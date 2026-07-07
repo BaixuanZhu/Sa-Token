@@ -23,7 +23,6 @@ sa-token-doc/big-file/
 .soloncode/
 .cursor
 .agents
-.github
 
 AGENTS.md
 CLAUDE.md
