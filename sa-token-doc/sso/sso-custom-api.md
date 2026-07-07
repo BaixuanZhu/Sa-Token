@@ -116,7 +116,7 @@ public class SsoClientController {
 	}
 
 	// SSO-Client：接收消息推送地址
-	@RequestMapping("/sso/pushC")
+	@RequestMapping("/sso/ssoPushC")
 	public Object ssoPushC() {
 		return SaSsoClientProcessor.instance.ssoPushC();
 	}
