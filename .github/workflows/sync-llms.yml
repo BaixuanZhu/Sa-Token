@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout (sparse: sa-token-doc only)
+      - name: Checkout sa-token-doc only
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
