@@ -5,14 +5,16 @@ on:
     # 每周一 00:00 UTC 自动执行
     - cron: '0 0 * * 1'
   workflow_dispatch:
-    # 手动触发按钮
+    # 手动触发
 
 jobs:
   sync-and-generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout sa-token-doc only
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -21,34 +23,29 @@ jobs:
             scripts
 
       - name: Configure upstream remote
-        run: |
-          git remote add upstream https://github.com/dromara/Sa-Token.git || true
+        run: git remote add upstream https://github.com/dromara/Sa-Token.git || true
 
-      - name: Sync from upstream
+      - name: Sync docs from upstream
+        id: sync
         run: |
           git fetch upstream master
-          git merge upstream/master --no-edit || git merge upstream/master --no-edit --abort
-
-      - name: Check if docs changed
-        id: check
-        run: |
-          # 比较 merge 前后的 sa-token-doc 目录变化
-          CHANGED=$(git diff HEAD@{1} --name-only sa-token-doc/ 2>/dev/null || echo "initial-run")
-          if [ -n "$CHANGED" ]; then
-            echo "docs_changed=true" >> $GITHUB_OUTPUT
-          else
+          # 只同步 sa-token-doc 目录，避免 merge 冲突
+          git checkout upstream/master -- sa-token-doc/
+          if git diff --cached --quiet -- sa-token-doc/; then
             echo "docs_changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "docs_changed=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Generate llms.txt
-        if: steps.check.outputs.docs_changed == 'true'
+        if: steps.sync.outputs.docs_changed == 'true'
         run: node scripts/generate-llms.js
 
       - name: Commit & Push
-        if: steps.check.outputs.docs_changed == 'true'
+        if: steps.sync.outputs.docs_changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add llms.txt llms-full.txt
-          git commit -m "auto: sync docs & regenerate llms.txt" || echo "No changes to commit"
+          git add sa-token-doc/ llms.txt llms-full.txt
+          git commit -m "auto: sync docs & regenerate llms.txt"
           git push
