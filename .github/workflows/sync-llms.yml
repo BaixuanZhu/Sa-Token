@@ -1,0 +1,54 @@
+name: Sync Upstream & Generate llms.txt
+
+on:
+  schedule:
+    # 每周一 00:00 UTC 自动执行
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    # 手动触发按钮
+
+jobs:
+  sync-and-generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (sparse: sa-token-doc only)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          sparse-checkout: |
+            sa-token-doc
+            scripts
+
+      - name: Configure upstream remote
+        run: |
+          git remote add upstream https://github.com/dromara/Sa-Token.git || true
+
+      - name: Sync from upstream
+        run: |
+          git fetch upstream master
+          git merge upstream/master --no-edit || git merge upstream/master --no-edit --abort
+
+      - name: Check if docs changed
+        id: check
+        run: |
+          # 比较 merge 前后的 sa-token-doc 目录变化
+          CHANGED=$(git diff HEAD@{1} --name-only sa-token-doc/ 2>/dev/null || echo "initial-run")
+          if [ -n "$CHANGED" ]; then
+            echo "docs_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "docs_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate llms.txt
+        if: steps.check.outputs.docs_changed == 'true'
+        run: node scripts/generate-llms.js
+
+      - name: Commit & Push
+        if: steps.check.outputs.docs_changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add llms.txt llms-full.txt
+          git commit -m "auto: sync docs & regenerate llms.txt" || echo "No changes to commit"
+          git push
