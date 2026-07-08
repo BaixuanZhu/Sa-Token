@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sa-Token llms.txt 查看器</title>
+  <style>
+    :root {
+      --primary: #42b983;
+      --primary-light: #e8f7f0;
+      --bg: #f8f9fa;
+      --card-bg: #fff;
+      --border: #eaecef;
+      --text: #2c3e50;
+      --text-light: #666;
+      --text-muted: #999;
+      --code-bg: #f6f8fa;
+      --radius: 8px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Header ── */
+    .header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 24px 24px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .header h1 .emoji { margin-right: 8px; }
+    .header .desc {
+      color: var(--text-light);
+      font-size: 15px;
+      margin-bottom: 16px;
+      max-width: 800px;
+    }
+    .header .desc p { margin-bottom: 4px; }
+    .stats {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .tab-btn {
+      padding: 12px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .tabs .spacer { flex: 1; }
+    .tabs .back-link {
+      color: var(--text-muted);
+      font-size: 13px;
+      padding: 12px 0;
+    }
+
+    /* ── Index View ── */
+    .index-view {
+      padding: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .group-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: box-shadow 0.2s;
+    }
+    .group-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .group-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .group-card.optional h3 {
+      border-bottom-color: #fff3e0;
+    }
+    .group-card.optional h3::after {
+      content: 'Optional';
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #e6a23c;
+      background: #fdf6ec;
+      padding: 1px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .doc-link {
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+      font-size: 14px;
+      color: var(--text);
+      transition: color 0.15s;
+    }
+    .doc-link:hover { color: var(--primary); }
+    .doc-link .path {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: 'SF Mono', Consolas, monospace;
+      margin-left: auto;
+      padding-left: 12px;
+    }
+
+    /* ── Full Text View ── */
+    .full-view {
+      padding: 16px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .search-box {
+      width: 100%;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+    .search-box:focus { border-color: var(--primary); }
+    .full-text-container {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .full-text {
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 75vh;
+      overflow-y: auto;
+      color: var(--text);
+    }
+    .full-text .line-h1 { color: #1a1a1a; font-weight: 700; font-size: 15px; }
+    .full-text .line-h2 { color: var(--primary); font-weight: 600; margin-top: 8px; }
+    .full-text .line-h3 { color: #555; font-weight: 600; }
+    .full-text .line-bq { color: var(--text-muted); font-style: italic; }
+    .full-text .line-link a { color: #4078c0; }
+    .full-text mark { background: #fff3a0; padding: 0 2px; border-radius: 2px; }
+    .full-text .line-hidden { display: none; }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .loading .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="emoji">🤖</span>Sa-Token llms.txt</h1>
+  <div class="desc" id="desc"></div>
+  <div class="stats" id="stats"></div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="index">📋 索引视图</button>
+  <button class="tab-btn" data-tab="full">📄 全文视图</button>
+  <div class="spacer"></div>
+  <a class="back-link" href="./">← 返回文档</a>
+</div>
+
+<!-- Index View -->
+<div id="index-view" class="index-view">
+  <div class="group-grid" id="group-grid">
+    <div class="loading"><div class="spinner"></div><br>加载 llms.txt...</div>
+  </div>
+</div>
+
+<!-- Full Text View -->
+<div id="full-view" class="full-view" style="display:none">
+  <input class="search-box" id="search-box" type="search" placeholder="搜索全文内容..." />
+  <div class="full-text-container">
+    <pre class="full-text" id="full-text"><div class="loading"><div class="spinner"></div><br>加载 llms-full.txt...</div></pre>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── State ───
+  let llmsTxtContent = null;
+  let llmsFullContent = null;
+  let parsedData = null;
+
+  // ─── Parse llms.txt ───
+  function parseLlmsTxt(text) {
+    const lines = text.split('\n');
+    const result = {
+      title: '',
+      descriptions: [],
+      groups: [],
+      optionalGroups: []
+    };
+
+    let currentGroup = null;
+    let inOptional = false;
+    let inDescription = false;
+
+    for (const line of lines) {
+      // H1 — title
+      if (/^# /.test(line)) {
+        result.title = line.replace(/^# /, '').trim();
+        continue;
+      }
+
+      // Blockquote — description
+      if (/^> /.test(line)) {
+        result.descriptions.push(line.replace(/^> /, '').trim());
+        inDescription = true;
+        continue;
+      }
+      if (inDescription && line.trim() === '') {
+        inDescription = false;
+        continue;
+      }
+      if (inDescription && !/^#/.test(line) && !/^-/.test(line)) {
+        continue;
+      }
+
+      // H2 — group
+      if (/^## /.test(line)) {
+        const groupName = line.replace(/^## /, '').trim();
+        inOptional = (groupName === 'Optional');
+        currentGroup = { name: groupName, items: [] };
+        if (inOptional) {
+          result.optionalGroups.push(currentGroup);
+        } else {
+          result.groups.push(currentGroup);
+        }
+        continue;
+      }
+
+      // List item with link
+      if (/^\s*- \[/.test(line) && currentGroup) {
+        const match = line.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        if (match) {
+          // Convert sa-token-doc/use/login-auth.md → use/login-auth
+          let path = match[2];
+          path = path.replace(/^sa-token-doc\//, '').replace(/\.md$/, '');
+          currentGroup.items.push({
+            title: match[1],
+            path: path,
+            rawPath: match[2]
+          });
+        }
+        continue;
+      }
+    }
+
+    return result;
+  }
+
+  // ─── Render Index View ───
+  function renderIndex(data) {
+    // Description
+    const descEl = document.getElementById('desc');
+    if (data.descriptions.length > 0) {
+      descEl.innerHTML = data.descriptions
+        .map(d => '<p>' + escapeHtml(d) + '</p>')
+        .join('');
+    }
+
+    // Stats
+    const totalDocs = data.groups.reduce((s, g) => s + g.items.length, 0)
+      + data.optionalGroups.reduce((s, g) => s + g.items.length, 0);
+    const totalGroups = data.groups.length + data.optionalGroups.length;
+    const statsEl = document.getElementById('stats');
+    statsEl.innerHTML =
+      '<span class="stat">' + totalGroups + ' 个分组</span>' +
+      '<span class="stat">' + totalDocs + ' 篇文档</span>' +
+      '<span class="stat" id="full-size-stat">全文加载中...</span>';
+
+    // Group cards
+    const grid = document.getElementById('group-grid');
+    let html = '';
+
+    for (const group of data.groups) {
+      html += renderGroupCard(group, false);
+    }
+    for (const group of data.optionalGroups) {
+      html += renderGroupCard(group, true);
+    }
+
+    grid.innerHTML = html;
+  }
+
+  function renderGroupCard(group, isOptional) {
+    let linksHtml = '';
+    for (const item of group.items) {
+      linksHtml +=
+        '<a class="doc-link" href="#/' + item.path + '">' +
+        '<span>' + escapeHtml(item.title) + '</span>' +
+        '<span class="path">' + escapeHtml(item.path) + '</span>' +
+        '</a>';
+    }
+    return '<div class="group-card' + (isOptional ? ' optional' : '') + '">' +
+      '<h3>' + escapeHtml(group.name) + '</h3>' +
+      linksHtml +
+      '</div>';
+  }
+
+  // ─── Render Full Text View ───
+  function renderFullText(text) {
+    const pre = document.getElementById('full-text');
+    const lines = text.split('\n');
+    let html = '';
+
+    for (const line of lines) {
+      let cls = '';
+      let content = line;
+
+      if (/^# /.test(line)) {
+        cls = 'line-h1';
+      } else if (/^## /.test(line)) {
+        cls = 'line-h2';
+      } else if (/^### /.test(line)) {
+        cls = 'line-h3';
+      } else if (/^> /.test(line)) {
+        cls = 'line-bq';
+      } else if (/^\s*- \[/.test(line)) {
+        cls = 'line-link';
+        content = line.replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2">$1</a>'
+        );
+      }
+
+      html += '<div class="' + cls + '" data-text="' + escapeAttr(line.toLowerCase()) + '">'
+        + escapeHtml(content) + '</div>';
+    }
+
+    // Handle empty lines
+    html = html.replace(/<div class="" data-text="">\s*<\/div>/g, '<div class="" data-text="">&nbsp;</div>');
+
+    pre.innerHTML = html;
+
+    // Update size stat
+    const sizeKB = (new Blob([text]).size / 1024).toFixed(1);
+    const sizeStat = document.getElementById('full-size-stat');
+    if (sizeStat) sizeStat.textContent = '全文 ' + sizeKB + ' KB';
+  }
+
+  // ─── Search Filter ───
+  function filterFullText(query) {
+    const pre = document.getElementById('full-text');
+    const lines = pre.querySelectorAll('div[data-text]');
+    const q = query.trim().toLowerCase();
+
+    if (!q) {
+      lines.forEach(l => l.classList.remove('line-hidden'));
+      return;
+    }
+
+    lines.forEach(line => {
+      const text = line.getAttribute('data-text') || '';
+      if (text.includes(q)) {
+        line.classList.remove('line-hidden');
+      } else {
+        line.classList.add('line-hidden');
+      }
+    });
+  }
+
+  // ─── Tab Switching ───
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      const tab = this.getAttribute('data-tab');
+      document.getElementById('index-view').style.display = (tab === 'index') ? '' : 'none';
+      document.getElementById('full-view').style.display = (tab === 'full') ? '' : 'none';
+
+      // Lazy load full text
+      if (tab === 'full' && !llmsFullContent) {
+        loadFullText();
+      }
+    });
+  });
+
+  // ─── Search Box ───
+  let searchTimer = null;
+  document.getElementById('search-box').addEventListener('input', function(e) {
+    clearTimeout(searchTimer);
+    const query = e.target.value;
+    searchTimer = setTimeout(function() {
+      filterFullText(query);
+    }, 200);
+  });
+
+  // ─── Load Functions ───
+  function loadLlmsTxt() {
+    fetch('llms.txt')
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(text => {
+        llmsTxtContent = text;
+        parsedData = parseLlmsTxt(text);
+        renderIndex(parsedData);
+      })
+      .catch(err => {
+        document.getElementById('group-grid').innerHTML =
+          '<div style="color:#999;padding:40px;text-align:center">' +
+          '⚠ 加载 llms.txt 失败: ' + escapeHtml(err.message) + '<br><br>' +
+          '请确保通过 HTTP 服务访问（而非直接打开文件）' +
+          '</div>';
+      });
+  }
+
+  function loadFullText() {
+    fetch('llms-full.txt')
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(text => {
+        llmsFullContent = text;
+        renderFullText(text);
+      })
+      .catch(err => {
+        document.getElementById('full-text').innerHTML =
+          '<div style="color:#999;padding:40px;text-align:center">' +
+          '⚠ 加载 llms-full.txt 失败: ' + escapeHtml(err.message) +
+          '</div>';
+      });
+  }
+
+  // ─── Utils ───
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+  function escapeAttr(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // ─── Init ───
+  loadLlmsTxt();
+})();
+</script>
+
+</body>
+</html>

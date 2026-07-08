@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sa-Token 文档站</title>
+  <meta name="description" content="Sa-Token — Java 权限认证框架，文档站 + llms.txt 可视化">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f8f9fa;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 40px 20px;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      display: block;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+    .version {
+      display: inline-block;
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .tagline {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: 280px;
+      padding: 16px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .links a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .link-docs {
+      background: #42b983;
+      color: #fff;
+    }
+    .link-docs:hover { background: #3aa876; }
+    .link-llms {
+      background: #fff;
+      color: #2c3e50;
+      border: 2px solid #e8e8e8;
+    }
+    .link-llms:hover { border-color: #42b983; }
+    .link-raw {
+      background: transparent;
+      color: #999;
+      font-size: 14px;
+      font-weight: 400;
+      width: auto;
+      padding: 8px 16px;
+    }
+    .link-raw:hover { color: #42b983; background: transparent; box-shadow: none; transform: none; }
+    .link-github {
+      background: transparent;
+      color: #999;
+      font-size: 14px;
+      font-weight: 400;
+      width: auto;
+      padding: 8px 16px;
+    }
+    .link-github:hover { color: #42b983; background: transparent; box-shadow: none; transform: none; }
+    .footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #bbb;
+    }
+    .footer a { color: #999; text-decoration: none; }
+    .footer a:hover { color: #42b983; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="sa-token-doc/logo.png" alt="Sa-Token">
+    <h1>Sa-Token</h1>
+    <span class="version">v1.45.0</span>
+    <p class="tagline">Java 权限认证框架 — 文档站 &amp; llms.txt 可视化</p>
+
+    <div class="links">
+      <a class="link-docs" href="sa-token-doc/doc.html">
+        <span style="font-size:20px;">&#128214;</span> 浏览完整文档
+      </a>
+      <a class="link-llms" href="llms-viewer.html">
+        <span style="font-size:20px;">&#128196;</span> llms.txt 可视化
+      </a>
+      <a class="link-raw" href="llms.txt">llms.txt 原文</a>
+      <a class="link-raw" href="llms-full.txt">llms-full.txt 全文</a>
+      <a class="link-github" href="https://github.com/BaixuanZhu/Sa-Token" target="_blank">GitHub 仓库 &rarr;</a>
+    </div>
+
+    <p class="footer">
+      Powered by <a href="https://docsify.js.org" target="_blank">docsify</a> · llms.txt 协议
+    </p>
+  </div>
+</body>
+</html>
