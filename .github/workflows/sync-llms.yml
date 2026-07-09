@@ -1,29 +1,17 @@
-name: Sync & Deploy
+name: Sync Upstream
 
 on:
   schedule:
-    # 每周一 00:00 UTC 自动执行
+    # 每周一 00:00 UTC 自动执行（北京时间周一 08:00）
     - cron: '0 0 * * 1'
   workflow_dispatch:
     # 手动触发
-  push:
-    branches: [main]
-    paths:
-      - 'llm-wiki/index.html'
-      - 'llm-wiki/llms-viewer.html'
-      - 'llm-wiki/.nojekyll'
-      - 'sa-token-doc/**'
 
 jobs:
-  sync-and-deploy:
+  sync:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -49,7 +37,7 @@ jobs:
             echo "docs_changed=true" >> $GITHUB_OUTPUT
           fi
 
-      # 生成 llms.txt / llms-full.txt / docs/（部署前必跑，保证 _site 含干净单篇）
+      # 生成 llms.txt / llms-full.txt / docs/（供提交入库；docs/ 在部署时再由 deploy-pages.yml 现生成）
       - name: Generate llms.txt and clean docs
         run: node llm-wiki/scripts/generate-llms.js
 
@@ -61,22 +49,4 @@ jobs:
           git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt
           git commit -m "auto: sync docs & regenerate llms.txt" || echo "nothing to commit"
           git push
-
-      # ── Deploy to GitHub Pages ──
-      - name: Build site artifact
-        run: |
-          mkdir -p _site
-          cp -r llm-wiki/. _site/
-          cp -r docs _site/docs
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '_site'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          # push 到 dev 会触发 deploy-pages.yml 完成部署，本工作流不再负责部署
