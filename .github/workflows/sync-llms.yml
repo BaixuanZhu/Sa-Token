@@ -49,8 +49,8 @@ jobs:
             echo "docs_changed=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Generate llms.txt
-        if: steps.sync.outputs.docs_changed == 'true'
+      # 生成 llms.txt / llms-full.txt / docs/（部署前必跑，保证 _site 含干净单篇）
+      - name: Generate llms.txt and clean docs
         run: node llm-wiki/scripts/generate-llms.js
 
       - name: Commit & Push
@@ -59,17 +59,23 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt
-          git commit -m "auto: sync docs & regenerate llms.txt"
+          git commit -m "auto: sync docs & regenerate llms.txt" || echo "nothing to commit"
           git push
 
       # ── Deploy to GitHub Pages ──
+      - name: Build site artifact
+        run: |
+          mkdir -p _site
+          cp -r llm-wiki/. _site/
+          cp -r docs _site/docs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'llm-wiki'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
