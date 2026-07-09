@@ -32,11 +32,14 @@ jobs:
             llm-wiki
             sa-token-doc
 
+      - name: Generate llms.txt and clean docs
+        run: node llm-wiki/scripts/generate-llms.js
+
       - name: Build site artifact
         run: |
           mkdir -p _site
           cp -r llm-wiki/. _site/
-          cp -r sa-token-doc _site/sa-token-doc
+          cp -r docs _site/docs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

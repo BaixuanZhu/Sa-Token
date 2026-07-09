@@ -1,5 +1,7 @@
 target/
 
+# 生成的清洗版单篇（由 generate-llms.js 在部署时动态生成，不入库）
+/docs/
 node_modules/
 bin/
 .settings/

@@ -18,6 +18,10 @@ const DOC_DIR = path.resolve(__dirname, '..', '..', 'sa-token-doc');
 const SIDEBAR_PATH = path.join(DOC_DIR, '_sidebar.md');
 const OUTPUT_DIR = path.resolve(__dirname, '..');
 
+// 单篇清洗模块（保留原始标题层级，不做聚合降级），用于生成 docs/ 下的清洗版单篇
+const { cleanDocFile } = require('./clean-doc.js');
+const DOCS_OUT_DIR = path.resolve(__dirname, '..', '..', 'docs');
+
 // 读取 Sa-Token 顶部版本号（来自 sa-token-doc/doc.html 的 saTokenTopVersion）
 // 用于替换文档中的 ${sa.top.version} 占位符，使依赖片段携带具体版本号
 function readTopVersion() {
@@ -354,8 +358,8 @@ function generateLlmsTxt(groups) {
 
     output += `## ${group.name}\n\n`;
     for (const item of group.items) {
-      // llms.txt 链接指向 sa-token-doc 下的相对路径
-      const linkPath = `sa-token-doc/${item.filePath}`;
+      // llms.txt 链接指向 docs/ 下的清洗版单篇（已去除 docsify 噪声）
+      const linkPath = `docs/${item.filePath}`;
       output += `- [${item.title}](${linkPath})\n`;
     }
     output += '\n';
@@ -367,7 +371,7 @@ function generateLlmsTxt(groups) {
     output += '## Optional\n\n';
     for (const group of optionalGroups) {
       for (const item of group.items) {
-        const linkPath = `sa-token-doc/${item.filePath}`;
+        const linkPath = `docs/${item.filePath}`;
         output += `- [${item.title}](${linkPath})\n`;
       }
     }
@@ -409,6 +413,29 @@ function generateLlmsFull(groups) {
   return output;
 }
 
+// ─── 5.5 生成清洗版单篇（docs/）───
+// 让 llms.txt 索引链接指向干净单篇，而非原始带噪声的 sa-token-doc/*.md。
+// 复用 clean-doc.js 的独立清洗逻辑（保留原始标题层级，不做聚合降级）。
+// 输出目录为仓库根 docs/，按 sa-token-doc 相对路径铺开（如 docs/sso/sso-type1.md）。
+function generateCleanDocs(groups) {
+  let count = 0, skip = 0;
+  for (const group of groups) {
+    for (const item of group.items) {
+      const outPath = path.join(DOCS_OUT_DIR, item.filePath);
+      try {
+        const cleaned = cleanDocFile(item.filePath); // 相对 sa-token-doc 的路径
+        fs.mkdirSync(path.dirname(outPath), { recursive: true });
+        fs.writeFileSync(outPath, cleaned, 'utf-8');
+        count++;
+      } catch (e) {
+        console.warn(`  ⚠ 清洗单篇失败，已跳过: ${item.filePath} - ${e.message}`);
+        skip++;
+      }
+    }
+  }
+  console.log(`  ✓ 已生成 ${count} 篇清洗单篇${skip ? `，${skip} 篇跳过` : ''}`);
+}
+
 // ─── 6. 主流程 ───
 
 function main() {
@@ -448,6 +475,9 @@ function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, 'llms-full.txt'), llmsFull, 'utf-8');
   const fullSizeKB = Buffer.byteLength(llmsFull, 'utf-8') / 1024;
   console.log(`  ✓ llms-full.txt 已写入 (${fullSizeKB.toFixed(1)} KB)`);
+
+  console.log('→ 生成清洗版单篇 (docs/)...');
+  generateCleanDocs(groups);
 }
 
 main();
