@@ -51,7 +51,7 @@
     }
     .doc-section h2 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
     .doc-section p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
-    .doc-section code { color: #fff; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    .doc-section p code { color: var(--text-secondary); font-size: 13px; }
 
     /* ── Tree ── */
     .tree {
@@ -74,6 +74,7 @@
     pre.code {
       margin: 0;
       background: #1e1e2e;
+      color: #ccc;
       padding: 18px 20px;
       border-radius: 6px;
       overflow-x: auto;
@@ -84,7 +85,7 @@
     .copy-btn {
       position: absolute;
       top: 8px; right: 8px;
-      color: #888;
+      color: #ccc;
       border: 1px solid #444;
       border-radius: 4px;
       padding: 4px 10px;
@@ -92,7 +93,6 @@
       cursor: pointer;
       background: #2a2a3a;
     }
-    .copy-btn:hover { color: #ccc; }
 
     /* ── Download button ── */
     .btn-download {
