@@ -8,15 +8,15 @@
   <meta name="description" content="Sa-Token 开发辅助 Skill — 混合渐进式封装，AI 可一键下载安装">
   <style>
     :root {
-      --green: #42b983;
-      --green-dark: #3aa876;
-      --green-light: #e8f7f0;
-      --text: #2c3e50;
-      --text-secondary: #666;
-      --text-muted: #999;
-      --bg: #f8f9fa;
+      --accent: #3b82f6;
+      --accent-dark: #2563eb;
+      --accent-light: #eff6ff;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+      --bg: #f8fafc;
       --card-bg: #fff;
-      --border: #eaecef;
+      --border: #e2e8f0;
       --radius: 12px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +35,7 @@
     .header .logo { width: 64px; height: 64px; margin-bottom: 14px; }
     .header .title-row { display: flex; align-items: baseline; justify-content: center; gap: 10px; }
     .header h1 { font-size: 32px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.5px; }
-    .header .version { font-size: 14px; color: var(--green); font-weight: 500; background: var(--green-light); padding: 2px 10px; border-radius: 20px; }
+    .header .version { font-size: 14px; color: var(--accent); font-weight: 500; background: var(--accent-light); padding: 2px 10px; border-radius: 20px; }
     .header .subtitle { margin-top: 8px; font-size: 15px; color: var(--text-secondary); }
 
     /* ── Main ── */
@@ -51,7 +51,7 @@
     }
     .doc-section h2 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
     .doc-section p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
-    .doc-section code { background: var(--green-light); color: var(--green-dark); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    .doc-section code { background: #f1f5f9; color: #334155; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
 
     /* ── Tree ── */
     .tree {
@@ -64,66 +64,57 @@
       color: var(--text);
       overflow-x: auto;
     }
-    .tree .dir { color: var(--green-dark); font-weight: 600; }
+    .tree .dir { color: var(--accent-dark); font-weight: 600; }
     .tree .comment { color: var(--text-muted); }
-    .tree a { color: var(--green); text-decoration: none; }
+    .tree a { color: var(--accent); text-decoration: none; }
     .tree a:hover { text-decoration: underline; }
 
     /* ── Code block ── */
-    .code-wrap {
-      position: relative;
-      margin-top: 14px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #2b2b3a;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
-    }
+    .code-wrap { position: relative; margin-top: 14px; }
     pre.code {
       margin: 0;
-      background: #1b1b27;
-      color: #d4d4e8;
-      padding: 20px 22px;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      padding: 18px 20px;
+      border-radius: 6px;
       overflow-x: auto;
       font-size: 13px;
-      line-height: 1.8;
+      line-height: 1.7;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
     .copy-btn {
       position: absolute;
-      top: 11px; right: 11px;
-      background: rgba(255,255,255,0.07);
-      color: #b9b9d6;
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 8px;
-      padding: 5px 13px;
+      top: 8px; right: 8px;
+      background: #2d2d40;
+      color: #cdd6f4;
+      border: 1px solid #3d3d54;
+      border-radius: 4px;
+      padding: 4px 10px;
       font-size: 12px;
       cursor: pointer;
-      backdrop-filter: blur(4px);
-      transition: all 0.18s ease;
     }
-    .copy-btn:hover { background: rgba(255,255,255,0.16); color: #fff; border-color: rgba(255,255,255,0.28); }
+    .copy-btn:hover { background: #3d3d54; }
 
     /* ── Download button ── */
     .btn-download {
       display: inline-block;
       margin-top: 14px;
       padding: 12px 22px;
-      background: var(--green);
+      background: var(--accent);
       color: #fff;
       border-radius: var(--radius);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      transition: background 0.15s;
     }
-    .btn-download:hover { background: var(--green-dark); }
+    .btn-download:hover { background: var(--accent-dark); }
 
     /* ── Footer / back ── */
-    .back-link { display: block; text-align: center; margin: 8px 0 28px; font-size: 14px; color: var(--green); text-decoration: none; }
+    .back-link { display: block; text-align: center; margin: 8px 0 28px; font-size: 14px; color: var(--accent); text-decoration: none; }
     .back-link:hover { text-decoration: underline; }
     .footer { margin-top: auto; padding: 40px 20px; text-align: center; font-size: 13px; color: var(--text-muted); }
     .footer a { color: var(--text-muted); text-decoration: none; }
-    .footer a:hover { color: var(--green); }
+    .footer a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
