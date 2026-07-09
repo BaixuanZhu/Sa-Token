@@ -109,37 +109,83 @@
     }
     .tabs .spacer { flex: 1; }
 
-    /* ── Index View ── */
+    /* ── Index View: sidebar + content ── */
     .index-view {
-      padding: 24px;
+      display: flex;
       max-width: 1200px;
       margin: 0 auto;
+      min-height: calc(100vh - 260px);
     }
-    .group-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-    }
-    .group-card {
+    .index-sidebar {
+      width: 220px;
+      flex-shrink: 0;
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      transition: box-shadow 0.2s;
+      border-right: 1px solid var(--border);
+      padding: 12px 0;
+      overflow-y: auto;
     }
-    .group-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-    .group-card h3 {
-      font-size: 16px;
+    .index-content {
+      flex: 1;
+      padding: 24px 32px;
+      min-width: 0;
+    }
+    .sidebar-group-btn {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 8px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text);
+      text-align: left;
+      transition: background 0.15s;
+      gap: 8px;
+    }
+    .sidebar-group-btn:hover { background: var(--bg); }
+    .sidebar-group-btn.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .sidebar-group-btn .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .sidebar-group-btn.active .dot { opacity: 1; }
+    .sidebar-group-btn .count {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 6px 16px;
+    }
+    .sidebar-optional-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 20px 2px;
+      margin-top: 4px;
+    }
+    .content-section-title {
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--primary-light);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
     }
-    .group-card.optional h3 {
-      border-bottom-color: #fff3e0;
-    }
-    .group-card.optional h3::after {
-      content: 'Optional';
+    .content-section-title .optional-tag {
       display: inline-block;
       font-size: 11px;
       font-weight: 400;
@@ -153,18 +199,34 @@
     .doc-link {
       display: flex;
       align-items: center;
-      padding: 5px 0;
+      padding: 7px 0;
       font-size: 14px;
       color: var(--text);
       transition: color 0.15s;
+      border-bottom: 1px solid var(--bg);
     }
-    .doc-link:hover { color: var(--primary); }
+    .doc-link:last-child { border-bottom: none; }
+    .doc-link:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
     .doc-link .path {
       color: var(--text-muted);
       font-size: 12px;
       font-family: 'SF Mono', Consolas, monospace;
       margin-left: auto;
       padding-left: 12px;
+    }
+    .index-view .loading {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .index-view { flex-direction: column; }
+      .index-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
     }
 
     /* ── Full Text View ── */
@@ -248,9 +310,7 @@
 
 <!-- Index View -->
 <div id="index-view" class="index-view">
-  <div class="group-grid" id="group-grid">
-    <div class="loading"><div class="spinner"></div><br>加载 llms.txt...</div>
-  </div>
+  <div class="loading" id="index-loading"><div class="spinner"></div><br>加载 llms.txt...</div>
 </div>
 
 <!-- Full Text View -->
@@ -358,21 +418,66 @@
       '<span class="stat">' + totalDocs + ' 篇文档</span>' +
       '<span class="stat" id="full-size-stat">全文加载中...</span>';
 
-    // Group cards
-    const grid = document.getElementById('group-grid');
-    let html = '';
+    // Build sidebar + content layout
+    const container = document.getElementById('index-view');
+    const allGroups = data.groups.concat(data.optionalGroups);
 
-    for (const group of data.groups) {
-      html += renderGroupCard(group, false);
-    }
-    for (const group of data.optionalGroups) {
-      html += renderGroupCard(group, true);
+    // Sidebar HTML
+    let sidebarHtml = '';
+    data.groups.forEach((group, i) => {
+      sidebarHtml +=
+        '<button class="sidebar-group-btn" data-idx="' + i + '">' +
+        '<span class="dot"></span>' +
+        escapeHtml(group.name) +
+        '<span class="count">' + group.items.length + '</span>' +
+        '</button>';
+    });
+
+    if (data.optionalGroups.length > 0) {
+      sidebarHtml += '<div class="sidebar-divider"></div>';
+      sidebarHtml += '<div class="sidebar-optional-label">Optional</div>';
+      data.optionalGroups.forEach((group, i) => {
+        const idx = data.groups.length + i;
+        sidebarHtml +=
+          '<button class="sidebar-group-btn" data-idx="' + idx + '">' +
+          '<span class="dot"></span>' +
+          escapeHtml(group.name) +
+          '<span class="count">' + group.items.length + '</span>' +
+          '</button>';
+      });
     }
 
-    grid.innerHTML = html;
+    // Content placeholder
+    container.innerHTML =
+      '<nav class="index-sidebar">' + sidebarHtml + '</nav>' +
+      '<main class="index-content" id="index-content"></main>';
+
+    // Click handler
+    container.querySelectorAll('.sidebar-group-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const idx = parseInt(this.getAttribute('data-idx'));
+        selectGroup(idx, allGroups);
+      });
+    });
+
+    // Select first group by default
+    if (allGroups.length > 0) {
+      selectGroup(0, allGroups);
+    }
   }
 
-  function renderGroupCard(group, isOptional) {
+  function selectGroup(idx, allGroups) {
+    // Update sidebar active
+    const container = document.getElementById('index-view');
+    container.querySelectorAll('.sidebar-group-btn').forEach(b => b.classList.remove('active'));
+    const btn = container.querySelector('.sidebar-group-btn[data-idx="' + idx + '"]');
+    if (btn) btn.classList.add('active');
+
+    // Render content
+    const content = document.getElementById('index-content');
+    const group = allGroups[idx];
+    const isOptional = idx >= (allGroups.length - parsedData.optionalGroups.length);
+
     let linksHtml = '';
     for (const item of group.items) {
       linksHtml +=
@@ -381,10 +486,14 @@
         '<span class="path">' + escapeHtml(item.path) + '</span>' +
         '</a>';
     }
-    return '<div class="group-card' + (isOptional ? ' optional' : '') + '">' +
-      '<h3>' + escapeHtml(group.name) + '</h3>' +
-      linksHtml +
-      '</div>';
+
+    content.innerHTML =
+      '<div class="content-section-title">' +
+      escapeHtml(group.name) +
+      (isOptional ? '<span class="optional-tag">Optional</span>' : '') +
+      ' <span style="font-weight:400;color:var(--text-muted);font-size:13px">· ' + group.items.length + ' 篇文档</span>' +
+      '</div>' +
+      linksHtml;
   }
 
   // ─── Render Full Text View ───
@@ -489,7 +598,7 @@
         renderIndex(parsedData);
       })
       .catch(err => {
-        document.getElementById('group-grid').innerHTML =
+        document.getElementById('index-loading').innerHTML =
           '<div style="color:#999;padding:40px;text-align:center">' +
           '⚠ 加载 llms.txt 失败: ' + escapeHtml(err.message) + '<br><br>' +
           '请确保通过 HTTP 服务访问（而非直接打开文件）' +
