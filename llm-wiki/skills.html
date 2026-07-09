@@ -73,27 +73,27 @@
     .code-wrap { position: relative; margin-top: 14px; }
     pre.code {
       margin: 0;
-      background: #1e1e2e;
-      color: #cdd6f4;
       padding: 18px 20px;
+      border: 1px solid var(--border);
       border-radius: 6px;
       overflow-x: auto;
       font-size: 13px;
       line-height: 1.7;
+      color: var(--text);
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
     .copy-btn {
       position: absolute;
       top: 8px; right: 8px;
-      background: #2d2d40;
-      color: #cdd6f4;
-      border: 1px solid #3d3d54;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
       border-radius: 4px;
       padding: 4px 10px;
       font-size: 12px;
       cursor: pointer;
+      background: var(--card-bg);
     }
-    .copy-btn:hover { background: #3d3d54; }
+    .copy-btn:hover { color: var(--text); border-color: var(--text-muted); }
 
     /* ── Download button ── */
     .btn-download {
