@@ -31,18 +31,38 @@
     .header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
-      padding: 32px 24px 24px;
+      padding: 24px 24px 20px;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
     }
     .header h1 {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
-      margin-bottom: 8px;
     }
-    .header h1 .emoji { margin-right: 8px; }
+    .header-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 2px 0;
+      margin-bottom: 10px;
+    }
+    .header-back:hover { text-decoration: underline; }
     .header .desc {
       color: var(--text-light);
-      font-size: 15px;
-      margin-bottom: 16px;
+      font-size: 14px;
+      margin-bottom: 12px;
       max-width: 800px;
     }
     .header .desc p { margin-bottom: 4px; }
@@ -88,11 +108,6 @@
       border-bottom-color: var(--primary);
     }
     .tabs .spacer { flex: 1; }
-    .tabs .back-link {
-      color: var(--text-muted);
-      font-size: 13px;
-      padding: 12px 0;
-    }
 
     /* ── Index View ── */
     .index-view {
@@ -216,7 +231,11 @@
 <body>
 
 <div class="header">
-  <h1><span class="emoji">🤖</span>Sa-Token llms.txt</h1>
+  <a class="header-back" href="./">← 返回 LLM Wiki 首页</a>
+  <div class="header-top">
+    <img class="header-logo" src="logo.png" alt="Sa-Token" onerror="this.style.display='none'">
+    <h1>Sa-Token llms.txt 查看器</h1>
+  </div>
   <div class="desc" id="desc"></div>
   <div class="stats" id="stats"></div>
 </div>
@@ -225,7 +244,6 @@
   <button class="tab-btn active" data-tab="index">📋 索引视图</button>
   <button class="tab-btn" data-tab="full">📄 全文视图</button>
   <div class="spacer"></div>
-  <a class="back-link" href="./">← 返回文档</a>
 </div>
 
 <!-- Index View -->
@@ -358,7 +376,7 @@
     let linksHtml = '';
     for (const item of group.items) {
       linksHtml +=
-        '<a class="doc-link" href="#/' + item.path + '">' +
+        '<a class="doc-link" href="https://sa-token.cc/doc.html#/' + item.path + '" target="_blank" rel="noopener">' +
         '<span>' + escapeHtml(item.title) + '</span>' +
         '<span class="path">' + escapeHtml(item.path) + '</span>' +
         '</a>';
