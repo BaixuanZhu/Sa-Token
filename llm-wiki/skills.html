@@ -70,30 +70,38 @@
     .tree a:hover { text-decoration: underline; }
 
     /* ── Code block ── */
-    .code-wrap { position: relative; margin-top: 12px; }
+    .code-wrap {
+      position: relative;
+      margin-top: 14px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #2b2b3a;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+    }
     pre.code {
-      background: #1e1e2e;
-      color: #e4e4e7;
-      padding: 18px 20px;
-      border-radius: 8px;
+      margin: 0;
+      background: #1b1b27;
+      color: #d4d4e8;
+      padding: 20px 22px;
       overflow-x: auto;
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.8;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
     .copy-btn {
       position: absolute;
-      top: 10px; right: 10px;
-      background: rgba(255,255,255,0.12);
-      color: #e4e4e7;
-      border: none;
-      border-radius: 6px;
-      padding: 5px 10px;
+      top: 11px; right: 11px;
+      background: rgba(255,255,255,0.07);
+      color: #b9b9d6;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px;
+      padding: 5px 13px;
       font-size: 12px;
       cursor: pointer;
-      transition: background 0.15s;
+      backdrop-filter: blur(4px);
+      transition: all 0.18s ease;
     }
-    .copy-btn:hover { background: rgba(255,255,255,0.22); }
+    .copy-btn:hover { background: rgba(255,255,255,0.16); color: #fff; border-color: rgba(255,255,255,0.28); }
 
     /* ── Download button ── */
     .btn-download {
@@ -153,21 +161,14 @@
     </div>
 
     <div class="doc-section">
-      <h2>一键安装</h2>
-      <p>将 Skill 下载并解压到 WorkBuddy 用户级技能目录 <code>~/.workbuddy/skills/</code>，AI 即可在相关场景自动调用：</p>
+      <h2>下载</h2>
+      <p>获取 Sa-Token 开发 Skill 安装包：</p>
       <div class="code-wrap">
         <button class="copy-btn" onclick="copyInstall()">复制</button>
-        <pre class="code" id="install"><code>curl -L https://baixuanzhu.github.io/Sa-Token/skills/sa-token-dev.zip -o /tmp/sa-token-skill.zip &amp;&amp; \
-mkdir -p ~/.workbuddy/skills &amp;&amp; \
-unzip -o /tmp/sa-token-skill.zip -d ~/.workbuddy/skills/</code></pre>
+        <pre class="code" id="install"><code>curl -L https://baixuanzhu.github.io/Sa-Token/skills/sa-token-dev.zip -o sa-token-dev.zip</code></pre>
       </div>
-      <p style="margin-top:10px"><a class="btn-download" href="skills/sa-token-dev.zip">⬇ 下载 sa-token-dev.zip</a></p>
-      <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">安装后，当涉及 sa-token、登录认证、权限校验、<code>@SaCheck*</code> 注解、踢人下线、token 失效排查等场景时，AI 会自动加载该 Skill 提供精准代码与路由指引。</p>
-    </div>
-
-    <div class="doc-section">
-      <h2>手动安装</h2>
-      <p>1. 点击上方按钮下载 <code>sa-token-dev.zip</code>；<br>2. 解压得到 <code>sa-token-dev/</code> 文件夹；<br>3. 放入 <code>~/.workbuddy/skills/</code>（用户级，跨项目可用）或 <code>&lt;项目&gt;/.workbuddy/skills/</code>（项目级）。</p>
+      <p style="margin-top:14px"><a class="btn-download" href="skills/sa-token-dev.zip">⬇ 下载 sa-token-dev.zip</a></p>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">解压后将 <code>sa-token-dev/</code> 文件夹放入你所用 AI 编程助手的技能目录即可使用。</p>
     </div>
 
     <a class="back-link" href="index.html">← 返回 LLM Wiki 首页</a>
