@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sa-Token LLM Wiki</title>
+  <meta name="description" content="Sa-Token LLM Wiki — 面向 AI 的结构化文档，llms.txt 可视化">
+  <style>
+    :root {
+      --green: #42b983;
+      --green-dark: #3aa876;
+      --green-light: #e8f7f0;
+      --text: #2c3e50;
+      --text-secondary: #666;
+      --text-muted: #999;
+      --bg: #f8f9fa;
+      --card-bg: #fff;
+      --border: #eaecef;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .header .logo {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+    }
+    .header .title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+    }
+    .header .version {
+      font-size: 14px;
+      color: var(--green);
+      font-weight: 500;
+      background: var(--green-light);
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+    .header .subtitle {
+      margin-top: 8px;
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    /* ── Main ── */
+    .main {
+      width: 100%;
+      max-width: 640px;
+      padding: 0 20px;
+    }
+
+    /* ── Feature Card ── */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    }
+    .card-primary {
+      border-color: var(--green);
+      background: linear-gradient(135deg, #fff 0%, var(--green-light) 100%);
+    }
+    .card-primary:hover {
+      border-color: var(--green-dark);
+      box-shadow: 0 6px 24px rgba(66,185,131,0.2);
+    }
+    .card .card-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .card .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .card .card-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .card .card-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--green);
+      background: var(--green-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* ── Link Row ── */
+    .link-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .link-row .card {
+      flex: 1;
+      margin-bottom: 0;
+      padding: 20px 24px;
+    }
+    .link-row .card .card-title {
+      font-size: 16px;
+    }
+
+    /* ── External Links ── */
+    .external-links {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .ext-link {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-size: 14px;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .ext-link:hover {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+    .ext-link .arrow {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* ── Coming Soon ── */
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .coming-soon {
+      background: var(--card-bg);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .coming-soon .cs-icon {
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--bg);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .coming-soon .cs-info {
+      flex: 1;
+    }
+    .coming-soon .cs-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .coming-soon .cs-status {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: auto;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: var(--green);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      .header { padding: 40px 20px 30px; }
+      .header h1 { font-size: 28px; }
+      .link-row { flex-direction: column; }
+      .external-links { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <img class="logo" src="logo.png" alt="Sa-Token">
+    <div class="title-row">
+      <h1>Sa-Token</h1>
+      <span class="version">v1.45.0</span>
+    </div>
+    <p class="subtitle">LLM Wiki — 面向 AI 的结构化文档</p>
+  </header>
+
+  <main class="main">
+    <!-- 核心入口 -->
+    <a class="card card-primary" href="llms-viewer.html">
+      <div class="card-icon">📄</div>
+      <div class="card-title">llms.txt 可视化查看器</div>
+      <div class="card-desc">按分组浏览 Sa-Token 全部文档索引，支持全文搜索与内容定位</div>
+      <span class="card-tag">Core</span>
+    </a>
+
+    <!-- 原文链接 -->
+    <div class="link-row">
+      <a class="card" href="llms.txt">
+        <div class="card-icon">📋</div>
+        <div class="card-title">llms.txt</div>
+        <div class="card-desc">结构化文档索引，105 个条目，按分组组织</div>
+      </a>
+      <a class="card" href="llms-full.txt">
+        <div class="card-icon">📦</div>
+        <div class="card-title">llms-full.txt</div>
+        <div class="card-desc">全量聚合文档，655 KB，清洗后的完整内容</div>
+      </a>
+    </div>
+
+    <!-- 外部链接 -->
+    <div class="external-links">
+      <a class="ext-link" href="https://sa-token.cc/" target="_blank">
+        官方文档 <span class="arrow">↗</span>
+      </a>
+      <a class="ext-link" href="https://github.com/BaixuanZhu/Sa-Token" target="_blank">
+        GitHub <span class="arrow">↗</span>
+      </a>
+    </div>
+
+    <!-- 即将推出 -->
+    <div class="section-title">即将推出</div>
+    <div class="coming-soon">
+      <div class="cs-icon">🧩</div>
+      <div class="cs-info">
+        <div class="cs-name">Skills</div>
+        <div class="cs-status">策划中 — AI 可直接调用的功能模块</div>
+      </div>
+    </div>
+    <div class="coming-soon">
+      <div class="cs-icon">🔌</div>
+      <div class="cs-info">
+        <div class="cs-name">MCP Server</div>
+        <div class="cs-status">策划中 — 让 AI 工具直接访问 Sa-Token 文档</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Powered by <a href="https://llmstxt.org/" target="_blank">llms.txt 协议</a>
+    · 由 <a href="https://github.com/BaixuanZhu/Sa-Token" target="_blank">BaixuanZhu</a> 维护
+  </footer>
+</body>
+</html>

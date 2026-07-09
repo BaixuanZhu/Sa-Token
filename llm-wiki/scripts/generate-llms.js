@@ -7,14 +7,14 @@
  * 3. 生成 llms.txt 索引文件
  * 4. 生成 llms-full.txt 全量聚合文件
  *
- * 用法：node scripts/generate-llms.js
- * 输出：仓库根目录下的 llms.txt 和 llms-full.txt
+ * 用法：node llm-wiki/scripts/generate-llms.js
+ * 输出：llm-wiki/ 目录下的 llms.txt 和 llms-full.txt
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const DOC_DIR = path.resolve(__dirname, '..', 'sa-token-doc');
+const DOC_DIR = path.resolve(__dirname, '..', '..', 'sa-token-doc');
 const SIDEBAR_PATH = path.join(DOC_DIR, '_sidebar.md');
 const OUTPUT_DIR = path.resolve(__dirname, '..');
 
@@ -265,7 +265,7 @@ function generateLlmsTxt(groups) {
     output += `## ${group.name}\n\n`;
     for (const item of group.items) {
       // llms.txt 链接指向 sa-token-doc 下的相对路径
-      const linkPath = `sa-token-doc/${item.filePath}`;
+      const linkPath = `../sa-token-doc/${item.filePath}`;
       output += `- [${item.title}](${linkPath})\n`;
     }
     output += '\n';
@@ -277,7 +277,7 @@ function generateLlmsTxt(groups) {
     output += '## Optional\n\n';
     for (const group of optionalGroups) {
       for (const item of group.items) {
-        const linkPath = `sa-token-doc/${item.filePath}`;
+        const linkPath = `../sa-token-doc/${item.filePath}`;
         output += `- [${item.title}](${linkPath})\n`;
       }
     }

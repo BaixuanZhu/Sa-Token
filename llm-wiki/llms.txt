@@ -59,7 +59,6 @@
 - [NoSdk、ReSdk 模式与非 java 项目](sa-token-doc/sso/sso-nosdk.md)
 - [SSO 代码 API 参考](sa-token-doc/sso/sso-dev.md)
 - [常见问题总结](sa-token-doc/sso/sso-questions.md)
-- [Sa-Pro：单点登录商业版](sa-token-doc/pro/st_sso.md)
 
 ## OAuth2.0
 
@@ -80,7 +79,6 @@
 - [OAuth2-与登录会话实现数据互通](sa-token-doc/oauth2/oauth2-interworking.md)
 - [OAuth2 代码 API 参考](sa-token-doc/oauth2/oauth2-dev.md)
 - [常见问题总结](sa-token-doc/oauth2/oauth2-questions.md)
-- [Sa-Max：统一认证商业版](sa-token-doc/pro/st_oauth2.md)
 
 ## 微服务
 
