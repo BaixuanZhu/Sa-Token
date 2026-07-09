@@ -18,6 +18,20 @@ const DOC_DIR = path.resolve(__dirname, '..', '..', 'sa-token-doc');
 const SIDEBAR_PATH = path.join(DOC_DIR, '_sidebar.md');
 const OUTPUT_DIR = path.resolve(__dirname, '..');
 
+// 读取 Sa-Token 顶部版本号（来自 sa-token-doc/doc.html 的 saTokenTopVersion）
+// 用于替换文档中的 ${sa.top.version} 占位符，使依赖片段携带具体版本号
+function readTopVersion() {
+  const docHtmlPath = path.join(DOC_DIR, 'doc.html');
+  if (!fs.existsSync(docHtmlPath)) {
+    console.warn(`  ⚠ 未找到 ${docHtmlPath}，跳过版本占位符替换`);
+    return null;
+  }
+  const html = fs.readFileSync(docHtmlPath, 'utf-8');
+  const m = html.match(/saTokenTopVersion\s*=\s*['"]([^'"]+)['"]/);
+  return m ? m[1] : null;
+}
+const TOP_VERSION = readTopVersion();
+
 // ─── 排除列表 ───
 
 // 不对 LLM 有价值的条目：项目运营信息、下载链接、社区信息等
@@ -118,15 +132,44 @@ function parseSidebar(content) {
 
 // ─── 2. 清洗 markdown ───
 
-// 保护代码块内容不被误清洗：提取代码块 → 清洗正文 → 拼回
+// 保护代码块内容不被误清洗：逐行状态机提取 ```...``` 代码块 → 清洗正文 → 拼回
+// 相比纯正则，状态机能处理源文档漏写闭围栏的情况（自动补闭合），避免孤立 ```
+// 污染聚合文档的 markdown 结构
 function protectCodeBlocks(content) {
   const codeBlocks = [];
-  // 提取 ```...``` 代码块（包括围栏式和内部可能有的缩进代码块）
-  let result = content.replace(/(```[\s\S]*?```)/g, (match) => {
-    codeBlocks.push(match);
-    return `__CODE_BLOCK_${codeBlocks.length - 1}__`;
-  });
-  return { result, codeBlocks };
+  const lines = content.split('\n');
+  const out = [];
+  let inBlock = false;
+  let blockLines = [];
+
+  for (const line of lines) {
+    if (/^```/.test(line)) {
+      if (!inBlock) {
+        inBlock = true;
+        blockLines = [line];
+      } else {
+        blockLines.push(line);
+        codeBlocks.push(blockLines.join('\n'));
+        out.push(`__CODE_BLOCK_${codeBlocks.length - 1}__`);
+        inBlock = false;
+        blockLines = [];
+      }
+    } else if (inBlock) {
+      blockLines.push(line);
+    } else {
+      out.push(line);
+    }
+  }
+
+  // 容错：文档结尾仍未闭合的代码块（源文档漏写闭围栏，如 fun/firewall.md）
+  // 自动补一个闭围栏并整体保护，杜绝孤立的 ``` 破坏后续章节结构
+  if (inBlock) {
+    blockLines.push('```');
+    codeBlocks.push(blockLines.join('\n'));
+    out.push(`__CODE_BLOCK_${codeBlocks.length - 1}__`);
+  }
+
+  return { result: out.join('\n'), codeBlocks };
 }
 
 function restoreCodeBlocks(content, codeBlocks) {
@@ -136,7 +179,45 @@ function restoreCodeBlocks(content, codeBlocks) {
   return content;
 }
 
+// ─── 通用 HTML 标签清扫（白名单制）───
+// 清理源文档内嵌的原始 HTML（Thymeleaf 测试页、class 按钮链接、HTML 页面脚手架等），
+// 容器标签保留内文，空/结构标签直接移除。白名单机制避免误伤 Java 泛型 <String>、<T> 等。
+const HTML_CONTAINER_TAGS = [
+  'a', 'span', 'p', 'div', 'button', 'font', 'details', 'summary', 'object',
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label', 'td', 'th', 'li', 'strong', 'em', 'b', 'u', 'code', 'pre',
+  'table', 'thead', 'tbody', 'tr', 'ul', 'ol', 'form', 'nav', 'header', 'footer',
+  'section', 'article', 'main', 'aside'
+];
+const HTML_VOID_TAGS = ['br', 'img', 'meta', 'link', 'input', 'hr', 'source', 'area', 'base', 'col', 'embed', 'param', 'track', 'wbr'];
+const HTML_STRUCT_TAGS = ['html', 'head', 'body', 'title', 'meta', 'link', 'script', 'style'];
+
+function sweepHtmlTags(text) {
+  // 1. script / style / head 整块移除（含内容，兜底多行属性情况）
+  text = text.replace(/<script[\s\S]*?<\/script>/gi, '');
+  text = text.replace(/<style[\s\S]*?<\/style>/gi, '');
+  text = text.replace(/<head[\s\S]*?<\/head>/gi, '');
+
+  // 2. 容器标签成对移除，保留内文（多趟处理同标签嵌套）
+  const allContainer = HTML_CONTAINER_TAGS.join('|');
+  const containerRe = new RegExp('<(' + allContainer + ')(\\s[^>]*)?>([\\s\\S]*?)<\\/\\1>', 'gi');
+  let prev, guard = 0;
+  do {
+    prev = text;
+    text = text.replace(containerRe, '$3');
+  } while (text !== prev && ++guard < 5);
+
+  // 3. 残留的开/闭标签（白名单内）一律移除
+  const allTags = HTML_CONTAINER_TAGS.concat(HTML_VOID_TAGS, HTML_STRUCT_TAGS).join('|');
+  text = text.replace(new RegExp('<\\/?(' + allTags + ')\\b[^>]*>', 'gi'), '');
+
+  return text;
+}
+
 function cleanMarkdown(content) {
+  // 版本占位符替换（在代码块保护前执行，确保代码块内的版本号也被替换为具体值）
+  if (TOP_VERSION) {
+    content = content.replace(/\$\{sa\.top\.version\}/g, TOP_VERSION);
+  }
   // 先保护代码块
   const { result: protected, codeBlocks } = protectCodeBlocks(content);
   let text = protected;
@@ -216,19 +297,28 @@ function cleanMarkdown(content) {
   // 移除 <br/> 标签
   text = text.replace(/<br\s*\/?>/gi, '');
 
+  // 通用 HTML 标签清扫（白名单制）：兜底清理上述规则未覆盖的残留 HTML
+  // （内嵌 HTML 页面脚手架、class 按钮链接、<span>/<a>/<p> 等），保留容器内文
+  text = sweepHtmlTags(text);
+
   // 清理多余空行（3+ 连续空行 → 2 个）
   text = text.replace(/\n{3,}/g, '\n\n');
 
   // 去掉末尾空行
   text = text.trimEnd() + '\n';
 
-  // 标题降级：### → ####, ## → ###, # → ##
-  // 避免文档内部标题和注入的顶级章节标题（### path: title）层级冲突
-  // 只处理行首的标题（代码块已被保护，不会误处理）
-  text = text.replace(/^#### /gm, '##### ');
-  text = text.replace(/^### /gm, '#### ');
-  text = text.replace(/^## /gm, '### ');
-  text = text.replace(/^# /gm, '## ');
+  // 标题层级修正：剥除文档首个 H1（与注入锚点 ### path: title 重复），
+  // 再按映射降级，确保文档内部标题全部位于注入锚点(###)与分组(##)之下，消除层级反转。
+  // 映射：H1→H4、H2→H4、H3→H5、H4→H6、H5→H6（H6 为下限，避免超出 markdown 六级上限）。
+  // 代码块已被保护，行首 # 不会误伤代码内容。
+  text = text.replace(/^# .+\n?/m, '');          // 剥除首个 H1 标题
+  text = text.replace(/^##### /gm, '###### ');    // H5 → H6
+  text = text.replace(/^#### /gm, '###### ');     // H4 → H6
+  text = text.replace(/^### /gm, '##### ');       // H3 → H5
+  text = text.replace(/^## /gm, '#### ');         // H2 → H4
+  text = text.replace(/^# /gm, '#### ');          // 剩余 H1 → H4
+  text = text.replace(/\n{3,}/g, '\n\n');         // 剥除标题后重新收敛空行
+  text = text.replace(/^\s+/, '');                // 去除开头残留空白
 
   // 还原代码块
   text = restoreCodeBlocks(text, codeBlocks);
@@ -322,6 +412,7 @@ function generateLlmsFull(groups) {
 // ─── 6. 主流程 ───
 
 function main() {
+  console.log(`→ 顶部版本号: ${TOP_VERSION || '(未读取，跳过占位符替换)'}`);
   console.log('→ 读取 _sidebar.md...');
   const sidebarContent = fs.readFileSync(SIDEBAR_PATH, 'utf-8');
 
