@@ -4,12 +4,8 @@ on:
   push:
     branches: [dev]
     paths:
-      - 'llm-wiki/index.html'
-      - 'llm-wiki/llms-viewer.html'
-      - 'llm-wiki/logo.png'
-      - 'llm-wiki/.nojekyll'
-      - 'llm-wiki/llms.txt'
-      - 'llm-wiki/llms-full.txt'
+      - 'llm-wiki/**'
+      - 'sa-token-doc/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -34,6 +30,13 @@ jobs:
         with:
           sparse-checkout: |
             llm-wiki
+            sa-token-doc
+
+      - name: Build site artifact
+        run: |
+          mkdir -p _site
+          cp -r llm-wiki/. _site/
+          cp -r sa-token-doc _site/sa-token-doc
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -41,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'llm-wiki'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -355,7 +355,7 @@ function generateLlmsTxt(groups) {
     output += `## ${group.name}\n\n`;
     for (const item of group.items) {
       // llms.txt 链接指向 sa-token-doc 下的相对路径
-      const linkPath = `../sa-token-doc/${item.filePath}`;
+      const linkPath = `sa-token-doc/${item.filePath}`;
       output += `- [${item.title}](${linkPath})\n`;
     }
     output += '\n';
@@ -367,7 +367,7 @@ function generateLlmsTxt(groups) {
     output += '## Optional\n\n';
     for (const group of optionalGroups) {
       for (const item of group.items) {
-        const linkPath = `../sa-token-doc/${item.filePath}`;
+        const linkPath = `sa-token-doc/${item.filePath}`;
         output += `- [${item.title}](${linkPath})\n`;
       }
     }
