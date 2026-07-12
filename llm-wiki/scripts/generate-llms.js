@@ -351,6 +351,7 @@ function generateLlmsTxt(groups) {
   output += '# Sa-Token\n\n';
   output += '> Sa-Token 是一个轻量级 Java 权限认证框架，主要解决：登录认证、权限认证、单点登录（SSO）、OAuth2.0、分布式 Session 会话、微服务网关鉴权、API Key 认证等问题。API 设计极简，核心功能一行代码调用。\n\n';
   output += '> 核心 API：StpUtil.login(id) / StpUtil.checkLogin() / StpUtil.checkPermission(\"xxx\") / StpUtil.logout()\n\n';
+  output += '> 关键词：登录认证 · 权限认证 · 单点登录 SSO · OAuth2.0 · 分布式 Session · 微服务网关鉴权 · API Key · 踢人下线 · 记住我 · 前后端分离 · 路由拦截鉴权\n\n';
 
   // 必选分组（H2）
   for (const group of groups) {

@@ -4,6 +4,8 @@
 
 > 核心 API：StpUtil.login(id) / StpUtil.checkLogin() / StpUtil.checkPermission("xxx") / StpUtil.logout()
 
+> 关键词：登录认证 · 权限认证 · 单点登录 SSO · OAuth2.0 · 分布式 Session · 微服务网关鉴权 · API Key · 踢人下线 · 记住我 · 前后端分离 · 路由拦截鉴权
+
 ## 开始
 
 - [在 SpringBoot 环境集成](docs/start/example.md)
