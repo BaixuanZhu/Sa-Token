@@ -44,7 +44,7 @@ public SaResult handler(SaTokenException e) {
 }
 ```
 
-常用码段：核心包 11011~11016（token 无效/过期/被顶/被踢/冻结）、11041 缺角色、11051 缺权限、11071 二级认证未过；SSO 30001~30011；OAuth2 30101+；JWT 30201+。完整表在线 fetch `docs/fun/exception-code.md`。
+常用码段：核心包 11011~11016（token 无效/过期/被顶/被踢/冻结）、11041 缺角色、11051 缺权限、11071 二级认证未过；SSO 30001~30011；OAuth2 30101+；JWT 30201+。
 
 ## 3. 注解不生效
 
@@ -65,7 +65,36 @@ public SaResult handler(SaTokenException e) {
 
 ## 6. 跨域 CORS
 
-前后端分离常见。Sa-Token 官方给出跨域处理参考（过滤器/配置层面），需要时在线 fetch `docs/fun/cors-filter.md`。
+前后端分离常见。两种方案：
+
+**方案一：Sa-Token 内置 CORS 处理**
+```java
+@Configuration
+public class SaTokenConfigure {
+    @Bean
+    public SaCorsHandleFunction corsHandle() {
+        return (req, res, sto) -> {
+            res.setHeader("Access-Control-Allow-Origin", "*")
+               .setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
+               .setHeader("Access-Control-Max-Age", "3600")
+               .setHeader("Access-Control-Allow-Headers", "*");
+            SaRouter.match(SaHttpMethod.OPTIONS).free(r -> {}).back();
+        };
+    }
+}
+```
+
+**方案二：Spring CORS 配置 + 过滤器异常处理**
+```java
+// 过滤器中异常需手动加 CORS 头
+.setError(e -> {
+    SaHolder.getResponse()
+        .setHeader("Access-Control-Allow-Origin", "*");
+    return SaResult.error(e.getMessage());
+})
+```
+
+> **注意**：过滤器异常不进 `@ExceptionHandler`，跨域场景必须在 `setError` 中处理 CORS 头，否则前端收到 CORS 错误而非业务错误。见 `10-antipattern.md` §17。
 
 ## 7. 反向代理后 uri 丢失
 
@@ -73,4 +102,32 @@ Nginx 反代后 `SaHolder.getRequest().getUrl()` 可能不对（影响 SSO 等�
 - Nginx 加 `proxy_set_header Public-Network-URL http://$http_host$request_uri;` 并重写 `SaTokenContext.getRequest().getUrl()`。
 - 或直接在 yml 配置 `sa-token.curr-domain: http://your-domain/api`。
 
-详见在线 `docs/fun/curr-domain.md`。
+## 8. 过滤器异常不进 @ExceptionHandler
+
+`SaServletFilter` / `SaReactorFilter` 在 DispatcherServlet 之前执行，抛出的异常不进入 Spring 全局异常处理器。
+
+```java
+// ❌ 过滤器中异常不会被这里捕获
+@ExceptionHandler(NotLoginException.class)
+public SaResult handler(NotLoginException e) { ... }
+
+// ✅ 必须在过滤器中配置 setError
+new SaServletFilter()
+    .setAuth(obj -> { StpUtil.checkLogin(); })
+    .setError(e -> { return SaResult.error(e.getMessage()); });  // 这里处理
+```
+
+## 9. 排错流程
+
+```
+问题 → 排查路径
+├─ 注解不生效 → ① 注册了 SaInterceptor？② SB≥2.6 加了 @EnableWebMvc？③ 注解在 Spring Bean 上？
+├─ token 读不到 → ① 前端传了 token？② token-name 对应？③ 配了 token-prefix 但前端没加？
+├─ Redis 丢数据 → ① 配了 Redis 连接？② SB3 用 spring.data.redis？③ 版本一致？
+├─ 跨域报错 → ① 配了 CORS？② 过滤器 setError 加了 CORS 头？
+├─ SSO 回调 URL 不对 → 反代 uri 丢失，配 sa-token.curr-domain
+├─ 踢人后仍可访问 → 封禁未踢下线，先 kickout 再 disable
+└─ active-timeout 莫名冻结 → 未触发自动续签（接口未走 Sa-Token 鉴权链）
+```
+
+> **更多常见错误**：见 `10-antipattern.md`（28 条 Agent 常见错误纠偏）。

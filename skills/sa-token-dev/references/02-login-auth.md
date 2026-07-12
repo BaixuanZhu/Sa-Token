@@ -79,3 +79,53 @@ StpUtil.checkActiveTimeout();     // 检查是否已冻结，是则抛异常
 StpUtil.updateLastActiveToNow();  // 续签（更新最后操作时间）
 ```
 - 关闭自动续签：配置 `autoRenew=false`。
+
+## 登录流程最佳实践
+
+### 标准 Web 应用（Cookie 模式）
+
+```java
+@RequestMapping("doLogin")
+public SaResult doLogin(String name, String pwd) {
+    // 1. 校验账号密码（查库）
+    User user = userService.login(name, pwd);
+    if (user == null) return SaResult.error("账号或密码错误");
+
+    // 2. 校验封禁状态（v1.31.0+ 必须手动）
+    StpUtil.checkDisable(user.getId());
+
+    // 3. 登录
+    StpUtil.login(user.getId());
+
+    // 4. Cookie 模式自动注入，无需手动返回 token
+    return SaResult.ok("登录成功");
+}
+```
+
+### 前后端分离（Header 模式）
+
+```java
+@RequestMapping("doLogin")
+public SaResult doLogin(String name, String pwd) {
+    User user = userService.login(name, pwd);
+    if (user == null) return SaResult.error("账号或密码错误");
+
+    StpUtil.checkDisable(user.getId());
+    StpUtil.login(user.getId());
+
+    // 必须返回 tokenValue，前端存本地后塞 header
+    return SaResult.data(StpUtil.getTokenInfo());
+}
+```
+
+### 登录方式决策
+
+| 场景 | 方案 |
+|------|------|
+| Web 应用 | Cookie 自动注入，`login(id)` 即可 |
+| 前后端分离 / App / 小程序 | 返回 `SaTokenInfo`，前端塞 header |
+| 记住我 | `login(id, true)`（默认）或 `login(id, false)`（非记住我） |
+| 同端互斥 | `is-concurrent: false` + `login(id, device)` |
+| 指定 token 有效期 | `login(id, new SaLoginParameter().setTimeout(seconds))` |
+
+> **常见错误**：前后端分离未返回 tokenValue、封禁未踢下线 → 见 `10-antipattern.md` §3、§8。

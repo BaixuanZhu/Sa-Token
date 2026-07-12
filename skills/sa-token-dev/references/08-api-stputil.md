@@ -1,6 +1,6 @@
 # StpUtil 常用 API 速查
 
-> Sa-Token 核心工具类，大多数功能由此提供。以下为高频 API，完整列表在线 fetch `docs/api/stp-util.md`。
+> Sa-Token 核心工具类，大多数功能由此提供。以下为高频 API 速查，高级用法见 `11-advanced.md`。
 
 ## 登录 / 注销
 

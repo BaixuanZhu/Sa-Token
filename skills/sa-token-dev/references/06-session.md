@@ -78,3 +78,22 @@ SaHolder.getApplication().set("key", "value");   // 全局级
 ## 常见坑
 - `SaSession` 与 `HttpSession` 无任何关系，互不通。用 Sa-Token 时统一使用 `SaSession`，不要用 `HttpSession`。
 - 修改 `session.getDataMap()` 里的值后需调用 `session.update()` 避免脏数据。
+
+## Session 使用决策
+
+| 需求 | 用哪个 Session |
+|------|---------------|
+| 存用户信息（跨请求共享） | `StpUtil.getSession()`（Account-Session） |
+| 存 token 级别数据（如设备信息） | `StpUtil.getTokenSession()`（Token-Session） |
+| 未登录时存临时数据 | `StpUtil.getAnonTokenSession()` 或配 `tokenSessionCheckLogin=false` |
+| 按业务 id 缓存（如商品信息） | `SaSessionCustomUtil.getSessionById("goods-10001")`（Custom-Session） |
+| 请求内传值 | `SaHolder.getStorage()`（请求作用域，请求结束销毁） |
+| 全局共享数据 | `SaHolder.getApplication()`（全局作用域） |
+
+### 最佳实践
+- **不要存大对象**：Session 数据存 Redis，大对象影响性能。用户信息建议存 id，用时查库。
+- **lazy 加载**：`session.get("key", () -> queryFromDb())` 无值时执行并缓存，避免每次查库。
+- **修改后 update**：直接修改 `session.getDataMap()` 里的值需调 `session.update()` 同步到 Redis。
+- **区分 Session 类型**：Account-Session 随账号生命周期，Token-Session 随 token 生命周期。
+
+> **常见错误**：SaSession 与 HttpSession 混用 → 见 `10-antipattern.md` §2。

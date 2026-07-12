@@ -92,6 +92,42 @@ public SaResult test() { return SaResult.ok(); }
 - 满足其中任一注解即通过。
 - 多个鉴权注解并列写 = 天然 AND 关系（故无 `@SaCheckAnd`）。
 
+## 7. 注解鉴权 vs 路由拦截鉴权（选型指南）
+
+| 特性 | 注解鉴权（@SaCheck*） | 路由拦截鉴权（SaRouter） |
+|------|---------------------|------------------------|
+| 粒度 | 方法级 / 类级 | 路径级 / 模块级 |
+| 灵活性 | 声明式，写死在代码中 | 可编程，支持动态规则 |
+| 适用 | 细粒度：单个接口需特定权限 | 粗粒度：整个模块统一鉴权 |
+| 代码量 | 每个接口加注解 | 集中配置一处 |
+
+**最佳实践**：
+- **粗粒度用路由拦截**："除登录接口外全部需登录" → SaRouter 一行搞定。
+- **细粒度用注解**："删除需要 user.delete 权限" → `@SaCheckPermission`。
+- **两者可混用**：路由做全局登录校验，注解做细粒度权限校验。
+- **不要重复校验**：路由已校验的，注解不要再重复。
+
+```java
+// 混用示例
+@Configuration
+public class SaTokenConfigure implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new SaInterceptor(handler -> {
+            SaRouter.match("/**", "/user/doLogin", r -> StpUtil.checkLogin());
+        })).addPathPatterns("/**");
+    }
+}
+
+@RestController
+public class UserController {
+    @SaCheckPermission("user.delete")  // 细粒度
+    @DeleteMapping("delete")
+    public SaResult delete() { ... }
+}
+```
+
 ## 扩展
-- 在 Service 层用注解：在线 fetch `docs/plugin/aop-at.md`。
-- 自定义鉴权注解：在线 fetch `docs/fun/custom-annotations.md`。
+- Service 层注解：引入 `sa-token-spring-aop` 插件（见 `14-plugin.md` §4），**不可与拦截器模式同时使用**。
+- 自定义注解：结合 `@SaCheckLogin(type = "user")` + 注解合并（见 `11-advanced.md` §6）。
+- SpEL 表达式：`sa-token-spring-el` 插件支持复杂条件组合（见 `14-plugin.md` §7）。

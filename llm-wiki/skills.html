@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sa-Token 开发 Skill — AI 编程助手专用 | 登录认证 · 权限校验 · SSO 速查</title>
-  <link rel="icon" href="favicon.ico" sizes="any">
-  <meta name="description" content="Sa-Token 开发辅助 Skill，AI 编程助手专用。混合渐进式封装，含核心 API 速记和 9 篇本地参考，覆盖登录认证、权限校验、SSO、路由拦截等场景。">
-  <meta name="keywords" content="Sa-Token Skill, sa-token-dev, AI编程助手, 登录认证速查, 权限校验, StpUtil, SSO开发, token认证, SpringBoot安全">
+  <title>Sa-Token 开发 Skill — AI 编程助手专用 | 最佳实践 · 28 条纠偏 · 全本地自包含</title>
+  <link rel="icon" href="logo.png" sizes="any">
+  <meta name="description" content="Sa-Token 开发辅助 Skill，AI 编程助手专用。完全本地自包含，14 篇参考 + 28 条反模式纠偏 + 6 个关键决策检查点，覆盖登录认证、权限校验、SSO、微服务网关鉴权等全链路。">
+  <meta name="keywords" content="Sa-Token Skill, sa-token-dev, AI编程助手, 登录认证, 权限校验, StpUtil, SSO, OAuth2, 微服务鉴权, JWT, 最佳实践, 反模式纠偏">
   <meta property="og:title" content="Sa-Token 开发 Skill — AI 编程助手专用">
-  <meta property="og:description" content="混合渐进式封装，含核心 API 速记和 9 篇本地参考，覆盖登录认证、权限校验、SSO、路由拦截等场景">
+  <meta property="og:description" content="完全本地自包含，14 篇参考 + 28 条反模式纠偏 + 6 个关键决策检查点，覆盖登录认证到微服务网关鉴权全链路">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://baixuanzhu.github.io/Sa-Token/skills.html">
   <meta property="og:image" content="https://baixuanzhu.github.io/Sa-Token/logo.png">
@@ -116,6 +116,22 @@
     }
     .btn-download:hover { background: var(--accent-dark); }
 
+    /* ── Install section ── */
+    .install-block { margin-top: 18px; }
+    .install-block:first-child { margin-top: 0; }
+    .badge-rec {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      color: #fff; background: var(--accent);
+      padding: 2px 8px; border-radius: 4px; margin-left: 8px;
+      vertical-align: middle;
+    }
+    .badge-alt {
+      display: inline-block; font-size: 12px; font-weight: 500;
+      color: var(--text-muted); background: var(--bg);
+      padding: 2px 8px; border-radius: 4px; margin-left: 8px;
+      vertical-align: middle;
+    }
+
     /* ── Footer / back ── */
     .back-link { display: block; text-align: center; margin: 8px 0 28px; font-size: 14px; color: var(--accent); text-decoration: none; }
     .back-link:hover { text-decoration: underline; }
@@ -129,44 +145,69 @@
     <img class="logo" src="logo.png" alt="Sa-Token">
     <div class="title-row">
       <h1>Skills</h1>
-      <span class="version">v1.45.0</span>
+      <span class="version">1.40.x+ 全线适用</span>
     </div>
-    <p class="subtitle">Sa-Token 开发辅助 Skill — 混合渐进式封装</p>
+    <p class="subtitle">Sa-Token 开发辅助 Skill — 完全本地自包含，离线可用</p>
   </header>
 
   <main class="main">
     <div class="doc-section">
       <h2>这是什么</h2>
-      <p>给 AI 编程助手用的 Sa-Token 开发 Skill。常用模块（登录认证、权限角色、注解鉴权、路由拦截、Session、Redis 集成）做了 9 篇本地文档，直接查不用联网。SSO、OAuth2、微服务、插件这些低频内容走在线文档，不会过时。基于稳定版 <code>1.45.0</code> 整理。</p>
+      <p>给 AI 编程助手用的 Sa-Token 开发 Skill。<strong>推荐 1.45.0+（1.40.x 及以上全线适用）</strong>，核心 API 向后兼容。完全本地自包含，不依赖外部文档站点，离线可用。14 篇本地参考覆盖从集成配置到微服务网关鉴权的全链路，附带 28 条反模式纠偏、6 个关键决策检查点、12 条核心强约束和 9 项输出前自检清单。</p>
+    </div>
+
+    <div class="doc-section">
+      <h2>适用场景</h2>
+      <p><strong>适用于：</strong>项目已使用 Sa-Token 依赖（sa-token-spring-boot-starter / sa-token-spring-boot3-starter / sa-token-spring-boot4-starter / sa-token-reactor-spring-boot-starter），涉及登录认证、权限校验（RBAC）、注解鉴权、路由拦截、Session、Redis 集成、前后端分离、踢人下线、账号封禁、SSO 单点登录、OAuth2.0、微服务网关鉴权、JWT / API-Key 等插件。</p>
+      <p><strong>不适用于：</strong>Shiro / Spring Security 项目、纯 JWT 自实现方案、非 Java 语言。</p>
+      <p><strong>部分适用：</strong>纯 Spring Security 项目——仅异常码参考章节可借用。</p>
     </div>
 
     <div class="doc-section">
       <h2>目录结构</h2>
       <div class="tree">
 <span class="dir">sa-token-dev/</span><br>
-├── <a href="skills/sa-token-dev/SKILL.md">SKILL.md</a> <span class="comment"># 决策路由 + 核心 API 速记 + 在线兜底指引</span><br>
+├── <a href="skills/sa-token-dev/SKILL.md">SKILL.md</a> <span class="comment"># 三段式适用判断 + 独特价值 + 快速路由 + 6个检查点 + 12条强约束 + 决策路由 + 9项自检</span><br>
 └── <span class="dir">references/</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/01-setup.md">01-setup.md</a> <span class="comment">集成配置（SpringBoot 依赖 / 框架适配）</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/02-login-auth.md">02-login-auth.md</a> <span class="comment">登录认证 / Token 有效期</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/03-permission.md">03-permission.md</a> <span class="comment">权限认证 / 角色鉴权</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/04-annotation.md">04-annotation.md</a> <span class="comment">注解鉴权 @SaCheck*</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/05-interceptor-route.md">05-interceptor-route.md</a> <span class="comment">路由拦截 SaInterceptor / SaRouter</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/06-session.md">06-session.md</a> <span class="comment">Session 会话 / 三大作用域</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/07-redis-frontsep.md">07-redis-frontsep.md</a> <span class="comment">集成 Redis / 前后端分离</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/01-setup.md">01-setup.md</a> <span class="comment">集成配置（SpringBoot 2/3/4/WebFlux + 生产配置清单）</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/02-login-auth.md">02-login-auth.md</a> <span class="comment">登录认证 / Cookie vs Header / 记住我</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/03-permission.md">03-permission.md</a> <span class="comment">权限认证 / RBAC 设计 / 权限缓存优化</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/04-annotation.md">04-annotation.md</a> <span class="comment">注解鉴权 @SaCheck* / 注解vs路由拦截选型</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/05-interceptor-route.md">05-interceptor-route.md</a> <span class="comment">路由拦截 SaInterceptor / SaRouter / 动态权限</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/06-session.md">06-session.md</a> <span class="comment">Session 会话 / Account/Token/Custom 三种类型</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/07-redis-frontsep.md">07-redis-frontsep.md</a> <span class="comment">Redis 集成 / 前后端分离 / Alone-Redis 隔离</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/08-api-stputil.md">08-api-stputil.md</a> <span class="comment">StpUtil 常用 API 速查表</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;└── <a href="skills/sa-token-dev/references/09-pitfalls.md">09-pitfalls.md</a> <span class="comment">常见坑（未登录场景值 / 跨域 / 反代 / 异常码）</span>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/09-pitfalls.md">09-pitfalls.md</a> <span class="comment">常见坑（CORS / 过滤器异常 / 反代 / 排错流程）</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/10-antipattern.md">10-antipattern.md</a> <span class="comment">★ 28条 Agent常见错误纠偏（核心价值）</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/11-advanced.md">11-advanced.md</a> <span class="comment">高级特性（封禁/二级认证/身份切换/多账号/密码加密/侦听器/过滤器）</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/12-sso-oauth2.md">12-sso-oauth2.md</a> <span class="comment">SSO 三种模式 + OAuth2 四种授权模式 + 选型对比</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <a href="skills/sa-token-dev/references/13-micro-service.md">13-micro-service.md</a> <span class="comment">微服务网关鉴权 + Same-Token 内部隔离 + 依赖规则</span><br>
+│&nbsp;&nbsp;&nbsp;&nbsp;└── <a href="skills/sa-token-dev/references/14-plugin.md">14-plugin.md</a> <span class="comment">JWT(3种模式)/API-Key/签名/AOP注解/临时Token/Alone-Redis/SpEL</span>
       </div>
     </div>
 
     <div class="doc-section">
-      <h2>下载</h2>
-      <p>获取 Sa-Token 开发 Skill 安装包：</p>
-      <div class="code-wrap">
-        <button class="copy-btn" onclick="copyInstall()">复制</button>
-        <pre class="code" id="install"><code>curl -L https://baixuanzhu.github.io/Sa-Token/skills/sa-token-dev.zip -o sa-token-dev.zip</code></pre>
+      <h2>安装</h2>
+
+      <div class="install-block">
+        <h3 style="font-size:15px;font-weight:600;margin-bottom:4px">SkillHub 安装<span class="badge-rec">推荐</span></h3>
+        <p>复制以下提示词，粘贴给你的 AI 编程助手即可自动安装：</p>
+        <div class="code-wrap">
+          <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          <pre class="code"><code>请根据 https://skillhub.cn/install/skillhub.md，安装 sa-token-dev。</code></pre>
+        </div>
       </div>
-      <p style="margin-top:14px"><a class="btn-download" href="skills/sa-token-dev.zip">⬇ 下载 sa-token-dev.zip</a></p>
-      <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">解压后将 <code>sa-token-dev/</code> 文件夹放入你所用 AI 编程助手的技能目录即可使用。</p>
+
+      <div class="install-block" style="margin-top:20px;border-top:1px solid var(--border);padding-top:18px">
+        <h3 style="font-size:15px;font-weight:600;margin-bottom:4px">手动下载 zip<span class="badge-alt">备选</span></h3>
+        <p>直接下载安装包，解压后放入 skills 目录：</p>
+        <div class="code-wrap">
+          <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          <pre class="code"><code>curl -L https://baixuanzhu.github.io/Sa-Token/skills/sa-token-dev.zip -o sa-token-dev.zip</code></pre>
+        </div>
+        <p style="margin-top:14px"><a class="btn-download" href="skills/sa-token-dev.zip">⬇ 下载 sa-token-dev.zip</a></p>
+        <p style="margin-top:8px;font-size:13px;color:var(--text-muted)">解压后将 <code>sa-token-dev/</code> 文件夹放入你所用 AI 编程助手的技能目录即可使用。</p>
+      </div>
     </div>
 
     <a class="back-link" href="index.html">← 返回 LLM Wiki 首页</a>
@@ -178,10 +219,10 @@
   </footer>
 
   <script>
-    function copyInstall() {
-      const el = document.getElementById('install').innerText;
-      navigator.clipboard.writeText(el).then(function () {
-        const btn = document.querySelector('.copy-btn');
+    function copyCode(btn) {
+      var pre = btn.parentElement.querySelector('pre');
+      var text = pre.innerText;
+      navigator.clipboard.writeText(text).then(function () {
         btn.textContent = '已复制';
         setTimeout(function () { btn.textContent = '复制'; }, 1500);
       });

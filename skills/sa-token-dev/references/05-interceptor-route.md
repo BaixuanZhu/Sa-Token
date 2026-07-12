@@ -80,3 +80,41 @@ SaRouter.match("/**").check(/* ... */);  // 继续执行
 - `@SaIgnore` 可忽略路由拦截校验（对自定义拦截器/过滤器不生效）。
 - `SaInterceptor` 注册后默认同时开启注解校验；关闭注解校验：`new SaInterceptor(...).isAnnotation(false)`。
 - `setBeforeAuth(...)` 注册认证前置函数（其中的 `SaRouter.stop()` 可跳过后续鉴权）。
+
+## 7. 常见路由模式
+
+### 全局登录校验 + 白名单
+
+```java
+registry.addInterceptor(new SaInterceptor(handler -> {
+    SaRouter.match("/**")
+        .notMatch("/user/doLogin", "/user/register", "/favicon.ico")
+        .notMatch("*.html", "*.css", "*.js")
+        .check(r -> StpUtil.checkLogin());
+})).addPathPatterns("/**");
+```
+
+### 按模块分权限
+
+```java
+SaRouter.match("/user/**", r -> StpUtil.checkPermission("user"));
+SaRouter.match("/admin/**", r -> StpUtil.checkRoleOr("admin", "super-admin"));
+SaRouter.match("/goods/**", r -> StpUtil.checkPermission("goods"));
+```
+
+### 动态权限（从数据库加载规则）
+
+```java
+List<RouteRule> rules = routeRuleService.getAll();
+for (RouteRule rule : rules) {
+    SaRouter.match(rule.getPattern(), r -> StpUtil.checkPermission(rule.getPermission()));
+}
+```
+
+## 最佳实践
+- **匹配顺序**：精确路由放前面，通配路由放后面。`SaRouter.match` 按代码顺序依次匹配。
+- **notMatch 排除**：用 `.notMatch()` 排除静态资源和公开接口，比在 match 中列排除路径更清晰。
+- **stop vs back**：`stop()` 停止匹配但仍进 Controller；`back()` 直接返回前端不进 Controller。
+- **过滤器 vs 拦截器**：WebFlux/Gateway 必须用过滤器（`SaReactorFilter`），Servlet 环境推荐用拦截器。
+
+> **常见错误**：SaRouter 匹配顺序错误、@SaIgnore 对自定义过滤器不生效 → 见 `10-antipattern.md` §15、§16。

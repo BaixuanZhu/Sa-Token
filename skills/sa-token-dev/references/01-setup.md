@@ -1,12 +1,13 @@
 # 集成与配置（SpringBoot）
 
-> 适用于 Sa-Token 1.45.0。核心一句话：引依赖 → （可选）配 yml → 直接用 `StpUtil`。
+> 适用于 Sa-Token 1.45.0+（1.40.x 及以上，核心 API 向后兼容）。核心一句话：引依赖 → （可选）配 yml → 直接用 `StpUtil`。
 
 ## 1. 添加依赖
 
 **Maven：**
 ```xml
 <!-- Sa-Token 权限认证 -->
+<!-- 版本号请使用最新稳定版，1.40.x+ 均适用；各 sa-token-* 依赖版本保持一致 -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-spring-boot-starter</artifactId>
@@ -16,10 +17,11 @@
 
 - SpringBoot 3.x → 用 `sa-token-spring-boot3-starter`
 - SpringBoot 4.x → 用 `sa-token-spring-boot4-starter`
-- WebFlux 响应式环境 → 用 `sa-token-reactor-spring-boot-starter`（见在线文档 start/webflux-example）
+- WebFlux 响应式环境 → 用 `sa-token-reactor-spring-boot-starter`（见 `13-micro-service.md`）
 
 **Gradle：**
 ```gradle
+// 版本号请使用最新稳定版，1.40.x+ 均适用
 implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
 ```
 
@@ -84,4 +86,33 @@ public class UserController {
 
 ## 关键说明
 - `StpUtil.login(id)` 利用 Cookie 自动注入把 token 返回前端，因此 Web 端无需手写返回 token。前后端分离场景见 `07-redis-frontsep.md`。
-- 完整可配置项繁多（前缀、cookie 策略、jwt 等），非高频，需要时在线 fetch `docs/use/config.md`。
+- 完整可配置项见 `08-api-stputil.md` 及高级特性 `11-advanced.md`。
+
+## 生产配置清单
+
+| 配置项 | 开发默认值 | 生产建议 | 原因 |
+|--------|-----------|---------|------|
+| `timeout` | 2592000（30天） | 按业务定（如 86400=1天） | 过长增加 token 泄露风险 |
+| `active-timeout` | -1（不限制） | 1800（30分钟） | 限制闲置会话 |
+| `is-concurrent` | true | 按业务定 | 多端同时登录需评估安全 |
+| `is-share` | false | false（推荐） | true 时多端共用 token，踢人语义变化 |
+| `token-style` | uuid | random-64 / tik | 更难猜测 |
+| `is-log` | true | false | 生产关闭日志输出 |
+| Redis | 内存 | 必须集成 | 分布式场景必须 |
+| `autoRenew` | true | true | active-timeout 自动续签 |
+
+## 版本选型决策树
+
+```
+SpringBoot 版本？
+├─ 2.x → sa-token-spring-boot-starter
+├─ 3.x → sa-token-spring-boot3-starter（Redis 前缀 spring.data.redis）
+└─ 4.x → sa-token-spring-boot4-starter
+
+环境类型？
+├─ SpringMVC (Servlet) → sa-token-spring-boot*-starter
+├─ WebFlux / Gateway (Reactor) → sa-token-reactor-spring-boot*-starter
+└─ 微服务网关 + 子服务 → 网关用 Reactor，子服务用 Servlet（各自单独引入）
+```
+
+> **常见错误**：Starter 混用、Redis 前缀配错、未注册 SaInterceptor → 见 `10-antipattern.md` §1、§10、§11。
