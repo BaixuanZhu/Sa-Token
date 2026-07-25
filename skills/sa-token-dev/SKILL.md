@@ -2,9 +2,7 @@
 name: sa-token-dev
 description: >-
   Sa-Token（cn.dev33）Java 权限认证框架开发助手。
-  适用于：项目已使用 Sa-Token 依赖（sa-token-spring-boot-starter /
-  sa-token-spring-boot3-starter / sa-token-spring-boot4-starter /
-  sa-token-reactor-spring-boot-starter）、StpUtil API、登录认证、权限认证（StpInterface /
+  适用于：项目已使用 Sa-Token 依赖（sa-token-spring-boot*-starter 系列，含 Servlet 的 SpringBoot 2/3/4 与 WebFlux 响应式变体）、StpUtil API、登录认证、权限认证（StpInterface /
   权限码 / 角色 / 通配符）、注解鉴权（@SaCheckLogin / @SaCheckPermission / @SaCheckRole /
   @SaCheckOr / @SaIgnore / @SaCheckSafe / @SaCheckDisable）、路由拦截鉴权（SaInterceptor /
   SaRouter）、Session 会话（Account/Token/Custom 三种类型）、集成 Redis、前后端分离 token 传递、
