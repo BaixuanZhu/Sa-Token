@@ -12,7 +12,9 @@ description: >-
   不适用于：Shiro / Spring Security 项目、纯 JWT 自实现方案、非 Java 语言。
   纯 Spring Security 项目仅异常码参考章节部分适用。
 agent_created: true
-version: 1.0.0
+version: 1.0.2
+slug: sa-token-dev
+displayName: Sa-Token 开发助手
 ---
 
 # Sa-Token 开发助手
