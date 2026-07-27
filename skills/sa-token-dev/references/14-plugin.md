@@ -1,8 +1,12 @@
 # 插件
 
 > 适用于 Sa-Token 1.45.0+（1.40.x 及以上，核心 API 向后兼容）。本文覆盖 JWT、API-Key、API 签名、AOP 注解、临时 Token、Alone Redis、SpEL 表达式七大常用插件。
+>
+> **依赖引入通用规则**：所有插件 Maven 坐标均为 `cn.dev33:<artifactId>`，artifactId 见文末「插件汇总」表，版本与核心 sa-token 依赖保持一致（最新稳定版，1.40.x+ 均适用）。除特别说明（JWT、temp-jwt）外，下文不再逐个列依赖 XML。
 
 ## 1. JWT 整合（sa-token-jwt）
+
+> **先明确概念：无状态与 JWT 是两个正交维度**。JWT 只是一种 token 风格（自包含/可读），不等于无状态：Simple 模式就是「JWT + Redis」的有状态方案；反过来，有状态场景用默认 `simple-uuid` token + Redis 即可，**根本无需引入本插件**。真正需要本插件的只有两类诉求：① 用户明确要 JWT 格式 token（选 Simple/Mixin）；② 无状态架构（不要 Redis，选 Stateless——这是 Sa-Token 实现无状态的唯一路径，JWT 在此只是实现手段）。只有 Mixin 是 JWT 与 Redis 两者都要。
 
 ### 1.1 依赖
 
@@ -90,23 +94,9 @@ public void setUserStpLogic() {
 
 ## 2. API Key 认证（sa-token-apikey）
 
-### 2.1 依赖
+随机字符串 Key 与用户 id 绑定；一个用户可创建多个 Key，每个 Key 可赋不同 scope 权限、可设有效期、随时删除回收。
 
-```xml
-<dependency>
-    <groupId>cn.dev33</groupId>
-    <artifactId>sa-token-apikey</artifactId>
-    <version>1.45.0</version>
-</dependency>
-```
-
-### 2.2 特点
-- 格式为随机字符串，与用户 id 绑定
-- 一个用户可创建多个 API Key
-- 每个 Key 可赋予不同 scope 权限
-- 可设置有效期，随时删除回收
-
-### 2.3 创建与查询
+### 2.1 创建与查询
 
 ```java
 // 创建
@@ -123,7 +113,7 @@ List<ApiKeyModel> list = SaApiKeyUtil.getApiKeyList(10001);
 SaApiKeyUtil.deleteApiKey("AK-xxx");
 ```
 
-### 2.4 校验
+### 2.2 校验
 
 ```java
 SaApiKeyUtil.checkApiKey("AK-xxx");                    // 校验有效性
@@ -132,7 +122,7 @@ boolean has = SaApiKeyUtil.hasApiKeyScope("AK-xxx", "userinfo");  // 返回 bool
 SaApiKeyUtil.checkApiKeyLoginId("AK-xxx", 10001);      // 校验归属
 ```
 
-### 2.5 注解鉴权
+### 2.3 注解鉴权
 
 ```java
 @SaCheckApiKey                                         // 必须携带有效 ApiKey
@@ -141,7 +131,7 @@ SaApiKeyUtil.checkApiKeyLoginId("AK-xxx", 10001);      // 校验归属
 @SaCheckApiKey(scope = {"userinfo", "chat"}, mode = SaMode.OR)  // 任一即可
 ```
 
-### 2.6 前端提交方式
+### 2.4 前端提交方式
 
 ```
 # 方式一：请求参数或 header，参数名 apikey（全小写）
@@ -151,7 +141,7 @@ SaApiKeyUtil.checkApiKeyLoginId("AK-xxx", 10001);      // 校验归属
 http://AK-xxx@localhost:8081/user/getInfo
 ```
 
-### 2.7 数据库模式
+### 2.5 数据库模式
 
 ```java
 @Component
@@ -166,7 +156,7 @@ public class SaApiKeyDataLoaderImpl implements SaApiKeyDataLoader {
 }
 ```
 
-### 2.8 适用场景
+### 2.6 适用场景
 - **适用**：第三方应用代替用户调用特定 API，可控授权、随时回收。
 - **不适用**：用户登录认证（用 `StpUtil`）。
 
@@ -174,17 +164,7 @@ public class SaApiKeyDataLoaderImpl implements SaApiKeyDataLoader {
 
 ## 3. API 接口签名（sa-token-sign）
 
-### 3.1 依赖
-
-```xml
-<dependency>
-    <groupId>cn.dev33</groupId>
-    <artifactId>sa-token-sign</artifactId>
-    <version>1.45.0</version>
-</dependency>
-```
-
-### 3.2 配置
+### 3.1 配置
 
 ```yaml
 sa-token:
@@ -192,7 +172,7 @@ sa-token:
     secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor  # 发起端和接收端须一致
 ```
 
-### 3.3 签名原理（三重防护）
+### 3.2 签名原理（三重防护）
 
 1. **sign 签名**：所有参数按字典序排列 + secretKey 计算 MD5，防篡改
 2. **nonce 随机串**：32 位，一次性使用，防重放
@@ -202,7 +182,7 @@ sa-token:
 sign = md5(所有参数按字典序排列 + "&key=" + secretKey)
 ```
 
-### 3.4 请求发起端
+### 3.3 请求发起端
 
 ```java
 Map<String, Object> paramMap = new LinkedHashMap<>();
@@ -214,7 +194,7 @@ String paramStr = SaSignUtil.addSignParamsAndJoin(paramMap);
 String url = "http://b.com/api/addMoney?" + paramStr;
 ```
 
-### 3.5 请求接收端
+### 3.4 请求接收端
 
 ```java
 @RequestMapping("addMoney")
@@ -224,7 +204,7 @@ public SaResult addMoney(long userId, long money) {
 }
 ```
 
-### 3.6 注解校验
+### 3.5 注解校验
 
 ```java
 @SaCheckSign                                          // 校验全部参数
@@ -232,7 +212,7 @@ public SaResult addMoney(long userId, long money) {
 @SaCheckSign(appid = "xm-shop")                       // 多应用模式
 ```
 
-### 3.7 多应用模式
+### 3.6 多应用模式
 
 ```yaml
 sa-token:
@@ -245,7 +225,7 @@ sa-token:
       digest-algo: sha256
 ```
 
-### 3.8 适用场景
+### 3.7 适用场景
 - **适用**：跨系统接口调用，防伪造、防篡改、防重放。
 - **不适用**：浏览器到后端的常规请求（用会话 token 或 API Key）。
 
@@ -253,25 +233,11 @@ sa-token:
 
 ## 4. AOP 注解鉴权（sa-token-spring-aop）
 
-### 4.1 依赖
+默认拦截器模式只能在 **Controller 层** 使用注解；引入 AOP 插件后可在**任意层级**（Service/Manager）使用。
 
-```xml
-<dependency>
-    <groupId>cn.dev33</groupId>
-    <artifactId>sa-token-spring-aop</artifactId>
-    <version>1.45.0</version>
-</dependency>
-```
+> **关键注意：拦截器模式和 AOP 模式不可同时使用**，否则 Controller 层注解校验两次。
 
-### 4.2 功能
-
-默认拦截器模式只能在 **Controller 层** 使用注解。引入 AOP 插件后可在**任意层级**（Service/Manager）使用。
-
-### 4.3 关键注意
-
-> **拦截器模式和 AOP 模式不可同时使用**，否则 Controller 层注解校验两次。
-
-### 4.4 适用场景
+### 4.1 适用场景
 - **适用**：需在 Service 层等非 Controller 层做注解鉴权。
 - **不适用**：只在 Controller 鉴权（用默认拦截器即可）。**绝对不要与拦截器模式同时使用。**
 
@@ -282,51 +248,26 @@ sa-token:
 ### 5.1 核心 API（已内嵌核心包）
 
 ```java
-// 创建 token，有效期 200 秒
+// 创建 token（有效期 200 秒）/ 解析 / 剩余有效期 / 删除
 String token = SaTempUtil.createToken("10014", 200);
-
-// 解析 token
 String value = SaTempUtil.parseToken(token, String.class);
-
-// 剩余有效期
 long timeout = SaTempUtil.getTimeout(token);
-
-// 删除 token
 SaTempUtil.deleteToken(token);
-```
 
-### 5.2 前缀拼接
+// 前缀拼接：解析时裁剪前缀，错误前缀返回 null
+String token2 = SaTempUtil.createToken("shop_1001", 1200);
+Long value2 = SaTempUtil.parseToken(token2, "shop_", Long.class);
 
-```java
-String token = SaTempUtil.createToken("shop_1001", 1200);
-// 解析时裁剪前缀，错误前缀返回 null
-Long value = SaTempUtil.parseToken(token, "shop_", Long.class);
-```
-
-### 5.3 反查 Token
-
-```java
-// 第三个参数 true = 保存 value→token 映射
+// 反查：第三个参数 true = 保存 value→token 映射
 SaTempUtil.createToken(10004, 1200, true);
 List<String> tokens = SaTempUtil.getTempTokenList(10004);
 ```
 
-### 5.4 集成 JWT（可选）
+### 5.2 集成 JWT（可选）
 
-```xml
-<dependency>
-    <groupId>cn.dev33</groupId>
-    <artifactId>sa-token-temp-jwt</artifactId>
-    <version>1.45.0</version>
-</dependency>
-```
+引入 `sa-token-temp-jwt` 插件（坐标规则同上），并配置 `sa-token.jwt-secret-key`（必填）。
 
-```yaml
-sa-token:
-  jwt-secret-key: JfdDSgfCmPsDfmsAaQwnXk  # 必填
-```
-
-### 5.5 适用场景
+### 5.3 适用场景
 - **适用**：邀请链接、短时效授权（5 分钟~半小时）、邮件验证、临时下载链接。
 - **不适用**：用户登录会话（用 `StpUtil.login()`）。
 
@@ -334,19 +275,9 @@ sa-token:
 
 ## 6. Alone 独立 Redis（sa-token-alone-redis）
 
-### 6.1 依赖
-
-```xml
-<dependency>
-    <groupId>cn.dev33</groupId>
-    <artifactId>sa-token-alone-redis</artifactId>
-    <version>1.45.0</version>
-</dependency>
-```
-
 > Spring Boot 4.x 用 `sa-token-alone-redis-by-spring-boot4` 替代。
 
-### 6.2 配置
+### 6.1 配置
 
 ```yaml
 sa-token:
@@ -362,7 +293,7 @@ spring:
     port: 6379
 ```
 
-### 6.3 适用场景
+### 6.2 适用场景
 - **适用**：权限数据与业务缓存物理隔离（不同 Redis 实例/database），权限数据独立扩容/备份。
 - **不适用**：单 Redis 且数据量不大的项目。
 - SSO 场景：Client 用 Alone-Redis 连接与 Server 同一个 Redis，业务数据用另一个。
@@ -371,28 +302,12 @@ spring:
 
 ## 7. SpEL 表达式注解（sa-token-spring-el）
 
-### 7.1 依赖
-
-```xml
-<dependency>
-    <groupId>cn.dev33</groupId>
-    <artifactId>sa-token-spring-el</artifactId>
-    <version>1.45.0</version>
-</dependency>
-```
-
-### 7.2 使用
+### 7.1 使用
 
 ```java
-// 登录校验
+// 登录/权限校验
 @SaCheckEL("stp.checkLogin()")
-@RequestMapping("test1")
-public SaResult test1() { return SaResult.ok(); }
-
-// 权限校验
 @SaCheckEL("stp.checkPermission('user:edit')")
-@RequestMapping("test3")
-public SaResult test3() { return SaResult.ok(); }
 
 // 参数校验
 @SaCheckEL("NEED( #name.length() > 3 )")
@@ -407,7 +322,7 @@ public SaResult test5(@RequestParam(defaultValue = "") String name) {
 public SaResult test8() { return SaResult.ok(); }
 ```
 
-### 7.3 根对象
+### 7.2 根对象
 
 | 根对象 | 说明 |
 |--------|------|
@@ -416,7 +331,7 @@ public SaResult test8() { return SaResult.ok(); }
 | `#参数名` | 方法参数引用 |
 | `this.成员变量` | 本类成员变量 |
 
-### 7.4 多账号体系
+### 7.3 多账号体系
 
 ```java
 @PostConstruct
@@ -430,7 +345,7 @@ public void rewriteSaStrategy() {
 @SaCheckEL("stpUser.checkLogin()")
 ```
 
-### 7.5 适用场景
+### 7.4 适用场景
 - **适用**：复杂条件组合鉴权（参数校验、Session 取值、自定义逻辑）。
 - **不适用**：简单单一权限/角色校验（直接用 `@SaCheckPermission` / `@SaCheckRole`）。
 

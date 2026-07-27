@@ -275,15 +275,9 @@ StpKit.ADMIN.checkPermission("article:add");
 StpKit.USER.getSession().set("name", "zhang");
 ```
 
-### 方案二：自定义 StpUtil
+### 方案二：自定义 StpUtil（不推荐）
 
-```java
-public class StpUserUtil {
-    public static final String TYPE = "user";
-    public static StpLogic stpLogic = new StpLogic(TYPE);
-    // 复制 StpUtil 的方法，将 "login" 替换为 TYPE...
-}
-```
+继承 `StpLogic` 复制 `StpUtil` 的全部方法并把 `loginId` 换成自定义 `TYPE`——代码冗余；仅在你**必须**脱离 StpKit 门面时才考虑，否则一律用方案一门面模式（见下方最佳实践）。
 
 ### 注解指定账号体系
 
@@ -568,18 +562,7 @@ public SaServletFilter getSaServletFilter() {
 
 ### WebFlux 注册
 
-```java
-@Bean
-public SaReactorFilter getSaReactorFilter() {
-    return new SaReactorFilter()
-        .addInclude("/**")
-        .addExclude("/favicon.ico")
-        .setAuth(obj -> {
-            SaRouter.match("/**", "/user/doLogin", r -> StpUtil.checkLogin());
-        })
-        .setError(e -> SaResult.error(e.getMessage()));
-}
-```
+WebFlux / Spring Cloud Gateway 项目把上方的 `SaServletFilter` 换成 `SaReactorFilter` 即可，配置项（`addInclude` / `addExclude` / `setAuth` / `setError` / `setBeforeAuth`）完全一致（强制要求见下方最佳实践「WebFlux 必须用 SaReactorFilter」）。
 
 ### 自定义响应格式
 

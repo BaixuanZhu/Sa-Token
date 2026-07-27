@@ -75,9 +75,7 @@ public class SsoServerController {
     private void configSso(SaSsoServerTemplate ssoServerTemplate) {
         // 未登录时返回的视图
         ssoServerTemplate.strategy.notLoginView = () -> {
-            return "<h2>SSO 认证中心尚未登录</h2>" +
-                   "用户：<input id='name' /> 密码：<input id='pwd' />" +
-                   "<button onclick=\"doLogin()\">登录</button>";
+            return /* 登录页 HTML：用户名/密码输入 + doLogin() 提交 */;
         };
 
         // 登录处理
@@ -140,13 +138,7 @@ sa-token:
     port: 6379
 ```
 
-**登录流程**：
-```
-用户访问 s1.stp.com → 点击登录 → 重定向至 sso.stp.com:9000/sso/auth
-→ SSO-Server 检查是否已登录 → 未登录展示登录页 → 登录成功
-→ 写入 Cookie (domain=stp.com) → 重定向回 Client
-→ Client 共享 Cookie 中的 Token → 通过共享 Redis 校验会话 → 登录成功
-```
+**登录流程**：Client 重定向至 Server 登录 → Server 写入父域 Cookie（domain=stp.com）→ 重定向回 Client → Client 共享 Cookie 中的 Token + 共享 Redis 校验会话，即完成登录。
 
 ### 6. SSO 模式二：URL 重定向 + Ticket
 
@@ -273,11 +265,7 @@ public Object logoutByAlone() {
 // 全端注销：调用 /sso/logout?back=self
 ```
 
-**全端注销链路**：
-```
-Client → Server 发送注销请求 → Server 遍历所有 Client 推送下线通知
-→ Server 自身注销 → 响应 Client → 全端下线
-```
+**全端注销链路**：Client 向 Server 发注销请求 → Server 遍历所有 Client 推送下线通知 → Server 自身注销 → 全端下线。
 
 ### 10. SSO 核心类速查
 
@@ -356,25 +344,7 @@ public class SaOAuth2ServerController {
 }
 ```
 
-**YAML 配置 client**（替代代码方式）：
-```yaml
-sa-token:
-  oauth2-server:
-    clients:
-      1001:
-        client-id: 1001
-        client-secret: aaaa-bbbb-cccc-dddd-eeee
-        allow-redirect-uris:
-          - http://sa-oauth-client.com:8002
-        contract-scopes:
-          - openid
-          - userinfo
-        allow-grant-types:
-          - authorization_code
-          - refresh_token
-          - password
-          - client_credentials
-```
+> Client 也可用 YAML 配置替代代码方式（`sa-token.oauth2-server.clients.<id>` 下配 client-id/client-secret/allow-redirect-uris/contract-scopes/allow-grant-types，与上方 Java 字段一一对应）。
 
 ### 14. 授权码模式流程
 
