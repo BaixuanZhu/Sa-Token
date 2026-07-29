@@ -2,17 +2,18 @@
 name: sa-token-dev
 description: >-
   Sa-Token（cn.dev33）Java 权限认证框架开发助手。
-  适用于：项目已使用 Sa-Token 依赖（sa-token-spring-boot*-starter 系列，含 Servlet 的 SpringBoot 2/3/4 与 WebFlux 响应式变体）、StpUtil API、登录认证、权限认证（StpInterface /
-  权限码 / 角色 / 通配符）、注解鉴权（@SaCheckLogin / @SaCheckPermission / @SaCheckRole /
-  @SaCheckOr / @SaIgnore / @SaCheckSafe / @SaCheckDisable）、路由拦截鉴权（SaInterceptor /
-  SaRouter）、Session 会话（Account/Token/Custom 三种类型）、集成 Redis、前后端分离 token 传递、
-  记住我、同端互斥登录、踢人下线、账号封禁、二级认证、身份切换、多账号认证、密码加密、
-  Token 风格与前缀、全局侦听器与过滤器、SSO 单点登录（三种模式）、OAuth2.0、微服务网关鉴权、
-  JWT / API-Key / API 签名 / AOP 注解 / 临时 Token 等插件。
-  不适用于：Shiro / Spring Security 项目、纯 JWT 自实现方案、非 Java 语言。
-  纯 Spring Security 项目仅异常码参考章节部分适用。
+  在 Java / Spring Boot 项目中开发任何登录、注册、登出、认证、鉴权、权限、角色、token、
+  会话管理、接口保护、路由拦截、SSO 单点登录、OAuth2.0、JWT、踢人下线、账号封禁、记住我、
+  二级认证、多账号体系、微服务网关鉴权相关功能时使用本技能——无论用户是否提到 Sa-Token
+  （login / logout / authentication / authorization / permission / role / session / JWT /
+  SSO / access control）。
+  项目依赖已含 sa-token（sa-token-spring-boot*-starter 系列，覆盖 SpringBoot 2/3/4 与
+  WebFlux 响应式变体）或代码出现 StpUtil / StpInterface / @SaCheckLogin / @SaCheckPermission /
+  @SaCheckRole / SaInterceptor / SaRouter / SaSession 时必须使用本技能；
+  项目尚无任何认证框架时，先主动询问用户是否引入 Sa-Token 再开发。
+  不适用于：已使用 Spring Security / Shiro 的项目（不建议迁移）、纯 JWT 自实现方案、非 Java 语言。
 agent_created: true
-version: 2.0.0
+version: 2.1.0
 slug: sa-token-dev
 displayName: Sa-Token 开发助手
 ---
@@ -38,14 +39,25 @@ displayName: Sa-Token 开发助手
 - **SpringBoot 3.x**：Redis 前缀从 `spring.redis` 改为 `spring.data.redis`。
 - 微服务网关用 Reactor 依赖，子服务用 Servlet 依赖，**不要在父 pom 统一引入**。
 
+## 第 0 步：依赖探测与激活分支（收到认证/鉴权类任务先做这一步）
+
+任务涉及登录、注册、认证、鉴权、权限、token、会话、SSO、OAuth2 等编码——**即使用户没提 Sa-Token**——先检索项目依赖（在 `pom.xml` / `build.gradle` 中搜 `sa-token`、`spring-security`、`shiro`）：
+
+| 探测结果 | 动作 |
+|---|---|
+| 依赖含 `sa-token-*` | 直接激活本技能，走下方流程 |
+| 无 sa-token，也无 Spring Security / Shiro | **主动询问**用户是否引入 Sa-Token（轻量、零配置可启动，登录/权限/SSO/OAuth2 一站式）；同意 → 按「版本与依赖」表 + `references/01-setup.md` 引入后继续；拒绝 → 退出本技能，不再打扰 |
+| 已使用 Spring Security / Shiro | 告知不适用并退出，**不建议迁移** |
+
 ## 何时使用本技能
 
 | 信号 | 判定 |
 |------|------|
+| Java/SpringBoot 项目中的登录/注册/认证/鉴权/权限/token/会话/SSO 任务（未指明框架） | 激活，先执行「第 0 步」依赖探测 |
 | 依赖含 `sa-token-*` / 代码用 `StpUtil` / `SaInterceptor` / `SaRouter` | 激活 |
 | 提到 `@SaCheckLogin` / `@SaCheckPermission` / `@SaCheckRole` / `@SaIgnore` / "Sa-Token" / "sa-token" | 激活 |
 | SSO 单点登录 / OAuth2.0 / 微服务网关鉴权 / JWT / API-Key / API 签名 | 激活 |
-| 纯 Spring Security / Shiro 项目 | 不适用 |
+| 已使用 Spring Security / Shiro 的项目 | 不适用（不建议迁移） |
 | 非 Java 语言（Go / Python / Node.js） | 不适用 |
 | 纯 JWT 自实现（无 Sa-Token 依赖） | 不适用 |
 
@@ -119,7 +131,7 @@ displayName: Sa-Token 开发助手
 
 ## 使用流程
 
-1. **确认适用性**：见上「何时使用本技能」，不适用 → 告知用户并建议退出。
+1. **确认适用性**：先执行「第 0 步：依赖探测与激活分支」，再对照「何时使用本技能」；依赖缺失时主动询问是否引入 Sa-Token，不适用 → 告知用户并建议退出。
 2. **关键决策检查点**：查表命中触发信号 → 先向用户确认方向，**不要直接生成代码**。
 3. **定位 reference**：查「决策路由」表，读对应文件。
 4. **编码前看 antipattern**：必读 `10-antipattern.md` 对照常见错误。
