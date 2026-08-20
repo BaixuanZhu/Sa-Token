@@ -85,7 +85,7 @@ jobs:
         if: steps.detect.outputs.notify == 'true'
         run: node llm-wiki/scripts/generate-llms.js
 
-      # ── 3.5 渲染发版说明为 HTML 并注入 skills.html 更新日志区块 ──
+      # ── 3.5 渲染发版说明为 HTML 并注入 changelog.html 更新日志页面 ──
       - name: Render changelog and inject
         if: steps.detect.outputs.notify == 'true'
         env:
@@ -99,7 +99,7 @@ jobs:
           version = os.environ['VERSION']
           html = pathlib.Path('/tmp/changelog.html').read_text(encoding='utf-8')
           fragment = '<div class="changelog-body">\n<h3>Sa-Token ' + version + ' 更新日志</h3>\n' + html + '\n</div>'
-          p = pathlib.Path('llm-wiki/skills.html')
+          p = pathlib.Path('llm-wiki/changelog.html')
           s = p.read_text(encoding='utf-8')
           new_s, n = re.subn(r'<!-- CHANGELOG_START -->.*?<!-- CHANGELOG_END -->',
                              '<!-- CHANGELOG_START -->\n' + fragment + '\n      <!-- CHANGELOG_END -->', s, flags=re.S)
@@ -116,7 +116,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           echo "$TAG" > .github/last_synced_release
-          git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt llm-wiki/skills.html .github/last_synced_release
+          git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt llm-wiki/changelog.html .github/last_synced_release
           git commit -m "auto: sync Sa-Token $TAG docs & regenerate llms.txt" || echo "nothing to commit"
           git push
 
