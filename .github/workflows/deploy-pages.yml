@@ -8,6 +8,9 @@ on:
       - 'sa-token-doc/**'
       - 'skills/**'
       - '.github/workflows/deploy-pages.yml'
+  workflow_run:
+    workflows: ["Sync Upstream Release"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -29,6 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
+          ref: dev
           sparse-checkout: |
             llm-wiki
             sa-token-doc
