@@ -1,52 +1,109 @@
-name: Sync Upstream
+name: Sync Upstream Release
 
 on:
   schedule:
-    # 每周一 00:00 UTC 自动执行（北京时间周一 08:00）
-    - cron: '0 0 * * 1'
+    # 每日 02:00 UTC（北京时间 10:00）轮询上游发版
+    - cron: '0 2 * * *'
   workflow_dispatch:
-    # 手动触发
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream-release
+  cancel-in-progress: false
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      # ── Sync & Generate（仅定时/手动触发）──
       - name: Configure upstream remote
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: git remote add upstream https://github.com/dromara/Sa-Token.git || true
 
-      - name: Sync docs from upstream
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-        id: sync
+      # ── 1. 发版追踪：对比 GitHub Releases latest 与本地 marker ──
+      - name: Detect latest release
+        id: detect
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git fetch upstream master
-          # 只同步 sa-token-doc 目录，避免 merge 冲突
-          git checkout upstream/master -- sa-token-doc/
-          if git diff --cached --quiet -- sa-token-doc/; then
-            echo "docs_changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "docs_changed=true" >> $GITHUB_OUTPUT
+          API="https://api.github.com/repos/dromara/Sa-Token/releases/latest"
+          DATA=$(curl -sSL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" "$API")
+          TAG=$(echo "$DATA" | jq -r .tag_name)
+          NAME=$(echo "$DATA" | jq -r .name)
+          BODY=$(echo "$DATA" | jq -r .body)
+          PRERELEASE=$(echo "$DATA" | jq -r .prerelease)
+          MARKER_FILE=".github/last_synced_release"
+          MARKER=$(cat "$MARKER_FILE" 2>/dev/null || echo "")
+          echo "latest tag: $TAG | marker: $MARKER | prerelease: $PRERELEASE"
+          if [ "$PRERELEASE" = "true" ]; then
+            echo "skip: prerelease, do nothing"
+            echo "notify=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          if [ "$TAG" = "$MARKER" ]; then
+            echo "skip: already synced $TAG"
+            echo "notify=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "new release detected: $TAG"
+          {
+            echo "notify=true"
+            echo "version=$TAG"
+            echo "name=$NAME"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "notes<<EOF"
+            echo "Sa-Token $TAG 已发布，文档已自动同步至本仓库（llm-wiki）。"
+            echo ""
+            echo "发版名称：$NAME"
+            echo ""
+            echo "发版说明："
+            echo "$BODY"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
-      # 生成 llms.txt / llms-full.txt / docs/（供提交入库；docs/ 在部署时再由 deploy-pages.yml 现生成）
+      # ── 2. 同步文档：从发版对应的 tag 拉取 sa-token-doc/ ──
+      - name: Sync docs from release tag
+        if: steps.detect.outputs.notify == 'true'
+        run: |
+          TAG="${{ steps.detect.outputs.version }}"
+          git fetch upstream --tags
+          git checkout "upstream/$TAG" -- sa-token-doc/
+
+      # ── 3. 重新生成 llms.txt / llms-full.txt ──
       - name: Generate llms.txt and clean docs
+        if: steps.detect.outputs.notify == 'true'
         run: node llm-wiki/scripts/generate-llms.js
 
+      # ── 4. 入库（push 到 dev 触发 deploy-pages.yml 部署）并更新 marker ──
       - name: Commit & Push
-        if: steps.sync.outputs.docs_changed == 'true'
+        if: steps.detect.outputs.notify == 'true'
         run: |
+          TAG="${{ steps.detect.outputs.version }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt
-          git commit -m "auto: sync docs & regenerate llms.txt" || echo "nothing to commit"
+          echo "$TAG" > .github/last_synced_release
+          git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt .github/last_synced_release
+          git commit -m "auto: sync Sa-Token $TAG docs & regenerate llms.txt" || echo "nothing to commit"
           git push
-          # push 到 dev 会触发 deploy-pages.yml 完成部署，本工作流不再负责部署
+
+      # ── 5. 发邮件通知（SMTP 未配置时不影响同步，仅跳过发信）──
+      - name: Send notification email
+        if: steps.detect.outputs.notify == 'true'
+        continue-on-error: true
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "[Sa-Token 文档站] ${{ steps.detect.outputs.version }} 已发版并同步"
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: ${{ secrets.SMTP_USERNAME }}
+          body: ${{ steps.detect.outputs.notes }}
+          convert_markdown: true
