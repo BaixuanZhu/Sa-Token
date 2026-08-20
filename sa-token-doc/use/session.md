@@ -11,7 +11,7 @@ Session 是会话中专业的数据缓存组件，通过 Session 我们可以很
 StpUtil.getSession().set("user", user);
 
 // 然后我们就可以在任意处使用这个 user 对象
-SysUser user = (SysUser) StpUtil.getSession().get("user");
+SysUser user = StpUtil.getSession().getModel("user", SysUser.class);
 ```
 
 在 Sa-Token 中，Session 分为三种，分别是：
@@ -22,6 +22,9 @@ SysUser user = (SysUser) StpUtil.getSession().get("user");
 
 > [!TIP| style:callout] 
 > 有关 Account-Session 与 Token-Session 的详细区别，可参考：[Session模型详解](/fun/session-model)
+
+> [!WARNING| ] 
+> 若往 Session 存自定义实体类后，从 Redis 读回报错 `无法反序列化的类型：xxx，请先将其注册到 JSON 全局类型白名单`，请参考：[JSON 全局类型白名单机制](/plugin/json-extend?id=json-全局类型白名单机制)
 
 
 ### 2、Account-Session

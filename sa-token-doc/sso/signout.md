@@ -28,7 +28,7 @@ public Object logoutByAlone() {
 
 在前端或跳转或 ajax 异步调用此接口即可。
 
-如果是跳转可指定 back 参数，代表注销成功后跳转的地址，例如：`http://sso-client.com/sso/logoutByAlone?back=https://sa-token.cc` 
+如果是跳转可指定 back 参数，代表注销成功后跳转的地址，例如：`http://sso-client.com/sso/logoutByAlone?back=https://sa-token.com` 
 
 
 ### 2、全端注销
@@ -154,5 +154,18 @@ public String index() {
 > 在进行测试时，同时将一个浏览器双击打开两次，是不算 “不同浏览器” 的，虽然你打开了两个浏览器窗口，但是这两个浏览器的会话数据是互通的。
 > 
 > 必须打开两个不同的浏览器来测试，或者按快捷键 `ctrl + shift + N` 打开隐私模式，才可以做到会话相互隔离。
+
+
+### 4、代码里指定账号单点注销
+
+``` java
+// sso-server：指定账号单点注销
+SaSsoServerUtil.ssoLogout(loginId);
+SaSsoServerUtil.ssoLogout(loginId, logoutParameter, ignoreClient);
+
+// sso-client：指定账号单点注销
+SaSsoClientUtil.ssoLogout(loginId);
+SaSsoClientUtil.ssoLogout(loginId, logoutParameter);
+```
 
 

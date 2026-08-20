@@ -3,7 +3,7 @@
 在开始SSO三种模式的对接之前，我们必须先搭建一个 SSO-Server 认证中心 
 
 > [!TIP| label:demo] 
-> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-server/`，如遇到难点可结合源码进行测试学习，demo里有制作好的登录页面 
+> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-server/`，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) ，demo里有制作好的登录页面 
 
 --- 
 
@@ -13,7 +13,7 @@
 <!---------------------------- tabs:start ---------------------------->
 <!-------- tab:Maven 方式 -------->
 ``` xml 
-<!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证，在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
@@ -53,7 +53,7 @@
 ```
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
+// Sa-Token 权限认证，在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-spring-boot-starter:${sa.top.version}'
 
 // Sa-Token 插件：整合SSO
@@ -70,6 +70,8 @@ implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 implementation 'cn.dev33:sa-token-forest:${sa.top.version}'
 ```
 <!---------------------------- tabs:end ---------------------------->
+
+> 也可选用 `sa-token-rest-template`（Spring Boot 2/3/4）或 `sa-token-rest-client`（Spring Boot 3.2+）作为 HTTP 请求处理器，详见：[HTTP 请求扩展](/plugin/http-extend)。
 
 
 > [!NOTE| label:引包简化] 

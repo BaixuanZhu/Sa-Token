@@ -29,7 +29,7 @@ Sa-Token提供两种解决方案：
 <!---------------------------- tabs:start ------------------------------>
 <!-------- tab:Maven 方式 -------->
 ``` xml 
-<!-- Sa-Token 权限认证（Reactor响应式集成）, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证（Reactor响应式集成）, 在线文档：https://sa-token.com -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
@@ -52,7 +52,7 @@ Sa-Token提供两种解决方案：
 
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:${sa.top.version}'
 
 // Sa-Token 整合 RedisTemplate
@@ -67,7 +67,7 @@ implementation 'org.apache.commons:commons-pool2'
 <!---------------------------- tabs:start ------------------------------>
 <!-------- tab:Maven 方式 -------->
 ``` xml 
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-spring-boot-starter</artifactId>
@@ -90,7 +90,7 @@ implementation 'org.apache.commons:commons-pool2'
 
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
+// Sa-Token 权限认证，在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-spring-boot-starter:${sa.top.version}'
 
 // Sa-Token 整合 RedisTemplate
@@ -191,7 +191,7 @@ public class FeignInterceptor implements RequestInterceptor {
  */
 @FeignClient(
 		name = "sp-home", 				// 服务名称 
-		configuration = FeignInterceptor.class,		// 请求拦截器 （关键代码）
+		configuration = FeignInterceptor.class,		// 请求拦截器 （⚠️ 关键代码）
 		fallbackFactory = SpCfgInterfaceFallback.class	// 服务降级处理 
 		)	
 public interface SpCfgInterface {

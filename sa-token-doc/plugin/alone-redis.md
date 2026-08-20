@@ -17,10 +17,9 @@ Sa-Token默认的Redis集成方式会把权限数据和业务缓存放在一起�
 
 ### 1、首先引入Alone-Redis依赖 
 
-!--
-> [!NOTE| label:Spring Boot 4 用户]
+
+> [!WARNING| label:Spring Boot 4 用户]
 > 若使用 Spring Boot 4.x，请引入 `sa-token-alone-redis-by-spring-boot4` 替代 `sa-token-alone-redis`。
--->
 
 <!---------------------------- tabs:start ---------------------------->
 <!-------- tab:Maven 方式 -------->
@@ -168,3 +167,5 @@ public class TestController {
 目前 Sa-Token-Alone-Redis 仅对以下插件有 Redis 分离效果：
 - sa-token-redis-template
 - sa-token-redis-template-jdk-serializer
+
+若使用的是 Redisson 而非 RedisTemplate，请改用 [Alone 独立 Redisson 插件](/plugin/alone-redisson)。

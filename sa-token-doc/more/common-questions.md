@@ -37,7 +37,15 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 }
 ```
 
+可能3：SpringMVC 项目里使用了 `SseEmitter` / `Flux` 等异步、流式返回，参考下面这条 QA。
 
+
+### Q：SpringMVC 下使用 SSE / Flux 流式返回时报错：SaTokenContext 上下文尚未初始化？
+
+常见于未引入 WebFlux、仅个别接口返回 `SseEmitter`、`Flux` 的场景。
+
+- **v1.46.0 起**：框架已在 `SaTokenContextFilter` 注册时原生支持 `REQUEST` + `ASYNC` dispatch，一般无需额外配置。
+- **v1.45.0 及以下**：参考 Issue 排查与临时规避：[升级后 SSE 请求报 SaTokenContext 上下文尚未初始化](https://gitee.com/dromara/sa-token/issues/IC4XFE)
 
 
 ### Q：报错：NotLoginException：xxx
@@ -345,6 +353,97 @@ public class SaTokenConfigure extends WebMvcConfigurationSupport {
 
 ### Q：整合 Redis 时先选择了默认jdk序列化，后又改成 jackson 序列化，程序开始报错，SerializationException？
 两者的序列化算法不一致导致的反序列化失败，如果要更改序列化方式，则需要先将 Redis 中历史数据清除，再做更新。
+
+
+### Q：报错：无法反序列化的类型：com.pj.model.SysUser，请先将其注册到 JSON 全局类型白名单？
+
+说明 Session 或 Redis 中的 JSON 在反序列化时，遇到了 **未加入白名单** 的业务实体类型。  
+常见于：`session.set("user", sysUser)` 后集成 Redis，或使用 `SaTokenDao.getObject()` 读回自定义 Model。
+
+**原因与解决方案** 详见：[JSON 序列化扩展 - JSON 全局类型白名单](/plugin/json-extend?id=json-全局类型白名单机制)
+
+
+### Q：升级 sa-token-redisson 后登录失效 / 读 Redis 报错？
+`SaTokenDaoForRedisson` 已改为默认使用 `StringCodec`，与升级前跟随 Redisson 全局 codec（一般为 `Kryo5Codec`）不兼容。请清空 Redis 中的 Sa-Token 旧缓存，或构造时传入 `new Kryo5Codec()`。详见：[集成 Redis - 集成 Redisson](/up/integ-redis?id=_5集成-redisson)。
+
+
+### Q：Redis 6.0 以下版本集成报错：ERR syntax error
+自 v1.46.0 起，当 Redis 6.0 以下集成时，可能会发生报错：
+
+```
+io.lettuce.core.RedisCommandExecutionException: ERR syntax error
+org.redisson.client.RedisException: ERR syntax error. command: (SET), params: [key, value, KEEPTTL]
+```
+
+这是因为 Redis 集成插件使用了 `SET KEEPTTL` 高级特性（原子覆写 value 并保留原 TTL），如果你的 Redis 服务低于 6.0 版本，将会报错。
+
+解决方案有两种：
+
+1、将 Redis 升级到 6.0+（推荐）
+
+2、重写相关组件，恢复旧写法：
+
+如果你使用的 sa-token-redis-template 插件，请这样重写：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao() {
+		return new SaTokenDaoForRedisTemplate() {
+			@Override
+			public void update(String key, String value) {
+				String finalKey = wrapKey(key);
+				long expireMs = stringRedisTemplate.getExpire(finalKey, TimeUnit.MILLISECONDS);
+				// -2 = 无此键
+				if (expireMs == SaTokenDao.NOT_VALUE_EXPIRE) {
+					return;
+				}
+				// -1 = 永不过期
+				if (expireMs == SaTokenDao.NEVER_EXPIRE) {
+					stringRedisTemplate.opsForValue().set(finalKey, value);
+				} else {
+					stringRedisTemplate.opsForValue().set(finalKey, value, expireMs, TimeUnit.MILLISECONDS);
+				}
+			}
+		};
+	}
+}
+```
+
+如果你使用的是 sa-token-redis-template-jdk-serializer 插件，把上面的 `SaTokenDaoForRedisTemplate` 换成 `SaTokenDaoForRedisTemplateUseJdkSerializer`，并额外重写 `updateObject`（写法相同，把 `stringRedisTemplate` 换成 `objectRedisTemplate`）。
+
+如果你使用的是 sa-token-redisson 相关插件，请这样重写：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao(RedissonClient redissonClient) {
+		return new SaTokenDaoForRedisson(redissonClient) {
+			@Override
+			public void update(String key, String value) {
+				RBucket<String> bucket = redissonClient.getBucket(key, codec);
+				long expireMs = bucket.remainTimeToLive();
+				// -2 = 无此键
+				if (expireMs == SaTokenDao.NOT_VALUE_EXPIRE) {
+					return;
+				}
+				// -1 = 永不过期
+				if (expireMs == SaTokenDao.NEVER_EXPIRE) {
+					bucket.set(value);
+				} else {
+					bucket.set(value, Duration.ofMillis(expireMs));
+				}
+			}
+		};
+	}
+}
+```
+
+> 旧写法会先读 TTL 再 SET，极端并发下可能有毫秒级偏差；能升级 Redis 的话，优先升级。
 
 
 ### Q：调用 `StpUtil.getExtra("name")` 报错：`this api is disabled`。
@@ -859,11 +958,40 @@ SaHolder.getResponse().setStatus(401)
 
 ### Q：多个项目共用同一个 redis，怎么防止冲突？
 
-首先，如无特殊需求，建议多个项目不要共用同一个 redis，如果非要共用，有以下方式避免数据冲突：
+详见：[集成 Redis - 多个项目共用同一个 Redis，怎么防止冲突？](/up/integ-redis?id=_4多个项目共用同一个-redis怎么防止冲突)
 
-- 方式 1：使用不同的 db 索引，Redis 默认提供 16 个 database 容器，每个项目配置不同的 db 索引即可。
-- 方式 2：给项目配置不同的 `sa-token.token-name` 值，此配置项默认为 `satoken`，是框架在 Redis 存储数据时使用的统一前缀。
-- 方式 3：使用 `sa-token-three-redis-jackson-add-prefix` 插件，参考：[sa-token-three-plugin](https://gitee.com/sa-tokens/sa-token-three-plugin)。
+
+### Q：是否启用 Redis，可以通过配置文件来决定吗？
+
+框架没有提供直接的配置开关。不过你可以自己注册 `SaTokenDao`，根据配置返回不同实现：
+
+``` yaml
+# 自定义开关（非框架内置配置项）
+sa-token:
+    my-use-redis: true
+```
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+
+	@Value("${sa-token.my-use-redis:false}")
+	private boolean useRedis;
+
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao() {
+		// 开启 Redis：使用 RedisTemplate 持久化
+		if (useRedis) {
+			return new SaTokenDaoForRedisTemplate();
+		}
+		// 关闭 Redis：回落到内存实现
+		return new SaTokenDaoDefaultImpl();
+	}
+}
+```
+
+也可以按 SpringBoot 多环境配置文件拆分（如 `application-dev.yml` / `application-prod.yml` 配不同的 `sa-token.my-use-redis`），达到「开发用内存、生产用 Redis」的效果。
 
 
 ### Q：如何防止 CSRF 攻击？

@@ -1,7 +1,7 @@
 <p align="center">
-	<img alt="logo" src="https://sa-token.cc/logo.png" width="150" height="150">
+	<img alt="logo" src="https://sa-token.com/logo.png" width="150" height="150">
 </p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Sa-Token v1.45.0</h1>
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">Sa-Token v1.46.0</h1>
 <h5 align="center">✨ 开源、免费、一站式 java 权限认证框架，让鉴权变得简单、优雅！</h5>
 <p align="center" class="badge-box">
 	<a href="https://gitee.com/dromara/sa-token/stargazers"><img src="https://gitee.com/dromara/sa-token/badge/star.svg?theme=gvp"></a>
@@ -17,10 +17,12 @@
 ---
 
 ## 📝 前言：️️
-为了保证新同学不迷路，请允许我唠叨一下：无论您从何处看到本篇文章，最新开发文档永远在：[https://sa-token.cc](https://sa-token.cc)，
-建议收藏在浏览器书签，如果您已经身处本网站下，则请忽略此条说明。
+为了保证新同学不迷路，请允许我唠叨一下：无论您从何处看到本篇文章，最新开发文档永远在：[https://sa-token.com](https://sa-token.com)，
+建议收藏在浏览器书签 (快捷键 **ctrl + D**)，如果您已经身处本网站下，则请忽略此条说明。
 
-本文档将会尽力讲解每个功能的设计原因、应用场景，用心阅读文档，你学习到的将不止是 `Sa-Token` 框架本身，更是绝大多数场景下权限设计的最佳实践。
+回望 2020 年初，我为 Sa-Token 提交第一行代码之际，彼时市面上 Java 缺少的不仅是一个简洁好用的鉴权框架，更是一整套清晰、自洽的权限架构设计思想。
+
+因此，这几年间我将大量时间倾注在 Sa-Token 的文档编写，几乎每一章节、每一句话、每一个字都经过反复修改、精细打磨，以求做到最清晰、干练、易懂的表述。用心阅读文档，你学习到的将不止是 Sa-Token 框架本身，更是绝大多数场景下权限设计的最佳实践。
 
 
 ## 🛠️ Sa-Token 介绍
@@ -162,9 +164,26 @@ Sa-Token 目前主要五大功能模块：登录认证、权限认证、单点�
 
 **5、Sa-Token 收费吗？** 
 
-Sa-Token 采用 Apache-2.0 开源协议，承诺框架本身与在线文档永久免费开放。当然如果您有心赞助 Sa-Token，我们也不回避：[赞助链接](https://sa-token.cc/doc.html#/more/sa-token-donate)。
+Sa-Token 采用 Apache-2.0 开源协议，承诺框架本身与在线文档永久免费开放。当然如果您有心赞助 Sa-Token，我们也不回避：[赞助链接](https://sa-token.com/doc.html#/more/sa-token-donate)。
 我们将定期同步赞助者名单到在线文档展示。（您需要注意的一点是：该赞助仅为友情赞助，不提供任何商业交换）
 
+
+**6、Sa-Token 是封装的 SpringSecurity 吗？是套壳 ApacheShiro 吗？** 
+
+不是。Sa-Token 不是一个后台模板，也不是针对 xx 框架的二次封装套壳，而是从 0 开始的纯血自研框架，核心包零依赖，完全自主可控的架构内核 + 众多主流框架的集成适配。
+					
+
+
+## 🌍 其它语言版本
+
+Sa-Token 社区成员贡献了多语言实现版本：
+
+- Rust 版本：[https://github.com/sa-tokens/sa-token-rust](https://github.com/sa-tokens/sa-token-rust)
+- Go 版本：[https://github.com/sa-tokens/sa-token-go](https://github.com/sa-tokens/sa-token-go)
+- NodeJS 版本：[https://github.com/xiaoLangtou/xlt-token](https://github.com/xiaoLangtou/xlt-token)
+- PHP 版本：[https://gitee.com/jinan-jimeng-network_0/real-token](https://gitee.com/jinan-jimeng-network_0/real-token)
+
+我们诚邀对上述语言较为熟练的开发者，一起建设相关版本。🤝
 
 
 ## 📈 开源仓库 Star 趋势
@@ -181,6 +200,16 @@ Sa-Token 采用 Apache-2.0 开源协议，承诺框架本身与在线文档永�
 
 ## 🚀 使用 Sa-Token 的开源项目 
 参考：[Sa-Token 生态](/more/link)
+
+
+
+## 📚 示例大全
+
+**我们为框架几乎所有技术点均单独制作了对应的集成示例，此压缩包共计 60+ Demo**：涵盖 Sa-Token 登录认证、权限认证、SSO 单点登录、OAUth2 统一认证、微服务鉴权、API Key 认证、JWT集成、跨系统调用参数签名校验 等鉴权认证的方方面面。
+
+下载地址：[Sa-Token 集成示例大全下载](/more/download-demos) 
+
+<img class="s-w" src="/big-file/contact/show/sa-token-demos-pre.png" />
 
 
 

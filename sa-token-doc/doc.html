@@ -1,17 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8">
-		<title>Sa-Token</title>
+		<title>Sa-Token 文档</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="description"
-			content="Sa-Token是一个java权限认证框架，功能全面，上手简单，登录认证、权限认证、Session会话、踢人下线、账号封禁、集成Redis、前后端分离、分布式会话、微服务网关鉴权、单点登录、OAuth2.0、临时Token验证、记住我模式、模拟他人账号、临时身份切换、多账号体系、注解式鉴权、路由拦截式鉴权、花式token、自动续签、同端互斥登录、会话治理、密码加密、jwt集成、Spring集成、WebFlux集成...，有了sa-token，你所有的权限认证问题，都不再是问题">
-		<meta name="keywords" content="sa-token,sa-token框架,sa-token文档,java权限认证">
+			content="Sa-Token 官方文档：Java 权限认证框架接入指南，覆盖登录认证、权限认证、SSO 单点登录、OAuth2.0、微服务网关鉴权、分布式 Session、注解鉴权与路由拦截等。">
+		<meta name="keywords" content="Sa-Token文档,Java权限认证,登录认证,权限认证,SSO,OAuth2,微服务鉴权,Spring Boot">
 		<meta name="viewport"
 			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="canonical" href="https://sa-token.com/doc.html">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Sa-Token 文档">
+		<meta property="og:description" content="Sa-Token 官方文档：Java 权限认证框架接入指南，覆盖登录认证、权限认证、SSO 单点登录、OAuth2.0、微服务网关鉴权、分布式 Session、注解鉴权与路由拦截等。">
+		<meta property="og:url" content="https://sa-token.com/doc.html">
+		<meta property="og:image" content="https://sa-token.com/logo.png">
+		<meta property="og:site_name" content="Sa-Token">
+		<meta property="og:locale" content="zh_CN">
 		<link rel="shortcut icon" type="image/x-icon" href="logo.png">
 		<link rel="stylesheet" href="./static/doc.css">
 		<link rel="stylesheet" href="./static/vue.css">
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebPage",
+			"name": "Sa-Token 文档",
+			"url": "https://sa-token.com/doc.html",
+			"description": "Sa-Token 官方文档：Java 权限认证框架接入指南，覆盖登录认证、权限认证、SSO 单点登录、OAuth2.0、微服务网关鉴权等。",
+			"isPartOf": {
+				"@type": "WebSite",
+				"name": "Sa-Token",
+				"url": "https://sa-token.com/"
+			}
+		}
+		</script>
 	</head>
 	<body>
 		<div class="doc-header">
@@ -20,64 +42,16 @@
 					<div class="logo-box">
 						<img src="logo.png" title="logo" />
 						<h1 class="logo-text">Sa-Token</h1>
-						<sub>v1.45.0</sub>
 					</div>
 				</a>
+				<select class="select-version p-none" onchange="location.href=this.value"></select>
+				<!-- 语言切换：translate.js 会往这个容器里生成 select -->
+				<span id="translate" class="select-language-box ignore"></span>
 			</div>
 			<nav class="nav-right">
 				<div class="sear-box p-none" tabindex="-1">
 					<!-- 加载中…… -->
 				</div>
-				<select class="select-version p-none" onchange="location.href=this.value">
-					<option value="doc.html">最新版</option>
-					<option value="v/v1.44.0/doc.html">v1.44.0</option>
-					<option value="v/v1.43.0/doc.html">v1.43.0</option>
-					<option value="v/v1.42.0/doc.html">v1.42.0</option>
-					<option value="v/v1.41.0/doc.html">v1.41.0</option>
-					<option value="v/v1.40.0/doc.html">v1.40.0</option>
-					<option value="v/v1.39.0/doc.html">v1.39.0</option>
-					<option value="v/v1.38.0/doc.html">v1.38.0</option>
-					<option value="v/v1.37.0/doc.html">v1.37.0</option>
-					<option value="v/v1.36.0/doc.html">v1.36.0</option>
-					<option value="v/v1.35.0/doc.html">v1.35.0</option>
-					<option value="v/v1.34.0/doc.html">v1.34.0</option>
-					<option value="v/v1.33.0/doc.html">v1.33.0</option>
-					<option value="v/v1.32.0/doc.html">v1.32.0</option>
-					<option value="v/v1.31.0/doc.html">v1.31.0</option>
-					<option value="v/v1.30.0/doc/index.html">v1.30.0</option>
-					<option value="v/v1.29.0/doc/index.html">v1.29.0</option>
-					<option value="v/v1.28.0/doc/index.html">v1.28.0</option>
-					<option value="v/v1.27.0/doc/index.html">v1.27.0</option>
-					<option value="v/v1.26.0/doc/index.html">v1.26.0</option>
-					<option value="v/v1.25.0/doc/index.html">v1.25.0</option>
-					<option value="v/v1.24.0/doc/index.html">v1.24.0</option>
-					<option value="v/v1.23.0/doc/index.html">v1.23.0</option>
-					<option value="v/v1.22.0/doc/index.html">v1.22.0</option>
-					<option value="v/v1.21.0/doc/index.html">v1.21.0</option>
-					<option value="v/v1.20.0/doc/index.html">v1.20.0</option>
-					<option value="v/v1.19.0/doc/index.html">v1.19.0</option>
-					<option value="v/v1.18.0/doc/index.html">v1.18.0</option>
-					<option value="v/v1.17.0/doc/index.html">v1.17.0</option>
-					<option value="v/v1.16.0/doc/index.html">v1.16.0</option>
-					<option value="v/v1.15.0/doc/index.html">v1.15.0</option>
-					<option value="v/v1.14.0/doc/index.html">v1.14.0</option>
-					<option value="v/v1.13.0/doc/index.html">v1.13.0</option>
-					<option value="v/v1.12.1/doc/index.html">v1.12.1</option>
-					<option value="v/v1.12.0/doc/index.html">v1.12.0</option>
-					<option value="v/v1.11.0/doc/index.html">v1.11.0</option>
-					<option value="v/v1.10.0/doc/index.html">v1.10.0</option>
-					<option value="v/v1.9.0/doc/index.html">v1.9.0</option>
-					<option value="v/v1.8.0/doc/index.html">v1.8.0</option>
-					<option value="v/v1.7.0/doc/index.html">v1.7.0</option>
-					<option value="v/v1.6.0/doc/index.html">v1.6.0</option>
-					<option value="v/v1.5.1/doc/index.html">v1.5.1</option>
-					<option value="v/v1.4.0/doc/index.html">v1.4.0</option>
-					<option value="v/v1.3.0/doc/index.html">v1.3.0</option>
-					<option value="v/v1.2.0/doc/index.html">v1.2.0</option>
-					<option value="v/v1.1.0/doc/index.html">v1.1.0</option>
-					<option value="v/v1.0.0/doc/index.html">v1.0.0</option>
-					<option value="/">首页</option>
-				</select>
 				<div class="zk-box p-none">
 					<a class="wzi" href="javascript:;">
 						<!-- <span>背景 </span> -->
@@ -87,17 +61,23 @@
 					<div class="zk-context theme-box">
 						<div>
 							<div style="height: 5px;"></div>
-							<span style="background-color: #FFFFFF;"></span>
-							<span style="background-color: #f5f5f5;"></span>
-							<span style="background-color: #f5e5f5;"></span>
-							<span style="background-color: #F1FAFA;"></span>
-							<span style="background-color: #f5f5d5;"></span>
+							<span style="background-color: #FFFFFF;" title="纯白"></span>
+							<span style="background-color: #f5f5f5;" title="浅灰"></span>
+							<span style="background-color: #f5e5f5;" title="淡粉"></span>
+							<span style="background-color: #F1FAFA;" title="薄荷白"></span>
+							<span style="background-color: #f5f5d5;" title="奶油黄"></span>
 
-							<span style="background-color: #E8E8FF;"></span>
-							<span style="background-color: #f0f9eb;"></span>
-							<span style="background-color: #d5f5f5;"></span>
-							<span style="background-color: #ebe5dd;"></span>
-							<span style="background-color: #e8f4ff;"></span>
+							<span style="background-color: #E8E8FF;" title="淡紫"></span>
+							<span style="background-color: #f0f9eb;" title="浅绿"></span>
+							<span style="background-color: #d5f5f5;" title="浅青"></span>
+							<span style="background-color: #ebe5dd;" title="暖米"></span>
+							<span style="background-color: #e8f4ff;" title="浅蓝"></span>
+
+							<span style="background-color: #1e1e1e;" data-st-dark="vscode-dark" title="VS Code Dark+"></span>
+							<span style="background-color: #2b2b2b;" data-st-dark="darcula" title="JetBrains Darcula"></span>
+							<span style="background-color: #282c34;" data-st-dark="one-dark" title="Atom One Dark"></span>
+							<span style="background-color: #282a36;" data-st-dark="dracula" title="Dracula"></span>
+							<span style="background-color: #1a1b26;" data-st-dark="tokyo-night" title="Tokyo Night"></span>
 
 							<!-- <span style="background-color: #F0DAD2;"></span> -->
 							<!-- <span style="background-color: #f5d5d5;"></span> -->
@@ -109,6 +89,7 @@
 				</div>
 				<a class="wzi" href="index.html">首页</a>
 				<a class="wzi" href="doc.html">文档</a>
+				<a class="wzi" href="/blog/index.html">博客</a>
 				<div class="zk-box">
 					<a class="wzi" href="javascript:;">
 						<span>视频 </span>
@@ -116,6 +97,8 @@
 					</a>
 					<div class="zk-context">
 						<div>
+							<a href="https://www.bilibili.com/video/BV1LzNu6KEsW" target="_blank">乐之者java（登录认证/权限管理/apiKey等）</a>
+							<a href="https://www.bilibili.com/video/BV1PF9QBXEet/?p=53" target="_blank">抓蛙师（23集）</a>
 							<a href="https://www.bilibili.com/video/BV1fsUVBWEyH/" target="_blank">朱老师的小课堂（7集）</a>
 							<a href="https://www.bilibili.com/video/BV1NF1FBpEe6/" target="_blank">王清江唷 SSO篇（29集）</a>
 							<a href="https://www.bilibili.com/video/BV1uZUpYVEst/" target="_blank">fox说技术（7集）</a>
@@ -125,19 +108,46 @@
 							<a href="https://www.bilibili.com/video/BV11u4y197JL/" target="_blank">达达-Java（26集）</a>
 							<a href="https://space.bilibili.com/473679148/video" target="_blank">晒太阳的盐（22集）</a>
 							<div class="zk-fengexian"></div>
-							<a href="doc.html#/more/content-cooperation">[ + 课程提交 ]</a>
+							<a href="https://wj.qq.com/s2/27539608/zzzd/" target="_blank">[ + 课程提交 ]</a>
 							<!-- <a href="javascript: layer.alert('如您有 Sa-Token 相关课程录制，请联系官网文档右侧 < sa-token 小助手 > 进行提交');">
 								[ + 课程提交 ]
 							</a> -->
 						</div>
 					</div>
 				</div>
-				<a class="p-none wzi" href="#/more/link">案例</a>
-				<a class="p-none wzi" href="#/more/join-group">加入讨论群</a>
+				<div class="zk-box">
+					<a class="wzi" href="javascript:;">
+						<span>案例 </span>
+						<span class="zk-icon"></span>
+					</a>
+					<div class="zk-context">
+						<div>
+							<a href="https://gitee.com/sa-tokens/awesome-sa-token" target="_blank">Gitee - Awesome-Sa-Token</a>
+							<a href="https://github.com/sa-tokens/awesome-sa-token" target="_blank">GitHub - Awesome-Sa-Token</a>
+							<a href="https://atomgit.com/sa-tokens/awesome-sa-token" target="_blank">AtomGit - Awesome-Sa-Token</a>
+						</div>
+					</div>
+				</div>
+				<a class="p-none wzi" href="#/more/join-group">加群</a>
 				<a class="p-none wzi" href="#/more/demand-commit">需求提交</a>
-				<a class="p-none wzi" href="#/more/blog">博客</a>
 				<a class="p-none wzi" href="#/more/sa-token-donate">赞助</a>
-				<a class="p-none wzi" href="#/pro/st_doc_top">🔥 SSO/OAuth2 商业版</a>
+				<a class="p-none wzi" href="https://sa-max.cn?way=st_doc_top" target="_blank">🔥 SSO/OAuth2 商业版</a>
+				<div class="zk-box">
+					<a class="wzi" href="javascript:;">
+						<span>安全推荐 </span>
+						<span class="zk-icon"></span>
+					</a>
+					<div class="zk-context">
+						<div>
+							<a href="https://github.com/FallibleInc/security-guide-for-developers/blob/master/security-checklist-zh.md" target="_blank">开发者安全 Checklist</a>
+							<a href="https://github.com/shieldfy/API-Security-Checklist/blob/master/README-zh.md" target="_blank">API 安全 Checklist</a>
+							<a href="https://github.com/Tencent/secguide" target="_blank">腾讯代码安全指南</a>
+							<a href="https://github.com/LyleMi/Learn-Web-Hacking" target="_blank">Web 安全学习笔记</a>
+							<a href="https://github.com/OWASP/CheatSheetSeries" target="_blank">OWASP Cheat Sheet Series</a>
+							<a href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank">PayloadsAllTheThings</a>
+						</div>
+					</div>
+				</div>
 				<div class="zk-box">
 					<a class="wzi" href="javascript:;">
 						<span>相关资源 </span>
@@ -149,7 +159,6 @@
 							<a href="#/more/update-log">更新日志</a>
 							<a href="#/more/common-questions">常见报错</a>
 							<a href="#/more/tj-gzh">推荐公众号</a>
-							<a href="#/more/blog">相关博客</a>
 							<div class="zk-fengexian"></div>
 							<!-- <a href="http://sa-app.dev33.cn/wall.html?name=sa-token" target="_blank">需求墙</a> -->
 							<a href="#/fun/sa-token-test">在线考试</a>
@@ -181,18 +190,18 @@
 					<div class="ad-box">
 
 						<div class="ad-title">
-							<span class="ad-tips">推广信息：</span>
+							<span class="ad-tips">推荐</span>
 							<span class="ad-tips ad-close">关闭</span>
 						</div>
 
 						<!-- ssp -->
 						<div class="top-ad-box" style="margin-bottom: 12px;">
-							<a href="https://sa-pro.yun94.cn?way=st_r" target="_blank">
+							<a href="https://sa-max.cn?way=st_r" target="_blank">
 								<div class="mad-bg-box">
 									<div class="mad-context-box">
-										<img class="mad-img" src="/big-file/contact/sspx-ad-11.png" />
+										<img class="mad-img" src="/big-file/contact/sa-token-syb-3.png" />
 										<span class="mad-text">
-											<b>轻松搭建：SSO 单点登录、OAuth2.0 统一认证、API Key、用户数据同步。全源码交付、可二开。</b>
+											<b>Sa-Token 商业版：轻松搭建 SSO 单点登录、OAuth2.0 统一认证、API Key 认证。全源码交付、可二开。</b>
 										</span>
 									</div>
 								</div>
@@ -200,18 +209,23 @@
 						</div>
 
 						<!-- 万维广告div -->
-						<div class="wwads-cn wwads-horizontal" data-id="88"
-							style="min-height: 0px; border: 1px #eee solid; margin-bottom: 12px;"></div>
+						<!-- <div class="wwads-cn wwads-horizontal" data-id="88"
+							style="min-height: 0px; border: 1px #eee solid; margin-bottom: 12px;"></div> -->
 
 					</div>
 
-					<!-- help 按钮 -->
-					<!-- <div class="help-btn">❤️ 技术求助</div> -->
+					<!-- 企业开发咨询服务 按钮 -->
+					<div class="help-btn">
+						<a href="https://sa-max.cn/index-st.html?way=st_qyzx" target="_blank">
+							❤️ Sa-Token 企业开发咨询服务
+						</a>
+					</div>
 					<!-- ew-wa -->
 					<div class="ew-wa">
 						<p>
 							<a href="https://pan.quark.cn/s/d5abda720e88" target="_blank">离线版文档</a>
 							<a href="https://pan.quark.cn/s/fea7e5ec72ee" target="_blank">历史所有版本文档</a>
+							<a href="doc.html#/more/download-demos">Demo 示例大全下载</a>
 						</p>
 					</div>
 					<!-- ew-wa -->
@@ -254,16 +268,22 @@
 		<!-- jqeury -->
 		<script src="static/jquery.min.js"></script>
 		<script src="static/layer-v3.1.1/layer.js"></script>
+		<script src="/static/all-version-common.js"></script>
+		<script>SaTokenVersions.initVersionSelects();</script>
+
+		<!-- 多语言：translate.js + 本地初始化（见 static/sa-translate.js） -->
+		<script src="https://res.zvo.cn/translate/translate.js"></script>
+		<script src="./static/sa-translate.js"></script>
 
 		<!--  -->
-		<script src="./static/docsify-plugin.js?v=7"></script>
+		<script src="./static/docsify-plugin.js?v=8"></script>
 		<script src="./static/is-star-plugin.js?v=7"></script>
 		<!-- <script src="./static/is-fill-in-wj-plugin.js?v=7"></script> -->
 		<link rel="stylesheet" href="./static/custom-docsify-plugins/doc-lock-plugin.css">
 		<!-- <script src="./static/custom-docsify-plugins/doc-lock-plugin.js"></script> -->
 		<!-- <script src="./static/custom-docsify-plugins/doc-lock-by-gzh-plugin.js"></script> -->
 		<script>
-			var saTokenTopVersion = '1.45.0'; // Sa-Token最新版本 
+			var saTokenTopVersion = '1.46.0'; // Sa-Token最新版本 
 			var name = '<img style="width: 60px; height: 60px; vertical-align: middle;" src="logo.png" alt="logo" /> ';
 			name += '<b style="font-size: 28px; vertical-align: middle;">Sa-Token</b> <sub>v' + saTokenTopVersion + '</sub>';
 			window.$docsify = {
@@ -321,6 +341,7 @@
 				// 自定义插件 
 				plugins: [ 
 					myDocsifyPlugin,         // 基础插件  
+					saTranslatePlugin,       // 顶部多语言切换（translate.js）
 					// window.isStarPlugin,     // 是否 star 
 					// window.isFillInWjPlugin  // 问卷填写 
 					// window.docLockPlugin,  // 章节锁 
@@ -372,7 +393,7 @@
 					let allowJg = 1000 * 60 * 60 * 24 * 1;
 					// allowJg = 1000 * 10;
 					try {
-						const closeAdTime = localStorage.closeAdTime;
+						const closeAdTime = localStorage.closeAdTimeRight;
 						if (closeAdTime) {
 							// 点击广告关闭的时间，和当前时间的差距
 							const closeAdJg = new Date().getTime() - parseInt(closeAdTime);
@@ -395,82 +416,29 @@
 						layer.confirm('关闭后，一天内不再展现此信息', function() {
 							$(".ad-box").fadeOut(1000); // 淡出效果
 							layer.msg('关闭成功');
-							localStorage.closeAdTime = new Date().getTime();
+							localStorage.closeAdTimeRight = new Date().getTime();
 						})
 					})
 				}
 			})();
 		</script>
 
-		<!-- 搜索引擎自动提交 -->
-		<script>
-			(function() {
-				var bp = document.createElement('script');
-				var curProtocol = window.location.protocol.split(':')[0];
-				if (curProtocol === 'https') {
-					bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-				} else {
-					bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-				}
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(bp, s);
-			})();
-		</script>
 
 		<!-- 万维广告 -->
-		<script data-mode="hash" type="text/javascript" src="https://cdn.wwads.cn/js/makemoney.js" async></script>
+		<!-- <script data-mode="hash" type="text/javascript" src="https://cdn.wwads.cn/js/makemoney.js" async></script> -->
 
-		<!-- 百度统计 -->
-		<script>
-			var _hmt = _hmt || [];
-			(function() {
-				var hm = document.createElement("script");
-				hm.src = "https://hm.baidu.com/hm.js?35ad501304eae758ac6139a22a9830f5";
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(hm, s);
-			})();
-		</script>
 
 		<script type="text/javascript">
 			// 预览版提示 
-			if (location.host === 'rc.sa-token.cc') {
+			if (location.host === 'rc.sa-token.com') {
 				const newTips =
-					'<b>当前文档为RC预览版文档，仅做学习测试使用，正式项目请使用正式版：<a href="https://sa-token.cc/" target="_blank">https://sa-token.cc/</a></b>';
+					'<b>当前文档为RC预览版文档，仅做学习测试使用，正式项目请使用正式版：<a href="https://sa-token.com/" target="_blank">https://sa-token.com/</a></b>';
 				layer.alert(newTips);
 			}
 		</script>
 
 		<!-- 小助手提示 -->
 		<script>
-			$('.help-btn').click(function() {
-				var str = `
-					<div class="xiaozhushou-intro">
-						<h2>报错了？搞不懂？别急、莫慌</h2>
-						<div style="margin-top: 20px; color: green;">
-							<p>👉 你的问题可能很多人都碰到过了！这有一份高频报错速查文档：<a href="doc.html#/more/common-questions" onclick="layer.closeAll()">常见问题排查</a></p>
-							<p>👉 几乎每个功能点都有对应的最简示例 Demo，或许可以给你一份参考：<a href="https://gitee.com/dromara/sa-token/tree/master/sa-token-demo" target="_blank" >sa-token-demo</a></p>
-							<p>👉 复杂功能玩不转？来看看这些优秀开源案例是怎么集成 Sa-Token 的：<a href="https://gitee.com/sa-tokens/awesome-sa-token" target="_blank" >awesome-sa-token</a></p>
-						</div>
-						<div style="margin-top: 20px; color: red;">上述方案没有解决你的问题？那你可以来“麻烦”一下我们的小助手了：</div>
-						<p>1、你在使用 Sa-Token 时遇到任何技术难题，可以向 < sa-token 小助手 > 求助咨询。</p>
-						<p>2、该小助手不属于商业运营，求助咨询完全免费。</p>
-						<p>3、目前该小助手属于试运营阶段，每天只能提供大约 1 小时的求助时间。</p>
-						<p>4、根据运营效果反馈，我们日后可能会提高求助时间，但也可能关闭此功能。</p>
-						<p>5、该小助手由企业微信提供平台支持，感谢企业微信。</p>
-						<p>6、不是 AI 是真人，不是 AI 是真人，不是 AI 是真人，重说三！</p>
-						<p style="margin-top: 30px;">打开方式：</p>
-						<p>1、如果你是使用 PC 端微信，请点此链接：<a href="https://work.weixin.qq.com/kfid/kfcdd45c432fee9655f" target="_blank">https://work.weixin.qq.com/kfid/kfcdd45c432fee9655f</a></p>
-						<p>2、如果你是使用手机端微信，请扫码：</p>
-						<p><img src="/big-file/contact/sa-token-xiaozhushou.jpg" width="200px"></p>
-						<p>如果您的问题已解决，我们希望您能够花费一点时间将解决方案发布在：<a href="https://gitee.com/dromara/sa-token/issues/I9I9CY" target="_blank">踩坑记录征集</a>，帮助以后遇到同样问题的开发者快速排查，感激不尽！🌹🌹🌹</p>
-					</div>
-				`;
-				layer.alert(str, {
-					title: '技术求助',
-					area: '680px',
-					offset: '7%',
-				})
-			})
 			// setTimeout(function(){
 			// 	try{
 			// 		// 给个小提示
@@ -537,5 +505,6 @@
 		</script> -->
 
 
-	</body>
+	<script src="./a/star-guide/star-guide.js"></script>
+</body>
 </html>

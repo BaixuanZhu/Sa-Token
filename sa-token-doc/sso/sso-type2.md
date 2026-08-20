@@ -49,7 +49,7 @@
 ### 3、搭建 Client 端项目 
 
 > [!TIP| label:demo | style:callout] 
-> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso2-client/`，如遇到难点可结合源码进行测试学习
+> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso2-client/`，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 #### 3.1、去除 SSO-Server 的 Cookie 作用域配置 
 在SSO模式一章节中我们打开了配置：
@@ -76,7 +76,7 @@ sa-token.cookie.domain=stp.com
 <!---------------------------- tabs:start ---------------------------->
 <!-------- tab:Maven 方式 -------->
 ``` xml 
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
@@ -111,12 +111,12 @@ sa-token.cookie.domain=stp.com
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-forest</artifactId>
-	<version>${sa-token.version}</version>
+	<version>${sa.top.version}</version>
 </dependency>
 ```
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
+// Sa-Token 权限认证，在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-spring-boot-starter:${sa.top.version}'
 
 // Sa-Token 插件：整合SSO
@@ -133,6 +133,8 @@ implementation 'cn.dev33:sa-token-alone-redis:${sa.top.version}'
 implementation 'cn.dev33:sa-token-forest:${sa.top.version}'
 ```
 <!---------------------------- tabs:end ---------------------------->
+
+> 也可选用 `sa-token-rest-template`（Spring Boot 2/3/4）或 `sa-token-rest-client`（Spring Boot 3.2+）作为 HTTP 请求处理器，详见：[HTTP 请求扩展](/plugin/http-extend)。
 
 
 #### 3.3、创建 SSO-Client 端认证接口

@@ -93,7 +93,7 @@ http://sa-oauth-server.com:8000/oauth2/token
 	"code": 200,
 	"msg": "ok",
 	"data": null,
-	"token_type": "bearer",
+	"token_type": "Bearer",
 	"access_token": "WdpjZdGlXdOzsAcr7gqPwmLVInHrhpznQa2pDOVqZmLXQynBflkcWqE6f5o2",
 	"refresh_token": "hKHwBm3eH6iqSHlXRGWQaziV8OoyHvzmUb97lKEEZnZJLt3NunBFx7rVZWbT",
 	"expires_in": 7199,
@@ -123,7 +123,7 @@ http://sa-oauth-server.com:8000/oauth2/token
 
 ### 3、扩展 id_token 载荷
 
-新建 `CustomOidcScopeHandler` 集成 `OidcScopeHandler`，扩展 OIDC 权限处理器，返回更多字段：
+新建 `CustomOidcScopeHandler` 继承 `OidcScopeHandler`，扩展 OIDC 权限处理器，返回更多字段：
 ``` java
 /**
  * 扩展 OIDC 权限处理器，返回更多字段
@@ -138,7 +138,7 @@ public class CustomOidcScopeHandler extends OidcScopeHandler {
 
         idToken.extraData.put("uid", userId); // 用户id
         idToken.extraData.put("nickname", "lin_xiao_lin"); // 昵称
-        idToken.extraData.put("picture", "https://sa-token.cc/logo.png"); // 头像
+        idToken.extraData.put("picture", "https://sa-token.com/logo.png"); // 头像
         idToken.extraData.put("email", "456456@xx.com"); // 邮箱
         idToken.extraData.put("phone_number", "13144556677"); // 手机号
         // 更多字段 ...
@@ -164,7 +164,7 @@ public class CustomOidcScopeHandler extends OidcScopeHandler {
   "azp": "1001",
   "uid": "10001",
   "nickname": "lin_xiao_lin",
-  "picture": "https://sa-token.cc/logo.png",
+  "picture": "https://sa-token.com/logo.png",
   "email": "456456@xx.com",
   "phone_number": "13144556677"
 }

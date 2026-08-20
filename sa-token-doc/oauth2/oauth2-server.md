@@ -11,12 +11,12 @@
 
 
 ### 2、引入依赖 
-创建SpringBoot项目 `sa-token-demo-oauth2-server`（不会的同学自行百度或参考仓库示例），引入 `pom.xml` 依赖：
+创建SpringBoot项目 `sa-token-demo-oauth2-server`（不会的同学自行百度或参考仓库示例：[Sa-Token 集成示例大全下载](/more/download-demos) 获取全套 Demo），引入 `pom.xml` 依赖：
 
 <!---------------------------- tabs:start ---------------------------->
 <!-------- tab:Maven 方式 -------->
 ``` xml
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
@@ -43,7 +43,7 @@
 ```
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
+// Sa-Token 权限认证，在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-spring-boot-starter:${sa.top.version}'
 
 // Sa-Token OAuth2.0 模块
@@ -170,7 +170,7 @@ public class SaOAuth2ServerController {
 		SaOAuth2Strategy.instance.confirmView = (clientId, scopes) -> {
 			String scopeStr = SaFoxUtil.convertListToString(scopes);
 			String yesCode =
-					"fetch('/oauth2/doConfirm?client_id=" + clientId + "&scope=" + scopeStr + "', {method: 'POST'})" +
+					"fetch('/oauth2/doConfirm' + location.search, {method: 'POST'})" +
 					".then(res => res.json())" +
 					".then(res => location.reload())";
 			String res = "<p>应用 " + clientId + " 请求授权：" + scopeStr + "，是否同意？</p>"
@@ -222,7 +222,7 @@ public class SaOAuth2ServerApplication {
 
 1、由于暂未搭建Client端，我们可以使用 Sa-Token 官网作为重定向URL进行测试：
 ``` url
-http://sa-oauth-server.com:8000/oauth2/authorize?response_type=code&client_id=1001&redirect_uri=https://sa-token.cc&scope=openid
+http://sa-oauth-server.com:8000/oauth2/authorize?response_type=code&client_id=1001&redirect_uri=https://sa-token.com&scope=openid
 ```
 
 2、由于首次访问，我们在OAuth-Server端暂未登录，会被转发到登录视图 
@@ -248,7 +248,7 @@ http://sa-oauth-server.com:8000/oauth2/token?grant_type=authorization_code&clien
   "code": 200,
   "msg": "ok",
   "data": null,
-  "token_type": "bearer",
+  "token_type": "Bearer",
   "access_token": "cAls8jnBLmeo5yuCUMwb8zxaSsQPPzGINXF3NOCjCqFHplr6hagdT6A5HeR2",
   "refresh_token": "L2rPbJ3aaOXwaB4Zu0EGWNz5EjVNpw5u2oMP9CS2IEap7rR3Hb76ZqqHS07J",
   "expires_in": 7199,
@@ -288,7 +288,7 @@ OAuth2 前端测试页：
 <img class="s-w-sh" src="/big-file/doc/oauth2-new/sa-oauth2-client-test-h5-page.png" alt="sa-oauth2-client-index" />
 
 <p><a class="case-btn case-btn-video" href="https://www.bilibili.com/video/BV13LSMYzEmE/" target="_blank">
-	参考视频：OAuth2 四种模式 前端测试页
+	视频讲解：OAuth2 四种模式 前端测试页
 </a></p>
 
 

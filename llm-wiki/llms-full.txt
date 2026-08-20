@@ -6,58 +6,49 @@
 
 ### start/example: 在 SpringBoot 环境集成
 
-本篇带你从零开始集成 Sa-Token，从而快速熟悉框架的使用姿势。
+本篇带你从零开始集成 Sa-Token，只需简单 5 步，你就可以快速熟悉框架的使用姿势。
 
-整合示例在官方仓库的`/sa-token-demo/sa-token-demo-springboot`文件夹下，如遇到难点可结合源码进行学习测试。
+整合示例在官方仓库的`/sa-token-demo/sa-token-demo-springboot`文件夹下，如遇到难点可结合源码进行学习测试。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ---
 
 ##### 1、创建项目
 在 IDE 中新建一个 SpringBoot 项目，例如：`sa-token-demo-springboot`（不会的同学请自行百度或者参考：[SpringBoot-Pure](https://gitee.com/click33/springboot-pure)）
 
-
 ##### 2、添加依赖
 在项目中添加依赖：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证，在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-spring-boot4-starter`。
 
-
-
-Maven依赖一直无法加载成功？[参考解决方案](https://sa-token.cc/doc.html#/start/maven-pull)
+Maven依赖一直无法加载成功？[参考解决方案](https://sa-token.com/doc.html#/start/maven-pull)
 
 更多内测版本了解：[Sa-Token最新版本](https://gitee.com/dromara/sa-token/blob/dev/sa-token-doc/start/new-version.md)
 
 ##### 3、设置配置文件
 你可以**零配置启动项目** ，但同时你也可以在 `application.yml` 中增加如下配置，定制性使用框架：
 
-
-
-
 ``` yaml
 server:
 	# 端口
     port: 8081
 	
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 sa-token: 
 	# token 名称（同时也是 cookie 名称）
 	token-name: satoken
@@ -75,12 +66,11 @@ sa-token:
 	is-log: true
 ```
 
-
 ``` properties
 # 端口
 server.port=8081
 	
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 
 # token 名称（同时也是 cookie 名称）
 sa-token.token-name=satoken
@@ -97,9 +87,6 @@ sa-token.token-style=uuid
 # 是否输出操作日志 
 sa-token.is-log=true
 ```
-
-
-
 
 ##### 4、创建启动类
 在项目中新建包 `com.pj` ，在此包内新建主类 `SaTokenDemoApplication.java`，复制以下代码：
@@ -143,13 +130,6 @@ public class UserController {
 ##### 6、运行
 启动代码，从浏览器依次访问上述测试接口：
 
-
-
-
-
-
-
-
 ##### 出发
 通过这个示例，你已经对 Sa-Token 有了初步的了解。那么，坐稳扶好，让我们开始吧：[登录认证](/use/login-auth)
 
@@ -160,60 +140,46 @@ public class UserController {
 **Reactor** 是一种非阻塞的响应式模型，本篇将以 **WebFlux** 为例，展示 Sa-Token 与 Reactor 响应式模型框架相整合的示例，
 **你可以用同样方式去对接其它 Reactor 模型框架（例如 SpringCloud Gateway）**
 
-整合示例在官方仓库的`/sa-token-demo/sa-token-demo-webflux`文件夹下，如遇到难点可结合源码进行测试学习
-
+整合示例在官方仓库的`/sa-token-demo/sa-token-demo-webflux`文件夹下，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 > [!WARNING| label:小提示 ] 
 > WebFlux 常用于微服务网关架构中，如果您的应用基于单体架构且非 Reactor 模型，可以先跳过本章  
-
 
 ---
 
 ##### 1、创建项目
 在 IDE 中新建一个 SpringBoot 项目，例如：`sa-token-demo-webflux`
 
-
 ##### 2、添加依赖
 在项目中添加依赖：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-reactor-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.46.0'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
-implementation("cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0")
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
+implementation("cn.dev33:sa-token-reactor-spring-boot-starter:1.46.0")
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
-
-
-
-
-
 
 ##### 3、创建启动类
 在项目中新建包 `com.pj` ，在此包内新建主类 `SaTokenDemoApplication.java`，输入以下代码：
-
-
 
 ``` java
 @SpringBootApplication
@@ -225,7 +191,6 @@ public class SaTokenDemoApplication {
 }
 ```
 
-
 ```kotlin
 @SpringBootApplication
 class SaTokenDemoApplication
@@ -236,12 +201,8 @@ fun main(args: Array<String>) {
 }
 ```
 
-
-
 ##### 4、创建全局过滤器
 新建`SaTokenConfigure.java`，注册 Sa-Token 的全局过滤器
-
-
 
 ``` java
 /**
@@ -274,7 +235,6 @@ public class SaTokenConfigure {
 }
 ```
 
-
 ```kotlin
 @Configuration
 class SaTokenConfigure {
@@ -300,13 +260,9 @@ class SaTokenConfigure {
 }
 ```
 
-
 你只需要按照此格式复制代码即可，有关过滤器的详细用法，会在之后的章节详细介绍。
 
-
 ##### 5、创建测试Controller
-
-
 
 ``` java
 @RestController
@@ -333,7 +289,6 @@ public class UserController {
 }
 ```
 
-
 ```kotlin
 @RestController
 @RequestMapping("/user/")
@@ -353,14 +308,8 @@ class UserController {
 }
 ```
 
-
 ##### 6、运行
 启动代码，从浏览器依次访问上述测试接口：
-
-
-
-
-
 
 **注意事项：**
 
@@ -372,7 +321,7 @@ class UserController {
 
 本篇介绍在 Solon 应用中如何集成 Sa-Token。
 
-整合示例在官方仓库的 `/sa-token-demo/sa-token-demo-solon` 文件夹下，如遇到难点可结合源码进行学习测试。
+整合示例在官方仓库的 `/sa-token-demo/sa-token-demo-solon` 文件夹下，如遇到难点可结合源码进行学习测试。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 > [!tip| label:Solon 是什么？] 
 > Solon 是一个高效的国产应用开发框架：更快、更小、更简单。
@@ -395,46 +344,34 @@ class UserController {
 
 在项目中添加依赖：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证，在线文档：https://sa-token.com -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-solon-plugin</artifactId>
-    <version>1.45.0</version>
+    <version>1.46.0</version>
 </dependency>
 ```
 
-
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-solon-plugin:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-solon-plugin:1.46.0'
 ```
 
-
-
-
-Maven依赖一直无法加载成功？[参考解决方案](https://sa-token.cc/doc.html#/start/maven-pull)
+Maven依赖一直无法加载成功？[参考解决方案](https://sa-token.com/doc.html#/start/maven-pull)
 
 更多内测版本了解：[Sa-Token最新版本](https://gitee.com/dromara/sa-token/blob/dev/sa-token-doc/start/new-version.md)
-
-
 
 ##### 3、设置配置文件
 
 你可以**零配置启动项目** ，但同时你也可以在 `app.yml` 中增加如下配置，定制性使用框架：
-
-
-
-
 
 ```yaml
 server:
     # 端口
     port: 8081
     
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 sa-token: 
 	# token 名称（同时也是 cookie 名称）
 	token-name: satoken
@@ -452,12 +389,11 @@ sa-token:
 	is-log: true
 ```
 
-
 ```properties
 # 端口
 server.port=8081
     
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 
 # token 名称（同时也是 cookie 名称）
 sa-token.token-name=satoken
@@ -474,11 +410,6 @@ sa-token.token-style=uuid
 # 是否输出操作日志 
 sa-token.is-log=true
 ```
-
-
-
-
-
 
 ##### 4、创建启动类
 
@@ -525,12 +456,6 @@ public class UserController {
 
 启动代码，从浏览器依次访问上述测试接口：
 
-
-
-
-
-
-
 ##### 详细了解
 
 通过这个示例，你已经对 Sa-Token 有了初步的了解，那么现在开始详细了解一下它都有哪些吧：
@@ -539,12 +464,79 @@ public class UserController {
 
 ---
 
+### start/run-source-code: 源码运行指南
+
+如果你想阅读或调试 Sa-Token 源码，可按以下步骤在本地运行框架及 Demo 示例。
+
+---
+
+##### 1、下载源码
+
+**方式一：Git 克隆（推荐）**
+
+Sa-Token 源码目前在 Gitee、GitHub、AtomGit 三个平台进行托管，**你可以从任意其一进行克隆下载源码**。
+
+**学习测试建议拉取 `master` 分支**；`dev` 为开发分支，代码随时变动，有时候会运行不起来。（如果你要提交 pr，则需要拉取 dev 分支）
+
+``` shell
+git clone -b master https://gitee.com/dromara/sa-token.git
+```
+
+``` shell
+git clone -b master https://github.com/dromara/sa-token.git
+```
+
+``` shell
+git clone -b master https://atomgit.com/dromara/sa-token.git
+```
+
+**方式二：官网 / 仓库页下载压缩包**
+
+在 [Gitee](https://gitee.com/dromara/sa-token)、[GitHub](https://github.com/dromara/sa-token)、[AtomGit](https://atomgit.com/dromara/sa-token) 三者任意一个平台，使用「克隆 / 下载」下载源码压缩包，解压后即可使用。
+
+---
+
+##### 2、从 IDEA 导入项目
+
+打开 IDEA，选择 **Open**，选中源码根目录，进行打开。
+
+源码目录说明请参考：[仓库目录](/arch/dir-intro)。
+
+---
+
+##### 3、运行
+
+Sa-Token 并非一个完整可运行的传统项目，而是一个需要被引入的框架。因此不存在传统意义下的运行源码，**你可以运行的是其中各项 demo 示例**。
+
+打开 `sa-token-demo` 目录，选择你想要运行的示例添加为 Maven 项目，打开 `XxxApplication.java` 运行。
+
+注意：首次在 IDEA 中运行项目时，可能会触发报错：
+
+```
+java: 程序包cn.dev33.satoken.apikey不存在
+```
+
+这是因为在 Sa-Token 中，`sa-token-apikey`、`sso`、`oauth2`、`sign`、`jwt` 等模块均为可选包，IDEA 有时候会跳过相关模块的编译，然后运行时又找不到这些包，触发报错。
+
+**解决方案是先运行一下 `sa-token-demo-first-run` 这个 demo**，该项目强制引入了这些模块，会引导 IDEA 对相关模块进行编译。
+
+如果此项目仍然无法运行成功，请根据控制台的报错提示，**把相关模块加入到此项目的 pom.xml 中**，然后点击右上角 maven 刷新依赖图标，然后再次点击运行。
+
+如果还不行，那就在项目根目录进入 cmd，执行 `mvn package`，然后重新运行试试。
+
+如果还是不行，那就加群反馈一下，我们再根据你的情况寻找一下新方案。
+
+##### 4、运行文档
+
+根目录双击执行 `preview-doc.bat` 可在本地预览 `sa-token-doc` 文档。
+
+---
+
 ## 基础
 
 ### use/login-auth: 登录认证
 
 --- 
-
 
 ##### 1、开始登录
 
@@ -555,8 +547,6 @@ public class UserController {
 4. 注销登录，关闭 网站/APP。
 
 在整个流程中，Sa-Token 负责哪些部分呢？ 下图可以帮助你理解：
-
-
 
 如上图所示：**无论用户采用何种登录方式，本质上都是通过提交一定的认证信息，使系统可以定位到 Ta 的唯一标识 —— userId**。
 
@@ -611,17 +601,12 @@ public SaResult doLogin(String name, String pwd) {
 > 
 > 加载演示图
 
-
 ##### 2、校验是否登录
 
 对于一些登录之后才能访问的接口（例如：查询我的账号资料），我们通常的做法是增加一层接口校验：
 
 - 如果校验通过，则：**正常返回数据。**
 - 如果校验未通过，则：**抛出异常，告知其需要先进行登录。**
-
-
-
-
 
 使用以下方法判断当前会话是否已登录：
 
@@ -678,7 +663,6 @@ public class GlobalException {
 
 可参照此篇：[未登录场景值](/fun/not-login-scene)，了解如何获取未登录的场景值。
 
-
 ##### 3、会话查询
 
 如果你想要获取当前登录的是谁：
@@ -701,7 +685,6 @@ StpUtil.getLoginIdDefaultNull();
 StpUtil.getLoginId(T defaultValue);
 ```
 
-
 ##### 4、token 查询
 ``` java
 // 获取当前会话的 token 值
@@ -722,13 +705,11 @@ StpUtil.getTokenInfo();
 
 有关`TokenInfo`参数详解，请参考：[TokenInfo参数详解](/fun/token-info)	
 
-
 ##### 5、会话注销
 ``` java
 // 当前会话注销登录
 StpUtil.logout();
 ```
-
 
 ##### 6、来个小测试，加深一下理解
 新建 `LoginController`，复制或手动敲出以下代码
@@ -776,7 +757,6 @@ public class LoginController {
  
 ---
 
-
 	本章代码示例：Sa-Token 登录认证 —— [ LoginAuthController.java ]
 
 本章小练习：Sa-Token 基础 - 登录认证，章节测试
@@ -795,9 +775,6 @@ public class LoginController {
 - 管理员账号访问：**正常返回数据**。
 - 普通账号访问：**权限不足，拒绝访问**。
 
-
-
-
 那么框架是如何判断，一个账号是否有权限访问某个接口的呢？
 
 从底层数据的角度来讲，**每个账号都会拥有一组权限码集合，框架要做的就是校验这个集合中是否包含指定的权限码。**
@@ -805,13 +782,9 @@ public class LoginController {
 - 有，就让你通过。
 - 没有？那么禁止访问！
 
-
-
-
 所以现在问题的核心就是两个：
 1. 如何定义一个账号所拥有的权限码集合？
 2. 本次操作需要校验的权限码是哪个？
-
 
 ##### 2、获取当前账号权限码集合
 
@@ -864,7 +837,6 @@ public class StpInterfaceImpl implements StpInterface {
 > [!WARNING| label:有同学会产生疑问：我实现了此接口，但是程序启动时好像并没有执行，是不是我写错了？] 
 > 答：不执行是正常现象，程序启动时不会执行这个接口的方法，在每次调用鉴权代码时，才会执行到此。
 
-
 ##### 3、权限校验
 然后就可以用以下 api 来鉴权了
 
@@ -886,7 +858,6 @@ StpUtil.checkPermissionOr("user.add", "user.delete", "user.get");
 ```
 
 扩展：**`NotPermissionException`** 异常对象可通过 `getLoginType()` 方法获取具体是哪个 `StpLogic` 抛出的异常
-
 
 ##### 4、角色校验
 在 Sa-Token 中，角色和权限可以分开独立验证
@@ -910,8 +881,6 @@ StpUtil.checkRoleOr("super-admin", "shop-admin");
 
 扩展：**NotRoleException** 异常对象可通过 `getLoginType()` 方法获取具体是哪个 `StpLogic` 抛出的异常
 
-
-
 ##### 5、拦截全局异常
 有同学要问，鉴权失败，抛出异常，然后呢？要把异常显示给用户看吗？**当然不可以！**
 
@@ -930,7 +899,6 @@ public class GlobalExceptionHandler {
 ```
 
 可参考：[码云：GlobalException.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-case/src/main/java/com/pj/current/GlobalException.java)
-
 
 ##### 6、权限通配符
 Sa-Token允许你根据通配符指定**泛权限**，例如当一个账号拥有`art.*`的权限时，`art.add`、`art.delete`、`art.update`都将匹配通过
@@ -955,11 +923,8 @@ StpUtil.hasPermission("index.html");      // false
 > [!WARNING| label:上帝权限] 
 > 当一个账号拥有 `"*"` 权限时，他可以验证通过任何权限码 （角色认证同理）
 
-
 ##### 7、如何把权限精确到按钮级？
 权限精确到按钮级的意思就是指：**权限范围可以控制到页面上的每一个按钮是否显示**。
-
-
 
 思路：如此精确的范围控制只依赖后端已经难以完成，此时需要前端进行一定的逻辑判断。
 
@@ -981,15 +946,11 @@ StpUtil.hasPermission("index.html");      // false
 
 以上写法只为提供一个参考示例，不同框架有不同写法，大家可根据项目技术栈灵活封装进行调用。
 
-
 > [!ATTENTION| label:前端有了鉴权后端还需要鉴权吗？] 
 > **需要！** 
 > 前端的鉴权只是一个辅助功能，对于专业人员这些限制都是可以轻松绕过的，为保证服务器安全：**无论前端是否进行了权限校验，后端接口都需要对会话请求再次进行权限校验！**
 
-
-
 ---
-
 
 	本章代码示例：Sa-Token 权限认证 —— [ JurAuthController.java ]
 
@@ -1005,14 +966,12 @@ StpUtil.hasPermission("index.html");      // false
 
 --- 
 
-
 ##### 1、强制注销
 ``` java
 StpUtil.logout(10001);                    // 强制指定账号注销下线 
 StpUtil.logout(10001, "PC");              // 强制指定账号指定端注销下线 
 StpUtil.logoutByTokenValue("token");      // 强制指定 Token 注销下线 
 ```
-
 
 ##### 2、踢人下线
 ``` java
@@ -1025,9 +984,7 @@ StpUtil.kickoutByTokenValue("token");      // 将指定 Token 踢下线
 - 强制注销等价于对方主动调用了注销方法，再次访问会提示：Token无效。
 - 踢人下线不会清除Token信息，而是将其打上特定标记，再次访问会提示：Token已被踢下线。
 
-
 加载动态演示图
-
 
 ##### 3、顶人下线
 “顶人下线” 操作发生在框架登录时顶退旧登录设备，属于框架内部操作，一般情形下你不会调用到此 API：
@@ -1037,9 +994,7 @@ StpUtil.replaced(10001, "PC");              // 将指定账号指定端顶下线
 StpUtil.replacedByTokenValue("token");      // 将指定 Token 顶下线
 ```
 
-
 ---
-
 
 	本章代码示例：Sa-Token 踢人下线 —— [ KickoutController.java ]
 
@@ -1068,7 +1023,6 @@ StpUtil.replacedByTokenValue("token");      // 将指定 Token 顶下线
 Sa-Token 使用全局拦截器完成注解鉴权功能，为了不为项目带来不必要的性能负担，拦截器默认处于关闭状态。
 因此，为了使用注解鉴权，**你必须手动将 Sa-Token 的全局拦截器注册到你项目中**。
 
-
 ##### 1、注册拦截器
 以 SpringBoot2 项目为例，新建配置类`SaTokenConfigure.java`
 
@@ -1084,9 +1038,6 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 }
 ```
 保证此类被`springboot`启动类扫描到即可
-
-
-
 
 ##### 2、使用注解鉴权
 然后我们就可以愉快的使用注解鉴权了：
@@ -1144,7 +1095,6 @@ public String send() {
 
 注：以上注解都可以加在类上，代表为这个类所有方法进行鉴权
 
-
 ##### 3、设定校验模式
 `@SaCheckRole`与`@SaCheckPermission`注解可设置校验模式，例如：
 ``` java
@@ -1159,7 +1109,6 @@ public SaResult atJurOr() {
 mode有两种取值：
 - `SaMode.AND`，标注一组权限，会话必须全部具有才可通过校验。
 - `SaMode.OR`，标注一组权限，会话只要具有其一即可通过校验。
-
 
 ##### 4、角色权限双重 “or校验”
 假设有以下业务场景：一个接口在具有权限 `user.add` 或角色 `admin` 时可以调通。怎么写？
@@ -1177,7 +1126,6 @@ orRole 字段代表权限校验未通过时的次要选择，两者只要其一�
 - 写法一：`orRole = "admin"`，代表需要拥有角色 admin 。
 - 写法二：`orRole = {"admin", "manager", "staff"}`，代表具有三个角色其一即可。
 - 写法三：`orRole = {"admin, manager, staff"}`，代表必须同时具有三个角色。
-
 
 ##### 5、忽略认证
 
@@ -1205,8 +1153,6 @@ public class TestController {
 - @SaIgnore 修饰方法时代表这个方法可以被游客访问，修饰类时代表这个类中的所有接口都可以游客访问。
 - @SaIgnore 具有最高优先级，当 @SaIgnore 和其它鉴权注解一起出现时，其它鉴权注解都将被忽略。
 - @SaIgnore 同样可以忽略掉 Sa-Token 拦截器中的路由鉴权，在下面的 [路由拦截鉴权] 章节中我们会讲到。
-
-
 
 ##### 6、批量注解鉴权
 
@@ -1260,7 +1206,6 @@ public SaResult test() {
 }
 ```
 
-
 使用 append 字段追加抓取扩展包里的注解，例如：
 ``` java
 // 测试：只有通过登录校验，或者提供了正确的 ApiKey，才可以进入方法
@@ -1273,19 +1218,13 @@ public SaResult test() {
 }
 ```
 
-
 ##### 7、扩展阅读
 
 - 在业务逻辑层使用鉴权注解：[AOP注解鉴权](/plugin/aop-at)
 
 - 制作自定义鉴权注解注入到框架：[自定义注解](/fun/custom-annotations)
 
-
-
-
-
 ---
-
 
 	本章代码示例：Sa-Token 注解鉴权 —— [ AtCheckController.java ]
 
@@ -1299,14 +1238,9 @@ public SaResult test() {
 
 如果给每个接口都手动加上注解鉴权，将会是一件比较麻烦的事情，这时候使用拦截器鉴权模式将大大降低我们的代码量。
 
-
-
-
-
 如上图所示，拦截器将拦截除登录以外的所以请求，并进行一道前置审核决定是否通过。
 
 --- 
-
 
 ##### 1、注册 Sa-Token 路由拦截器
 以`SpringBoot2.0`为例，新建配置类`SaTokenConfigure.java`
@@ -1398,7 +1332,6 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 }
 ```
 
-
 ##### 3、匹配特征详解
 
 除了上述示例的 path 路由匹配，还可以根据很多其它特征进行匹配，以下是所有可匹配的特征：
@@ -1440,8 +1373,6 @@ SaRouter
 	.check( /* 只有上述所有条件都匹配成功，才会执行最后的check校验函数 */ );
 ```
 
-
-
 ##### 4、提前退出匹配链 
 使用 `SaRouter.stop()` 可以提前退出匹配链，例：
 
@@ -1466,7 +1397,6 @@ stop() 与 back() 函数的区别在于：
 - `SaRouter.stop()` 会停止匹配，进入Controller。
 - `SaRouter.back()` 会停止匹配，直接返回结果到前端。
 
-
 ##### 5、使用free打开一个独立的作用域
 
 ``` java
@@ -1481,7 +1411,6 @@ SaRouter.match("/**").check(/* --- */);
 ```
 
 free() 的作用是：打开一个独立的作用域，使内部的 stop() 不再一次性跳出整个 Auth 函数，而是仅仅跳出当前 free 作用域。
-
 
 ##### 6、使用注解忽略掉路由拦截校验
 
@@ -1516,9 +1445,6 @@ public SaResult getList() {
 > [!WARNING| label:注意点] 
 > 注解 `@SaIgnore` 的忽略效果只针对 SaInterceptor拦截器 和 AOP注解鉴权 生效，对自定义拦截器与过滤器不生效。
 
-
-
-
 ##### 7、关闭注解校验
 
 `SaInterceptor` 只要注册到项目中，默认就会打开注解校验，如果要关闭此能力，需要指定 `isAnnotation` 为 false：
@@ -1533,7 +1459,6 @@ public void addInterceptors(InterceptorRegistry registry) {
 	).addPathPatterns("/**");
 }
 ```
-
 
 你也可以使用 `setBeforeAuth` 注册认证前置函数：
 
@@ -1552,10 +1477,7 @@ public void addInterceptors(InterceptorRegistry registry) {
 
 如上代码，先执行 2，再执行注解鉴权，再执行 1，如果 beforeAuth 里包含 `SaRouter.stop()` 将跳过后续的注解鉴权和 auth 认证环节。
 
-
-
 ---
-
 
 	本章代码示例：Sa-Token 路由拦截鉴权 —— [ SaTokenConfigure.java ]
 
@@ -1576,7 +1498,7 @@ Session 是会话中专业的数据缓存组件，通过 Session 我们可以很
 StpUtil.getSession().set("user", user);
 
 // 然后我们就可以在任意处使用这个 user 对象
-SysUser user = (SysUser) StpUtil.getSession().get("user");
+SysUser user = StpUtil.getSession().getModel("user", SysUser.class);
 ```
 
 在 Sa-Token 中，Session 分为三种，分别是：
@@ -1588,6 +1510,8 @@ SysUser user = (SysUser) StpUtil.getSession().get("user");
 > [!TIP| style:callout] 
 > 有关 Account-Session 与 Token-Session 的详细区别，可参考：[Session模型详解](/fun/session-model)
 
+> [!WARNING| ] 
+> 若往 Session 存自定义实体类后，从 Redis 读回报错 `无法反序列化的类型：xxx，请先将其注册到 JSON 全局类型白名单`，请参考：[JSON 全局类型白名单机制](/plugin/json-extend?id=json-全局类型白名单机制)
 
 ##### 2、Account-Session
 有关 账号-Session 的 API 如下：
@@ -1608,7 +1532,6 @@ StpUtil.getSessionByLoginId(10001, true);
 StpUtil.getSessionBySessionId("xxxx-xxxx");
 ```
 
-
 ##### 3、Token-Session
 有关 令牌-Session 的 API 如下：
 ``` java
@@ -1618,7 +1541,6 @@ StpUtil.getTokenSession();
 // 获取指定 Token 的 Token-Session 对象
 StpUtil.getTokenSessionByToken(token);
 ```
-
 
 ##### 4、Custom-Session
 自定义 Session 指的是以一个`特定的值`作为 SessionId 来分配的`Session`, 借助自定义Session，你可以为系统中的任意元素分配相应的session
@@ -1636,7 +1558,6 @@ SaSessionCustomUtil.getSessionById("goods-10001", false);
 // 删除指定key的Session
 SaSessionCustomUtil.deleteSessionById("goods-10001");
 ```
-
 
 ##### 5、在 Session 上存取值
 
@@ -1682,7 +1603,6 @@ session.clear();
 session.keys();      
 ```
 
-
 ##### 6、其它操作
 
 ``` java
@@ -1702,7 +1622,6 @@ session.update();
 session.logout();                         
 ```
 
-
 ##### 7、避免与 HttpSession 混淆使用
 经常有同学会把 `SaSession` 与 `HttpSession` 进行混淆，例如：
 ``` java
@@ -1717,7 +1636,6 @@ public void reset(HttpSession session) {
 **要点：**
 1. `SaSession` 与 `HttpSession` 没有任何关系，在`HttpSession`上写入的值，在`SaSession`中无法取出
 2. `HttpSession`并未被框架接管，在使用Sa-Token时，请在任何情况下均使用`SaSession`，不要使用`HttpSession` 
-
 
 ##### 8、未登录场景下获取 Token-Session 
 
@@ -1736,9 +1654,7 @@ StpUtil.getAnonTokenSession();
 注意点：如果前端没有提交 Token ，或者提交的 Token 是一个无效 Token 的话，框架将不会根据此 Token 创建 `Token-Session` 对象，
 而是随机一个新的 Token 值来创建 `Token-Session` 对象，此 Token 值可以通过 `StpUtil.getTokenValue()` 获取到。
 
-
 ---
-
 
 	本章代码示例：Sa-Token Session 会话 —— [ SaSessionController.java ]
 
@@ -1756,11 +1672,8 @@ StpUtil.getAnonTokenSession();
 
 ###### 方式1、在 application.yml 配置
 
-
-
-
 ``` yaml
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 sa-token: 
 	# token 名称（同时也是 cookie 名称）
 	token-name: satoken
@@ -1778,9 +1691,8 @@ sa-token:
 	is-log: true
 ```
 
-
 ``` properties
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 
 # token 名称（同时也是 cookie 名称）
 sa-token.token-name=satoken
@@ -1798,13 +1710,7 @@ sa-token.token-style=uuid
 sa-token.is-log=true
 ```
 
-
-
-
-
 ###### 方式2、通过代码配置
-
-
 
 ``` java 
 /**
@@ -1812,7 +1718,7 @@ sa-token.is-log=true
  */
 @Configuration
 public class SaTokenConfigure {
-	// Sa-Token 参数配置，参考文档：https://sa-token.cc
+	// Sa-Token 参数配置，参考文档：https://sa-token.com
 	// 此配置会覆盖 application.yml 中的配置
     @Bean
     @Primary
@@ -1836,7 +1742,7 @@ public class SaTokenConfigure {
  */
 @Configuration
 public class SaTokenConfigure {
-	// Sa-Token 参数配置，参考文档：https://sa-token.cc
+	// Sa-Token 参数配置，参考文档：https://sa-token.com
 	// 此配置会与 application.yml 中的配置合并 （代码配置优先）
 	@Autowired
 	public void configSaToken(SaTokenConfig config) {
@@ -1851,11 +1757,9 @@ public class SaTokenConfigure {
 }
 ```
 
-
 两者的区别在于：
 - 模式 1 会覆盖 application.yml 中的配置。
 - 模式 2 会与 application.yml 中的配置合并（代码配置优先）。
-
 
 --- 
 ##### 2、核心包所有可配置项
@@ -1886,6 +1790,7 @@ public class SaTokenConfigure {
 | isLogoutKeepFreezeOps		| Boolean	| false	| 如果 token 已被冻结，是否保留其操作权 (是否允许此 token 调用注销API)	(此参数只在调用 StpUtil.[logout/kickout/replaced]ByTokenValue("token") 时有效)			|
 | isLogoutKeepTokenSession	| Boolean	| false	| 在注销 token 后，是否保留其对应的 Token-Session					|
 | rightNowCreateTokenSession| Boolean	| false	| 在登录时，是否立即创建对应的 Token-Session （true=在登录时立即创建，false=在第一次调用 getTokenSession() 时创建）	|
+| allowLoginIdColon		| Boolean	| false	| 是否允许 loginId 包含冒号（`:`）。默认为 false，因 Sa-Token 持久化 key 使用冒号分段，loginId 含冒号会导致 key 难以解析；存量项目如需使用可设为 true	|
 | tokenStyle			| String	| uuid		| token风格， [参考：自定义Token风格](/up/token-style)										|
 | dataRefreshPeriod		| int		| 30		| 默认数据持久组件实现类中，每次清理过期数据间隔的时间 （单位: 秒） ，默认值30秒，设置为-1代表不启动定时清理 		|
 | tokenSessionCheckLogin	| Boolean	| true	| 获取 `Token-Session` 时是否必须登录 （如果配置为true，会在每次获取 `Token-Session` 时校验是否登录），[详解](/use/config?id=配置项详解：tokenSessionCheckLogin)		|
@@ -1916,10 +1821,7 @@ public class SaTokenConfigure {
 | sameSite		| String	| Lax		| 第三方限制级别（Strict=完全禁止，Lax=部分允许，None=不限制）		|
 | extraAttrs	| String	| new LinkedHashMap()		| 额外扩展属性		|
 
-
 Cookie 配置示例:
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -1959,8 +1861,6 @@ sa-token.cookie.extraAttrs.Partitioned=""
 # sa-token.cookie.extraAttrs.abc=def
 ```
 
-
-
 ###### 2.3、Sign 参数签名相关配置
 
 | 参数名称				| 类型		| 默认值		| 说明																	|
@@ -1970,8 +1870,6 @@ sa-token.cookie.extraAttrs.Partitioned=""
 | digestAlgo			| String	| md5		| 对 fullStr 的摘要算法					|
 
 示例：
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -1987,9 +1885,6 @@ sa-token:
 sa-token.sign.secret-key=kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 ```
 
-
-
-
 ###### 2.4、API Key 相关配置
 
 | 参数名称				| 类型		| 默认值		| 说明																	|
@@ -1999,8 +1894,6 @@ sa-token.sign.secret-key=kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 | isRecordIndex			| String	| true		| 框架是否记录索引信息					|
 
 示例：
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -2024,12 +1917,6 @@ sa-token.pi-key.timeout=2592000
 sa-token.pi-key.is-record-index=true
 ```
 
-
-
-
-
-
-
 ##### 3、单点登录相关配置 
 
 ###### 3.1、SSO-Server 端配置
@@ -2050,8 +1937,6 @@ sa-token.pi-key.is-record-index=true
 
 配置示例：
 
-
-
 ``` yml
 # Sa-Token 配置
 sa-token: 
@@ -2071,16 +1956,13 @@ sa-token.sso-server.ticket-timeout=300
 sa-token.sso-server.home-route=/home
 ```
 
-
-
-
 ###### 3.2、SSO-Client 端配置
 
 | 参数名称			| 类型		| 默认值		| 说明											|
 | :--------			| :--------	| :--------	| :--------										|
 | mode				| String	| 					| 指定当前系统集成 SSO 时使用的模式（约定型配置项，不对代码逻辑产生任何影响）			|
 | client			| String	| ""				| 当前 Client 名称标识，用于和 ticket 码的互相锁定			|
-| serverUrl			| String	| null				| 配置 Server 端主机总地址，拼接在 `authUrl`、`checkTicketUrl`、`userinfoUrl`、`sloUrl` 属性前面，用以简化各种 url 配置，参考：[详解](/sso/sso-questions?id=问：模式三配置一堆-xxx-url-，有办法简化一下吗？)	|
+| serverUrl			| String	| null				| 配置 Server 端主机总地址，拼接在 `authUrl`、`signoutUrl`、`pushUrl` 属性前面，用以简化各种 url 配置，参考：[详解](/sso/sso-questions?id=问：模式三配置一堆-xxx-url-，有办法简化一下吗？)	|
 | authUrl			| String	| /sso/auth			| 配置 Server 端单点登录授权地址					|
 | signoutUrl		| String	| /sso/signout		| 配置 Server 端单点注销地址										|
 | pushUrl			| String	| /sso/pushS		| 配置 Server 端的推送消息地址						|
@@ -2094,8 +1976,6 @@ sa-token.sso-server.home-route=/home
 | isCheckSign		| Boolean	| true				| 是否校验参数签名（方便本地调试用的一个配置项，生产环境请务必为true）		|
 
 配置示例：
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -2115,9 +1995,6 @@ sa-token.sso-client.server-url=http://sa-sso-server.com:9000
 sa-token.sso-client.is-slo=true
 ```
 
-
-
-
 ###### 3.3、SaSsoClientModel 配置
 
 | 参数名称			| 类型		| 默认值		| 说明											|
@@ -2127,12 +2004,10 @@ sa-token.sso-client.is-slo=true
 | isPush			| Boolean	| false				| 是否接收推送消息			|
 | isSlo				| Boolean	| true				| 是否打开单点注销功能							|
 | secretKey			| String	| ""				| API 调用签名秘钥					|
-| serverUrl			| String	| null				| 配置 Server 端主机总地址，拼接在 `authUrl`、`checkTicketUrl`、`userinfoUrl`、`sloUrl` 属性前面，用以简化各种 url 配置，参考：[详解](/sso/sso-questions?id=问：模式三配置一堆-xxx-url-，有办法简化一下吗？)	|
+| serverUrl			| String	| null				| 配置此 Client 端主机总地址，拼接在 `pushUrl` 属性前面（默认 `/sso/pushC`），用以简化推送地址配置	|
 | pushUrl			| String	| /sso/pushC		| 配置此 Client 端的推送消息地址						|
 
 配置示例：
-
-
 
 ``` yml
 # Sa-Token 配置
@@ -2166,12 +2041,6 @@ sa-token.sso-server.clients.sso-client2.allow-url=*
 sa-token.sso-server.clients.sso-client2.secret-key=SSO-C2-kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 ```
 
-
-
-
-
-
-
 ##### 4、OAuth2.0相关配置 
 
 ###### 4.1、OAuth2-Server 相关配置
@@ -2201,7 +2070,6 @@ sa-token.sso-server.clients.sso-client2.secret-key=SSO-C2-kQwIOrYvnXmSDkwEiFngrK
 
 配置示例：
 
-
 ``` yaml
 # Sa-Token 配置
 sa-token: 
@@ -2224,15 +2092,11 @@ sa-token.oauth2-server.enable-password=true
 sa-token.oauth2-server.enable-client-credentials=true
 ```
 
-
-
 ###### 4.2、OIDC 相关配置
 | 参数名称					| 类型		| 默认值	| 说明																			|
 | :--------					| :--------	| :--------	| :--------																	|
 | iss						| String	| 			| iss 值，如不配置则自动计算													|
 | idTokenTimeout			| long		| 600		| idToken 有效期（单位秒） 默认十分钟											|
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -2247,9 +2111,6 @@ sa-token:
 sa-token.oauth2-server.oidc.iss=xxx
 sa-token.oauth2-server.oidc.idTokenTimeout=600
 ```
-
-
-
 
 ###### 4.3、SaClientModel属性定义
 | 参数名称				| 类型			| 默认值	| 说明													|
@@ -2269,10 +2130,6 @@ sa-token.oauth2-server.oidc.idTokenTimeout=600
 | isNewRefresh			| Boolean		| 取全局配置		| 单独配置此 Client：是否在每次 `Refresh-Token` 刷新 `Access-Token` 时，产生一个新的 Refresh-Token [ 默认取全局配置 ]	|
 | isAutoConfirm			| Boolean		| false		| 是否允许此应用自动确认授权 （高危配置，禁止向不被信任的第三方开启此选项）	|
 
-
-
-
-
 ##### 5、部分配置项详解
 
 对部分配置项做一下详解 
@@ -2288,7 +2145,6 @@ sa-token.oauth2-server.oidc.idTokenTimeout=600
 为此 Sa-Token 对这个 SaTerminalInfo 列表的大小设定一个上限值，也就是 `maxLoginCount`，默认值=12。
 
 假设一个账号的登录数量超过 `maxLoginCount` 后，将会主动注销第一个登录的会话（先进先出），以此保证队列中的有效会话数量始终 `<= maxLoginCount` 值。
-
 
 ###### 配置项详解：tokenSessionCheckLogin
 配置含义：获取 `Token-Session` 时是否必须登录 （如果配置为true，会在每次获取 `Token-Session` 时校验是否登录）。
@@ -2311,8 +2167,6 @@ sa-token.oauth2-server.oidc.idTokenTimeout=600
 
 但是 —— 有的场景下我们又确实需要在登录之前就使用 Token-Session 对象，这时候就把配置项 `tokenSessionCheckLogin` 值改为 `false` 即可。
 
-
-
 ###### 配置项详解：isHttp
 
 配置含义：是否打开单点登录模式三。
@@ -2320,11 +2174,7 @@ sa-token.oauth2-server.oidc.idTokenTimeout=600
 - 此配置项为 false 时，代表使用SSO模式二：使用 Redis 校验 ticket 值、删除 Redis 数据做到单点注销、使用 Redis 同步 Userinfo 数据。
 - 此配置项为 true 时，代表使用SSO模式三：使用 Http 请求校验 ticket 值、使用 Http 请求做到单点注销、使用 Http 请求同步 Userinfo 数据。
 
-
-
-
 ---
-
 
 	本章代码示例：Sa-Token 框架配置 —— [ application.yml ]
 
@@ -2352,14 +2202,12 @@ Sa-Token 默认将数据保存在内存中，此模式读写速度最快，且�
 
 RedisTemplate 是 SpringBoot 官方推荐的 Redis 客户端，Sa-Token 提供基于 RedisTemplate 的 Redis 整合方案：
 
-
-
 ``` xml 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- 提供 Redis 连接池 -->
@@ -2371,13 +2219,11 @@ RedisTemplate 是 SpringBoot 官方推荐的 Redis 客户端，Sa-Token 提供�
 
 ``` gradle
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 
 // 提供 Redis 连接池
 implementation 'org.apache.commons:commons-pool2'
 ```
-
-
 
 Redis 的集成有多种方式，缓存的方案也不止 Redis 一种，Sa-Token 为缓存方案提供多种扩展实现。
 
@@ -2385,6 +2231,11 @@ Redis 的集成有多种方式，缓存的方案也不止 Redis 一种，Sa-Toke
 
 如果你想对缓存方案再进行一下深入探究，那么你可以参考：[缓存层扩展](/plugin/dao-extend) 
 
+> [!WARNING| ] 
+> 若往 Session 存自定义实体类后，从 Redis 读回报错 `无法反序列化的类型：xxx，请先将其注册到 JSON 全局类型白名单`，请参考：[JSON 全局类型白名单机制](/plugin/json-extend?id=json-全局类型白名单机制)
+
+> [!WARNING| ] 
+> 自 v1.46.0 起，`sa-token-redis-template` / `sa-token-redisson` 使用了 Redis 6.0+ 的 `SET KEEPTTL` 特性。若 Redis 服务低于 6.0，会报 `ERR syntax error`。解决方案见：[Q：Redis 6.0 以下版本集成报错](/more/common-questions?id=q：redis-60-以下版本集成报错：err-syntax-error)
 
 ##### 2、自定义序列化方案
 
@@ -2392,59 +2243,47 @@ Redis 的集成有多种方式，缓存的方案也不止 Redis 一种，Sa-Toke
 
 框架的默认序列化层调用为 `String 序列化` -> `JSON 序列化`。要自定义数据序列化方式你可以从这两方面入手：
 
-
 ###### 2.1、自定义 JSON 序列化方案：
 
 先说较为底层的 `JSON 序列化`，如果你引入的是 sa-token-spring-boot-starter 集成包 (含SpringBoot3) ，那么框架将会自动引入 Jackson 框架作为 JSON 序列化方案。
 
 如果你想更换为其它 JSON 解析框架，可以引入相关依赖：
 
-
-
-
-
 ``` xml
 <!-- Sa-Token 整合 Fastjson -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-fastjson</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson:1.45.0'`
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Fastjson2 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-fastjson2</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson2:1.45.0'`
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson2:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Snack3 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-snack3</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-snack3:1.45.0'`
-
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-snack3:1.46.0'`
 
 完整插件列表请参考：[JSON 序列化扩展](/plugin/json-extend)
 
 ###### 2.2、自定义 String 序列化方案：
 
 或者你想更直接点，不使用 json 序列化方案，也是可以的。你可以直接自定义数据的 String 序列化方案：
-
-
-
 
 ``` java
 // 设置序列化方案: jdk序列化 (base64编码)
@@ -2454,7 +2293,6 @@ public void rewriteComponent() {
 }
 ```
 
-
 ``` java
 // 设置序列化方案: jdk序列化 (16进制编码)
 @PostConstruct
@@ -2462,7 +2300,6 @@ public void rewriteComponent() {
 	SaManager.setSaSerializerTemplate(new SaSerializerTemplateForJdkUseHex());
 }
 ```
-
 
 ``` java
 // 设置序列化方案: jdk序列化 (ISO-8859-1编码)
@@ -2472,16 +2309,12 @@ public void rewriteComponent() {
 }
 ```
 
-
 除了以上的几种序列化方案，我们还提供了序列化扩展包，详细可参考：[序列化插件扩展包](/plugin/custom-serializer)
-
 
 ##### 3、集成 Redis 请注意：
 
 **1. 引入了依赖，我还需要为 Redis 配置连接信息吗？** 
 需要！只有项目初始化了正确的 Redis 实例，`Sa-Token`才可以使用 Redis 进行数据持久化，参考以下`yml配置`：
-
-
 
 ``` yaml
 spring: 
@@ -2530,10 +2363,8 @@ spring.redis.lettuce.pool.max-idle=10
 spring.redis.lettuce.pool.min-idle=0
 ```
 
-
 > [!WARNING| label:小提示 ] 
 > 如果你使用的是 SpringBoot3.x 版本，则需要将前缀 `spring.redis` 改为 `spring.data.redis`。
-
 
 **2. 集成 Redis 后，是我额外手动保存数据，还是框架自动保存？** 
 框架自动保存。集成 `Redis` 只需要引入对应的 `pom依赖` 即可，框架所有上层 API 保持不变。
@@ -2541,9 +2372,153 @@ spring.redis.lettuce.pool.min-idle=0
 **3. 集成包版本问题** 
 Sa-Token-Redis 集成包的版本尽量与 Sa-Token-Starter 集成包的版本一致，否则可能出现兼容性问题。
 
+##### 4、多个项目共用同一个 Redis，怎么防止冲突？
 
+如无特殊需求，建议多个项目不要共用同一个 Redis。如果非要共用，可用以下方式隔离数据：
 
-##### 4、扩展：集成 MongoDB 
+**方式 1：使用不同的 db 索引**
+
+Redis 默认提供 16 个 database，每个项目配置不同的 `spring.redis.database`（SpringBoot3 为 `spring.data.redis.database`）即可。
+
+**方式 2：配置不同的 `sa-token.token-name`**
+
+此配置项默认为 `satoken`，会作为框架在 Redis 中存储数据时的统一前缀，例如：
+
+``` yaml
+sa-token: 
+    token-name: my-app-a
+```
+
+> [!NOTE| label:注意 ]
+> `token-name` 同时也会作为前端提交 Token 时的参数名 / Header 名。若只想隔离 Redis 键、又不想改前端传参方式，请看方式 4。
+
+**方式 3：使用 Alone 独立 Redis / Redisson 插件**
+
+让权限缓存与业务缓存分离，或让不同项目连接不同的 Redis 实例：
+- RedisTemplate：[Alone 独立 Redis 插件](/plugin/alone-redis)
+- Redisson：[Alone 独立 Redisson 插件](/plugin/alone-redisson)
+
+**方式 4：重写 `wrapKey` 自定义键前缀（保底方案）**
+
+`sa-token-redis-template`（及 `sa-token-redis-template-jdk-serializer`）提供了 `wrapKey` 钩子，默认原样返回 key。需要给所有 Redis 键加项目前缀时，可注册自定义 Dao 并重写该方法：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao() {
+		return new SaTokenDaoForRedisTemplate() {
+			@Override
+			public String wrapKey(String key) {
+				return "my-app:" + key;
+			}
+		};
+	}
+}
+```
+
+重写后，框架读写的键会变成类似：`my-app:satoken:login:token:xxxx`。
+
+##### 5、集成 Redisson
+
+如果你的项目用的是 Redisson，而不是上文的 RedisTemplate，可以改用本节方案。这是与第 1 节 **并列的可选项**，不是必须步骤。已经按 RedisTemplate 集成的，不必再引入 Redisson；也不要两套 Dao 同时引入。
+
+集成 Redisson 有两种方式，**二选一**即可。
+
+###### 5.1、方式一：引入 `sa-token-redisson`
+
+通用插件，Spring Boot、Solon、JFinal 等都可用。需要项目里已有 `RedissonClient`，并自己注册 `SaTokenDao`。
+
+``` xml
+<!-- Sa-Token 整合 Redisson -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-redisson</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+
+``` gradle
+implementation 'cn.dev33:sa-token-redisson:1.46.0'
+```
+
+然后注册 Dao（`RedissonClient` 由你现有的 Redisson 配置提供）：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	public SaTokenDao saTokenDao(RedissonClient redissonClient) {
+		return new SaTokenDaoForRedisson(redissonClient);
+	}
+}
+```
+
+###### 5.2、方式二：引入 `sa-token-redisson-spring-boot-starter`
+
+Spring Boot 专用自动配置包，内部已包含 `sa-token-redisson` 和官方 `redisson-spring-boot-starter`。引入后会自动注册 `SaTokenDao`，不用手写 Java。
+
+``` xml
+<!-- Sa-Token 整合 Redisson（Spring Boot 自动配置） -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-redisson-spring-boot-starter</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+
+``` gradle
+implementation 'cn.dev33:sa-token-redisson-spring-boot-starter:1.46.0'
+```
+
+配置 Redis 连接即可（与官方 Redisson starter 相同）。Spring Boot 3.x 请将前缀 `spring.redis` 改为 `spring.data.redis`：
+
+``` yaml
+spring:
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        database: 1
+        # password:
+```
+
+``` properties
+spring.redis.host=127.0.0.1
+spring.redis.port=6379
+spring.redis.database=1
+# spring.redis.password=
+```
+
+示例：[sa-token-demo-springboot-redisson](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-springboot-redisson)
+
+若需要权限缓存与业务缓存分离，请改用 [Alone 独立 Redisson 插件](/plugin/alone-redisson)。
+
+###### 5.3、升级注意
+
+`SaTokenDaoForRedisson` 按 String 读写，默认使用 `StringCodec`，与业务 `RedissonClient` 的全局 codec（未配置时为 `Kryo5Codec`）隔离。
+
+Sa-Token 旧版本下（version<=v1.45.0） `getBucket(key)` 跟随 `RedissonClient` 全局 `codec` （一般默认是 `Kryo5Codec`）。升级 `sa-token-redisson` 或 `sa-token-redisson-spring-boot-starter` 后改为默认为 `StringCodec`，旧缓存将无法反序列化，登录态会失效。处理方式二选一：
+
+1. **清空旧缓存**（推荐）：删除 Redis 中 Sa-Token 相关 key（默认前缀为配置项 `sa-token.token-name`，一般为 `satoken:`），让用户重新登录。
+2. **保持旧 codec**：重写 `SaTokenDao` 的注册方式，在构造时显式传入升级前的 `codec`。未自定义过 Redisson codec 时，传入 `new Kryo5Codec()`。例如：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao(RedissonClient redissonClient) {
+		return new SaTokenDaoForRedisson(redissonClient, new Kryo5Codec());
+	}
+}
+```
+
+若你曾在 Redisson 配置里指定过其它 codec（如 `JsonJacksonCodec`），请传入当时使用的那个，而不是 `Kryo5Codec`。
+
+`setAndKeepTTL` 要求 Redis 6.0+。若 Redis 服务低于 6.0，会报 `ERR syntax error`，请参考：[Q：Redis 6.0 以下版本集成报错](/more/common-questions?id=q：redis-60-以下版本集成报错：err-syntax-error)
+
+##### 6、扩展：集成 MongoDB  
 
 - [集成 MongoDB 参考一](/up/integ-spring-mongod-1)
 - [集成 MongoDB 参考二](/up/integ-spring-mongod-2)
@@ -2569,8 +2544,6 @@ Sa-Token-Redis 集成包的版本尽量与 Sa-Token-Starter 集成包的版本�
 - 不能后端控制写入了，就前端自己写入。（难点在**后端如何将 Token 传递到前端**）
 - 每次请求不能自动提交了，那就手动提交。（难点在**前端如何将 Token 传递到后端**，同时**后端将其读取出来**）
 
-
-
 ##### 1、后端将 token 返回到前端
 
 1. 首先调用 `StpUtil.login(id)` 进行登录。
@@ -2592,7 +2565,6 @@ public SaResult doLogin() {
 }
 ```
 
-
 ##### 2、前端将 token 提交到后端
 1. 无论是app还是小程序，其传递方式都大同小异。
 2. 那就是，将 token 塞到请求`header`里 ，格式为：`{tokenName: tokenValue}`。
@@ -2609,7 +2581,7 @@ uni.request({
 	url: 'https://www.example.com/request', // 仅为示例，并非真实接口地址。
 	header: {
 		"content-type": "application/x-www-form-urlencoded",
-		"satoken": uni.getStorageSync('tokenValue')		// 关键代码, 注意参数名字是 satoken 
+		"satoken": uni.getStorageSync('tokenValue')		// ⚠️ 关键代码, 注意参数名字是 satoken 
 	},
 	success: (res) => {
 		console.log(res.data);	
@@ -2648,7 +2620,6 @@ uni.request({
 5. 你可能会有疑问，难道我每个`ajax`都要写这么一坨？岂不是麻烦死了？
 	- 你当然不能每个 ajax 都写这么一坨，因为这种重复性代码都是要封装在一个函数里统一调用的。
 
-
 ##### 其它解决方案？
 如果你对 Cookie 非常了解，那你就会明白，所谓 Cookie ，本质上就是一个特殊的`header`参数而已，
 而既然它只是一个 header 参数，我们就能手动模拟实现它，从而完成鉴权操作。
@@ -2656,7 +2627,6 @@ uni.request({
 这其实是对`无Cookie模式`的另一种解决方案，有兴趣的同学可以百度了解一下，在此暂不赘述。
 
 ---
-
 
 	本章代码示例：Sa-Token 前后端分离样例 —— [ NotCookieController.java ]
 
@@ -2667,7 +2637,6 @@ uni.request({
 本篇介绍token生成的各种风格，以及自定义token生成策略。
 
 --- 
-
 
 #### 内置风格
 
@@ -2696,13 +2665,11 @@ Sa-Token 默认的 token 生成策略是 uuid 风格，其模样类似于：`623
 "gr_SwoIN0MC1ewxHX_vfCW3BothWDZMMtx__"
 ```
 
-
 #### 自定义 Token 生成策略
 
 如果你觉着以上风格都不是你喜欢的类型，那么你还可以**自定义token生成策略**，来定制化token生成风格。 
 
 怎么做呢？只需要重写 `SaStrategy` 策略类的 `createToken` 算法即可：
-
 
 ###### 参考步骤如下：
 1、在`SaTokenConfigure`配置类中添加代码：
@@ -2748,8 +2715,6 @@ gfuPSwZsnUhwgz08GTCH4wOgasWtc3odP4HLwXJ7NDGOximTvT4OlW19zeLH
 
 为此，我们需要在yml中添加如下配置：
 
-
-
 ``` yaml
 sa-token: 
 	# 指定 token 提交时的前缀
@@ -2761,20 +2726,15 @@ sa-token:
 sa-token.token-prefix=Bearer
 ```
 
-
-
 此时 Sa-Token 便可在读取 Token 时裁剪掉 `Bearer`，成功获取`xxxx-xxxx-xxxx-xxxx`。
 
 注：**Token前缀  与 Token值 之间必须有一个空格**
-
 
 ##### Cookie 模式自动填充前缀
 
 由于`Cookie`中无法存储空格字符，所以配置 Token 前缀后，Cookie 模式将会失效，无法成功提交带有前缀的 token。
 
 如果需要在这种场景下仍然使用 Cookie 模式验证 token，可以使用 `cookieAutoFillPrefix` 配置项打开 Cookie 模式自动填充前缀：
-
-
 
 ``` yaml
 sa-token: 
@@ -2794,7 +2754,6 @@ sa-token.cookie-auto-fill-prefix=true
 如果你经常使用腾讯QQ，就会发现它的登录有如下特点：它可以手机电脑同时在线，但是不能在两个手机上同时登录一个账号。 
 同端互斥登录，指的就是：像腾讯QQ一样，在同一类型设备上只允许单地点登录，在不同类型设备上允许同时在线。
 
-
 加载动态演示图
 
 --- 
@@ -2804,14 +2763,12 @@ sa-token.cookie-auto-fill-prefix=true
 在 Sa-Token 中如何做到同端互斥登录? 
 首先在配置文件中，将 `isConcurrent` 配置为false，然后调用登录等相关接口时声明设备类型即可：
 
-
 ###### 指定设备类型登录
 ``` java
 // 指定`账号id`和`设备类型`进行登录
 StpUtil.login(10001, "PC");	
 ```
 调用此方法登录后，同设备的会被顶下线（不同设备不受影响），再次访问系统时会抛出 `NotLoginException` 异常，场景值=`-4`
-
 
 ###### 指定设备类型强制注销
 ``` java
@@ -2820,13 +2777,11 @@ StpUtil.logout(10001, "PC");
 ```
 如果第二个参数填写null或不填，代表将这个账号id所有在线端强制注销，被踢出者再次访问系统时会抛出 `NotLoginException` 异常，场景值=`-2`
 
-
 ###### 查询当前登录的设备类型
 ``` java
 // 返回当前token的登录设备类型
 StpUtil.getLoginDevice();	
 ```
-
 
 ###### Id 反查 Token
 ``` java
@@ -2834,9 +2789,7 @@ StpUtil.getLoginDevice();
 StpUtil.getTokenValueByLoginId(10001, "APP");	
 ```
 
-
 --- 
-
 
 	本章代码示例：Sa-Token 同端互斥登录  —— [ MutexLoginController.java ]
 
@@ -2852,7 +2805,6 @@ StpUtil.getTokenValueByLoginId(10001, "APP");
 
 那么在Sa-Token中，如何做到 [ 记住我 ] 功能呢？
 
-
 ##### 在 Sa-Token 中实现记住我功能
 
 Sa-Token的登录授权，**默认就是`[记住我]`模式**，为了实现`[非记住我]`模式，你需要在登录时如下设置：
@@ -2864,7 +2816,6 @@ StpUtil.login(10001, false);
 
 那么，Sa-Token实现`[记住我]`的具体原理是？
 
-
 ##### 实现原理
 Cookie作为浏览器提供的默认会话跟踪机制，其生命周期有两种形式，分别是：
 - 临时Cookie：有效期为本次会话，只要关闭浏览器窗口，Cookie就会消失。
@@ -2874,9 +2825,7 @@ Cookie作为浏览器提供的默认会话跟踪机制，其生命周期有两�
 - 勾选 [记住我] 按钮时：调用`StpUtil.login(10001, true)`，在浏览器写入一个`持久Cookie`储存 Token，此时用户即使重启浏览器 Token 依然有效。
 - 不勾选 [记住我] 按钮时：调用`StpUtil.login(10001, false)`，在浏览器写入一个`临时Cookie`储存 Token，此时用户在重启浏览器后 Token 便会消失，导致会话失效。
 
-
 加载动态演示图
-
 
 ##### 前后端分离模式下如何实现[记住我]?
 
@@ -2905,8 +2854,6 @@ sessionStorage.setItem("satoken", "xxxx-xxxx-xxxx-xxxx-xxx");
 
 Remember me, it's too easy!
 
-
-
 ##### 登录时指定 Token 有效期
 登录时不仅可以指定是否为`[记住我]`模式，还可以指定一个特定的时间作为 Token 有效时长，如下示例：
 ``` java
@@ -2925,11 +2872,7 @@ StpUtil.login(10001, new SaLoginParameter()
 			);
 ```
 
-
-
-
 --- 
-
 
 	本章代码示例：Sa-Token 记住我登录 —— [ RememberMeController.java ]
 
@@ -2970,7 +2913,7 @@ StpUtil.login(10001, new SaLoginParameter()
 		.setOverflowLogoutMode(SaLogoutMode.LOGOUT)         // 溢出 maxLoginCount 的客户端，将以何种方式注销下线: LOGOUT=注销下线, KICKOUT=踢人下线, REPLACED=顶人下线
 		.setRightNowCreateTokenSession(true)                // 是否立即创建对应的 Token-Session （true=在登录时立即创建，false=在第一次调用 getTokenSession() 时创建）
 		.setupCookieConfig(cookie->{     // 设置 Cookie 配置项 
-			cookie.setDomain("sa-token.cc");  // 设置：作用域
+			cookie.setDomain("sa-token.com");  // 设置：作用域
 			cookie.setPath("/shop");          // 设置：路径 （一般只有当你在一个域名下部署多个项目时才会用到此值。）
 			cookie.setSecure(true);           // 设置：是否只在 https 协议下有效
 			cookie.setHttpOnly(true);         // 设置：是否禁止 js 操作 Cookie 
@@ -2981,8 +2924,6 @@ StpUtil.login(10001, new SaLoginParameter()
 ```
 
 以上大部分参数在未指定时将使用全局配置作为默认值。
-
-
 
 ##### 2、注销参数
 
@@ -3014,7 +2955,6 @@ StpUtil.logout(10001, new SaLogoutParameter()
 ```
 
 以上大部分参数在未指定时将使用全局配置作为默认值。
-
 
 ##### 3、遍历登录终端详细操作
 
@@ -3052,7 +2992,6 @@ public SaResult logout() {
 
 这就是我们本篇要讲的 —— 二级认证，即：在已登录会话的基础上，进行再次验证，提高会话的安全性。
 
-
 --- 
 
 ##### 具体API
@@ -3075,7 +3014,6 @@ StpUtil.getSafeTime();
 // 在当前会话 结束二级认证
 StpUtil.closeSafe(); 
 ```
-
 
 ##### 一个小示例
 
@@ -3120,7 +3058,6 @@ public SaResult openSafe(String password) {
 > 5. 前端在 120 秒内再次调用 `deleteProject` 接口，尝试删除仓库。
 > 6. 后端校验会话已完成二级认证，返回：`仓库删除成功`。
 
-
 ##### 指定业务标识进行二级认证
 
 如果项目有多条业务线都需要敏感操作验证，则 `StpUtil.openSafe()` 无法提供细粒度的认证操作，
@@ -3155,8 +3092,6 @@ StpUtil.isSafe("shop");  // 返回 false
 StpUtil.checkSafe("shop"); 
 ```
 
-
-
 ##### 使用注解进行二级认证
 在一个方法上使用 `@SaCheckSafe` 注解，可以在代码进入此方法之前进行一次二级认证校验
 ``` java
@@ -3177,10 +3112,7 @@ public String add2() {
 
 详细使用方法可参考：[注解鉴权](/use/at-check)，此处不再赘述
 
-
-
 ---
-
 
 	本章代码示例：Sa-Token 二级认证 —— [ SafeAuthController.java ]
 
@@ -3190,12 +3122,10 @@ public String add2() {
 
 --- 
 
-
 以上介绍的 API 都是操作当前账号，对当前账号进行各种鉴权操作，你可能会问，我能不能对别的账号进行一些操作？
 比如：查看账号 10001 有无某个权限码、获取 账号 id=10002 的 `Account-Session`，等等...
 
 Sa-Token 在 API 设计时充分考虑了这一点，暴露出多个api进行此类操作：
-
 
 #### 有关操作其它账号的api
 
@@ -3218,8 +3148,6 @@ StpUtil.hasRole(10001, "super-admin");
 // 获取账号10001是否含有指定权限码
 StpUtil.hasPermission(10001, "user:add");
 ```
-
-
 
 #### 临时身份切换
 
@@ -3245,10 +3173,7 @@ StpUtil.switchTo(10044, () -> {
 System.out.println("------- [身份临时切换]调用结束...");
 ```
 
-
-
 --- 
-
 
 	本章代码示例：Sa-Token 身份切换 —— [ SwitchToController.java ]
 
@@ -3274,7 +3199,6 @@ StpUtil.disable(10001, 86400);
 参数含义：
 - 参数1：要封禁的账号id。
 - 参数2：封禁时间，单位：秒，此为 86400秒 = 1天（此值为 -1 时，代表永久封禁）。
-
 
 注意点：对于正在登录的账号，将其封禁并不会使它立即掉线，如果我们需要它即刻下线，可采用先踢再封禁的策略，例如：
 ``` java
@@ -3313,7 +3237,6 @@ StpUtil.getDisableTime(10001);
 // 解除封禁
 StpUtil.untieDisable(10001); 
 ```
-
 
 ##### 2、分类封禁
 
@@ -3384,7 +3307,6 @@ StpUtil.getDisableTime(10001, "<业务标识>");
 StpUtil.untieDisable(10001, "<业务标识>"); 
 ```
 
-
 ##### 3、阶梯封禁
 
 对于多次违规的用户，我们常常采取阶梯处罚的策略，这种 “阶梯” 一般有两种形式：
@@ -3439,8 +3361,6 @@ StpUtil.isDisableLevel(10001, "comment", 3);
 StpUtil.checkDisableLevel(10001, "comment", 2);
 ```
 
-
-
 ##### 4、使用注解完成封禁校验
 首先我们需要注册 Sa-Token 全局拦截器（可参考 [注解鉴权](/use/at-check) 章节），然后我们就可以使用以下注解校验账号是否封禁
 
@@ -3486,7 +3406,6 @@ public SaResult send() {
 }
 ```
 
-
 ##### 5、封禁信息持久化
 
 Sa-Token 默认将封禁信息储存在缓存中，缓存中的数据是“临时性的”、“易丢失的”，而在大多数系统的设计中，需要将封禁数据持久化到数据库中。
@@ -3518,9 +3437,10 @@ public class StpInterfaceImpl implements StpInterface {
 	 *
 	 * @param loginId  账号id
 	 * @param service 业务标识符
+	 * @param loginType 账号类型
 	 * @return 描述该账号是否封禁的包装信息对象
 	 */
-	public SaDisableWrapperInfo isDisabled(Object loginId, String service) {
+	public SaDisableWrapperInfo isDisabled(Object loginId, String service, String loginType) {
 		// 查库操作 ...  (此处仅做示例代码)
 		return SaDisableWrapperInfo.createDisabled(86400, 1);
 	}
@@ -3531,29 +3451,27 @@ public class StpInterfaceImpl implements StpInterface {
 该方法返回一个 `SaDisableWrapperInfo` 实例对象，用来描述指定账号是否已被封禁，一般有以下几种写法：
 ``` java
 // 标准写法：new 对象返回，参数为：是否被封禁、封禁时间(秒)、封禁等级
-public SaDisableWrapperInfo isDisabled(Object loginId, String service) {
+public SaDisableWrapperInfo isDisabled(Object loginId, String service, String loginType) {
 	return new SaDisableWrapperInfo(true, 86400, 1);
 }
 
 // 快捷写法：被封禁，解封倒计时86400秒，封禁等级1
-public SaDisableWrapperInfo isDisabled(Object loginId, String service) {
+public SaDisableWrapperInfo isDisabled(Object loginId, String service, String loginType) {
 	return SaDisableWrapperInfo.createDisabled(86400, 1);
 }
 
 // 快捷写法：未被封禁 
-public SaDisableWrapperInfo isDisabled(Object loginId, String service) {
+public SaDisableWrapperInfo isDisabled(Object loginId, String service, String loginType) {
 	return SaDisableWrapperInfo.createNotDisabled();
 }
 
 // 快捷写法：未被封禁，且将查询结果保存到缓存中，ttl为86400，改时间内不再重复进入 isDisabled 方法 
-public SaDisableWrapperInfo isDisabled(Object loginId, String service) {
+public SaDisableWrapperInfo isDisabled(Object loginId, String service, String loginType) {
 	return SaDisableWrapperInfo.createNotDisabled(86400);
 }
 ```
 
-
 --- 
-
 
 	本章代码示例：Sa-Token 账号禁用  —— [ DisableController.java ]
 
@@ -3563,8 +3481,6 @@ public SaDisableWrapperInfo isDisabled(Object loginId, String service) {
 
 严格来讲，密码加密不属于 [权限认证] 的范畴，但是对于大多数系统来讲，密码加密又是安全认证不可或缺的部分，
 所以，应大家要求，`Sa-Token`在 v1.14 版本添加密码加密模块，该模块非常简单，仅仅封装了一些常见的加密算法。
-
-
 
 ##### 摘要加密
 md5、sha1、sha256
@@ -3578,7 +3494,6 @@ SaSecureUtil.sha1("123456");
 // sha256加密 
 SaSecureUtil.sha256("123456");
 ```
-
 
 ##### 对称加密
 AES加密
@@ -3611,7 +3526,6 @@ System.out.println("AES解密后：" + text2);
     }
 ```
 
-
 ##### 非对称加密
 ~~RSA加密(已过时)~~
 ``` java
@@ -3637,7 +3551,6 @@ System.out.println("私钥解密后：" + text2);
 System.out.println(SaSecureUtil.rsaGenerateKeyPair());
 ```
 
-
 ##### Base64编码与解码
 ``` java
 // 文本
@@ -3652,7 +3565,6 @@ String text2 = SaBase64Util.decode(base64Text);
 System.out.println("Base64解码后：" + text2); 
 ```
 
-
 ##### Base32编码与解码
 ``` java
 // 文本
@@ -3666,7 +3578,6 @@ System.out.println("Base32编码后：" + base32Text);
 String text2 = SaBase32Util.decode(base32Text);
 System.out.println("Base32解码后：" + text2); 
 ```
-
 
 ##### TOTP 验证器
 
@@ -3690,7 +3601,6 @@ System.out.println("验证结果: " + isValid);
 
 在线 TOTP 管理器推荐： [TOTP 密码生成管理 - 工具哇](https://toolwa.com/totp/)
 
-
 ##### BCrypt加密
 由它加密的文件可在所有支持的操作系统和处理器上进行转移
 
@@ -3709,14 +3619,9 @@ String strong_salt = BCrypt.gensalt(10);
 String stronger_salt = BCrypt.gensalt(12); 
 ```
 
-
-
-
 如需更多加密算法，可参考 [Hutool-crypto: 加密](https://hutool.cn/docs/#/crypto/%E6%A6%82%E8%BF%B0)
 
-
 --- 
-
 
 	本章代码示例：Sa-Token 密码加密 —— [ SecureController.java ]
 
@@ -3765,8 +3670,6 @@ terminal.getExtra("key");  // 此次登录的额外自定义参数
 StpUtil.login(10001, new SaLoginParameter().setTerminalExtra("key", "value"));
 ```
 
-
-
 ##### 2、全部会话检索 
 
 ``` java
@@ -3779,7 +3682,6 @@ StpUtil.searchSessionId(String keyword, int start, int size, boolean sortType);
 // 查询所有 Token-Session 会话
 StpUtil.searchTokenSessionId(String keyword, int start, int size, boolean sortType);
 ```
-
 
 ###### 参数详解：
 - `keyword`: 查询关键字，只有包括这个字符串的 token 值才会被查询出来。
@@ -3831,10 +3733,6 @@ for (String sessionId : sessionIdList) {
 }
 ```
 
-
-
-
-
 ###### 注意事项：
 由于会话查询底层采用了遍历方式获取数据，当数据量过大时此操作将会比较耗时，有多耗时呢？这里提供一份参考数据：
 - 单机模式下：百万会话取出10条 Token 平均耗时 `0.255s`。
@@ -3842,13 +3740,10 @@ for (String sessionId : sessionIdList) {
 
 请根据业务实际水平合理调用API。
 
-
 > [!WARNING| label:注意] 
 > 基于活跃 Token 的统计方式会比实际情况略有延迟，如果需要精确统计实时在线用户信息需要采用 WebSocket。
 
-
 --- 
-
 
 	本章代码示例：Sa-Token 会话查询  —— [ SearchSessionController.java ]
 
@@ -3890,13 +3785,7 @@ public class GlobalExceptionHandler {
 
 然后我们访问这个接口时，浏览器会强制弹出一个表单：
 
-
-
-
 当我们输入账号密码后 `（sa / 123456）`，才可以继续访问数据：
-
-
-
 
 ##### 2、其它启用方式 
 ``` java
@@ -3929,7 +3818,6 @@ public SaServletFilter getSaServletFilter() {
 ``` url
 http://sa:123456@127.0.0.1:8081/test/test3
 ```
-
 
 ##### 4、Http Digest 认证 
 
@@ -3964,10 +3852,7 @@ SaHttpDigestUtil.check();
 http://sa:123456@127.0.0.1:8081/test/testDigest
 ```
 
-
-
 --- 
-
 
 	本章代码示例：Sa-Token Http Basic 认证 —— [ HttpBasicController.java ]
 
@@ -3983,15 +3868,12 @@ Sa-Token 提供一种侦听器机制，通过注册侦听器，你可以订阅�
 
 事件触发流程大致如下：
 
-
-
 框架默认内置了侦听器 `SaTokenListenerForLog` 实现：[代码参考](https://gitee.com/dromara/sa-token/blob/master/sa-token-core/src/main/java/cn/dev33/satoken/listener/SaTokenListenerForLog.java)
 ，功能是控制台 log 打印输出，你可以通过配置`sa-token.is-log=true`开启。
 
 要注册自定义的侦听器也非常简单：
 1. 新建类实现 `SaTokenListener` 接口。
 2. 将实现类注册到 `SaTokenEventCenter` 事件发布中心。
-
 
 ##### 2、自定义侦听器实现
 
@@ -4016,6 +3898,24 @@ public class MySaTokenListener implements SaTokenListener {
 	@Override
 	public void doLogout(String loginType, Object loginId, String tokenValue) {
 		System.out.println("---------- 自定义侦听器实现 doLogout");
+	}
+
+	/** 每次注销前触发 */
+	@Override
+	public void doBeforeLogout(String loginType, Object loginId, String tokenValue, SaLogoutParameter logoutParameter) {
+		System.out.println("---------- 自定义侦听器实现 doBeforeLogout");
+	}
+
+	/** 每次被踢下线前触发 */
+	@Override
+	public void doBeforeKickout(String loginType, Object loginId, String tokenValue, SaLogoutParameter logoutParameter) {
+		System.out.println("---------- 自定义侦听器实现 doBeforeKickout");
+	}
+
+	/** 每次被顶下线前触发 */
+	@Override
+	public void doBeforeReplaced(String loginType, Object loginId, String tokenValue, SaLogoutParameter logoutParameter) {
+		System.out.println("---------- 自定义侦听器实现 doBeforeReplaced");
 	}
 
 	/** 每次被踢下线时触发 */
@@ -4138,9 +4038,6 @@ public SaResult login() {
 
 启动项目，访问登录接口，观察控制台输出：
 
-
-
-
 ##### 3、其它注意点
 
 ###### 3.1、你可以通过继承 `SaTokenListenerForSimple` 快速实现一个侦听器：
@@ -4191,9 +4088,22 @@ SaTokenEventCenter.registerListener(new SaTokenListenerForSimple() {
 ###### 3.4、疑问：一个项目可以注册多个侦听器吗？
 可以，多个侦听器间彼此独立，互不影响，按照注册顺序依次接受到事件通知。
 
+###### 3.5、注销前钩子：doBeforeLogout / doBeforeKickout / doBeforeReplaced
+
+在 `doLogout`、`doKickout`、`doReplaced` 触发**之前**，框架会先触发对应的 `doBefore*` 钩子。此时 Token-Session、Token 映射、Account-Session 上的设备信息尚未清理，适合做授权日志、审计等需要在注销前读取会话信息的场景。
+
+``` java
+@Override
+public void doBeforeLogout(String loginType, Object loginId, String tokenValue, SaLogoutParameter logoutParameter) {
+	SaSession session = SaManager.getStpLogic(loginType).getSessionByLoginId(loginId, false);
+	SaTerminalInfo terminal = session == null ? null : session.getTerminal(tokenValue);
+	// 记录注销日志 ...
+}
+```
+
+注意：请勿依赖 `StpUtil` 读取当前请求上下文，应使用钩子参数及 `loginId`、`tokenValue` 主动查询会话数据。
 
 ---
-
 
 	本章代码示例：Sa-Token 自定义侦听器  —— [ MySaTokenListener.java ]
 
@@ -4218,7 +4128,6 @@ SaTokenEventCenter.registerListener(new SaTokenListenerForSimple() {
 3. 在Spring中，过滤器中抛出的异常无法进入全局`@ExceptionHandler`，我们必须额外编写代码进行异常处理。
 
 Sa-Token同时提供过滤器和拦截器机制，不是为了让谁替代谁，而是为了让大家根据自己的实际业务合理选择，拥有更多的发挥空间。
-
 
 ##### 在 SpringBoot 中注册过滤器
 同拦截器一样，为了避免不必要的性能浪费，Sa-Token全局过滤器默认处于关闭状态，若要使用过滤器组件，首先你需要注册它到项目中：
@@ -4291,7 +4200,6 @@ public class SaTokenConfigure {
 ```
 JSON 工具类可参考：[Hutool-Json](https://hutool.cn/docs/#/json/JSONUtil)
 
-
 ##### 自定义过滤器执行顺序
 
 SaServletFilter 默认执行顺序为 `-100`，如果你要自定义过滤器的执行顺序，可以使用 `FilterRegistrationBean` 注册，参考：
@@ -4318,7 +4226,6 @@ public FilterRegistrationBean<SaServletFilter> getSaServletFilter() {
 
 在 SpringBoot 中， Order 值越小，执行时机越靠前。
 
-
 ##### 在 WebFlux 中注册过滤器
 `Spring WebFlux`中不提供拦截器机制，因此若你的项目需要路由鉴权功能，过滤器是你唯一的选择，在`Spring WebFlux`注册过滤器的流程与上述流程几乎完全一致，
 除了您需要将过滤器名称由`SaServletFilter`更换为`SaReactorFilter`以外，其它所有步骤均可参考以上示例。
@@ -4344,7 +4251,6 @@ public class SaTokenConfigure {
 		
 ---
 
-
 	本章代码示例：Sa-Token 全局过滤器 —— [ SaTokenConfigure.java ]
 
 ---
@@ -4361,7 +4267,6 @@ public class SaTokenConfigure {
 
 要解决这个问题，我们必须有一个合理的机制将这两套账号的授权给区分开，让它们互不干扰才行。
 
-
 ##### 2、演进思路
 假如说我们的 user表 和 admin表 都有一个 id=10001 的账号，它们对应的登录代码：`StpUtil.login(10001)` 是一样的，
 那么问题来了：在`StpUtil.getLoginId()`获取到的账号id如何区分它是User用户，还是Admin用户？
@@ -4370,7 +4275,6 @@ public class SaTokenConfigure {
 但是同样的：你需要在`StpUtil.getLoginId()`时再裁剪掉相应的前缀才能获取真正的账号id，这样一增一减就让我们的代码变得无比啰嗦。
 
 那么，有没有从框架层面支持的，更优雅的解决方案呢？
-
 
 ##### 3、解决方案
 
@@ -4381,7 +4285,6 @@ public class SaTokenConfigure {
 这样做有两个好处: 
 - StpLogic 类的所有函数都可以被重写，按需扩展。
 - 在构造方法时随意传入一个不同的 `loginType`，就可以再造一套账号登录体系。
-
 
 ##### 4、操作示例
 
@@ -4415,7 +4318,6 @@ StpUserUtil.getSession();    // 获取当前 User 账号的 Access-Session 对�
 StpUserUtil.checkPermission('xx');    // 校验当前登录的 user 账号是否具有 xx 权限 
 // ...
 ```
-
 
 ##### 5、Kit模式 
 如果你觉得 “复制代码” 的方式繁琐不够优雅，这里还有另一种方案：建立一个 `StpKit.java` 门面类，声明所有的 `StpLogic` 引用：
@@ -4466,7 +4368,6 @@ StpKit.USER.checkSafe();
 StpKit.USER.getSession().set("name", "zhang");
 ```
 
-
 ##### 6、在多账户模式下使用注解鉴权
 框架默认的注解鉴权 如`@SaCheckLogin` 只针对原生`StpUtil`进行鉴权。
 
@@ -4485,7 +4386,6 @@ public String info() {
 ```
 
 注：`@SaCheckRole("xxx")`、`@SaCheckPermission("xxx")`同理，亦可根据type属性指定其校验的账号体系，此属性默认为`""`，代表使用原生`StpUtil`账号体系。
-
 
 ##### 7、使用注解合并简化代码
 交流群里有同学反应，虽然可以根据 `@SaCheckLogin(type = "user")` 指定账号类型，但几十上百个注解都加上这个的话，还是有些繁琐，代码也不够优雅，有么有更简单的解决方案？
@@ -4542,8 +4442,6 @@ public String info() {
 > [!TIP| label:自定义注解方案] 
 > 除了注解合并方案，这里还有一份自定义注解方案，参考：[自定义注解](/fun/custom-annotations)
 
-
-
 ##### 8、同端多登陆 
 假设我们不仅需要在后台同时集成两套账号，我们还需要在一个客户端同时登陆两套账号（业务场景举例：一个APP中可以同时登陆商家账号和用户账号）。
 
@@ -4572,7 +4470,6 @@ public class StpUserUtil {
 ```
 
 再次调用 `StpUserUtil.login(10001)` 进行登录授权时，token的名称将不再是 `satoken`，而是我们重写后的 `satoken-user`，这样就不会再客户端发生 token 的相互覆盖了。
-
 
 ##### 9、不同体系不同 SaTokenConfig 配置
 如果自定义的 StpUserUtil 需要使用不同 SaTokenConfig 对象, 也很简单，参考示例如下：
@@ -4603,7 +4500,6 @@ public class SaTokenConfigure {
 }
 
 ```
-
 
 ##### 10、多账号体系混合鉴权
 QQ群中经常有小伙伴提问：在多账号体系下，怎么在 SaInterceptor 拦截器中给一个接口登录鉴权？
@@ -4639,7 +4535,6 @@ public void addInterceptors(InterceptorRegistry registry) {
 }
 ```
 
-
 ##### 11、在一个接口里获取是哪个体系的账号正在登录
 
 可以分别用两个体系的 isLogin() 方法去判断，哪个返回 true 就代表正在登录哪个体系
@@ -4667,7 +4562,6 @@ public SaResult test2() {
 - 两个 if 均返回 false：代表客户端在两个账号体系都没有登录。
 - 两个 if 均返回 true：代表客户端在两个账号体系都登录了。
 
-
 ##### 12、注意点：运行时不可更改 LoginType
 在 Q群 解决问题时，发现有些同学会写出类似下列形式的代码：
 
@@ -4679,14 +4573,7 @@ StpUtil.getSession().set("name", "zhangsan");
 
 这是一种错误写法：LoginType 不可在运行时更改，只能在项目启动时指定。一旦项目启动成功后再修改 LoginType ，就会造成线程安全问题和严重的逻辑问题。
 
-
-
-
-
-
-
 ---
-
 
 	本章代码示例：Sa-Token 多账号体系认证 —— [ StpUserUtil.java ]
 
@@ -4697,7 +4584,6 @@ StpUtil.getSession().set("name", "zhangsan");
 ### sso/readme: 单点登录简述
 
 观看 SSO 模块视频讲解（B站：王清江唷）
-
 
 凡是稍微上点规模的系统，统一认证中心都是绕不过去的槛。而单点登录——便是我们搭建统一认证中心的关键。
 
@@ -4712,7 +4598,6 @@ StpUtil.getSession().set("name", "zhangsan");
 
 简而言之，单点登录可以做到： **`在多个互相信任的系统中，用户只需登录一次，就可以访问所有系统。`**
 
-
 ##### 架构选型
 Sa-Token-SSO 由简入难划分为三种模式，解决不同架构下的 SSO 接入问题：
 
@@ -4722,13 +4607,13 @@ Sa-Token-SSO 由简入难划分为三种模式，解决不同架构下的 SSO �
 | 前端不同域 + 后端同 Redis	| 模式二		| URL重定向传播会话 		| [文档](/sso/sso-type2)、[示例](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso2-client)	|
 | 前端不同域 + 后端不同 Redis	| 模式三		| Http请求获取会话		| [文档](/sso/sso-type3)、[示例](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client)	|
 
+集成示例还可下载全套 Demo 压缩包：[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 1. 前端同域：就是指多个系统可以部署在同一个主域名之下，比如：`c1.domain.com`、`c2.domain.com`、`c3.domain.com`。
 2. 后端同Redis：就是指多个系统可以连接同一个Redis。PS：这里并不需要把所有项目的数据都放在同一个Redis中，Sa-Token提供了 **`[权限缓存与业务缓存分离]`** 的解决方案，详情戳： Alone独立Redis插件。
 3. 如果既无法做到前端同域，也无法做到后端同Redis，那么只能走模式三，Http请求获取会话（Sa-Token对SSO提供了完整的封装，你只需要按照示例从文档上复制几段代码便可以轻松集成）。
 
 *图: sa-token-jss*
-
 
 ##### Sa-Token-SSO 特性
 1. API 简单易用，文档介绍详细，且提供直接可用的集成示例。
@@ -4737,7 +4622,6 @@ Sa-Token-SSO 由简入难划分为三种模式，解决不同架构下的 SSO �
 4. 不丢参数：笔者曾试验多个单点登录框架，均有参数丢失的情况，比如重定向之前是：`http://a.com?id=1&name=2`，登录成功之后就变成了：`http://a.com?id=1`，Sa-Token-SSO内有专门的算法保证了参数不丢失，登录成功之后原路返回页面。
 5. 无缝集成：由于Sa-Token本身就是一个权限认证框架，因此你可以只用一个框架同时解决`权限认证` + `单点登录`问题，让你不再到处搜索：xxx单点登录与xxx权限认证如何整合……
 6. 高可定制：Sa-Token-SSO模块对代码架构侵入性极低，结合Sa-Token本身的路由拦截特性，你可以非常轻松的定制化开发。
-
 
 ##### 学习注意点
 1. sa-token-sso 虽然是个单独的插件，但其本质仍是对 Sa-Token 本身各个功能的组合使用，所以先熟练掌握 Sa-Token 可有效降低 SSO 章节的学习压力。
@@ -4753,35 +4637,33 @@ Sa-Token-SSO 由简入难划分为三种模式，解决不同架构下的 SSO �
 在开始SSO三种模式的对接之前，我们必须先搭建一个 SSO-Server 认证中心 
 
 > [!TIP| label:demo] 
-> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-server/`，如遇到难点可结合源码进行测试学习，demo里有制作好的登录页面 
+> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-server/`，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) ，demo里有制作好的登录页面 
 
 --- 
 
 ##### 1、添加依赖 
 创建 SpringBoot 项目 `sa-token-demo-sso-server`，在引入 SpringBoot 依赖的基础上，继续引入：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证，在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 插件：整合SSO -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-sso</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
         
 <!-- Sa-Token 插件：整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
 	<groupId>org.apache.commons</groupId>
@@ -4798,29 +4680,29 @@ Sa-Token-SSO 由简入难划分为三种模式，解决不同架构下的 SSO �
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-forest</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 
 // Sa-Token 插件：整合SSO
-implementation 'cn.dev33:sa-token-sso:1.45.0'
+implementation 'cn.dev33:sa-token-sso:1.46.0'
 
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 
 // 视图引擎（在前后端不分离模式下提供视图支持）
 implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 // Sa-Token 插件：整合 Forest 请求工具 (模式三需要通过 http 请求推送消息)
-implementation 'cn.dev33:sa-token-forest:1.45.0'
+implementation 'cn.dev33:sa-token-forest:1.46.0'
 ```
 
-
+> 也可选用 `sa-token-rest-template`（Spring Boot 2/3/4）或 `sa-token-rest-client`（Spring Boot 3.2+）作为 HTTP 请求处理器，详见：[HTTP 请求扩展](/plugin/http-extend)。
 
 > [!NOTE| label:引包简化] 
 > 除了 `sa-token-spring-boot-starter` 和 `sa-token-sso` 以外，其它包都是可选的：
@@ -4830,7 +4712,6 @@ implementation 'cn.dev33:sa-token-forest:1.45.0'
 > - 在不需要 SSO 模式三单点注销的情况下可以删除 http 工具包。
 > 
 > 建议先完整测试三种模式之后再对 pom 依赖进行酌情删减。
-
 
 ##### 2、开放认证接口  
 新建 `SsoServerController`，用于对外开放接口：
@@ -4889,7 +4770,6 @@ public class SsoServerController {
 
 注意：在`doLoginHandle`函数里如果要获取 name, pwd 以外的参数，可通过`SaHolder.getRequest().getParam("xxx")`来获取。
 
-
 全局异常处理：
 ``` java
 @RestControllerAdvice
@@ -4903,11 +4783,7 @@ public class GlobalExceptionHandler {
 }
 ```
 
-
 ##### 3、application.yml配置
-
-
-
 
 ``` yml
 # 端口
@@ -5014,10 +4890,7 @@ spring.redis.port=6379
 spring.redis.password=
 ```
 
-
-
 注意点：`sa-token.sso-server.clients.xxx.allow-url`为了方便测试配置为`*`，线上生产环境一定要配置为详细 URL 地址 （之后的章节我们会详细阐述此配置项）
-
 
 ##### 4、创建启动类
 ``` java 
@@ -5038,22 +4911,15 @@ public class SaSsoServerApplication {
 
 启动项目，不出意外的情况下我们将看到如下输出：
 
-
-
 访问统一授权地址（仅测试 SSO-Server 是否部署成功，暂时还不需要点击登录）：
 - [http://localhost:9000/sso/auth](http://localhost:9000/sso/auth)
-
-
 
 可以看到这个页面目前非常简陋，这是因为我们以上的代码示例，主要目标是为了带大家从零搭建一个可用的SSO认证服务端，所以就对一些不太必要的步骤做了简化。
 
 大家可以下载运行一下官方仓库里的示例`/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-server/`，里面有制作好的登录页面：
 
-
-
 默认账号密码为：`sa / 123456`，先别着急点击登录，因为我们还没有搭建对应的 Client 端项目，
 真实项目中我们一般不会直接从浏览器访问 `/sso/auth` 授权地址的，我们需要在 Client 端点击登录按钮重定向而来。
-
 
 ---
 
@@ -5080,27 +4946,15 @@ public class SaSsoServerApplication {
 如果你的 SSO-Client 端是 非java 项目，或不支持引入 sa-token-sso 框架，那么你可以使用 NoSDK 方式进行对接。
 在之后的 [SSO整合 - NoSdk 模式对接](/sso/sso-nosdk) 章节我们会详细介绍对接步骤，下面的 API 文档将给你的对接步骤做一份参考。
 
-
 #### 二、STS 协议
 
-Sa-Token SSO 模块的开放接口标准为 STS 协议。
-
-STS 协议并非一套公共授权协议，而是 sa-token-sso 框架本身内化、抽离出的一套授权协议标准。
-
-- 一般的公共协议遵循的路线是：发现需求 -> 先为解决方案定义一套协议 -> 再进行框架实现。
-- 而 Sa-Token SSO 的路线为：发现需求 -> 先进行框架实现 -> 再基于框架实现定义一套协议，将解决方案进行标准化。
-
-定义 STS 协议将有助于让 Sa-Token SSO 模块进行标准化，也为日后实现多语言 SDK 提供基础支持。
-
-目前 STS 协议规定了应用进行 单点登录、单点注销、消息推送 等动作的标准流程。
+Sa-Token SSO 模块的开放接口标准为 STS 协议。STS 协议的设计充分参考了 CAS、Spring Authorization Server、KeyClock、OAuth2 协议等经典框架/ 协议的授权流程。
+定义了应用进行 单点登录、单点注销、消息推送 等动作的标准动作。
 可解决：同域、跨域、共享Redis、跨Redis、前后端一体、前后端分离、纯 js、vue2、vue3、Sa-Token 项目、非 Sa-Token 项目、java 项目、非 java 项目 等架构下的 SSO 认证需求。
 
 下面两节将介绍 STS 协议在 SSO-Server 端和 SSO-Client 端开放的接口标准。
 
-
-
 #### 三、SSO-Server 认证中心接口 
-
 
 ##### 1、单点登录授权地址
 ``` url
@@ -5125,7 +4979,6 @@ Ticket 码具有以下特点：
 3. 一个 `ticket` 的有效期默认为五分钟，超时自动作废。
 4. 每次授权产生新 `ticket` 码，会导致旧 `ticket` 码立即作废，即使旧 `ticket` 码尚未使用。
 
-
 ##### 2、RestAPI 登录接口
 ``` url
 http://{host}:{port}/sso/doLogin
@@ -5142,7 +4995,6 @@ http://{host}:{port}/sso/doLogin
 
 另外需要注意：此接口并非只能携带 name、pwd 参数，因为你可以在方法里通过 `SaHolder.getRequest().getParam("xxx")` 来获取前端提交的其它参数。 
 
-
 ##### 3、单点注销接口
 ``` url
 http://{host}:{port}/sso/signout
@@ -5153,7 +5005,6 @@ http://{host}:{port}/sso/signout
 | 参数			| 是否必填	| 说明											|
 | :--------		| :--------	| :--------										|
 | back			| 否		| 注销成功后的重定向地址，一般填写 location.href（从哪来回哪去），也可以填写 self 字符串，含义同上			|
-
 
 ##### 4、消息推送接口
 
@@ -5207,14 +5058,6 @@ http://{host}:{port}/sso/pushS
 
 详细可参考：[消息推送机制](/sso/message-push)
 
-
-
-
-
-
-
-
-
 ---
 
 #### 四、SSO-Client 应用端开放接口 
@@ -5234,7 +5077,6 @@ http://{host}:{port}/sso/login
 此接口有两种访问方式：
 - 方式一：我们需要登录操作，所以带着 back 参数主动访问此接口，框架会拼接好参数后再次将用户重定向至认证中心。
 - 方式二：用户在认证中心登录成功后，带着 ticket 参数重定向而来，此为框架自动处理的逻辑，开发者无需关心。
-
 
 ##### 2、注销地址
 ``` url
@@ -5259,7 +5101,6 @@ http://{host}:{port}/sso/logout
 }
 ```
 
-
 ##### 3、单点注销回调接口
 此接口仅配置 `(reg-logout-call=true)` 时打开，且为框架回调，开发者无需关心
 
@@ -5278,7 +5119,6 @@ http://{host}:{port}/sso/logoutCall
 | client		| 否		| 客户端标识，如果你在登录时向 sso-server 端传递了 client 值，那么在此处 sso-server 也会给你回传过来，否则此参数无值。如果此参数有值，则此参数也要参与签名，放在 loginId 参数前面（字典顺序）		|
 | autoLogout	| 否		| 是否为“登录client超过最大数量”引起的自动注销（true=超限系统自动注销，false=用户主动发起注销）。如果此参数有值，则此参数也要参与签名，放在 client 参数前面（字典顺序）		|
 
-
 返回数据：
 
 ``` js
@@ -5288,8 +5128,6 @@ http://{host}:{port}/sso/logoutCall
     "data": null
 }
 ```
-
-
 
 ##### 4、消息推送接口
 
@@ -5354,12 +5192,9 @@ http://{host}:{port}/sso/pushC
 
 而共享Redis，并不需要我们把所有项目的数据都放在同一个Redis中，Sa-Token提供了 **[权限缓存与业务缓存分离]** 的解决方案，详情戳：[Alone独立Redis插件](/plugin/alone-redis)。
 
-
 加载动态演示图
 
-
 OK，所有理论就绪，下面开始实战：
-
 
 ##### 2、准备工作
 
@@ -5375,11 +5210,8 @@ OK，所有理论就绪，下面开始实战：
 
 [Some Name](../include/include-qa.md#hostsInvalid ':include')
 
-
 ##### 3、指定Cookie的作用域
 在`sso.stp.com`访问服务器，其Cookie也只能写入到`sso.stp.com`下，为了将Cookie写入到其父级域名`stp.com`下，我们需要更改 SSO-Server 端的 yml 配置：
-
-
 
 ``` yaml
 sa-token: 
@@ -5393,42 +5225,35 @@ sa-token:
 sa-token.cookie.domain=stp.com
 ```
 
-
 **这个配置原本是被注释掉的，现在将其打开。**另外我们格外需要注意：
 在SSO模式一测试完毕之后，一定要将这个配置再次注释掉，因为模式一与模式二三使用不同的授权流程，这行配置会影响到我们模式二和模式三的正常运行。 
 
-
-
-
 ##### 4、搭建 Client 端项目 
 
-> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso1-client/`，如遇到难点可结合源码进行测试学习。
-
+> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso1-client/`，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ###### 4.1、引入依赖
 新建项目 sa-token-demo-sso1-client，并添加以下依赖：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <!-- Sa-Token 插件：整合SSO -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-sso</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 整合 RedisTemplate  -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
 	<groupId>org.apache.commons</groupId>
@@ -5439,26 +5264,24 @@ sa-token.cookie.domain=stp.com
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-alone-redis</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 
 // Sa-Token 插件：整合SSO
-implementation 'cn.dev33:sa-token-sso:1.45.0'
+implementation 'cn.dev33:sa-token-sso:1.46.0'
 
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 
 // Sa-Token插件：权限缓存与业务缓存分离
-implementation 'cn.dev33:sa-token-alone-redis:1.45.0'
+implementation 'cn.dev33:sa-token-alone-redis:1.46.0'
 ```
-
-
 
 ###### 4.2、新建 Controller 控制器
 
@@ -5496,8 +5319,6 @@ public class SsoClientController {
 ```
 
 ###### 4.3、application.yml 配置 
-
-
 
 ``` yaml
 # 端口
@@ -5553,8 +5374,6 @@ sa-token.alone-redis.password=
 sa-token.alone-redis.timeout=10s
 ```
 
-
-
 ###### 4.4、启动类
 
 ``` java
@@ -5578,33 +5397,21 @@ public class SaSso1ClientApplication {
 }
 ```
 
-
 ##### 5、访问测试
 启动项目，依次访问三个应用端：
 - [http://s1.stp.com:9001/](http://s1.stp.com:9001/)
 - [http://s2.stp.com:9001/](http://s2.stp.com:9001/)
 - [http://s3.stp.com:9001/](http://s3.stp.com:9001/)
 
-
 均返回：
-
-
 
 然后点击登录，被重定向至SSO认证中心：
 
-
-
 我们登录之后，然后刷新页面：
-
-
 
 刷新另外两个Client端，均显示已登录 
 
-
-
 测试完成 
-
-
 
 ##### 6、跨域模式下的解决方案 
 
@@ -5622,7 +5429,6 @@ public class SaSso1ClientApplication {
 ### sso/sso-type2: SSO模式二 URL重定向传播会话
 
 如果我们的多个系统：部署在不同的域名之下，但是后端可以连接同一个Redis，那么便可以使用 **`[URL重定向传播会话]`** 的方式做到单点登录。
-
 
 ##### 1、设计思路
 
@@ -5649,9 +5455,7 @@ public class SaSso1ClientApplication {
 整个过程，除了第四步用户在SSO认证中心登录时会被打断，其余过程均是自动化的，当用户在另一个子系统再次点击`[登录]`按钮，由于此用户在SSO认证中心已有会话存在，
 所以第四步也将自动化，也就是单点登录的最终目的 —— 一次登录，处处通行。
 
-
 加载动态演示图
-
 
 下面我们按照步骤依次完成上述过程：
 
@@ -5666,15 +5470,13 @@ public class SaSso1ClientApplication {
 
 [Some Name](../include/include-qa.md#hostsInvalid ':include')
 
-
 ##### 3、搭建 Client 端项目 
 
 > [!TIP| label:demo | style:callout] 
-> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso2-client/`，如遇到难点可结合源码进行测试学习
+> 搭建示例在官方仓库的 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso2-client/`，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ###### 3.1、去除 SSO-Server 的 Cookie 作用域配置 
 在SSO模式一章节中我们打开了配置：
-
 
 ``` yaml
 sa-token: 
@@ -5688,33 +5490,30 @@ sa-token:
 sa-token.cookie.domain=stp.com
 ```
 
-
 此为模式一专属配置，现在我们将其注释掉**（一定要注释掉！）**
-
 
 ###### 3.2、创建 SSO-Client 端项目
 创建一个 SpringBoot 项目 `sa-token-demo-sso2-client`，引入依赖：
 
-
 ``` xml 
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <!-- Sa-Token 插件：整合SSO -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-sso</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
 	<groupId>org.apache.commons</groupId>
@@ -5725,36 +5524,36 @@ sa-token.cookie.domain=stp.com
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-alone-redis</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 插件：整合 Forest 请求工具 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-forest</artifactId>
-	<version>${sa-token.version}</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 
 // Sa-Token 插件：整合SSO
-implementation 'cn.dev33:sa-token-sso:1.45.0'
+implementation 'cn.dev33:sa-token-sso:1.46.0'
 
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 
 // Sa-Token插件：权限缓存与业务缓存分离
-implementation 'cn.dev33:sa-token-alone-redis:1.45.0'
+implementation 'cn.dev33:sa-token-alone-redis:1.46.0'
 
 // Sa-Token插件：整合 Forest 请求工具
-implementation 'cn.dev33:sa-token-forest:1.45.0'
+implementation 'cn.dev33:sa-token-forest:1.46.0'
 ```
 
-
+> 也可选用 `sa-token-rest-template`（Spring Boot 2/3/4）或 `sa-token-rest-client`（Spring Boot 3.2+）作为 HTTP 请求处理器，详见：[HTTP 请求扩展](/plugin/http-extend)。
 
 ###### 3.3、创建 SSO-Client 端认证接口
 
@@ -5822,11 +5621,8 @@ public class GlobalExceptionHandler {
 }
 ```
 
-
 ###### 3.4、配置SSO认证中心地址 
 你需要在 `application.yml` 配置如下信息：
-
-
 
 ``` yaml
 # 端口
@@ -5889,8 +5685,6 @@ sa-token.alone-redis.password=
 sa-token.alone-redis.timeout=10s
 ```
 
-
-
 注意点：`sa-token.alone-redis` 的配置需要和SSO-Server端连接同一个Redis**（database 值也要一样！database 值也要一样！database 值也要一样！重说三！）**
 
 ###### 3.5、写启动类
@@ -5913,49 +5707,31 @@ public class SaSso2ClientApplication {
 ```
 启动项目 
 
-
 ##### 4、测试访问 
 
 (1) 依次启动 `SSO-Server` 与 `SSO-Client`，然后从浏览器访问：[http://sa-sso-client1.com:9002/](http://sa-sso-client1.com:9002/)
 
 （注：先前版本文档测试demo端口号为9001，后为了方便区分三种模式改为了9002，因此出现文字描述与截图端口号不一致情况，请注意甄别，后不再赘述）
 
-
-
 (2) 首次打开，提示当前未登录，我们点击 **`登录`** 按钮，页面会被重定向到登录中心
-
-
 
 (3) SSO-Server提示我们在认证中心尚未登录，我们点击 **`登录`** 按钮进行模拟登录
 
-
-
 (4) SSO-Server认证中心登录成功，系统重定向回 client
-
-
 
 (5) 页面被重定向至`Client`端首页，并提示登录成功，至此，`Client1`应用已单点登录成功！ 
 
 (6) 我们再次访问`Client2`：[http://sa-sso-client2.com:9002/](http://sa-sso-client2.com:9002/)
 
-
-
 (7) 提示未登录，我们点击 **`登录`** 按钮，会直接提示登录成功
 
-
-
 (8) 同样的方式，我们打开`Client3`，也可以直接登录成功：[http://sa-sso-client3.com:9002/](http://sa-sso-client3.com:9002/)
-
-
 
 至此，测试完毕！
 
 可以看出，除了在`Client1`端我们需要手动登录一次之外，在`Client2端`和`Client3端`都是可以无需再次认证，直接登录成功的。
 
 我们可以通过 F12控制台 Network 跟踪整个过程
-
-
-
 
  
  
@@ -5974,7 +5750,6 @@ public class SaSso2ClientApplication {
 > [!WARNING| label:小提示] 
 > 阅读本篇之前请务必先熟读SSO模式二！因为模式三仅仅属于模式二的一个特殊场景，熟读模式二有助于您快速理解本章内容
 
-
 ##### 1、问题分析
 我们先来分析一下，当后端不使用共享 Redis 时，会对架构产生哪些影响：
 
@@ -5986,8 +5761,7 @@ public class SaSso2ClientApplication {
 
 > [!TIP| label:demo | style:callout] 
 > 模式三的 Demo 示例地址：`/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client/` 
-> [源码链接](https://gitee.com/dromara/sa-token/tree/dev/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client)，如遇难点可参考示例 
-
+> ，如遇难点可参考示例。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ##### 2、在Client 端更改 Ticket 校验方式
 
@@ -5997,29 +5771,23 @@ public class SaSso2ClientApplication {
 
 模式三要求 sso-client 与 sso-server 连接不同的 redis，所以此处没有必要再引入 sa-token-alone-redis 机制，可以去除相关依赖：
 
-
-
 ``` xml 
 <!-- Sa-Token插件：权限缓存与业务缓存分离 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-alone-redis</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token插件：权限缓存与业务缓存分离
-implementation 'cn.dev33:sa-token-alone-redis:1.45.0'
+implementation 'cn.dev33:sa-token-alone-redis:1.46.0'
 ```
-
-
 
 ###### 2.2、SSO-Client 端更改配置
 
 更改 `application.yml` ：
-
-
 
 ``` yaml
 # 端口
@@ -6089,10 +5857,6 @@ spring.redis.password=
 spring.redis.timeout=10s
 ```
 
-
-
-
-
 ##### 3、后记
 当我们熟读三种模式的单点登录之后，其实不难发现：所谓单点登录，其本质就是多个系统之间的会话共享。
 
@@ -6119,8 +5883,6 @@ spring.redis.timeout=10s
 
 当不知情的小红被诱导访问了这个URL时，它将被重定向至百度首页：
 
-
-
 可以看到，代表着用户身份的 Ticket 码也显现到了 URL 之中，借此漏洞，攻击者完全可以构建一个URL将小红的 Ticket 码自动提交到攻击者自己的服务器，伪造小红身份登录网站
 
 ##### 2、防范方法
@@ -6128,7 +5890,6 @@ spring.redis.timeout=10s
 造成此漏洞的直接原因就是SSO-Server认证中心没有对 `redirect地址` 进行任何的限制，防范的方法也很简单，就是对`redirect参数`进行校验，如果其不在指定的URL列表中时，拒绝下放ticket 
 
 我们将其配置为一个具体的URL：
-
 
 ``` yaml
 sa-token: 
@@ -6144,10 +5905,7 @@ sa-token:
 sa-token.sso-server.clients.so-client3.allow-url=http://sa-sso-client1.com:9003/sso/login
 ```
 
-
 再次访问上述链接：
-
-
 
 域名没有通过校验，拒绝授权！
 
@@ -6158,7 +5916,6 @@ sa-token.sso-server.clients.so-client3.allow-url=http://sa-sso-client1.com:9003/
 | 配置为*		| `*`										| **低**		| ****禁止在生产环境下使用****	|
 | 配置到域名	| `http://sa-sso-client1.com/*`					| **中**		| **不建议在生产环境下使用**	|
 | 配置到详细地址| `http://sa-sso-client1.com:9001/sso/login`	| **高**		| **可以在生产环境下使用**	|
-
 
 ##### 4、疑问：为什么不直接回传 Token，而是先回传 Ticket，再用 Ticket 去查询对应的账号id？
 Token 作为长时间有效的会话凭证，在任何时候都不应该直接暴露在 URL 之中（虽然 Token 直接的暴露本身不会造成安全漏洞，但会为很多漏洞提供可乘之机）
@@ -6239,9 +5996,6 @@ if(res.code == 401) {
 
 这种方案比较适合以 Ajax 访问的 RestAPI 接口重定向 
 
-
-
-
 ##### 2、如何自定义登录视图？
 
 ###### 方式一：在demo示例中直接更改 login.html 页面代码即可 
@@ -6254,7 +6008,6 @@ ssoServerTemplate.strategy.notLoginView = () -> {
 	return new ModelAndView("xxx.html");
 }
 ```
-
 
 ##### 3、如何自定义登录API的接口地址？
 根据需求点选择解决方案：
@@ -6283,15 +6036,11 @@ public SaResult ss(String name, String pwd) {
 
 答：直接在前端更改点击按钮时 Ajax 的请求地址即可 
 
-
 ##### 4、不同 client 不同登录页
 
 如果你的不同应用覆盖的用户群体差异极大，此时你可能想针对不同的应用跳转到不同的登录页，让每个应用的用户在登录时能够看到当前应用的专属信息，怎么做呢？
 
 首先，保证每个 sso-client 端都配置了不同的 client 标识：
-
-
-
 
 ``` yaml
 sa-token:
@@ -6304,8 +6053,6 @@ sa-token:
 # 当前 client 标识
 sa-token.sso-client.client=sso-client-shop
 ```
-
-
 
 然后在 `sso-server` 里为每个系统开发不同的登录页，并在 `configSso` 方法里 `notLoginView` 函数中根据 client 值，返回不同的登录视图：
 
@@ -6382,7 +6129,6 @@ private void configSso(SaSsoServerTemplate ssoServerTemplate) {
 
 启动项目，统一认证地址就被我们修改成了：`http://{host}:{port}/sso/auth2`
 
-
 ##### 方式二：拆分路由入口
 根据上述路由入口：`@RequestMapping("/sso/*")`，我们给它起一个合适的名字 —— 聚合式路由。
 
@@ -6426,7 +6172,6 @@ public class SsoServerController {
 
 拆分式路由 与 聚合式路由 在功能上完全等价，且提供了更为细致的路由管控。
 
-
 ##### SSO-Client 端拆分路由入口示例
 
 ``` java
@@ -6455,7 +6200,7 @@ public class SsoClientController {
 	}
 
 	// SSO-Client：接收消息推送地址
-	@RequestMapping("/sso/ssoPushC")
+	@RequestMapping("/sso/pushC")
 	public Object ssoPushC() {
 		return SaSsoClientProcessor.instance.ssoPushC();
 	}
@@ -6472,8 +6217,6 @@ public class SsoClientController {
 --- 
 
 有的时候，我们需要把 sso-server 搭建成一个平台中心，效果图大致如下：
-
-
 
 如图所示，用户先从 sso-server 登录进入平台首页，在首页上有各个子系统的进入链接，用户点击链接进入子系统（免登录）。
 
@@ -6501,8 +6244,6 @@ http://sa-sso-client1.com:9003/
 
 1、在 sso-server 中配置 `home-route` 字段：
 
-
-
 ``` yaml
 # Sa-Token 配置
 sa-token:
@@ -6516,9 +6257,6 @@ sa-token:
 # 主页路由：在 /sso/auth 登录页不指定 redirect 参数时，默认跳转的地址
 sa-token.sso-server.home-route: /home
 ```
-
-
-
 
 2、在 sso-server 中添加 `HomeController`，作为平台中心首页：
 
@@ -6552,14 +6290,11 @@ public class HomeController {
 }
 ```
 
-
 ##### 测试访问
 
 启动项目，访问：[http://sa-sso-server.com:9000](http://sa-sso-server.com:9000)
 
 首次访问，因为我们没有登录，所以会被重定向到 `/sso/auth` 登录页，我们登录上之后，便会跳转到平台中心首页：
-
-
 
 依次点击三个链接，便可在跳转的同时自动登录上子系统。
 
@@ -6573,12 +6308,9 @@ public class HomeController {
 
 要想匿名 client 接入，你需要做一些特殊配置。
 
-
 ##### 1、在 sso-server 端开启匿名 client 接入
 
 开启方式一，通过配置项方式：
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -6602,8 +6334,6 @@ sa-token.sso-server.allow-url=*
 # API 接口调用秘钥 (全局默认 + 匿名 client 使用)
 sa-token.sso-server.secret-key=kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 ```
-
-
 
 开启方式二，通过代码重写方式：
 
@@ -6636,7 +6366,6 @@ public class CustomSaSsoServerTemplate extends SaSsoServerTemplate {
 }
 ```
 
-
 ##### 2、在 sso-client 端不要配置 client 字段
 
 然后在对应的应用端不要配置 client 字段，例如：
@@ -6659,7 +6388,6 @@ sa-token:
         # API 接口调用秘钥
         secret-key: kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 ```
-
 
 > [!TIP| label:demo] 
 > 匿名 Client 接入的 Demo 示例地址：[sa-token-demo-sso3-client-anon](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client-anon)
@@ -6705,8 +6433,7 @@ public Object logoutByAlone() {
 
 在前端或跳转或 ajax 异步调用此接口即可。
 
-如果是跳转可指定 back 参数，代表注销成功后跳转的地址，例如：`http://sso-client.com/sso/logoutByAlone?back=https://sa-token.cc` 
-
+如果是跳转可指定 back 参数，代表注销成功后跳转的地址，例如：`http://sso-client.com/sso/logoutByAlone?back=https://sa-token.com` 
 
 ##### 2、全端注销
 
@@ -6720,9 +6447,7 @@ public Object logoutByAlone() {
 6. sso-client 后端响应 sso-client 前端：注销完成。
 7. 整体完成。
 
-
 加载动态演示图
-
 
 这些逻辑 Sa-Token 内部已经封装完毕，你只需按照文档步骤集成即可。以模式三 demo 为例：
 
@@ -6753,21 +6478,11 @@ public String index() {
 - [http://sa-sso-client2.com:9003/](http://sa-sso-client2.com:9003/)
 - [http://sa-sso-client3.com:9003/](http://sa-sso-client3.com:9003/)
 
-
-
 在任意一个 client 里，点击 **`[注销]`** 按钮，即可单点注销成功（打开另外两个client，刷新一下页面，登录态丢失）。
-
-
-
-
 
 PS：这里我们为了方便演示，使用的是超链接跳页面的形式，正式项目中使用 Ajax 调用接口即可做到无刷单点登录退出。
 
 例如，我们使用 [Apifox 接口测试工具](https://www.apifox.cn/) 可以做到同样的效果：
-
-
-
-
 
 ##### 3、单浏览器注销
 
@@ -6803,7 +6518,6 @@ public class SsoServerController {
 
 如上代码，在登录时获取前端提交的 deviceId 参数，如果前端没有提交则随机生成一个。
 
-
 ###### 3.2、sso-client 端发起注销时指定单设备注销参数
 
 然后在 sso-client 发起单点注销时，加上 `singleDeviceIdLogout=true` 参数，代表按照设备 id 进行分组注销，非本设备id的会话不参与注销行为：
@@ -6826,11 +6540,22 @@ public String index() {
 
 重点在第 9 行。
 
-
 > [!WARNING| label:测试注意点] 
 > 在进行测试时，同时将一个浏览器双击打开两次，是不算 “不同浏览器” 的，虽然你打开了两个浏览器窗口，但是这两个浏览器的会话数据是互通的。
 > 
 > 必须打开两个不同的浏览器来测试，或者按快捷键 `ctrl + shift + N` 打开隐私模式，才可以做到会话相互隔离。
+
+##### 4、代码里指定账号单点注销
+
+``` java
+// sso-server：指定账号单点注销
+SaSsoServerUtil.ssoLogout(loginId);
+SaSsoServerUtil.ssoLogout(loginId, logoutParameter, ignoreClient);
+
+// sso-client：指定账号单点注销
+SaSsoClientUtil.ssoLogout(loginId);
+SaSsoClientUtil.ssoLogout(loginId, logoutParameter);
+```
 
 ---
 
@@ -6878,7 +6603,6 @@ public class H5Controller {
 }
 ```
 
-
 ##### 2、增加跨域处理策略 
 
 ``` java
@@ -6915,7 +6639,6 @@ public class SaTokenConfigure {
 ```
 
 详细参考：[解决跨域问题](/fun/cors-filter)
-
 
 ##### 3、新建前端项目 
 任意文件夹新建前端项目：`sa-token-demo-sso-client-h5`，在根目录添加测试文件：`index.html`
@@ -7041,7 +6764,6 @@ public class SaTokenConfigure {
 </html>
 ```
 
-
 ##### 5、添加公共 js文件
 新建 `sso-common.js`：
 
@@ -7108,18 +6830,13 @@ function setHtml(select, html) {
 }
 ```
 
-
 ##### 6、测试运行
 先启动 Server 服务端与 Client 服务端，再随便找个能预览html的工具打开前端项目（比如[HBuilderX](https://www.dcloud.io/hbuilderx.html)），测试流程与一体版一致，暂不赘述。
-
-
-
 
 > [!TIP| label:另附其它技术栈的前后端分离 demo 示例：] 
 > - sso-client 前后端分离 - 原生h5：[源码链接](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-client-h5) 
 > - sso-client 前后端分离 - vue2：[源码链接](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-client-vue2) 
 > - sso-client 前后端分离 - vue3：[源码链接](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-client-vue3) 
-
 
 #### SSO-Server 前后端分离
 
@@ -7129,11 +6846,7 @@ function setHtml(select, html) {
 
 使用前端 ide 导入项目 `/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso-server-h5`，浏览器访问 `sso-auth.html` 页面：
 
-
-
 复制上述地址，将其配置到 Client 端的配置项 `sa-token.sso-client.auth-url` ，例如：
-
-
 
 ``` yaml
 sa-token: 
@@ -7151,8 +6864,6 @@ sa-token.sso-client.server-url=http://sa-sso-server.com:9000
 sa-token.sso-client.auth-url=http://127.0.0.1:8848/sa-token-demo-sso-server-h5/sso-auth.html
 ```
 
-
-
 然后我们启动项目 sso-server 与 sso-client ，按照之前的测试步骤访问：
 [http://sa-sso-client1.com:9003/](http://sa-sso-client1.com:9003/)，即可以前后端分离模式完成 SSO-Server 端的授权登录。
 
@@ -7167,7 +6878,6 @@ sa-token.sso-client.auth-url=http://127.0.0.1:8848/sa-token-demo-sso-server-h5/s
 消息推送机制是应用与认证中心相互沟通的桥梁，ticket 校验、单点注销等行为都是依赖消息推送机制来实现的。
 
 本篇将介绍在 Sa-Token SSO 模块中，sso-server 端和 sso-client 端分别内置了哪些消息模块，以及如何自定义消息处理器。
-
 
 ##### 1、sso-server 端内置消息处理器
 
@@ -7207,7 +6917,6 @@ http://{sso-server主机地址}/sso/pushS
 }
 ```
 
-
 ###### 1.2、signout（单点注销）
 
 作用：为 sso-client 提供单点注销能力
@@ -7236,7 +6945,6 @@ http://{sso-server主机地址}/sso/pushS
   "data": null
 }
 ```
-
 
 ##### 2、sso-client 端内置消息处理器
 
@@ -7267,7 +6975,6 @@ http://{sso-client主机地址}/sso/pushC
   "data": null
 }
 ```
-
 
 ##### 3、认证中心自定义消息处理器
 
@@ -7302,12 +7009,9 @@ public class SsoServerController {
 }
 ```
 
-
 ##### 4、应用端调用消息推送接口获取数据
 
 首先保证在配置文件里要配置上消息推送的具体地址
-
-
 
 ``` yaml
 # sa-token配置 
@@ -7337,8 +7041,6 @@ sa-token.sso-client.push-url=http://sa-sso-server.com:9000/sso/pushS
 # API 接口调用秘钥
 sa-token.sso-client.secret-key=SSO-C3-kQwIOrYvnXmSDkwEiFngrKidMcdrgKor
 ```
-
-
 
 然后在需要拉取资料的地方：
 
@@ -7396,7 +7098,6 @@ public Object myInfo() {
 	- 强同步就是指 sso-client 的 user 数据和 sso-server 的 user 数据，字段值必须保持一致。比如说：一个用户在server端昵称修改为“张三”，那么在 client 端也要实时同步修改。
 	- 弱同步就是指两边可以各改各的。比如说：一个用户 server 端修改了昵称为 “张三”，他在 client 端依然可以昵称为 “李四”。
 
-
 由此可大致分为三种设计方案：
 
 | 方案序号	| 方案名称	| 简单说明															|  适用系统									|
@@ -7406,7 +7107,6 @@ public Object myInfo() {
 | 方案三	 	| 字段关联	| 不同步，但找一个关键字段，将 sso-client 和 sso-server 的 user 账号进行关联起来	| sso-client 不打算过分依赖 sso-server 的 user 数据，只是想借助 sso-server 完成一下统一登录		|
 
 下面逐一拆解三种方案具体实现。
-
 
 ##### 1、方案一：统一迁移
 
@@ -7420,7 +7120,6 @@ public Object myInfo() {
 - 方案缺点：sso-client 不存储 user 信息，因此业务上需要连表查询 user 信息的地方会比较麻烦（例如：拉取帖子列表时需要附加显示用户头像和昵称信息）
 
 方案适用范围：适合业务比较简单，不涉及 user资料连表查业务 的子系统。
-
 
 ##### 2、方案二：实时同步
 
@@ -7439,7 +7138,6 @@ public Object myInfo() {
 - 方案缺点：sso-server 与 sso-client 的 user 数据同步功能不算简单，开发起来可能要耗费一段不小的工期。
 
 方案适用范围：一般业务上需要 user 信息连表查的子系统都适合。
-
 
 ##### 3、方案三：字段关联
 
@@ -7542,7 +7240,6 @@ private void configSso(SaSsoClientTemplate ssoClientTemplate) {
 
 方案适用范围：在 user 信息方面不打算过分依赖 sso-server 的系统，希望自己维护自己的 user 信息，只是想借助 sso-server 完成一下统一登录。
 
-
 ##### 4、扩展：没有关联字段
 
 如果我们的子系统 user 表没有邮箱、手机号等唯一性字段和 sso-server 的 user 表进行关联，该怎么办呢？
@@ -7601,7 +7298,6 @@ private void configSso(SaSsoClientTemplate ssoClientTemplate) {
 
 至此完毕。
 
-
 > [!INFO| label:提问：按照方案三，一个用户登录过程中，sso-server 和 sso-client 对这个用户账号的完整处理步骤是怎样的？] 
 > 1. 用户进入 sso-client 登录页面，点击上面的 [ 使用 xx 认证中心快捷登录 ] 按钮，浏览器跳转至 sso-server 认证中心。
 > 2. 如果用户在 sso-server 有账号，则直接登录，如果没有，则注册账号并登录。
@@ -7611,8 +7307,6 @@ private void configSso(SaSsoClientTemplate ssoClientTemplate) {
 > 	- 5.1 查的到，证明有账号，直接登录。
 > 	- 5.2 查不到，证明无账号，程序自动给他添加一条 user 账号，并登录。
 > 6. 登录完成。
-
-
 
 ##### 5、解决模式三下，loginId 与 centerId 不一致的问题
 
@@ -7691,15 +7385,12 @@ NoSdk 模式（不使用SDK）：通过 http 工具类调用接口的方式来�
 
 参考 demo：[sa-token-demo-sso3-client-nosdk](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client-nosdk)
 
-该 demo 假设应用端没有使用任何“权限认证框架”，使用最基础的 ServletAPI 进行会话管理，模拟了 `/sso/login`、 `/sso/logout`、 `/sso/logoutCall` 三个接口的处理逻辑。
+该 demo 假设应用端没有使用任何“权限认证框架”，使用最基础的 ServletAPI 进行会话管理，模拟了 `/sso/login`、 `/sso/logout`、 `/sso/pushC` 三个接口的处理逻辑。
 
-> [!WARNING| label:NoSdk 示例不再主维护] 
-> 基于以下原因：
-> - 1、NoSdk demo 相当于通过 http 工具类再次重写了一遍 Sa-Token SSO 模块代码，繁琐且冗余。
-> - 2、重写的代码无法拥有 Sa-Token SSO 模块全部能力，仅能完成基本对接，算是一个简化版 SDK。
-> 
-> 自 v1.43.0 版本起，不再主维护 NoSdk 模式，仓库示例仅做留档参考，大家可以转为 ReSdk 模式。
-
+> [!INFO| label:NoSdk 模式优缺点] 
+> - 1、支持客户端使用任意技术栈。
+> - 2、代码简单易懂，流程直观清晰。
+> - 3、用 http 工具类模拟 Sa-Token SSO 内部实现，样版代码较多，略显冗余。
 
 ##### ReSdk 模式
 
@@ -7707,14 +7398,10 @@ ReSdk 模式（重写SDK部分方法）：通过重写框架关键步骤点，�
 
 参考 demo：[sa-token-demo-sso3-client-resdk](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client-resdk)
 
-> [!INFO| label:ReSdk 模式优点] 
-> - 1、依然支持客户端使用任意技术栈。
+> [!INFO| label:ReSdk 模式优缺点] 
+> - 1、支持客户端使用任意技术栈。
 > - 2、仅重写少量部分关键代码，即可完成对接。几乎可以得到 Sa-Token SSO 模块全量能力。
-
-建议新项目首选 ReSdk 模式作为参考。
-
-
-
+> - 3、此模式需要对 Sa-Token SSO 内部实现较为熟悉，才可以驾驭。
 
 ##### 非 java 语言项目
 
@@ -7770,8 +7457,6 @@ SaSsoServerUtil.checkTicketParamAndDelete(String ticket, String client);
 SaSsoServerUtil.getTicketValue(String client, Object loginId);
 ```
 
-
-
 ##### Client 信息获取 
 ``` java
 // 获取所有 Client
@@ -7790,7 +7475,6 @@ SaSsoServerUtil.getAnonClient();
 SaSsoServerUtil.getNeedPushClients();
 ```
 
-
 ##### 重定向 URL 构建与校验
 ``` java
 // 构建 URL：sso-server 端向 sso-client 下放 ticket 的地址
@@ -7800,7 +7484,6 @@ SaSsoServerUtil.buildRedirectUrl(String client, String redirect, Object loginId,
 SaSsoServerUtil.checkRedirectUrl(String client, String url);
 ```
 
-
 ##### 单点注销
 ``` java
 // 指定账号单点注销
@@ -7809,10 +7492,6 @@ SaSsoServerUtil.ssoLogout(Object loginId);
 // 指定账号单点注销
 SaSsoServerUtil.ssoLogout(Object loginId, SaLogoutParameter logoutParameter, String ignoreClient);
 ```
-
-
-
-
 
 ##### 消息推送 
 ``` java
@@ -7835,13 +7514,9 @@ SaSsoServerUtil.pushToAllClient(SaSsoMessage message);
 SaSsoServerUtil.pushToAllClient(SaSsoMessage message, String ignoreClient);
 ```
 
-
 详情请参考源码：[码云：SaSsoServerUtil.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-plugin/sa-token-sso/src/main/java/cn/dev33/satoken/sso/template/SaSsoServerUtil.java)
 
-
-
 #### Sso-Client 工具类
-
 
 ##### 构建交互地址 
 ``` java
@@ -7849,6 +7524,14 @@ SaSsoServerUtil.pushToAllClient(SaSsoMessage message, String ignoreClient);
 SaSsoClientUtil.buildServerAuthUrl(String clientLoginUrl, String back);
 ```
 
+##### 单点注销
+``` java
+// 指定账号单点注销（loginId 为本地账号 id，框架会按策略转换为认证中心 id）
+SaSsoClientUtil.ssoLogout(Object loginId);
+
+// 指定账号单点注销
+SaSsoClientUtil.ssoLogout(Object loginId, SaLogoutParameter logoutParameter);
+```
 
 ##### 消息推送 
 
@@ -7867,9 +7550,6 @@ SaSsoClientUtil.buildSignoutMessage(Object loginId, SaLogoutParameter logoutPara
 ```
 
 详情请参考源码：[码云：SaSsoClientUtil.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-plugin/sa-token-sso/src/main/java/cn/dev33/satoken/sso/template/SaSsoClientUtil.java)
-
-
-
 
 #### Sso-Server 所有可重写策略 
 
@@ -7905,8 +7585,6 @@ SaSsoServerProcessor.instance.ssoServerTemplate.strategy.checkTicketAppendData =
 }
 ```
 
-
-
 #### Sso-Client 所有可重写策略
 
 ``` java
@@ -7941,10 +7619,8 @@ SSO 集成常见问题整理
 
 --- 
 
-
 ##### 问：在模式一与模式二中，Client端 必须通过 Alone-Redis 插件来访问 Redis 吗？
 答：不必须，只是推荐，权限缓存与业务缓存分离后会减少 `SSO-Redis` 的访问压力，且可以避免多个 `Client端` 的缓存读写冲突。
-
 
 ##### 问：搭建好 sso-server 或 sso-client 服务后，访问返回：`{"msg": "not handle"}`。
 
@@ -7961,7 +7637,6 @@ SSO 集成常见问题整理
 - sso-client 端的注销地址：`http://{host}:{port}/sso/logout`；
 
 都需要在配置文件配置：`sa-token.sso-server.is-slo=true`(client端为 `sa-token.sso-client.is-slo=true` )后，才会打开。
-
 
 ##### 问：我参照文档搭建SSO-Client，一直提示：Ticket无效，请问怎么回事？
 如果使用的是模式二，出现此异常概率最大的原因是因为 `Client` 与 `Server` 没有连接同一个Redis，SSO模式二中两者必须连接同一个 Redis 才可以登录成功。
@@ -7985,14 +7660,11 @@ public class SaSsoServerApplication {
 
 如果使用的是模式三，则排查是否有重复校验 ticket 的代码，一个 ticket 码只能使用一次，多次重复使用就会提示这个。
 
-
 ##### 问：模式一或者模式二报错：Could not write JSON: No serializer found for class com.pj.sso.SysUser and no properties discovered to create BeanSerializer 
 
 一般是因为在 sso-server 端往 session 上写入了某个实体类（比如 User），而在 sso-client 端没有这个实体类，导致反序列化失败。
 
 解决方案：在 sso-client 也新建上这个类，而且包名需要与 sso-server 端的一致（直接从 sso-server 把实体类复制过来就好了）
-
-
 
 ##### 在测试模式一时，出现一些难以理解的现象 
 
@@ -8017,12 +7689,10 @@ public class SaSsoServerApplication {
 	
 	
 
-
-
 ##### 问：模式三配置一堆 xxx-url ，有办法简化一下吗？
 可以使用 `sa-token.sso-client.server-url` 来简化：
 
-配置含义：配置 Server 端主机总地址，拼接在 authUrl、getDataUrl、sloUrl 属性前面，用以简化各种 url 配置。
+配置含义：配置 Server 端主机总地址，拼接在 authUrl、getDataUrl、signoutUrl、pushUrl 属性前面，用以简化各种 url 配置。
 
 在开发 SSO 模块时，我们需要在 sso-client 配置认证中心的各种地址，特别是在模式三下，一般代码会变成这样：
 
@@ -8058,7 +7728,6 @@ sa-token:
 - 你配置的 server-url 值是：`http://sa-sso-server.com:9000`，auth-url 是：`http://my-site.com/sso/auth2`。
 - 此时框架只以 auth-url 值为准，得到的 auth-url 值是：`http://my-site.com/sso/auth2`，其它三个 url 配置项同理。
 
-
 ##### 问：我接手了一个项目，里面集成了 Sa-Token SSO ，请问怎么快速分辨它用的模式几？
 
 **方法一：看代码注释。**
@@ -8088,11 +7757,6 @@ sa-token:
 
 此配置项可以是任意字符串，你也可以自己整理一套合适的表达规则。
 
-
-
-
-
-
 ##### 问：SSO模式二或模式三，第一个 client 登录成功之后再访问其它两个 client 不会自动登录，需要点一下登录按钮才会登录上？
 答：这是正常现象，系统 1 登录成功之后，系统 2 与系统 3 需要点击登录按钮，才会登录成功。
 
@@ -8101,7 +7765,6 @@ sa-token:
 > 第三个系统，需要：点击 [登录] 按钮 -> 登录成功 
 > 
 > （系统二、三 免去重复跳转登录页输入账号密码的步骤）
-
 
 ##### 追问：那我是否可以设计成不需要点登录按钮的，只要访问页面，它就能登录成功？
 可以的。
@@ -8142,10 +7805,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 }
 ```
 
-
 更多登录姿势可以参考 [[何时引导用户去登录]](/sso/sso-custom-login) 给出的建议进行设计。
-
-
 
 ##### 问：Client 信息可以做成从数据库读取的吗？
 可以，自定义 `SaSsoServerTemplate` 实现类，重写 `getClient` 与 `getClients` 方法即可：
@@ -8192,20 +7852,16 @@ public class CustomSaSsoServerTemplate extends SaSsoServerTemplate {
 }
 ```
 
-
 ##### 问：如果 sso-client 端我没有集成 sa-token-sso，如何对接？
 需要手动调用 http 请求来对接 sso-server 开放的接口，参考示例：
 [sa-token-demo-sso3-client-nosdk](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-sso/sa-token-demo-sso3-client-nosdk)
-
 
 ##### 问：如果 sso-client 端不是 java语言，可以对接吗？
 可以，只不过有点麻烦，基本思路和上个问题一致，需要手动调用 http 请求来对接 sso-server 开放的接口，参考：
 [SSO-Server 认证中心开放接口](/sso/sso-apidoc)
 
-
 ##### 问：将旧有系统改造为单点登录时，应该注意哪些？
 答：建议不要把其中一个系统改造为SSO服务端，而是新起一个项目作为 SSO-Server 端，所有旧有项目全部作为 Client 端与此对接。
-
 
 ##### 问：怎么在一个项目里同时搭建 sso-server 和 sso-client？
 
@@ -8240,7 +7896,6 @@ public class SsoController {
 	
 }
 ```
-
 
 ##### 问：我一个项目里有两套账号体系，都需要单点登录，怎么在一个项目里同时搭建两个 sso-server 服务？
 
@@ -8315,69 +7970,11 @@ public class SsoUserServerController {
 }
 ```
 
-
-
-
-
 --- 
-
 
 **还有其它问题？**
 
 可以加群反馈一下，比较典型的问题我们解决之后都会提交到此页面方便大家快速排查
-
----
-
-### pro/st_sso: Sa-Pro：单点登录商业版
-
-##### 项目介绍
-
-根据 SSO 模块文档，以及官网提供的源码示例，您可以很方便的搭建一个SSO模式的认证 Demo 示例。
-
-然而，要真正开发一个商业级项目的统一认证中心系统，绝非一朝一夕可以搭建完毕，为此，我们特意准备了项目：
-[[ Sa-Pro 单点登录商业版 ]](https://sa-pro.yun94.cn?way=st_sso)。
-
-项目基于 Sa-Token 搭建，集成了单点登录常见技术点，可解决： 
-同域、跨域、共享Redis、跨Redis、前后端一体、前后端分离、纯 js、vue2、vue3、java 项目、非 java 项目 等架构下的 SSO 认证需求。 
-可大大缩短您的项目接入单点登录的开发周期。
-
-全套源码交付、不包含加密 jar 、可自由二开。不限制域名、不限制项目数量。
-
-
-
-
-
-##### 释疑
-
-###### 1、Sa-Pro 是收费项目吗？与 Sa-Token 有什么不同？
-
-`Sa-Pro` 是付费项目，暂不开放源码，如需使用需要购买项目授权，您可以在其主页了解更多详细信息。
-
-`Sa-Pro` 与 `Sa-Token` 的区别，简单来讲：
-- `Sa-Token` 是一个框架，需要在项目中通过 pom.xml 引入
-- `Sa-Pro` 是一个完整项目，下载源码后可直接启动 
-
-
-###### 2、Sa-Token 会不会在某一天收费？导致我们项目无法正常运行？
-首先我们需要了解一点：**已经发布到 Maven 中央仓库的代码，是不可以删除的**，所以这部分代码是无法做到收费的 
-
-其次，像中间件框架，业界没有收费的先例，也没有对应的商业模式，一般的付费项目都是一些成型的完整项目，以解决特定场景的业务需求为目的，
-比如：聊天通信、刷脸认证、短信验证码、聚合支付……等等。
-
-Sa-Pro 并非随意收费，只有当您的系统需要 **统一认证中心** 时您才会用到它，花一笔小钱节省大量开发工期，整体来看，这是非常划算的。
-
-另外：即使您没有购买 `Sa-Pro`，也不会影响到您对 `Sa-Token` 的使用，举个例子：MySQL具有社区版与企业版，即使您没有购买其付费版，也不会影响到您对免费 MySql 的使用。
-
-
-
-###### 3、Sa-Token 团队日后的主要精力是不是放在 Sa-Pro 上，降低对 Sa-Token 的支持？毕竟 Sa-Token 是免费的！
-
-答案是不会。
-
-再次强调一下：`Sa-Token` 与 `Sa-Pro` 是两个独立的项目，两者互不影响。
-付费项目的出现不会降低对 `Sa-Token` 的支持，`Sa-Token`将会按照原有的发展继续升级迭代。
-
-实际结果可能会恰恰相反：有了盈利来源，`Sa-Token`将发展的更快。
 
 ---
 
@@ -8394,10 +7991,7 @@ OAuth2.0 与 SSO 相比，增加了对应用授权范围的控制，减弱了应
 有关 OAuth2.0 的设计思想网上教程较多，此处不再重复赘述，详细可参考博客：
 [OAuth2.0 简单解释](https://www.ruanyifeng.com/blog/2019/04/oauth_design.html)
 
-
 如果你还不知道你的项目应该选择 SSO 还是 OAuth2.0，可以参考这篇：[技术选型：[ 单点登录 ] VS [ OAuth2.0 ]](/fun/sso-vs-oauth2)
-
-
 
 ##### OAuth2.0 四种模式 
 
@@ -8412,6 +8006,7 @@ OAuth2.0 与 SSO 相比，增加了对应用授权范围的控制，减弱了应
 
 接下来我们将通过简单示例演示如何在 Sa-Token-OAuth2 中完成这四种模式的对接: [搭建OAuth2-Server](/oauth2/oauth2-server)
 
+若需下载官方仓库内全套可运行 Demo 压缩包，请见：[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ##### OAuth2.0 第三方开放平台完整开发流程参考
 
@@ -8453,32 +8048,29 @@ OAuth2.0 与 SSO 相比，增加了对应用授权范围的控制，减弱了应
 127.0.0.1 sa-oauth-client.com
 ```
 
-
 ##### 2、引入依赖 
-创建SpringBoot项目 `sa-token-demo-oauth2-server`（不会的同学自行百度或参考仓库示例），引入 `pom.xml` 依赖：
-
-
+创建SpringBoot项目 `sa-token-demo-oauth2-server`（不会的同学自行百度或参考仓库示例：[Sa-Token 集成示例大全下载](/more/download-demos) 获取全套 Demo），引入 `pom.xml` 依赖：
 
 ``` xml
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token OAuth2.0 模块 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-oauth2</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 整合 RedisTemplate (可选) -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
 	<groupId>org.apache.commons</groupId>
@@ -8487,23 +8079,20 @@ OAuth2.0 与 SSO 相比，增加了对应用授权范围的控制，减弱了应
 ```
 
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 
 // Sa-Token OAuth2.0 模块
-implementation 'cn.dev33:sa-token-oauth2:1.45.0'
+implementation 'cn.dev33:sa-token-oauth2:1.46.0'
 
 // Sa-Token 整合 RedisTemplate (可选)
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 ```
 
-
 注：Redis 相关依赖是非必须的，如果集成了 redis，可以让你更细致的观察到 sa-token-oauth2 的底层数据格式。
 
-
 ##### 3、开放服务 
-
 
 1、新建`SaOAuth2ServerController`
 ``` java
@@ -8571,7 +8160,7 @@ public class SaOAuth2ServerController {
 		SaOAuth2Strategy.instance.confirmView = (clientId, scopes) -> {
 			String scopeStr = SaFoxUtil.convertListToString(scopes);
 			String yesCode =
-					"fetch('/oauth2/doConfirm?client_id=" + clientId + "&scope=" + scopeStr + "', {method: 'POST'})" +
+					"fetch('/oauth2/doConfirm' + location.search, {method: 'POST'})" +
 					".then(res => res.json())" +
 					".then(res => location.reload())";
 			String res = "<p>应用 " + clientId + " 请求授权：" + scopeStr + "，是否同意？</p>"
@@ -8588,7 +8177,6 @@ public class SaOAuth2ServerController {
 注意：
 - 在 `doLoginHandle` 函数里如果要获取 name, pwd 以外的参数，可通过 `SaHolder.getRequest().getParam("xxx")` 来获取。
 - 你可以在 [框架配置](/use/config?id=SaClientModel属性定义) 了解有关 `SaClientModel` 对象所有属性的详细定义。
-
 
 2、全局异常处理
 ``` java
@@ -8618,24 +8206,18 @@ public class SaOAuth2ServerApplication {
 ```
 启动项目
 
-
 ##### 4、访问测试 
 
 1、由于暂未搭建Client端，我们可以使用 Sa-Token 官网作为重定向URL进行测试：
 ``` url
-http://sa-oauth-server.com:8000/oauth2/authorize?response_type=code&client_id=1001&redirect_uri=https://sa-token.cc&scope=openid
+http://sa-oauth-server.com:8000/oauth2/authorize?response_type=code&client_id=1001&redirect_uri=https://sa-token.com&scope=openid
 ```
 
 2、由于首次访问，我们在OAuth-Server端暂未登录，会被转发到登录视图 
 
-
-
 3、输入 `sa/123456` 进行登录之后，会提示我们确认授权
 
-
 4、点击同意授权之后，我们会被重定向至 redirect_uri 页面，并携带了code参数 
-
-
 
 4、我们拿着code参数，访问以下地址：
 ``` url
@@ -8649,7 +8231,7 @@ http://sa-oauth-server.com:8000/oauth2/token?grant_type=authorization_code&clien
   "code": 200,
   "msg": "ok",
   "data": null,
-  "token_type": "bearer",
+  "token_type": "Bearer",
   "access_token": "cAls8jnBLmeo5yuCUMwb8zxaSsQPPzGINXF3NOCjCqFHplr6hagdT6A5HeR2",
   "refresh_token": "L2rPbJ3aaOXwaB4Zu0EGWNz5EjVNpw5u2oMP9CS2IEap7rR3Hb76ZqqHS07J",
   "expires_in": 7199,
@@ -8660,9 +8242,7 @@ http://sa-oauth-server.com:8000/oauth2/token?grant_type=authorization_code&clien
 }
 ```
 
-
 测试完毕
-
 
 ##### 5、运行官方示例
 以上代码只是简单模拟了一下OAuth2.0的授权流程，现在，我们运行一下官方示例，里面有制作好的UI界面
@@ -8672,11 +8252,7 @@ http://sa-oauth-server.com:8000/oauth2/token?grant_type=authorization_code&clien
 
 依次启动`OAuth2-Server` 与 `OAuth2-Client`，然后从浏览器访问：[http://sa-oauth-client.com:8002](http://sa-oauth-client.com:8002)
 
-
-
 如图，可以针对OAuth2.0四种模式进行详细测试 
-
-
 
 ##### 6、OAuth2 前端测试页
 
@@ -8686,10 +8262,7 @@ OAuth2 前端测试页：
 
 此示例允许你在前端自由配置 OAuth-Client 端所需的各个参数，方便对 OAuth2 四种模式的测试。
 
-
-
-
-	参考视频：OAuth2 四种模式 前端测试页
+	视频讲解：OAuth2 四种模式 前端测试页
 
 ---
 
@@ -8738,8 +8311,6 @@ redirect_uri?code={code}&state={state}
 3. 一个 `Code` 的有效期默认为五分钟，超时自动作废。
 4. 每次授权产生新 `Code` 码，会导致旧 `Code` 码立即作废，即使旧 `Code` 码尚未使用。
 
-
-
 **RestAPI 登录接口：/oauth2/doLogin**
 
 如果用户在 OAuth-Server 端尚未登录，则会被阻塞在登录界面，开始登录，需要在页面上调用`/oauth2/doLogin`完成登录（此接口非 OAuth2 标准协议接口）
@@ -8759,10 +8330,6 @@ http://{host}:{port}/oauth2/doLogin
 访问此接口将进入自定义的 `cfg.doLoginHandle` 函数开始登录，你只要在此函数内调用 `StpUtil.login(xxx)` 即代表登录成功。
 
 另外需要注意：此接口并非只能携带 `name`、`pwd` 参数，因为你可以在方法里通过 `SaHolder.getRequest().getParam("xxx")` 来获取前端提交的其它参数。
-
-
-
-
 
 **RestAPI 确认授权接口：/oauth2/doConfirm**
 
@@ -8784,12 +8351,14 @@ http://{host}:{port}/oauth2/doConfirm
 | :--------				| :--------	| :--------												|
 | client_id				| 是		| 应用 id												|
 | scope					| 是		| 具体确认的权限，多个用逗号(或空格)隔开					|
-| build_redirect_uri	| 否		| 是否立即构建 `redirect_uri` 授权地址，取值：true | false		|
-| response_type			| 否		| 取 url 上的 `response_type` 参数来提交					|
-| redirect_uri			| 否		| 取 url 上的 `redirect_uri` 参数来提交					|
+| response_type			| 是		| 取 url 上的 `response_type` 参数来提交					|
+| redirect_uri			| 是		| 取 url 上的 `redirect_uri` 参数来提交					|
+| build_redirect_uri	| 否		| 是否立即构建 `redirect_uri` 授权地址，取值：true / false (默认)		|
 | state					| 否		| 取 url 上的 `state` 参数来提交							|
 
-此接口有两种调用方式，一种只提供 `client_id`、`scope` 两个参数，此时返回结果代表是否确认授权成功：
+此接口有两种调用方式，均需提交 `client_id`、`scope`、`response_type`、`redirect_uri` 参数（可直接取当前授权页 URL 上的 query 参数），区别仅在于是否立即构建授权地址：
+
+**方式一**：不提供 `build_redirect_uri`（或设为 `false`），仅确认授权，返回结果代表是否确认授权成功：
 ``` js
 {
     code: 200, 
@@ -8798,7 +8367,9 @@ http://{host}:{port}/oauth2/doConfirm
 }
 ```
 
-一种是指定 `build_redirect_uri: true`，并同时提供 `client_id`、`scope`、`response_type`、`redirect_uri`、`state` 全部参数，
+确认成功后，需再访问 `/oauth2/authorize` 完成授权跳转。
+
+**方式二**：指定 `build_redirect_uri: true`，并同时提供 `state` 等参数，
 此时返回结果包括最终的 code 授权地址：
 ``` js
 {
@@ -8810,10 +8381,6 @@ http://{host}:{port}/oauth2/doConfirm
 ```
 
 前端在 ajax 回调函数中直接使用 `location.href=res.redirect_uri` 跳转即可，无需再重复访问 `/oauth2/authorize` 接口。
-
-
-
-
 
 ##### 1.2、根据授权码获取 Access-Token
 获得 `Code` 码后，我们可以通过以下接口，获取到用户的 `Access-Token`、`Refresh-Token` 等信息。
@@ -8847,7 +8414,7 @@ header['Authorization'] = base64(`${client_id}:${client_secret}`);
     "code": 200,    // 200表示请求成功，非200标识请求失败, 以下不再赘述 
     "msg": "ok",
     "data": null,
-    "token_type": "bearer",
+    "token_type": "Bearer",
     "access_token": "Gly7mnnXSdCxkOqmOwcA5SbG6ZtPmJVX7ZgSn1pidhRmnenBEgxbWJS8VWxA",     // Access-Token值
     "refresh_token": "EuYNwpxdc18MpaZLPyhFeyAyzr2IOWEr4q3QUGgPWqdJujQqvohjQEDJpwOm",    // Refresh-Token值
     "expires_in": 7199,                  // Access-Token剩余有效期，单位秒  
@@ -8856,7 +8423,6 @@ header['Authorization'] = base64(`${client_id}:${client_secret}`);
     "scope": "userinfo"                  // 此令牌包含的权限
 }
 ```
-
 
 ##### 1.3、根据 Refresh-Token 刷新 Access-Token （如果需要的话）
 Access-Token的有效期较短，如果每次过期都需要重新授权的话，会比较影响用户体验，因此我们可以在后台通过`Refresh-Token` 刷新 `Access-Token`
@@ -8879,7 +8445,6 @@ http://{host}:{port}/oauth2/refresh
 | refresh_token | 是		| 步骤1.2中获取到的 `Refresh-Token` 值							|
 
 接口返回值同章节1.2，此处不再赘述 
-
 
 ##### 1.4、回收 Access-Token （如果需要的话）
 在A ccess-Token 过期之前主动将其回收 
@@ -8908,7 +8473,6 @@ http://{host}:{port}/oauth2/revoke
 }
 ```
 
-
 ##### 1.5、根据 Access-Token 获取相应用户的账号信息  
 注：此接口非 OAuth2 标准协议接口，为官方仓库 demo 模拟接口，正式项目中大家可以根据此样例，自定义需要的接口及参数 
 
@@ -8933,7 +8497,6 @@ http://{host}:{port}/oauth2/userinfo?access_token={access_token}
 ``` js
 header['Authorization'] = 'Bearer access_token';
 ```
-
 
 #### 2、模式二：隐藏式（Implicit）
 
@@ -8962,7 +8525,6 @@ http://{host}:{port}/oauth2/authorize
 redirect_uri#token=xxxx-xxxx-xxxx-xxxx
 ```
 注意 token 是以 `#` 锚参数的形式拼接到 url 上的。
-
 
 #### 3、模式三：密码式（Password）
 首先在Client端构建表单，让用户输入 Server 端的账号和密码，然后在 Client 端访问接口 
@@ -9004,7 +8566,6 @@ http://{host}:{port}/oauth2/token
 
 > [!WARNING| label:重写认证处理器] 
 > 在正式项目中，password 认证模式需要重写 `PasswordGrantTypeHandler` 处理器，在后面的 [自定义 grant_type](/oauth2/oauth2-custom-grant_type) 章节我们会详细介绍
-
 
 #### 4、模式四：凭证式（Client Credentials）
 以上三种模式获取的都是用户的 `Access-Token`，代表用户对第三方应用的授权，
@@ -9080,8 +8641,6 @@ public void configOAuth2Server(SaOAuth2ServerConfig oauth2Server) {
 
 你也可以在 `application.yml` 配置中 `client` 信息：
 
-
-
 ``` yaml
 # sa-token配置
 sa-token: 
@@ -9143,15 +8702,11 @@ sa-token.oauth2-server.clients.1002.client-id=1002
 sa-token.oauth2-server.clients.1002.client-secret=...
 ```
 
-
-
 这两种方案都是基于内存形式的 client 信息配置，只适合简单的测试，一般真实项目的 client 信息都是保存在数据库中的，下面演示一下如何在数据库中动态获取 client 信息
-
 
 ##### 2、基于数据库的数据加载
 
 你只需要自定义数据加载器：新建 `SaOAuth2DataLoaderImpl` 实现 `SaOAuth2DataLoader` 接口。
-
 
 ``` java
 /**
@@ -9231,10 +8786,7 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 
 当不知情的小红被诱导访问了这个 URL 时，它将被重定向至百度首页。
 
-
-
 可以看到，代表着用户身份的 code 授权码也显现到了URL之中，借此漏洞，攻击者完全可以构建一个 URL 将小红的 code 授权码自动提交到攻击者自己的服务器，伪造小红身份登录网站。
-
 
 ##### 2、防范方法
 
@@ -9262,10 +8814,7 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 
 再次访问上述链接：
 
-
-
 URL 没有通过校验，拒绝授权！
-
 
 ##### 3、配置安全性参考表
 
@@ -9275,13 +8824,12 @@ URL 没有通过校验，拒绝授权！
 | 配置到域名		| `http://sa-oauth-client.com:8002/*`			| **中**		| **不建议在生产环境下使用**	|
 | 配置到详细地址	| `http://sa-oauth-client.com:8002/xxx/xxx`		| **高**		| **可以在生产环境下使用**	|
 
-
 ##### 4、其它规则
 
 1、AllowRedirectUris 配置的地址不允许出现 `@` 字符。
 
-- 反例：`http://user@sa-token.cc`
-- 反例：`http://sa-oauth-client.com@sa-token.cc`
+- 反例：`http://user@sa-token.com`
+- 反例：`http://sa-oauth-client.com@sa-token.com`
 
 *详见源码：[SaOAuth2Template.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-plugin/sa-token-oauth2/src/main/java/cn/dev33/satoken/oauth2/template/SaOAuth2Template.java) 
 `checkRedirectUri` 方法。*
@@ -9310,7 +8858,6 @@ sa-token-oauth2 提供两种模式，让 access_token 可以得到更多信息�
 
 - 自定义接口模式：在 oauth2-server 端开放一个资料查询接口，在 oauth2-client 得到 `access_token` 后，再次调用这个接口来获取 `userinfo` 信息。
 - 自定义权限处理器模式：自定义一个 `ScopeHandler`，直接在返回 `access_token` 时追加字段，将 `userinfo` 信息和 `access_token` 一并返回到 oauth2-client。
-
 
 ##### 2、自定义接口模式
 
@@ -9342,7 +8889,6 @@ public SaResult userinfo() {
 }
 ```
 
-
 ###### 2、申请 code 时指定权限
 oauth2-client 申请 `code` 时，一定需要加上 `userinfo` 权限
 
@@ -9353,7 +8899,6 @@ http://sa-oauth-server.com:8000/oauth2/authorize
 	&redirect_uri=http://sa-oauth-client.com:8002/
 	&scope=userinfo
 ```
-
 
 ###### 3、code 换 access_token
 访问上述链接后，得到 `code` 授权码，然后我们拿着 `code` 换 `access_token`
@@ -9388,8 +8933,6 @@ http://sa-oauth-server.com:8000/oauth2/userinfo?access_token=${access_token}
 ```
 
 拿到 userinfo。
-
-
 
 ##### 3、自定义权限处理器模式
 
@@ -9441,7 +8984,6 @@ public class UserinfoScopeHandler implements SaOAuth2ScopeHandlerInterface {
 
 如上所述，所有写入到 `extraData` 中的数据，都将追加返回到 oauth2-client 端。
 
-
 ###### 2、申请 code 时指定权限
 oauth2-client 申请 `code` 时，一定需要加上 `userinfo` 权限
 ``` url
@@ -9451,7 +8993,6 @@ http://sa-oauth-server.com:8000/oauth2/authorize
 	&redirect_uri=http://sa-oauth-client.com:8002/
 	&scope=userinfo
 ```
-
 
 ###### 3、code 换 access_token
 访问上述链接后，得到 `code` 授权码，然后我们拿着 `code` 换 `access_token`
@@ -9469,7 +9010,7 @@ http://sa-oauth-server.com:8000/oauth2/token
   "code": 200,
   "msg": "ok",
   "data": null,
-  "token_type": "bearer",
+  "token_type": "Bearer",
   "access_token": "LQ24xI0hX25vIzvciHPA0PNsnGCweSFM1Bzl8783li07VAXpw8sEfn9xsta2",
   "refresh_token": "rKB8mby1Mw8yZXHbWzliHx6lmatcLcULLw5C5cUMBhMMRx72DFg5u0owZgrA",
   "expires_in": 7199,
@@ -9491,8 +9032,6 @@ http://sa-oauth-server.com:8000/oauth2/token
 
 ###### 总结
 相比于自定义接口模式，自定义权限处理器模式可以少一次网络请求，让 oauth2-client 端提前拿到 `userinfo` 信息。
-
-
 
 ##### 4、最终权限处理器
 当一个自定义权限处理器，监听的 scope 字符串为 `_FINALLY_WORK_SCOPE` 时，则代表这个权限处理器为“最终权限处理器”。
@@ -9533,8 +9072,6 @@ public class FinallyWorkScopeHandler implements SaOAuth2ScopeHandlerInterface {
 
 我们可以通过配置文件来为 scope 划分等级
 
-
-
 ``` yaml
 # sa-token 配置
 sa-token: 
@@ -9553,7 +9090,6 @@ sa-token.oauth2-server.higher-scope=openid,userid
 sa-token.oauth2-server.lower-scope=userinfo
 ```
 
-
 如上所示：
 - 通过 `sa-token.oauth2-server.higher-scope` 配置项指定的 `scope` 将变成 **高级权限**。
 - 通过 `sa-token.oauth2-server.lower-scope` 配置项指定的 `scope` 将变成 **低级权限**。
@@ -9566,7 +9102,6 @@ sa-token.oauth2-server.lower-scope=userinfo
 | 高级权限		| 申请授权时：每次都需要用户手动点击确认授权按钮，才会下放 code 授权码	| 
 | 一般权限		| 申请授权时：如果申请的 scope 用户近期授权过，则静默授权，如果近期未授权过，则需要手动点击确认授权按钮		| 
 | 低级权限		| 申请授权时：不需要用户手动点击确认授权，程序自动完成静默授权						| 
-
 
 ##### 2、详细举例
 
@@ -9618,20 +9153,19 @@ http://{host}:{port}/oauth2/authorize
 	- 如果是，则静默授权。
 	- 如果否，则需要用户手动点击确认授权。
 
-
 ##### 3、申请高级权限时 `/oauth2/authorize` 无法通过验证
 
 由于申请高级权限时，每次都必须用户手动点击确认授权，`/oauth2/authorize` 路由接口是无法完成权限验证操作的。
 
-此时需要将构建 `redirect_uri` 的动作提前，在 `/oauth2/doConfirm` 确认授权接口时额外追加 `build_redirect_uri: true` 等参数：
+此时需要将构建 `redirect_uri` 的动作提前，在 `/oauth2/doConfirm` 确认授权接口时提交当前授权页的全部 query 参数，并额外追加 `build_redirect_uri=true`：
 ``` url
 http://{host}:{port}/oauth2/doConfirm
-    ?client={value}
+    ?client_id={value}
     &scope={value}
-    &build_redirect_uri=true
     &response_type={value}
     &redirect_uri={value}
     &state={value}
+    &build_redirect_uri=true
 ```
 
 返回结果示例：
@@ -9676,10 +9210,7 @@ OAuth2 协议的 `/oauth2/token` 接口定义了两种获取 `access_token` 的 
 
 你可以重写内置 `grant_type` 处理器，或添加自定义 `grant_type` 处理器，来支持更多的场景。
 
-
-
 --- 
-
 
 ##### 2、重写 password 认证模式处理器
 
@@ -9712,7 +9243,6 @@ public class CustomPasswordGrantTypeHandler extends PasswordGrantTypeHandler {
 }
 ```
 
-
 ##### 3、添加自定义 grant_type 处理器
 
 假设有以下需求：通过 手机号+验证码 登录，返回 `access_token`。
@@ -9740,7 +9270,6 @@ public class PhoneLoginController {
 ```
 
 真实项目肯定是要对接短信服务商的，此处我们仅做模拟代码，将发送的验证码打印在控制台上。
-
 
 ###### 3.2、自定义 grant_type 处理器
 
@@ -9824,7 +9353,6 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 
 完工，开始测试。
 
-
 ##### 4、测试步骤
 
 ###### 1、先发送验证码 
@@ -9854,7 +9382,7 @@ http://sa-oauth-server.com:8000/oauth2/token
     "code": 200,
     "msg": "ok",
     "data": null,
-    "token_type": "bearer",
+    "token_type": "Bearer",
     "access_token": "pfxRz6KVacwvKNu4IHmDsCJs33kvvARs2z1lTch7stog8nRt6rfVLowtAZ0E",
     "refresh_token": "qcFD6Wo2qZidofXQtWF5oK5ML6ljHKufQ5SbouBxzGnHhnMjUG4VV0iXZhdE",
     "expires_in": 7199,
@@ -9870,8 +9398,6 @@ http://sa-oauth-server.com:8000/oauth2/token
 ### oauth2/oauth2-custom-login: 定制化登录页面与授权页面
 
 ---
-
-
 
 ##### 1、如何自定义 OAuth-Server 端的登录视图？
 
@@ -9895,8 +9421,6 @@ public void configOAuth2Server(SaOAuth2ServerConfig oauth2Server) {
 | pwd			| 否		| 密码									|
 
 接口返回值根据你重写的 `cfg.doLoginHandle` 策略进行自由决定。
-
-
 
 ##### 2、如何自定义登录API的接口地址？
 根据需求点选择解决方案：
@@ -9925,8 +9449,6 @@ public SaResult ss(String name, String pwd) {
 
 答：直接在前端更改点击按钮时 Ajax 的请求地址即可 
 
-
-
 ##### 3、如何自定义 OAuth-Server 端的确认授权视图？
 
 重写 `SaOAuth2Strategy.instance.confirmView` 策略：
@@ -9950,6 +9472,11 @@ public void configOAuth2Server(SaOAuth2ServerConfig oauth2Server) {
 | :--------		| :--------	| :--------								|
 | client_id		| 是		| 应用 id								|
 | scope			| 是		| 具体授予的权限，多个用逗号(或空格)隔开	|
+| response_type	| 是		| 取当前授权页 URL 上的 `response_type` 参数提交	|
+| redirect_uri	| 是		| 取当前授权页 URL 上的 `redirect_uri` 参数提交	|
+| state			| 否		| 取当前授权页 URL 上的 `state` 参数提交			|
+
+推荐直接提交当前页面的 query 参数，例如：`fetch('/oauth2/doConfirm' + location.search, {method: 'POST'})`
 
 接口返回值样例：
 ``` js
@@ -10005,7 +9532,6 @@ private void configOAuth2Server(SaOAuth2ServerConfig oauth2Server) {
 ```
 
 启动项目，统一认证地址就被我们修改成了：`http://{host}:{port}/oauth2/authorize2`
-
 
 ##### 方式二：拆分路由入口
 根据上述路由入口：`@RequestMapping("/oauth2/*")`，我们给它起一个合适的名字 —— 聚合式路由。
@@ -10092,7 +9618,6 @@ public class SaOAuth2ServerController {
 
 我们只需要把上述逻辑从 oauth2-server 的后端搬到 oauth2-server 的前端即可。
 
-
 ##### 2、OAuth2-Server 后端添加接口
 
 首先在 `oauth2-server` 的后端添加一个接口，用于获取最终授权重定向地址：
@@ -10178,20 +9703,13 @@ public class SaOAuth2ServerH5Controller {
 
 ##### 3、新建前端项目
 
-既然是前后台分离，那肯定要有一个独立的前端项目，所需代码比较冗长，不便于在文档处直接展示，大家可以参考在线仓库示例：
-
-[sa-token-demo-oauth2-server-h5/](https://gitee.com/dromara/sa-token/blob/dev/sa-token-demo/sa-token-demo-oauth2/sa-token-demo-oauth2-server-h5/)
-
+既然是前后台分离，那肯定要有一个独立的前端项目，所需代码比较冗长，不便于在文档处直接展示，大家可以参考仓库示例`/sa-token-demo/sa-token-demo-oauth2/sa-token-demo-oauth2-server-h5`（完整压缩包见 [Sa-Token 集成示例大全下载](/more/download-demos) ）：
 
 ##### 4、运行测试
 
 在前端 ide 中导入 demo 案例的 `sa-token-demo-oauth2-server-h5` 项目，然后直接预览 `oauth2-authorize.html` 页面，如图所示：
 
-
-
 复制上述地址，然后将其配置到 “OAuth2前端测试页” 的 “OAuth2 Server 授权页地址” 选项中，其它选项保持默认不变：
-
-
 
 然后根据 “OAuth2前端测试页” 的页面提示进行测试即可，此处不再赘述。
 
@@ -10199,9 +9717,7 @@ public class SaOAuth2ServerH5Controller {
 
 ### oauth2/oauth2-openid: OpenId 与 UnionId
 
-参考视频：OAuth2 授权流程中的 clientId、openId、unionId、userId 都是干嘛的？
-
-
+视频讲解：OAuth2 授权流程中的 clientId、openId、unionId、userId 都是干嘛的？
 
 ##### 1、OpenId 
 
@@ -10219,8 +9735,6 @@ md5(prefix + "_" + clientId + "_" + loginId);
 
 其中的 prefix 前缀默认值为：`openid_default_digest_prefix`，你可以通过以下方式配置：
 
-
-
 ``` yaml
 # sa-token配置
 sa-token:
@@ -10233,8 +9747,6 @@ sa-token:
 # 默认 openid 生成算法中使用的摘要前缀
 sa-token.oauth2-server.openid-digest-prefix=xxxxxx
 ```
-
-
 
 你也可以通过实现 `SaOAuth2DataLoader` 接口完全自定义 OpenId 生成算法：
 
@@ -10255,9 +9767,7 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 }
 ``` 
 
-
 ###### openid 算法要求
-
 
 正常来讲，openid 算法需要保证：
 
@@ -10285,8 +9795,6 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 - create_time：数据创建时间。
 - xxx：其它需要扩展的字段。
 
-
-
 ##### 2、UnionId 
 
 `UnionId` 的特点与 `OpenId` 几乎一致：同一用户在不同 client 里的 UnionId 值是不同的，除非这些应用属于同一主体。
@@ -10313,7 +9821,7 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
             return new SaClientModel()
 					.setClientId("xxxx")  
 					.setClientSecret("xxxx")   
-					.setSubjectId("1000001")   // 关键代码：主体 id (可选)
+					.setSubjectId("1000001")   // ⚠️ 关键代码：主体 id (可选)
 					// ....
             ;
         }
@@ -10333,8 +9841,6 @@ md5(prefix + "_" + subjectId + "_" + loginId);
 
 其中的 prefix 前缀默认值为：`unionid_default_digest_prefix`，你可以通过以下方式配置：
 
-
-
 ``` yaml
 # sa-token配置
 sa-token:
@@ -10347,8 +9853,6 @@ sa-token:
 # 默认 unionid 生成算法中使用的摘要前缀
 sa-token.oauth2-server.unionid-digest-prefix=xxxxxx
 ```
-
-
 
 你也可以通过实现 `SaOAuth2DataLoader` 接口完全自定义 UnionId 生成算法：
 
@@ -10371,9 +9875,6 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 
 unionid 算法要求与 openid 基本一致，可参考上述 openid 算法要求介绍，此处暂不赘述。
 
-
-
-
 ##### 3、总结
 
 | 类型			| 概念															|
@@ -10393,23 +9894,19 @@ unionid 算法要求与 openid 基本一致，可参考上述 openid 算法要�
 
 1、引入 `sa-token-jwt` 依赖，用来签发 `id_token` 
 
-
-
 ``` xml
 <!-- sa-token-jwt 签发 OIDC id_token 令牌 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-jwt</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // sa-token-jwt 签发 OIDC id_token 令牌 
-implementation 'cn.dev33:sa-token-jwt:1.45.0'
+implementation 'cn.dev33:sa-token-jwt:1.46.0'
 ```
-
-
 
 2、在 `SaOAuth2DataLoader` 实现类中，返回的 `SaClientModel` 中添加 `oidc` 的签约权限。
 
@@ -10436,8 +9933,6 @@ public class SaOAuth2DataLoaderImpl implements SaOAuth2DataLoader {
 
 3、在 `application.yml` 配置文件中配置 jwt 生成秘钥：
 
-
-
 ``` yaml
 sa-token:
 	# jwt秘钥 
@@ -10449,10 +9944,7 @@ sa-token:
 sa-token.jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk
 ```
 
-
 注：为了安全起见请不要直接复制官网示例这个字符串（随便按几个字符就好了）
-
-
 
 ##### 2、测试
 
@@ -10480,7 +9972,7 @@ http://sa-oauth-server.com:8000/oauth2/token
 	"code": 200,
 	"msg": "ok",
 	"data": null,
-	"token_type": "bearer",
+	"token_type": "Bearer",
 	"access_token": "WdpjZdGlXdOzsAcr7gqPwmLVInHrhpznQa2pDOVqZmLXQynBflkcWqE6f5o2",
 	"refresh_token": "hKHwBm3eH6iqSHlXRGWQaziV8OoyHvzmUb97lKEEZnZJLt3NunBFx7rVZWbT",
 	"expires_in": 7199,
@@ -10507,10 +9999,9 @@ http://sa-oauth-server.com:8000/oauth2/token
 
 如果默认携带的载荷无法满足你的业务需求，你还可以自定义追加扩展字段，让 `id_token` 返回更多信息 
 
-
 ##### 3、扩展 id_token 载荷
 
-新建 `CustomOidcScopeHandler` 集成 `OidcScopeHandler`，扩展 OIDC 权限处理器，返回更多字段：
+新建 `CustomOidcScopeHandler` 继承 `OidcScopeHandler`，扩展 OIDC 权限处理器，返回更多字段：
 ``` java
 /**
  * 扩展 OIDC 权限处理器，返回更多字段
@@ -10525,7 +10016,7 @@ public class CustomOidcScopeHandler extends OidcScopeHandler {
 
         idToken.extraData.put("uid", userId); // 用户id
         idToken.extraData.put("nickname", "lin_xiao_lin"); // 昵称
-        idToken.extraData.put("picture", "https://sa-token.cc/logo.png"); // 头像
+        idToken.extraData.put("picture", "https://sa-token.com/logo.png"); // 头像
         idToken.extraData.put("email", "456456@xx.com"); // 邮箱
         idToken.extraData.put("phone_number", "13144556677"); // 手机号
         // 更多字段 ...
@@ -10551,7 +10042,7 @@ public class CustomOidcScopeHandler extends OidcScopeHandler {
   "azp": "1001",
   "uid": "10001",
   "nickname": "lin_xiao_lin",
-  "picture": "https://sa-token.cc/logo.png",
+  "picture": "https://sa-token.com/logo.png",
   "email": "456456@xx.com",
   "phone_number": "13144556677"
 }
@@ -10569,7 +10060,6 @@ sa-token-oauth2 模块扩展了三个注解用于相关数据校验：
 和 Sa-Token-Code 模块的注解一样，你必须先注册框架的内置拦截器，才可以使用这些注解，详细参考：[注解鉴权](/use/at-check) 。
 
 --- 
-
 
 ##### 1、@SaCheckAccessToken 示例
 
@@ -10603,7 +10093,6 @@ public class TestController {
 }
 ```
 
-
 ##### 2、@SaCheckClientToken 示例
 
 ``` java
@@ -10635,7 +10124,6 @@ public class TestController {
 
 }
 ```
-
 
 ##### 3、@SaCheckClientIdSecret 示例
 ``` java
@@ -10670,8 +10158,6 @@ public class TestController {
 
 那么，有什么办法可以做到这两个模块的数据互通呢？
 
-
-
 ##### OAuth2-Server 端数据互通
 
 很简单，你只需要在 `configOAuth2Server` 中重写 Access-Token 的生成策略：
@@ -10693,13 +10179,11 @@ public void configOAuth2Server(SaOAuth2ServerConfig oauth2Server) {
 
 重启项目，然后在 OAuth2 模块授权登录，现在生成的 `access_token` ，可以用来访问 `satoken` 的会话接口了。
 
-
 > [!WARNING| label:注意点] 
 > 数据互通，让前端与后端的交互更加方便，一个 token 即可访问所有接口，但也一定程度上失去了OAuth2的 “不同 Client 不同权限” 的设计意义，
 > 同时也默认每个 Client 都拥有了账号的会话权限（access_token 与 satoken 为同一个）。
 > 
 > 应该根据自己的架构合理分析是否应该整合数据互通。
-
 
 ##### OAuth2-Client 数据互通
 除了Server端，Client端也可以打通 `access_token` 与 `satoken` 会话。做法是在 Client 端拿到 `access_token` 后进行登录时，使用 `SaLoginParameter` 预定登录生成的 Token 值 
@@ -10713,6 +10197,12 @@ StpUtil.login(uid, new SaLoginParameter().setToken(access_token));
 
 // 3. 其它代码...
 ```
+
+**疑问：数据互通后，两个 token 的过期策略是什么？**
+
+会话 token 由 `sa-token.timeout` 决定，`access_token` 由 `sa-token.oauth2-server.access-token-timeout` 决定。
+
+数据互通只是将 token 拷贝一份进行复用，动作完成之后两者不再有任何联系。
 
 ---
 
@@ -10756,7 +10246,6 @@ SaOAuth2Util.isGrantScope(loginId, clientId, scopes);
 SaOAuth2Util.deleteGrantScope(loginId, clientId);
 ```
 
-
 ##### Code 相关
 ``` java
 // 获取 CodeModel，无效的 code 会返回 null
@@ -10768,7 +10257,6 @@ SaOAuth2Util.checkCode(code);
 // 获取 Code，根据索引： clientId、loginId
 SaOAuth2Util.getCodeValue(clientId, loginId);
 ```
-
 
 ##### Access-Token 相关
 ``` java
@@ -10800,7 +10288,6 @@ SaOAuth2Util.revokeAccessToken(accessToken);
 SaOAuth2Util.revokeAccessTokenByIndex(clientId, loginId);
 ```
 
-
 ##### Refresh-Token 相关
 ``` java
 // 获取 RefreshTokenModel，无效的 RefreshToken 会返回 null
@@ -10821,7 +10308,6 @@ SaOAuth2Util.revokeRefreshTokenByIndex(clientId, loginId);
 // 根据 RefreshToken 刷新出一个 AccessToken
 SaOAuth2Util.refreshAccessToken(refreshToken);
 ```
-
 
 ##### Client-Token 相关
 
@@ -10848,7 +10334,6 @@ SaOAuth2Util.revokeClientToken(clientToken);
 SaOAuth2Util.revokeClientTokenByIndex(clientId);
 ```
 
-
 ##### 请求查询
 
 ``` java
@@ -10861,13 +10346,9 @@ SaOAuth2Util.currentAccessToken();
 SaOAuth2Util.currentClientToken();
 ```
 
-
-
 详情请参考源码：[码云：SaOAuth2Util.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-plugin/sa-token-oauth2/src/main/java/cn/dev33/satoken/oauth2/template/SaOAuth2Util.java)
 
-
 ##### OAuth2-Server 所有可重写策略
-
 
 ###### 权限处理器
 ``` java
@@ -10887,7 +10368,6 @@ SaOAuth2Strategy.instance.workClientTokenByScope = at -> {
 }
 ```
 
-
 ###### grant_type 处理器
 ``` java
 // 根据 grantType 构造一个 AccessTokenModel
@@ -10895,7 +10375,6 @@ SaOAuth2Strategy.instance.grantTypeAuth = req -> {
 	// ... 
 }
 ```
-
 
 ###### 凭证创建
 ``` java
@@ -10920,7 +10399,6 @@ SaOAuth2Strategy.instance.createClientToken = (clientId, scopes) -> {
 }
 ```
 
-
 ###### 认证流程回调
 ``` java
 // OAuth-Server端：未登录时返回的View
@@ -10944,7 +10422,6 @@ SaOAuth2Strategy.instance.userAuthorizeClientCheck = (loginId, clientId) -> {
 }
 ```
 
-
 ###### 其它
 ``` java
 // 在创建 SaClientModel 时，设置其默认字段
@@ -10963,7 +10440,6 @@ OAuth2 集成常见问题整理
 
 --- 
 
-
 ##### 问：搭建好 oauth2-server 服务后，访问返回：`{"msg": "not handle"}`。
 
 返回这个信息，代表你访问的路由有错误，比如说：
@@ -10973,19 +10449,8 @@ OAuth2 集成常见问题整理
 
 地址写错了，框架就不会处理这个请求，会直接返回 `{"msg": "not handle"}`，所有开放地址可参考：[OAuth2 开放接口](/oauth2/oauth2-apidoc)
 
-如果仔细检查地址后没有写错，却依然返回了这个信息，那有可能是对应的接口没有打开，比如说：
-
-- sso-server 端的单点注销地址：`http://{host}:{port}/sso/signout`；
-- sso-client 端的注销地址：`http://{host}:{port}/sso/logout`；
-
-都需要在配置文件配置：`sa-token.sso.is-slo=true`后，才会打开。
-
-
-
 ##### 问：我参照文档搭建 oauth2-server，一直提示：code 无效，请问怎么回事？
 一个 code 码只能使用一次，多次使用就会报这个错。
-
-
 
 ##### 问：Sa-Token-OAuth2 怎么集成多账号模式？
 
@@ -11002,9 +10467,6 @@ public void configOAuth2Server(SaOAuth2ServerConfig oauth2Server) {
 }
 ```
 
-
-
-
 ##### 问：授权码流程中 state 参数是干吗用的？
 
 state 参数用于验证授权码流程的发起端和接受端是否为同一个客户端，以防止OAuth-Server账号伪装攻击。
@@ -11013,59 +10475,6 @@ state 参数用于验证授权码流程的发起端和接受端是否为同一�
 - state 参数必须足够随机，不可被预测。
 - state 参数与授权码流程发起客户端 一 一 对 应，授权流程发起时创建的 state 必须与接受时返回的 state 值一致。
 - 安全起见，一个 state 参数只允许使用一次。
-
----
-
-### pro/st_oauth2: Sa-Max：统一认证商业版
-
-##### 项目介绍
-
-根据 OAuth2 模块文档，以及官网提供的源码示例，您可以很方便的搭建一个 OAuth2 模式的认证 Demo 示例。
-
-然而，要真正开发一个商业级项目的统一认证中心系统，绝非一朝一夕可以搭建完毕，为此我们特意准备了项目：
-[[ Sa-Max 统一认证商业版 ]](https://sa-pro.yun94.cn?way=st_oauth2)。
-
-项目基于 Sa-Token 搭建，集成了统一认证常见技术点，可大大缩短您的项目接入统一授权认证的开发周期：
-- 支持：同域、跨域、共享Redis、跨Redis、前后端一体、前后端分离、纯 js、vue2、vue3、java 项目、非 java 项目 等架构下的 SSO 认证需求。 
-- 支持：API Key、OAuth2.0 统一认证能力， 并提供开放平台，供第三方公司申请应用对接平台能力。
-
-全套源码交付、不包含加密 jar 、可自由二开。不限制域名、不限制项目数量。
-
-
-
-
-
-##### 释疑
-
-###### 1、Sa-Max 是收费项目吗？与 Sa-Token 有什么不同？
-
-`Sa-Max` 是付费项目，暂不开放源码，如需使用需要购买项目授权，您可以在其主页了解更多详细信息。
-
-`Sa-Max` 与 `Sa-Token` 的区别，简单来讲：
-- `Sa-Token` 是一个框架，需要在项目中通过 pom.xml 引入
-- `Sa-Max` 是一个完整项目，下载源码后可直接启动 
-
-
-###### 2、Sa-Token 会不会在某一天收费？导致我们项目无法正常运行？
-首先我们需要了解一点：**已经发布到 Maven 中央仓库的代码，是不可以删除的**，所以这部分代码是无法做到收费的 
-
-其次，像中间件框架，业界没有收费的先例，也没有对应的商业模式，一般的付费项目都是一些成型的完整项目，以解决特定场景的业务需求为目的，
-比如：聊天通信、刷脸认证、短信验证码、聚合支付……等等。
-
-Sa-Max 并非随意收费，只有当您的系统需要 **统一认证中心** 时您才会用到它，花一笔小钱节省大量开发工期，整体来看，这是非常划算的。
-
-另外：即使您没有购买 `Sa-Max`，也不会影响到您对 `Sa-Token` 的使用，举个例子：MySQL具有社区版与企业版，即使您没有购买其付费版，也不会影响到您对免费 MySql 的使用。
-
-
-
-###### 3、Sa-Token 团队日后的主要精力是不是放在 Sa-Max 上，降低对 Sa-Token 的支持？毕竟 Sa-Token 是免费的！
-
-答案是不会。
-
-再次强调一下：`Sa-Token` 与 `Sa-Max` 是两个独立的项目，两者互不影响。
-付费项目的出现不会降低对 `Sa-Token` 的支持，`Sa-Token`将会按照原有的发展继续升级迭代。
-
-实际结果可能会恰恰相反：有了盈利来源，`Sa-Token`将发展的更快。
 
 ---
 
@@ -11090,31 +10499,26 @@ Sa-Max 并非随意收费，只有当您的系统需要 **统一认证中心** �
 3. **建立会话中心**：将Session存储在专业的缓存中间件上，使每个节点都变成了无状态服务，例如：`Redis`
 4. **颁发无状态token**：放弃Session机制，将用户数据直接写入到令牌本身上，使会话数据做到令牌自解释，例如：`jwt`
 
-
 ##### 方案选择
 
 该如何选择一个合适的方案？
 - 方案一：性能消耗太大，不太考虑
 - 方案二：需要从网关处动手，与框架无关
 - 方案三：Sa-Token 整合`Redis`非常简单，详见章节：[集成 Redis](/up/integ-redis)
-- 方案四：详见官方仓库中 Sa-Token 整合`jwt`的示例
+- 方案四：详见官方仓库中 Sa-Token 整合`jwt`的示例（示例压缩包：[Sa-Token 集成示例大全下载](/more/download-demos) ）
 
 由于`jwt`模式不在服务端存储数据，对于比较复杂的业务可能会功能受限，因此更加推荐使用方案三
 
-
 加载动态演示图
 
-
 集成依赖示例：
-
-
 
 ``` xml 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
     <groupId>org.apache.commons</groupId>
@@ -11124,10 +10528,9 @@ Sa-Max 并非随意收费，只有当您的系统需要 **统一认证中心** �
 
 ``` gradle
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 ```
-
 
 详细参考：[集成 Redis](/up/integ-redis)
 
@@ -11143,27 +10546,23 @@ implementation 'org.apache.commons:commons-pool2'
 
 --- 
 
-
-
 ##### 1、引入依赖 
 
 首先，根据 [依赖引入说明](/micro/import-intro) 引入正确的依赖，以`[SpringCloud Gateway]`为例：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证（Reactor响应式集成）, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证（Reactor响应式集成）, 在线文档：https://sa-token.com -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
-    <version>1.45.0</version>
+    <version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
     <groupId>org.apache.commons</groupId>
@@ -11173,19 +10572,16 @@ implementation 'org.apache.commons:commons-pool2'
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.46.0'
 
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
-
-
 
 注：Redis包是必须的，因为我们需要和各个服务通过Redis来同步数据 
 
@@ -11216,7 +10612,6 @@ public class StpInterfaceImpl implements StpInterface {
 1. 在网关处集成ORM框架，直接从数据库查询数据
 2. 先从Redis中获取数据，获取不到时走ORM框架查询数据库 
 3. 先从Redis中获取缓存数据，获取不到时走RPC调用子服务 (专门的权限数据提供服务) 获取
-
 
 ##### 3、注册全局过滤器 
 然后在网关处注册全局过滤器进行鉴权操作 
@@ -11266,7 +10661,6 @@ public class SaTokenConfigure {
 
 --- 
 
-
 ##### 一、需求场景  
 
 我们的子服务一般不能通过外网直接访问，必须通过网关转发才是一个合法的请求，这种子服务与外网的隔离一般分为两种：
@@ -11282,29 +10676,25 @@ Sa-Token提供两种解决方案：
 
 本篇主要讲解方案二 `Same-Token` 模块的整合步骤，其鉴权流程与 OAuth2.0 类似，不过使用方式上更加简洁（希望使用方案一的同学可参考Sa-OAuth2模块，此处不再赘述）
 
-
-
-
 ##### 二、网关转发鉴权 
 
 ###### 1、引入依赖
 
 在网关处引入的依赖为（此处以 SpringCloud Gateway 为例）：
 
-
 ``` xml 
-<!-- Sa-Token 权限认证（Reactor响应式集成）, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证（Reactor响应式集成）, 在线文档：https://sa-token.com -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
-    <version>1.45.0</version>
+    <version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
     <groupId>org.apache.commons</groupId>
@@ -11314,35 +10704,32 @@ Sa-Token提供两种解决方案：
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.46.0'
 
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
-
 
 在下游子服务引入的依赖为：
 
-
 ``` xml 
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-spring-boot-starter</artifactId>
-    <version>1.45.0</version>
+    <version>1.46.0</version>
 </dependency>
 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
     <groupId>org.apache.commons</groupId>
@@ -11352,18 +10739,16 @@ implementation 'org.apache.commons:commons-pool2'
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-spring-boot4-starter`。
-
 
 ###### 2、网关处添加Same-Token
 
@@ -11388,7 +10773,6 @@ public class ForwardAuthFilter implements GlobalFilter {
 }
 ```
 此过滤器会为 Request 请求头追加 `Same-Token` 参数，这个参数会被转发到子服务 
-
 
 ###### 3、在子服务里校验参数 
 
@@ -11423,7 +10807,6 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 > [!WARNING| label:越过网关访问] 
 > 如果通过网关转发，可以正常访问。如果直接访问子服务会提示：`无效Same-Token：xxx`
 
-
 ##### 三、服务间内部调用鉴权 
 
 有时候我们需要在一个服务调用另一个服务的接口，这也是需要添加`Same-Token`作为身份凭证的
@@ -11455,7 +10838,7 @@ public class FeignInterceptor implements RequestInterceptor {
  */
 @FeignClient(
 		name = "sp-home", 				// 服务名称 
-		configuration = FeignInterceptor.class,		// 请求拦截器 （关键代码）
+		configuration = FeignInterceptor.class,		// 请求拦截器 （⚠️ 关键代码）
 		fallbackFactory = SpCfgInterfaceFallback.class	// 服务降级处理 
 		)	
 public interface SpCfgInterface {
@@ -11469,17 +10852,11 @@ public interface SpCfgInterface {
 
 被调用方的代码无需更改（按照网关转发鉴权处的代码注册全局过滤器），保持启动测试即可 
 
-
 ##### 四、Same-Token 模块详解 
 
 Same-Token —— 专门解决同源系统互相调用时的身份认证校验，它的作用不仅局限于微服务调用场景
 
 基本使用流程为：服务调用方获取 Same-Token，提交到请求中，被调用方取出 Same-Token 进行校验：如果一致则校验通过，否则拒绝服务。
-
-
-
-
-
 
 首先我们预览一下此模块的相关API：
 ``` java
@@ -11547,50 +10924,41 @@ Same-Token 模块在每次刷新 Token 时，旧 Token 会被作为次级 Token 
 
 总体来讲，我们需要关注的依赖就是两个：`sa-token-spring-boot-starter` 和 `sa-token-reactor-spring-boot-starter`：
 
-
-
 ``` xml 
-<!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证，在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证，在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-spring-boot4-starter`。
 
-
-
-
 ``` xml 
-<!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-reactor-spring-boot-starter</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
 
-
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
-implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0'
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
+implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.46.0'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
 - 如果你使用的 `SpringBoot 4.x`，请引入 `sa-token-reactor-spring-boot4-starter`。
-
-
 
 至于怎么分辨我们需要引入哪个呢？这个要看你使用的基础框架：
 
@@ -11605,14 +10973,12 @@ implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0'
 
 另外，我们需要引入Redis集成包，因为我们的网关和子服务主要通过Redis来同步数据 
 
-
-
 ``` xml 
 <!-- Sa-Token 整合 RedisTemplate -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 <dependency>
     <groupId>org.apache.commons</groupId>
@@ -11622,10 +10988,9 @@ implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:1.45.0'
 
 ``` gradle
 // Sa-Token 整合 RedisTemplate
-implementation 'cn.dev33:sa-token-redis-template:1.45.0'
+implementation 'cn.dev33:sa-token-redis-template:1.46.0'
 implementation 'org.apache.commons:commons-pool2'
 ```
-
 
 详细参考：[集成 Redis](/up/integ-redis)
 
@@ -11642,23 +11007,19 @@ implementation 'org.apache.commons:commons-pool2'
 
 因此Sa-Token提供AOP插件，你只需在`pom.xml`里添加如下依赖，便可以在任意层级使用注解鉴权
 
-
-
 ``` xml 
 <!-- Sa-Token 整合 SpringAOP 实现注解鉴权 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-aop</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 整合 SpringAOP 实现注解鉴权
-implementation 'cn.dev33:sa-token-spring-aop:1.45.0'
+implementation 'cn.dev33:sa-token-spring-aop:1.46.0'
 ```
-
-
 
 ###### 注意点：
 - 使用拦截器模式，只能把注解写在`Controller层`，使用AOP模式，可以将注解写在任意层级 
@@ -11704,7 +11065,6 @@ implementation 'cn.dev33:sa-token-spring-aop:1.45.0'
 > 
 > 而且为了安全性，这个token的有效期一般不会太长，给你预留五分钟、半小时的时间足够你点击它即可。
 
-
 ##### 2、创建临时 token
 
 **[sa-token-temp 临时 token 认证模块]** 已内嵌到核心包，无需引入其它依赖即可使用：
@@ -11723,7 +11083,6 @@ SaTempUtil.getTimeout(token);
 SaTempUtil.deleteToken(token);
 ```
 
-
 ##### 3、前缀拼接与裁剪
 
 ``` java
@@ -11738,7 +11097,6 @@ SaTempUtil.parseToken(token, "shop_", Long.class)
 ```
 
 如果指定了错误的前缀，即使 token 正确，上述方法也将返回 null 
-
 
 ##### 4、根据 value 反查 token
 
@@ -11757,28 +11115,22 @@ List<String> list = SaTempUtil.getTempTokenList(10004);
 System.out.println(list);
 ```
 
-
-
 ##### 5、集成jwt
 提到 [临时Token认证]，你是不是想到一个专门干这件事的框架？对，就是JWT！
 
 **[sa-token-temp]** 模块允许以JWT作为逻辑内核完成工作，你只需要引入以下依赖，所有上层API保持不变
 
-
-
 ``` xml
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-temp-jwt</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
-implementation 'cn.dev33:sa-token-temp-jwt:1.45.0'
+implementation 'cn.dev33:sa-token-temp-jwt:1.46.0'
 ```
-
-
 
 并在配置文件中配置上jwt秘钥 **`(必填!)`**
 ``` yml
@@ -11792,7 +11144,6 @@ sa-token:
 ### plugin/quick-login: Quick-Login快速登录插件
 
 --- 
-
 
 ##### 解决什么问题
 
@@ -11820,7 +11171,6 @@ Sa-Token-Quick-Login 可以为一个系统快速的、零代码 注入一个登�
 
 Sa-Token-Quick-Login便是为了解决这个问题！
 
-
 ##### 适用场景
 
 Sa-Token-Quick-Login 旨在用最小的成本为项目增加一个登录认证功能
@@ -11831,38 +11181,32 @@ Sa-Token-Quick-Login 旨在用最小的成本为项目增加一个登录认证�
 Sa-Token-Quick-Login的定位是这样的场景：你的项目需要一个登录认证功能、这个认证页面可以不华丽、可以烂，但是一定要有，同时你又不想花费太多的时间浪费在登录页面上，
 那么你便可以尝试一下`Sa-Token-Quick-Login`
 
-
 ##### 集成步骤
 首先我们需要创建一个SpringBoot的demo项目，比如：`sa-token-demo-quick-login`
 
 ###### 1、添加pom依赖
-
-
 
 ``` xml
 <!-- Sa-Token 启动依赖 -->
 <dependency>
         <groupId>cn.dev33</groupId>
         <artifactId>sa-token-spring-boot-starter</artifactId>
-        <version>1.45.0</version>
+        <version>1.46.0</version>
 </dependency>
 <!-- Sa-Token-Quick-Login 插件依赖 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-quick-login</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 启动依赖
-implementation 'cn.dev33:sa-token-spring-boot-starter:1.45.0'
+implementation 'cn.dev33:sa-token-spring-boot-starter:1.46.0'
 // Sa-Token-Quick-Login 插件
-implementation 'cn.dev33:sa-token-quick-login:1.45.0'
+implementation 'cn.dev33:sa-token-quick-login:1.46.0'
 ```
-
-
-
 
 ###### 2、启动类
 ``` java
@@ -11900,11 +11244,7 @@ public class TestController {
 ##### 测试访问
 启动项目，使用浏览器访问：`http://localhost:8081`，首次访问时，由于处于未登录状态，会被强制进入登录页面
 
-
-
 使用默认账号：`sa / 123456`进行登录，会看到资源页面
-
-
 
 也可以通过 Http Basic 的方式直接进行认证 (一般需要在专门的 API 测试工具下才能正常测试，浏览器会自动忽略@之前的信息)
 
@@ -11912,12 +11252,8 @@ public class TestController {
 http://sa:123456@localhost:8081/
 ```
 
-
 ##### 可配置信息
 你可以在yml中添加如下配置 (所有配置都是可选的) 
-
-
-
 
 ``` yaml
 # Sa-Token-Quick-Login 配置
@@ -11940,7 +11276,6 @@ sa:
     # exclude: /1.jpg
 ```
 
-
 ``` properties
 ####### Sa-Token-Quick-Login 配置 #######
 # 登录账号
@@ -11961,24 +11296,14 @@ sa.copr=true
 # sa.exclude=/1.jpg
 ```
 
-
-
-
-
-
-**注：**示例源码在`/sa-token-demo/sa-token-demo-quick-login`目录下，可结合源码查看学习
-
-
+**注：**示例源码在`/sa-token-demo/sa-token-demo-quick-login`目录下，可结合源码查看学习。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ##### 使用独立jar包运行
 使用`sa-token-quick-login`只需引入一个依赖即可为系统注入登录模块，现在我们更进一步，将这个项目打成一个独立的jar包
 
 通过这个jar包，我们可以方便的部署任意静态网站！做到真正的零编码注入登录功能。
 
-
 ###### 打包步骤
-
-
 
 首先放上懒人链接：[sa-quick-dist.jar](https://pan.quark.cn/s/04fd34a24928)，不想手动操作的同学可以直接点此链接下载打包后的jar文件 
 
@@ -12014,11 +11339,8 @@ java -jar sa-quick-dist.jar
 
 5、测试访问，根据控制台输出提示，我们使用浏览器访问测试: `http://localhost:8080`
 
-
-
 如果可以进入登录界面，则代表打包运行成功 
 当然仅仅运行成功还不够，下面我们演示一下如何使用这个jar包进行静态网站部署
-
 
 ##### 所有功能示例
 
@@ -12057,14 +11379,11 @@ java -jar sa-quick-dist.jar --server.port=80
 
 注：所有参数可组合使用
 
-
 ##### 使用SpringBoot默认资源路径
 SpringBoot默认开放了一些路径作为资源目录，比如`classpath:/static/`，
 怎么使用呢？我们只需要在jar包同目录创建一个`\static`文件夹，将静态资源文件复制到此目录下，然后启动jar包即可访问
 
 同时，我们还可以在jar包同目录创建yml配置文件，来覆盖jar包内的yml配置，如下图所示：
-
-
 
 例如如上目录中`/static`中有一个`1.jpg`文件，我们启动jar包后访问`http://localhost:8080/1.jpg`即可查看到此文件，这是Springboot自带的功能，在此不再赘述
 
@@ -12079,44 +11398,32 @@ Sa-Token默认的Redis集成方式会把权限数据和业务缓存放在一起�
 > [!NOTE| label:业务场景] 
 > 搭建两个Redis服务器，一个专门用来做业务缓存，另一台专门存放Sa-Token权限数据 
 
-
 加载动态演示图
-
 
 要将Sa-Token的数据单独抽离出来很简单，你只需要为Sa-Token单独配置一个Redis连接信息即可 
 
 --- 
 
-
 ##### 1、首先引入Alone-Redis依赖 
 
-!--
-> [!NOTE| label:Spring Boot 4 用户]
+> [!WARNING| label:Spring Boot 4 用户]
 > 若使用 Spring Boot 4.x，请引入 `sa-token-alone-redis-by-spring-boot4` 替代 `sa-token-alone-redis`。
--->
-
-
 
 ``` xml 
 <!-- Sa-Token插件：权限缓存与业务缓存分离 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-alone-redis</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 整合 Redis （使用 jackson 序列化方式）
-implementation 'cn.dev33:sa-token-alone-redis:1.45.0'
+implementation 'cn.dev33:sa-token-alone-redis:1.46.0'
 ```
 
-
-
 ##### 2、然后在application.yml中增加配置
-
-
-
 
 ``` yaml
 # Sa-Token 配置
@@ -12156,7 +11463,6 @@ spring:
 		timeout: 10s
 ```
 
-
 ``` properties
 ############## Sa-Token 配置 ############## 
 # Token名称
@@ -12192,15 +11498,11 @@ spring.redis.timeout=10s
 
 ```
 
-
-
-
 具体可参考示例：[码云：application.yml](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-alone-redis/src/main/resources/application.yml)
 
 集群配置说明: alone-redis同样可以配置集群(cluster模式和sentinel模式), 且基础配置参数和spring redis集群配置别无二致
 
 集群配置示例可参考demo项目sa-token-demo-alone-redis-cluster
-
 
 ##### 3、测试
 新建Controller测试一下 
@@ -12233,14 +11535,157 @@ public class TestController {
 
 分别访问两个接口，观察Redis中增加的数据 
 
-
-
 测试完毕！
 
 ##### 4、注意点
 目前 Sa-Token-Alone-Redis 仅对以下插件有 Redis 分离效果：
 - sa-token-redis-template
 - sa-token-redis-template-jdk-serializer
+
+若使用的是 Redisson 而非 RedisTemplate，请改用 [Alone 独立 Redisson 插件](/plugin/alone-redisson)。
+
+---
+
+### plugin/alone-redisson: Alone独立Redisson插件
+
+---
+
+Sa-Token 默认的 Redisson 集成会把权限数据和业务缓存放在同一个 `RedissonClient` 上。需要彻底分离时，可再为 Sa-Token 单独起一个 Redisson 连接。
+
+> [!NOTE| label:业务场景]
+> 搭建两个 Redis：一个给业务 RedissonClient，另一台专门存放 Sa-Token 权限数据。
+
+---
+
+##### 1、引入依赖
+
+引入 `sa-token-alone-redisson` 即可，**无需再引入** `sa-token-redisson` 或 `sa-token-redisson-spring-boot-starter`（本插件已包含 Dao 实现并完成注册）。
+
+业务代码如果也要用 `RedissonClient`：
+- Spring Boot 2 / 3：可再引入官方 `redisson-spring-boot-starter`，或自行注册 Bean。
+- Spring Boot 4：当前 Redisson 3.45 的 starter 仍引用已移除的 `RedisAutoConfiguration`，**不要引入** `redisson-spring-boot-starter`，改为引入 `redisson` 并自行注册 Bean。`sa-token-alone-redisson` 本身无需 Boot 4 专用包。
+
+``` xml
+<!-- Sa-Token 插件：权限缓存与业务缓存分离（Redisson） -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-alone-redisson</artifactId>
+	<version>1.46.0</version>
+</dependency>
+
+<!-- 业务 Redis（按需） -->
+<dependency>
+	<groupId>org.redisson</groupId>
+	<artifactId>redisson-spring-boot-starter</artifactId>
+	<version>${redisson.version}</version>
+</dependency>
+```
+
+``` gradle
+implementation 'cn.dev33:sa-token-alone-redisson:1.46.0'
+// 业务 Redis（按需）
+implementation 'org.redisson:redisson-spring-boot-starter:${redisson.version}'
+```
+
+##### 2、配置独立连接（Redisson 原生 yaml）
+
+配置项与官方 `spring.redis.redisson.config` / `file` 相同，单机用 `singleServerConfig`，集群用 `clusterServersConfig`。
+
+``` yaml
+sa-token:
+    token-name: satoken
+    timeout: 2592000
+    # Sa-Token 单独使用的 Redisson 连接
+    alone-redisson:
+        config: |
+            singleServerConfig:
+                address: "redis://127.0.0.1:6379"
+                database: 2
+                password: null
+
+spring:
+    redis:
+        # 业务使用的 Redisson 连接
+        redisson:
+            config: |
+                singleServerConfig:
+                    address: "redis://127.0.0.1:6379"
+                    database: 0
+                    password: null
+```
+
+``` yaml
+sa-token:
+    alone-redisson:
+        config: |
+            clusterServersConfig:
+                nodeAddresses:
+                    - "redis://127.0.0.1:3000"
+                    - "redis://127.0.0.1:3001"
+                    - "redis://127.0.0.1:3002"
+                password: null
+```
+
+``` yaml
+# application.yml
+sa-token:
+    alone-redisson:
+        file: classpath:sa-redisson.yml
+```
+
+`src/main/resources/sa-redisson.yml` 示例（单机）：
+
+``` yaml
+singleServerConfig:
+    address: "redis://127.0.0.1:6379"
+    database: 2
+    password: null
+```
+
+集群则把内容换成上面「集群」页签里的 `clusterServersConfig` 即可。
+
+`config` 与 `file` 二选一，同时配置时优先 `config`。
+
+完整示例：
+- 单机：[sa-token-demo-alone-redisson](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-alone-redisson/src/main/resources/application.yml)
+- 集群：[sa-token-demo-alone-redisson-cluster](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-alone-redisson-cluster/src/main/resources/application.yml)
+- Spring Boot 3：[sa-token-demo-alone-redisson-sb3](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-alone-redisson-sb3/src/main/resources/application.yml)
+- Spring Boot 4：[sa-token-demo-alone-redisson-sb4](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-alone-redisson-sb4/src/main/resources/application.yml)
+
+##### 3、测试
+
+``` java
+@RestController
+@RequestMapping("/test/")
+public class TestController {
+
+	@Autowired
+	RedissonClient redissonClient;
+
+	// 测试 Sa-Token 缓存 --- http://localhost:8084/test/login
+	@RequestMapping("login")
+	public SaResult login(@RequestParam(defaultValue="10001") String id) {
+		StpUtil.login(id);
+		return SaResult.ok();
+	}
+
+	// 测试业务缓存 --- http://localhost:8084/test/test
+	@RequestMapping("test")
+	public SaResult test() {
+		redissonClient.getBucket("hello").set("Hello World");
+		return SaResult.ok();
+	}
+}
+```
+
+分别访问两个接口，观察两套 Redis 中增加的数据。
+
+##### 4、注意点
+- 引入本插件后，无需再引入 `sa-token-redisson` 或 `sa-token-redisson-spring-boot-starter`。
+- 业务代码注入的 `RedissonClient` 来自官方 `redisson-spring-boot-starter` 或你自己注册的 Bean，与 Sa-Token 使用的独立连接互不影响。Spring Boot 4 请自行注册，不要引入 3.45 的 starter。
+- `SaTokenDaoForRedisson` 默认使用 `StringCodec`，与业务 `RedissonClient` 的全局 codec 无关。
+- Redis Cluster 没有 database 索引，集群配置里不要写 `database`。
+- 哨兵模式同样走 Redisson 原生 yaml（`sentinelServersConfig`），按 [Redisson 配置文档](https://github.com/redisson/redisson/wiki/2.-Configuration) 填写即可。
 
 ---
 
@@ -12260,11 +11705,12 @@ public class TestController {
 - sa-token-caffeine：集成 Caffeine 缓存方案（基于内存）。
 - sa-token-redisson：集成 Redisson 客户端。
 - sa-token-redisson-spring-boot-starter：集成 Redisson 客户端 - SpringBoot 自动配置包 。
+- sa-token-alone-redisson：独立 Redisson 连接，权限缓存与业务缓存分离。
 - sa-token-redisx：Redisx 集成包。 
 
+`SaTokenDaoForRedisson` 默认使用 `StringCodec`。从旧版本升级时，请先清空 Redis 中的 Sa-Token 缓存，或构造时传入 `Kryo5Codec` 以兼容旧数据，详见：[集成 Redis - 集成 Redisson](/up/integ-redis?id=_5集成-redisson)。
 
 有关 Redis 集成，详细参考：[集成Redis](/up/integ-redis)，更多存储方式欢迎提交PR 
-
 
 **扩展：集成 MongoDB**
 
@@ -12277,6 +11723,8 @@ public class TestController {
 
 --- 
 
+#### JSON 序列化插件大全
+
 Sa-Token 在 Session 存储、Redis 缓存等场景下需要对对象进行 JSON 序列化与反序列化。框架将 JSON 转换逻辑抽象到 `SaJsonTemplate` 接口，
 开发者只需引入对应的 JSON 插件依赖，框架会通过 SPI 机制自动完成注入，接口签名：[SaJsonTemplate.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-core/src/main/java/cn/dev33/satoken/json/SaJsonTemplate.java)
  
@@ -12286,84 +11734,150 @@ Sa-Token 在 Session 存储、Redis 缓存等场景下需要对对象进行 JSON
 - **sa-token-jackson3**：集成 Jackson 3（tools.jackson.core），适用于 SpringBoot4、Java 17+ 等环境。
 - **sa-token-fastjson**：集成 Fastjson。
 - **sa-token-fastjson2**：集成 Fastjson2。
+- **sa-token-fory-json**：集成 [Apache Fory JSON](https://fory.apache.org/docs/json/)（高性能 JSON 编解码，不在 JSON 中写入类型信息，用法同 Fastjson2）。
 - **sa-token-snack3**：集成 Snack3。
 - **sa-token-snack4**：集成 Snack4。
 
-> 若使用 `sa-token-spring-boot-starter` 集成包（含 SpringBoot3），框架会自动引入 Jackson 作为默认 JSON 方案，一般无需额外配置。如需更换为其它 JSON 框架，引入对应插件依赖即可。
-
-
+> 默认 JSON 组件：
+> 
+> - `sa-token-spring-boot-starter` 会自动引入 `sa-token-jackson` 作为默认 JSON 方案。
+> - `sa-token-spring-boot3-starter` 会自动引入 `sa-token-jackson`  作为默认 JSON 方案。
+> - `sa-token-spring-boot4-starter` 会自动引入 `sa-token-jackson3`  作为默认 JSON 方案。
+> 
+> 如需更换为其它 JSON 框架，引入对应插件依赖即可。
 
 ``` xml
 <!-- Sa-Token 整合 Jackson -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-jackson</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-jackson:1.45.0'`
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-jackson:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Jackson3 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-jackson3</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-jackson3:1.45.0'`
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-jackson3:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Fastjson -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-fastjson</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson:1.45.0'`
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Fastjson2 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-fastjson2</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson2:1.45.0'`
+Gradle 参考：`implementation 'cn.dev33:sa-token-fastjson2:1.46.0'`
 
+``` xml
+<!-- Sa-Token 整合 Apache Fory JSON -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-fory-json</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+Gradle 参考：`implementation 'cn.dev33:sa-token-fory-json:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Snack3 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-snack3</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-snack3:1.45.0'`
-
+Gradle 参考：`implementation 'cn.dev33:sa-token-snack3:1.46.0'`
 
 ``` xml
 <!-- Sa-Token 整合 Snack4 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-snack4</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-Gradle 参考：`implementation 'cn.dev33:sa-token-snack4:1.45.0'`
+Gradle 参考：`implementation 'cn.dev33:sa-token-snack4:1.46.0'`
 
+#### JSON 全局类型白名单机制
 
+##### 报错示例
 
+如果你在往 SaSession 上存储实体类字段，或从 Redis 反序列化 Session / 对象时报错：
+
+```
+无法反序列化的类型：com.pj.model.SysUser，请先将其注册到 JSON 全局类型白名单
+```
+
+##### 这是因为
+
+Sa-Token 在 **集成 Redis** 等持久化场景下，会把 `SaSession` 以及 `SaTokenDao.getObject()` / `setObject()` 中的对象先做 **JSON 序列化** 再写入 Redis。而后在使用数据时再进行反序列化。
+
+为防止攻击者篡改 Redis 中的类型标记、实例化 classpath 上任意类（多态反序列化 RCE），或开发者使用 `sa-token-json` 组件将不安全的前端提交内容进行反序列化，框架只允许 **白名单内的类型** 参与这类多态反序列化。  
+
+白名单内置常见 JDK 值类型，以及已实现 `SaJsonType` 的框架 Model 等；**你的业务实体类默认不在白名单中**，因此反序列化时会抛出上述异常。
+
+> 说明：`sa-token-fastjson` / `sa-token-fastjson2` / `sa-token-fory-json` / `sa-token-snack3` 默认不在 JSON 中写入类型信息，一般不会出现此报错；业务对象请通过 `SaSession.getModel(key, Class)` 或 `jsonToObject(json, Class)` 指定类型。
+
+白名单由 [SaJsonStrategy](https://gitee.com/dromara/sa-token/blob/master/sa-token-core/src/main/java/cn/dev33/satoken/strategy/SaJsonStrategy.java) 统一管理。**首次** 构建 JSON 插件（如 `SaJsonTemplateForJackson`）时会完成初始化；初始化之后不可再注册类型。
+
+##### 下面是注册 JSON 全局类型白名单的几种方式
+
+###### 1、实体类实现 `SaJsonType`（推荐）
+
+业务 Model 实现标记接口 `SaJsonType` 即可加入白名单，无需额外配置：
+
+``` java
+public class SysUser implements SaJsonType {
+	// ...
+}
+```
+
+###### 2、启动前调用 `registerAllowType`
+
+在 **JSON 插件完成初始化之前** 注册（Spring Boot 请在 `main` 方法里、`SpringApplication.run` 之前；Solon 请在 `Solon.start` 之前）：
+
+``` java
+import cn.dev33.satoken.strategy.SaJsonStrategy;
+
+public static void main(String[] args) {
+	// 在项目启动前，将所有需要反序列化的 Bean Class 进行注册
+	SaJsonStrategy.instance.registerAllowType(SysUser.class);
+
+	SpringApplication.run(Application.class, args);
+}
+```
+
+###### 3、通过 SPI 文件批量声明
+
+在 `resources/META-INF/satoken/sa-json-type.list` 中按行写入完整类名（`#` 开头为注释）：
+
+``` properties
+# 允许参与多态 JSON 反序列化的业务类型
+com.pj.model.SysUser
+com.pj.model.SysRole
+```
+
+---
 
 有关 Redis 集成与序列化配置，详细参考：[集成 Redis](/up/integ-redis)
-
-更多自定义序列化方案（如 Base64、天干地支等），可参考：[序列化插件扩展包](/plugin/custom-serializer)
 
 ---
 
@@ -12371,25 +11885,21 @@ Gradle 参考：`implementation 'cn.dev33:sa-token-snack4:1.45.0'`
 
 --- 
 
-引入此插件可以为 Sa-Token 提供一些有意思的序列化方案。（娱乐向，不建议上生产）
-
-
+引入此插件可以为 Sa-Token 提供一些有意思的序列化方案。（娱乐向，不建议上生产，只为探索序列化插件更多边界能力）
 
 ``` xml 
 <!-- Sa-Token 自定义 String 序列化方案合集 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-serializer-features</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 自定义 String 序列化方案合集
-implementation 'cn.dev33:sa-token-serializer-features:1.45.0'
+implementation 'cn.dev33:sa-token-serializer-features:1.46.0'
 ```
-
-
 
 ###### 1、SaSerializerForBase64UseTianGan
 base64 编码，采用 十大天干、十二地支 等64个中文字符作为元字符集
@@ -12404,9 +11914,6 @@ public void rewriteComponent() {
 
 效果图：
 
-
-
-
 ###### 2、SaSerializerForBase64UsePeriodicTable
 base64 编码，采用 元素周期表 前六十四位作为元字符集
 
@@ -12420,10 +11927,6 @@ public void rewriteComponent() {
 
 效果图：
 
-
-
-
-
 ###### 3、SaSerializerForBase64UseSpecialSymbols
 base64 编码，采用64个特殊符号作为元字符集
 
@@ -12436,9 +11939,6 @@ public void rewriteComponent() {
 ```
 
 效果图：
-
-
-
 
 ###### 4、SaSerializerForBase64UseEmoji
 base64 编码，采用 64 个 Emoji 小黄脸作为元字符集，无填充字符
@@ -12455,6 +11955,115 @@ public void rewriteComponent() {
 
 ---
 
+### plugin/http-extend: HTTP 请求扩展
+
+---
+
+#### HTTP 请求插件大全
+
+Sa-Token 在 SSO 模式三（`isHttp`）、单点注销、消息推送等场景需要发起 HTTP 请求。框架将 HTTP 调用逻辑抽象到 `SaHttpTemplate` 接口，
+开发者只需引入对应的 HTTP 插件依赖，框架会通过 SPI 机制自动完成注入，接口签名：[SaHttpTemplate.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-core/src/main/java/cn/dev33/satoken/http/SaHttpTemplate.java)
+
+框架已提供的 HTTP 请求插件包括：
+
+- **sa-token-forest**：整合 Forest，适用于 Spring / 非 Spring 环境（SSO 示例默认使用）。
+- **sa-token-okhttps**：整合 OkHttps，适用于 Spring / 非 Spring 环境。
+- **sa-token-rest-template**：整合 Spring `RestTemplate`，适用于 Spring Boot 2 / 3 / 4 环境。
+- **sa-token-rest-client**：整合 Spring `RestClient`，适用于 Spring Boot 3.2+ / Spring Framework 6.1+ 环境。
+
+> 默认实现：
+>
+> - `SaHttpTemplateDefaultImpl` 未实现 HTTP 调用，未引入插件时会抛出「本地系统没有配置 http 请求处理器」（错误码 30010）。
+> - 同一 classpath 只应存在一个 HTTP 插件；多插件并存时后加载的会覆盖 `SaHttpTemplate`。
+
+``` xml
+<!-- Sa-Token 整合 Forest -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-forest</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+Gradle 参考：`implementation 'cn.dev33:sa-token-forest:1.46.0'`
+
+``` xml
+<!-- Sa-Token 整合 OkHttps -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-okhttps</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+Gradle 参考：`implementation 'cn.dev33:sa-token-okhttps:1.46.0'`
+
+``` xml
+<!-- Sa-Token 整合 RestTemplate（需 Spring Boot 环境，项目已引入 spring-web） -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-rest-template</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+Gradle 参考：`implementation 'cn.dev33:sa-token-rest-template:1.46.0'`
+
+``` xml
+<!-- Sa-Token 整合 RestClient（需 Spring Boot 3.2+ / Spring Framework 6.1+） -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-rest-client</artifactId>
+	<version>1.46.0</version>
+</dependency>
+```
+Gradle 参考：`implementation 'cn.dev33:sa-token-rest-client:1.46.0'`
+
+#### 选型建议
+
+| 运行环境 | 推荐插件 |
+| :-------- | :-------- |
+| 非 Spring / Solon 等 | `sa-token-forest` 或 `sa-token-okhttps` |
+| Spring Boot 2，或 Boot 3.0–3.1 | `sa-token-rest-template` 或 `sa-token-forest` |
+| Spring Boot 3.2+ / 4 | **优先** `sa-token-rest-client`，或 `sa-token-rest-template`（兼容旧代码） |
+
+- `RestTemplate` 在 Spring Boot 4 中已标记为 deprecated，但仍可使用。
+- `RestClient` 需要 Spring Framework 6.1+，无法在 Spring Boot 2 或 Boot 3.0–3.1 中使用。
+
+#### 使用场景
+
+- **SSO 模式三**：ticket 校验、单点注销、消息推送（参考 [模式三](/sso/sso-type3)、[消息推送](/sso/message-push)）
+- **SSO-Server 模式三**：Server 端需配置 HTTP 请求处理器（参考 [搭建 SSO-Server](/sso/sso-server)）
+
+#### 自定义 Http 请求处理器
+
+**方式一（推荐）**：引入官方插件，SPI 自动注册。
+
+**方式二**：手动注册（参考 [插件开发指南 - 更改全局组件](/fun/plugin-dev?id=方式2更改全局组件实现)）：
+
+``` java
+// 使用官方插件实现
+SaManager.setSaHttpTemplate(new SaHttpTemplateForForest());
+
+// 或自定义实现 SaHttpTemplate 接口
+SaManager.setSaHttpTemplate(new SaHttpTemplate() {
+	@Override
+	public String get(String url) {
+		// ...
+	}
+	@Override
+	public String postByFormData(String url, Map<String, Object> params) {
+		// ...
+	}
+});
+```
+
+在 Spring Boot 环境中，也可通过注入 `SaHttpTemplate` Bean 覆盖默认实现（参考 [全局类、方法](/more/common-action)）。
+
+#### 错误码 30010
+
+若运行时抛出「本地系统没有配置 http 请求处理器」，说明当前 classpath 未引入任何 HTTP 插件，且未手动设置 `SaHttpTemplate`。
+请按上文选型建议引入一个插件，或参考 [异常码表 - 30010](/fun/exception-code?id=sa-token-sso-相关) 排查。
+
+---
+
 ### plugin/thymeleaf-extend: 和 Thymeleaf 集成
 
 本插件的作用是让我们可以在 Thymeleaf 页面中使用 Sa-Token 相关API，俗称 —— 标签方言。
@@ -12464,23 +12073,19 @@ public void rewriteComponent() {
 ##### 1、引入依赖 
 首先我们确保项目已经引入 Thymeleaf 依赖，然后在此基础上继续添加：
 
-
-
 ``` xml 
 <!-- 在 thymeleaf 标签中使用 Sa-Token -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-thymeleaf</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // 在 thymeleaf 标签中使用 Sa-Token
-implementation 'cn.dev33:sa-token-thymeleaf:1.45.0'
+implementation 'cn.dev33:sa-token-thymeleaf:1.46.0'
 ```
-
-
 
 ##### 2、注册标签方言对象 
 在 SaTokenConfigure 配置类中注册 Bean 
@@ -12494,7 +12099,6 @@ public class SaTokenConfigure {
 	}
 }
 ```
-
 
 ##### 3、使用标签方言 
 然后我们就可以愉快的使用在 Thymeleaf 页面中使用标签方言了 
@@ -12552,7 +12156,6 @@ public class SaTokenConfigure {
 </p>
 ```
 
-
 ##### 4、调用 Sa-Token 相关API  
 
 以上的标签方言，可以满足我们大多数场景下的权限判断，然后有时候我们依然需要更加灵活的在页面中调用 Sa-Token 框架API  
@@ -12575,7 +12178,6 @@ public class SaTokenConfigure{
 > [!WARNING| label:注意] 
 > 如果`SaTokenConfigure`继承了`WebMvcConfigurer`等类，可能会造成循环依赖，如果遇到，请新建一个其他配置类完成此项配置
 
-
 然后我们就可以在页面上调用 StpLogic 的 API 了，例如：
  
 ``` html
@@ -12586,12 +12188,9 @@ public class SaTokenConfigure{
 </p>
 ```
 
-
 ##### 5、代码提示
 
 如果想在写标签属性时增加代码提示：
-
-
 
 只需在头部声明增加上对应的命名空间即可：
 
@@ -12618,24 +12217,19 @@ public class SaTokenConfigure{
 ##### 1、引入依赖 
 首先我们确保项目已经引入 Freemarker 依赖，然后在此基础上继续添加：
 
-
-
 ``` xml 
 <!-- 在 Freemarker 页面中使用 Sa-Token 自定义标签 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-freemarker</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // 在 Freemarker 页面中使用 Sa-Token 自定义标签
-implementation 'cn.dev33:sa-token-freemarker:1.45.0'
+implementation 'cn.dev33:sa-token-freemarker:1.46.0'
 ```
-
-
-
 
 ##### 2、注入 Sa-Token Freemarker 标签模板模型 对象 
 在 SaTokenConfigure 配置类中增加配置 
@@ -12663,7 +12257,6 @@ public class SaTokenConfigure {
 
 }
 ```
-
 
 ##### 3、使用自定义标签
 然后我们就可以愉快的使用在 Freemarker 页面中使用 Sa-Token 自定义标签了 
@@ -12721,7 +12314,6 @@ public class SaTokenConfigure {
 </p>
 ```
 
-
 ##### 4、调用 Sa-Token 相关API  
 
 以上的自定义标签，可以满足我们大多数场景下的权限判断，然后有时候我们依然需要更加灵活的在页面中调用 Sa-Token 框架API :
@@ -12742,28 +12334,23 @@ public class SaTokenConfigure {
 
 Sa-Token 提供一个 `@SaCheckEL` 鉴权注解，该注解允许你使用 SpEL 表达式进行鉴权。
 
-
 ##### 1、引入插件
 
 由于该注解的工作底层需要依赖 SpringAOP 切面编程，因此你需要单独引入插件包 `sa-token-spring-el` 才可以使用此注解。
-
-
 
 ``` xml 
 <!-- Sa-Token 注解鉴权使用 EL 表达式 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-el</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 注解鉴权使用 EL 表达式
-implementation 'cn.dev33:sa-token-spring-el:1.45.0'
+implementation 'cn.dev33:sa-token-spring-el:1.46.0'
 ```
-
-
 
 ##### 2、简单示例
 
@@ -12804,7 +12391,6 @@ public class SaCheckELController {
 }
 ```
 
-
 ##### 3、多账号体系鉴权
 
 要在 EL 表达式中使用多账号体系鉴权模式，你需要在配置类中重写 `SaCheckELRootMap 扩展函数`，增加 EL 表达式可使用的根对象：
@@ -12840,7 +12426,6 @@ public SaResult test9() {
 }
 ```
 
-
 ##### 4、调用本类成员变量
 ``` java
 // 本模块需要鉴权的权限码
@@ -12854,7 +12439,6 @@ public SaResult test10() {
 }
 ```
 
-
 ##### 5、忽略鉴权
 配合 `@SaIgnore` 注解做到忽略某接口的鉴权
 ``` java 
@@ -12867,21 +12451,14 @@ public SaResult test11() {
 }
 ```
 
-
 ##### 6、代码提示
 
 如果在书写 SpEL 表达式时需要代码提示：
-
-
 
 可以在 idea 中安装 **SpEL Assistant** 插件，该插件由 `@ly-chn` 提供，允许为自定义注解书写 SpEL 表达式时增加代码提示功能，
 开源地址：[https://github.com/ly-chn/SpEL-Assistant](https://github.com/ly-chn/SpEL-Assistant)
 
 安装方式：直接在 idea 插件商店中搜索 “**SpEL Assistant**” 即可
-
-
-
-
 
 	本章代码示例：Sa-Token SpEL表达式注解鉴权 —— [ SaCheckELController.java ]
 
@@ -12896,33 +12473,26 @@ public SaResult test11() {
 ##### 1、引入依赖 
 首先在项目已经引入 Sa-Token 的基础上，继续添加：
 
-
-
 ``` xml 
 <!-- Sa-Token 整合 jwt -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-jwt</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 整合 jwt
-implementation 'cn.dev33:sa-token-jwt:1.45.0'
+implementation 'cn.dev33:sa-token-jwt:1.46.0'
 ```
-
-
 
 > [!WARNING| label:版本兼容性] 
 > 1. 注意: sa-token-jwt 显式依赖 hutool-jwt 5.7.14 版本，保险起见：你的项目中要么不引入 hutool，要么引入版本 >= 5.7.14 的 hutool 版本。
 > 2. hutool 5.8.13 和 5.8.14 版本下会出现类型转换问题，[关联issue](https://gitee.com/dromara/sa-token/issues/I6L429)。
 
-
 ##### 2、配置秘钥
 在 `application.yml` 配置文件中配置 jwt 生成秘钥：
-
-
 
 ``` yaml
 sa-token:
@@ -12935,15 +12505,10 @@ sa-token:
 sa-token.jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk
 ```
 
-
 注：为了安全起见请不要直接复制官网示例这个字符串（随便按几个字符就好了）
-
 
 ##### 3、注入jwt实现
 根据不同的整合规则，插件提供了三种不同的模式，你需要 **选择其中一种** 注入到你的项目中 
-
-
-
 
 Simple 模式：Token 风格替换
 ``` java
@@ -12957,7 +12522,6 @@ public class SaTokenConfigure {
 }
 ```
 
-
 Mixin 模式：混入部分逻辑
 ``` java
 @Configuration
@@ -12970,7 +12534,6 @@ public class SaTokenConfigure {
 }
 ```
 
-
 Stateless 模式：服务器完全无状态
 ``` java
 @Configuration
@@ -12982,8 +12545,6 @@ public class SaTokenConfigure {
     }
 }
 ```
-
-
 
 ##### 4、开始使用
 然后我们就可以像之前一样使用 Sa-Token 了 
@@ -13023,7 +12584,6 @@ public class LoginController {
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiMTAwMDEiLCJybiI6IjZYYzgySzBHVWV3Uk5NTTl1dFdjbnpFZFZHTVNYd3JOIn0.F_7fbHsFsDZmckHlGDaBuwDotZwAjZ0HB14DRujQfOQ
 ```
 
-
 ##### 5、不同模式策略对比
 
 注入不同模式会让框架具有不同的行为策略，以下是三种模式的差异点（为方便叙述，以下比较以同时引入 jwt 与 Redis 作为前提）：
@@ -13050,8 +12610,6 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpbklkIjoiMTAwMDEiLCJybiI6IjZYYzgySzB
 | 二级认证					| 支持			| 支持				| 支持				|
 | 模式总结					| Token风格替换	| jwt 与 Redis 逻辑混合	| 完全舍弃Redis，只用jwt		|
 
-
-
 ##### 6、扩展参数
 你可以通过以下方式在登录时注入扩展参数：
 
@@ -13072,8 +12630,6 @@ String name = StpUtil.getExtra("name");
 String name = StpUtil.getExtra("tokenValue", "name");
 ```
 
-
-
 ##### 7、在多账户模式中集成 jwt
 sa-token-jwt 插件默认只为 `StpUtil` 注入 `StpLogicJwtFoxXxx` 实现，自定义的 `StpUserUtil` 是不会自动注入的，我们需要帮其手动注入：
 
@@ -13086,8 +12642,6 @@ public void setUserStpLogic() {
 	StpUserUtil.setStpLogic(new StpLogicJwtForSimple(StpUserUtil.TYPE));
 }
 ```
-
-
 
 ##### 8、自定义 SaJwtUtil 生成 token 的算法 
 
@@ -13109,7 +12663,6 @@ public void setSaJwtTemplate() {
 }
 ```
 
-
 ##### 9、注意点
 
 ###### 1、使用 jwt-simple 模式后，is-share=false 恒等于 false。
@@ -13117,12 +12670,10 @@ public void setSaJwtTemplate() {
 `is-share=true` 的意思是每次登录都产生一样的 token，这种策略和 [ 为每个 token 单独设定 setExtra 数据 ] 不兼容的，
 为保证正确设定 Extra 数据，当使用 `jwt-simple` 模式后，`is-share` 配置项 恒等于 `false`。
 
-
 ###### 2、使用 jwt-mixin 模式后，is-concurrent 必须为 true。
 
 `is-concurrent=false` 代表每次登录都把旧登录顶下线，但是 jwt-mixin 模式登录的 token 并不会记录在持久库数据中，
 技术上来讲无法将其踢下线，所以此时顶人下线和踢人下线等 API 都属于不可用状态，所以此时 `is-concurrent` 配置项必须配置为 `true`。
-
 
 ###### 3、使用 jwt-mixin 模式后，max-try-times 恒等于 -1。
 
@@ -13152,30 +12703,25 @@ RPC 模式的调用，可以让我们像调用本地方法一样完成服务通�
 - 在 [ 被调用端 ] 提供以 Dubbo 为基础的上下文环境 
 - 在 RPC 调用时将 Token 传递至 [ 被调用端 ]，同时在调用结束时将 Token 回传至 [ 调用端 ]。
 
-
 ##### 引入插件 
 
 在项目已经引入 Dubbo 的基础上，继续添加依赖（Consumer 端和 Provider 端都需要引入）：
-
-
 
 ``` xml 
 <!-- Sa-Token 整合 Dubbo -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-dubbo</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
+注：如果使用的是 dubbo3，只需要将 `sa-token-dubbo` 修改为 `sa-token-dubbo3` 即可。
 
 ``` gradle
 // Sa-Token 整合 Dubbo
-implementation 'cn.dev33:sa-token-dubbo:1.45.0'
+implementation 'cn.dev33:sa-token-dubbo:1.46.0'
 ```
-
-
 注：如果使用的是 dubbo3，只需要将 `sa-token-dubbo` 修改为 `sa-token-dubbo3` 即可。
-
 
 然后我们就可以愉快的做到以下事情：
 
@@ -13189,7 +12735,6 @@ implementation 'cn.dev33:sa-token-dubbo:1.45.0'
 2. [ 被调用端 ] 执行的 `SaResponse.setHeader()`、`setStatus()` 等代码无效。
 
 应该合理避开以上 API 的使用。
-
 
 ##### RPC调用鉴权
 
@@ -13206,8 +12751,6 @@ implementation 'cn.dev33:sa-token-dubbo:1.45.0'
 
 直接在 `application.yml` 配置即可：
 
-
-
 ``` yaml
 sa-token: 
 	# 打开 RPC 调用鉴权 
@@ -13218,8 +12761,6 @@ sa-token:
 # 打开 RPC 调用鉴权 
 sa-token.check-same-token=true
 ```
-
-
 
 ###### 方式二、自建 Dubbo 过滤器校验
 此方式略显繁琐，好处是除了Same-Token，我们还可以添加其它自定义参数 (attachment)。
@@ -13262,7 +12803,6 @@ public class DubboConsumerFilter implements Filter {
 }
 ```
 
-
 2、在 [ 被调用端 ] 的 `\resources\META-INF\dubbo\` 目录新建 `org.apache.dubbo.rpc.Filter` 文件
 ``` html
 dubboProviderFilter=com.pj.DubboProviderFilter
@@ -13302,7 +12842,6 @@ public class DubboProviderFilter implements Filter {
 }
 ```
 
-
 然后我们就可以进行安全的 RPC 调用了，不带有 Same-Token 参数的调用都会抛出异常，无法调用成功。
 
 ---
@@ -13328,29 +12867,23 @@ public class DubboProviderFilter implements Filter {
 ##### 引入插件
 需要springboot环境，添加依赖（调用端和被调用端都需要引入）：
 
-
-
 ``` xml 
 <!-- Sa-Token 整合 grpc -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-grpc</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 整合 grpc
-implementation 'cn.dev33:sa-token-grpc:1.45.0'
+implementation 'cn.dev33:sa-token-grpc:1.46.0'
 ```
-
-
 
 ---
 ##### 开启 Same-Token 校验：
 直接在 `application.yml` 配置即可：
-
-
 
 ``` yaml
 sa-token: 
@@ -13369,7 +12902,6 @@ sa-token.check-same-token=true
 
 观看本节视频讲解（B站：抓蛙师）
 
-
 在涉及跨系统接口调用时，我们容易碰到以下安全问题：
 
 - 请求身份被伪造。
@@ -13380,14 +12912,12 @@ sa-token-sign 模块将帮你轻松解决以上难题。
 
 本篇将根据假设的需求场景，循序渐进讲明白跨系统接口调用时必做的几个步骤，以及为什么要有这些步骤的原因。
 
-
 ##### 1、需求场景
 
 假设我们有如下业务需求：
 
 > [!NOTE| label:业务场景] 
 > 用户在 A 系统参与活动成功后，活动奖励以余额的形式下发到 B 系统。
-
 
 ##### 2、初始方案：直接裸奔
 
@@ -13425,7 +12955,6 @@ String res = HttpUtil.request("http://b.com/api/addMoney?userId=" + userId + "&m
 
 B 系统开放的接口不仅可以被 A 系统调用，还可以被其它任何人调用，甚至别人可以本地跑一个 for 循环调用这个接口，为自己无限充值金额。
 
-
 ##### 3、方案升级：增加 secretKey 校验
 
 为防止 B 系统开放的接口被陌生人任意调用，我们增加一个 secretKey 参数
@@ -13461,8 +12990,6 @@ String res = HttpUtil.request("http://b.com/api/addMoney?userId=" + userId + "&m
 - 如果请求被抓包，secretKey 就会泄露，因为每次请求都在 url 中明文传输了 secretKey 参数。
 - 如果请求被抓包，请求的其它参数就可以被任意修改，例如可以将 money 参数修改为 9999999，B系统无法确定参数是否被修改过。
 
-
-
 ##### 4、方案再升级：使用摘要算法生成参数签名
 
 首先，在 A 系统不要直接发起请求，而是先计算一个 sign 参数：
@@ -13483,7 +13010,6 @@ String res = HttpUtil.request("http://b.com/api/addMoney?userId=" + userId + "&m
 **注意此处计算签名时，需要将所有参数按照字典顺序依次排列（key除外，挂在最后面）。**以下所有计算签名时同理，不再赘述。
 
 然后在 B 系统接收请求时，使用同样的算法、同样的秘钥，生成 sign 字符串，与参数中 sign 值进行比较：
-
 
 ``` java
 // 为指定用户添加指定余额
@@ -13515,8 +13041,6 @@ public SaResult addMoney(long userId, long money, String sign) {
 
 此方案仍然存在以下缺陷：
 - 被抓包后，请求可以被无限重放，B 系统无法判断请求是真正来自于 A 系统发出的，还是被抓包后重放的。
-
-
 
 ##### 5、方案再再升级：追加 nonce 随机字符串
 
@@ -13581,7 +13105,6 @@ public SaResult addMoney(long userId, long money, String nonce, String sign) {
 
 你可能会想到，那我永久保存吧。这样确实能解决问题，但显然服务器承载不了这么做，即使再微小的数据量，在时间的累加下，也总一天会超出服务器能够承载的上限。
 
-
 ##### 6、方案再再再升级：追加 timestamp 时间戳
 
 我们可以再追加一个 timestamp 时间戳参数，将请求的有效性限定在一个有限时间范围内，例如 15分钟。
@@ -13638,7 +13161,6 @@ public SaResult addMoney(long userId, long money, long timestamp, String nonce, 
 - 如果在 15 分钟内重放攻击，nonce 参数不答应：缓存中可以查出 nonce 值，直接拒绝响应请求。
 - 如果在 15 分钟后重放攻击，timestamp 参数不答应：超出了允许的 timestamp 时间差，直接拒绝响应请求。
 
-
 ##### 7、服务器的时钟差异造成安全问题
 
 以上的代码，均假设 A 系统服务器与 B 系统服务器的时钟一致，才可以正常完成安全校验，但在实际的开发场景中，有些服务器会存在时钟不准确的问题。
@@ -13666,7 +13188,7 @@ public SaResult addMoney(long userId, long money, long timestamp, String nonce, 
 @RequestMapping("addMoney")
 public SaResult addMoney(long userId, long money, long timestamp, String nonce, String sign) {
 
-	// 1、检查 timestamp 是否超出允许的范围 （重点一：此处需要取绝对值）
+	// 1、检查 timestamp 是否超出允许的范围 （⚠️ 重点一：此处需要取绝对值）
 	long timestampDisparity = Math.abs(System.currentTimeMillis() - timestamp);
 	if(timestampDisparity > 1000 * 60 * 15) {
 		return SaResult.error("timestamp 时间差超出允许的范围，请求无效");
@@ -13678,7 +13200,7 @@ public SaResult addMoney(long userId, long money, long timestamp, String nonce, 
 	// 3、验证签名
 	// 代码同上，不再赘述 
 
-	// 4、将 nonce 记入缓存，防止重复使用（重点二：此处需要将 ttl 设定为允许 timestamp 时间差的值 x 2 ）
+	// 4、将 nonce 记入缓存，防止重复使用（⚠️ 重点二：此处需要将 ttl 设定为允许 timestamp 时间差的值 x 2 ）
 	CacheUtil.set("nonce_" + nonce, "1", (1000 * 60 * 15) * 2);
 
 	// 5、业务代码 ...
@@ -13687,7 +13209,6 @@ public SaResult addMoney(long userId, long money, long timestamp, String nonce, 
 	return SaResult.ok();
 }
 ```
-
 
 ##### 8、最终版方案
 
@@ -13746,7 +13267,6 @@ public SaResult addMoney(long userId, long money, long timestamp, String nonce, 
 }
 ```
 
-
 ##### 9、使用 Sa-Token 框架完成 API 参数签名
 
 接下来步入正题，使用 sa-token-sign 模块，方便的完成 API 签名创建、校验等步骤：
@@ -13755,30 +13275,22 @@ public SaResult addMoney(long userId, long money, long timestamp, String nonce, 
 - 自动构建签名，并序列化参数为字符串。
 - 一句代码完成 nonce、timestamp、sign 的校验，防伪造请求调用、防参数篡改、防重放攻击。
 
-
 ###### 9.1、引入依赖
 请求发起端和接收端都需要引入：
-
-
-
 
 ``` xml 
 <!-- Sa-Token 整合 API 参数签名校验 -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-sign</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
 
-
-
 ``` gradle
 // Sa-Token 整合 API 参数签名校验
-implementation 'cn.dev33:sa-token-sign:1.45.0'
+implementation 'cn.dev33:sa-token-sign:1.46.0'
 ```
-
-
 
 ###### 9.2、配置秘钥
 请求发起端和接收端需要配置一个相同的秘钥，在 `application.yml` 中配置：
@@ -13815,7 +13327,6 @@ String res = HttpUtil.request(url);
 System.out.println("server 端返回信息：" + res);
 ```
 
-
 ###### 9.4、请求接受端校验签名
 ``` java
 // 为指定用户添加指定余额
@@ -13843,7 +13354,6 @@ public SaResult addMoney(long userId, long money) {
   "data": null
 }
 ```
-
 
 ##### 10、使用注解校验签名
 
@@ -13875,13 +13385,13 @@ public SaResult test3() {
 }
 ```
 
+> 注：上述注解与 `SaSignUtil.checkRequest` 默认从 **Query / Form** 参数中取参验签。若业务使用 **JSON Body** 传参，请参考下文第 12 节。
 
 ##### 11、多应用模式
 
 有时候我们可能需要同时与多个应用对接，每个应用都需要使用不同的秘钥：
 
 首先在配置文件配置多个应用信息：
-
 
 ``` yaml
 sa-token: 
@@ -13939,8 +13449,6 @@ public void configSaToken(SaTokenConfig config) {
 }
 ```
 
-
-
 然后在签名时通过指定 appid 的方式获取对应的 SignTemplate 进行操作：
 
 ``` java
@@ -13951,6 +13459,15 @@ String paramStr = SaSignMany.getSignTemplate("xm-shop").addSignParamsAndJoin(par
 SaSignMany.getSignTemplate("xm-shop").checkRequest(SaHolder.getRequest());
 ```
 
+##### 12、JSON Body 验签参考（社区示例）
+
+官方默认的签名校验基于请求参数（Query / Form），无法直接读取 `Content-Type: application/json` 的请求体字段。
+
+若你的接口使用 JSON Body 传参，可参考社区示例自行扩展（自定义 `@SaCheckSign` 处理器、缓存可重复读取的 Request Body 等）：
+
+> [!TIP| label:社区示例 | style:callout]
+> 仓库：[https://github.com/ly-chn/sa-token-check-sign-from-body](https://github.com/ly-chn/sa-token-check-sign-from-body)
+
 ---
 
 ### plugin/api-key: API Key 接口调用秘钥
@@ -13960,9 +13477,6 @@ API Key（应用程序编程接口密钥） 是一种用于身份验证和授权
 以上是官话，简单理解：API Key 是一种接口调用密钥，类似于会话 token ，但比会话 token 具有更灵活的权限控制。
 
 示例仓库地址：[sa-token-demo-apikey](https://gitee.com/dromara/sa-token/tree/master/sa-token-demo/sa-token-demo-apikey) 🔗
-
-
-
 
 ##### 1、需求场景
 
@@ -14002,11 +13516,9 @@ API Key（应用程序编程接口密钥） 是一种用于身份验证和授权
 > 
 > API Key 就是为了完成这种“可控式部分授权” 而设计的一种身份凭证。
 
-
 为了让第三方插件为用户工作，用户必定是要为插件提供一个“凭证”信息的，然后插件利用“凭证”信息，代替用户调用特定 API 完成一些功能。
 
 不同的凭证信息将会带来不同的后果：
-
 
 | 提供的凭证					| 后果										|
 | :--------					| :--------									|
@@ -14021,8 +13533,6 @@ API Key 具有以下特点：
 - 4、每个 API Key 都可以赋予不同的 scope 权限，以做到最小化授权。
 - 5、API Key 可以设置有效期，并且随时删除回收，做到灵活控制。
 
-
-
 ##### 2、引入依赖
 在使用 API Key 模块之前，你必须先引入依赖：
 ``` xml
@@ -14030,15 +13540,13 @@ API Key 具有以下特点：
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-apikey</artifactId>
-	<version>1.45.0</version>
+	<version>1.46.0</version>
 </dependency>
 ```
-
 
 ##### 3、创建 API Key
 
 理解了应用场景后，让我们看看 Sa-Token 为 API Key 提供了哪些方法：
-
 
 ``` java
 // 为指定用户创建一个新的 API Key 
@@ -14079,7 +13587,6 @@ Object loginId = SaApiKeyUtil.getLoginIdByApiKey("AK-NAO6u57zbOWCmLaiVQuVW2tyt3r
 // 获取指定 loginId 的 ApiKey 列表记录
 List<ApiKeyModel> apiKeyList = SaApiKeyUtil.getApiKeyList(10001);
 ```
-
 
 ##### 4、校验 API Key
 
@@ -14144,7 +13651,6 @@ public class ApiKeyResourcesController {
 }
 ```
 
-
 ##### 5、前端如何提交 API Key？
 默认情况下，前端可以从任意途径提交 API Key 字符串，只要后端能接受到。
 
@@ -14156,16 +13662,11 @@ public class ApiKeyResourcesController {
 /user/getInfo?apikey=AK-NAO6u57zbOWCmLaiVQuVW2tyt3rHpZrXkaQp
 ```
 
-
 方式二：通过 Basic 参数提交
 
 ``` url
 http://AK-NAO6u57zbOWCmLaiVQuVW2tyt3rHpZrXkaQp@localhost:8081/user/getInfo
 ```
-
-
-
-
 
 ##### 6、打开数据库模式
 
@@ -14206,8 +13707,6 @@ public class SaApiKeyDataLoaderImpl implements SaApiKeyDataLoader {
 - 4、调用 `SaApiKeyUtil.deleteApiKey("ApiKey")` 时，只会删除这个 API Key 在缓存中的数据，不会删除数据库的数据，请自行补充相关代码保证数据双删。
 - 5、其它诸如查询 `SaApiKeyUtil.getApiKey("ApiKey")` 或校验 `SaApiKeyUtil.checkApiKeyScope("ApiKey", "userinfo")` 等方法，依旧可以正常调用。
 
-
-
 ##### 7、多账号模式使用 
 
 如果系统有多套账号表，比如 Admin 和 User，只需要指定不同的命名空间即可：
@@ -14239,7 +13738,6 @@ public SaResult createApiKey() {
 
 --- 
 
-
 #### 1、插件开发
 			
 为 Sa-Token 开发插件非常简单，以下是几种可行的方式：
@@ -14265,7 +13763,6 @@ SaStrategy.instance.createToken = (loginId, loginType) -> {
 ```
 
 就像变量的重新赋值一样，你只需重新指定一个新的策略函数，即可自定义 Token 生成的逻辑。
-
 
 ##### 方式2：更改全局组件实现
 
@@ -14296,11 +13793,8 @@ public class MySaTempTemplate extends SaTempTemplate {
 ##### 方式3：实现自定义SaTokenContext
 SaTokenContext 是对接不同框架的上下文接口，篇幅限制，可参考：[自定义 SaTokenContext 指南](/fun/sa-token-context)
 
-
 ##### 方式4：其它自由扩展
 这种方式就无需注入什么全局组件替换内部实现了，你可以在 Sa-Token 的基础之上封装任何代码，进行功能扩展。
-
-
 
 #### 2、插件注册
 
@@ -14309,7 +13803,6 @@ SaTokenContext 是对接不同框架的上下文接口，篇幅限制，可参�
 首先这里需要分两种情况：
 - 情况1：只打算自己的项目使用这个插件。
 - 情况2：准备提交 pr 到 Sa-Token 仓库，让更多人使用。
-
 
 ##### 情况1：只打算自己的项目使用这个插件
 
@@ -14351,7 +13844,6 @@ public static void main(String[] args) {
 }
 ```
 
-
 ##### 情况2：准备提交 pr 到 Sa-Token 仓库，让更多人使用。
 
 这种情况稍微复杂一些，因为你基本上很难：通过在插件内部写一些代码，帮助“插件使用者”注册插件到项目中。
@@ -14385,7 +13877,6 @@ SpringBoot3 格式：创建 `resources\META-INF\spring\org.springframework.boot.
 
 这样在别人引入此插件时，便会根据 SPI 文件指定的地址去加载插件类，做到插件引入即注册的效果。
 
-
 ###### 如果是：通用型插件
 
 通用型插件则不能使用 SpringBoot 的 SPI 机制去注册组件，因为其它项目是无法识别 SpringBoot SPI 文件的，
@@ -14413,7 +13904,6 @@ cn.dev33.satoken.plugin.SaTokenPluginForXxx
 
 这样便可以在项目启动时，被 Sa-Token 插件管理器加载到此插件，执行自定义 `SaTokenPluginForXxx` 实现类的 `install` 方法，完成插件安装。
 
-
 #### 3、练练手
 
 学废了吗？给你出个题练练手：
@@ -14437,7 +13927,6 @@ cn.dev33.satoken.plugin.SaTokenPluginForXxx
 - SaStorage：请求上下文对象，提供 [一次请求范围内] 的上下文数据读写。
 
 ---
-
 
 ##### 上下文包装类 
 
@@ -14492,23 +13981,19 @@ Sa-Token 为了一套代码对接所有的 Web 框架，就在原生请求对象
 
 如果你的 Web 框架是基于 Servlet 规范开发的，那么你可以直接引入 `sa-token-servlet`，这个包封装了针对 Servlet 规范的上下文包装类对象：
 
-
-
 ``` xml 
 <!-- Sa-Token 权限认证（ServletAPI 集成包） -->
 <dependency>
     <groupId>cn.dev33</groupId>
     <artifactId>sa-token-servlet</artifactId>
-    <version>1.45.0</version>
+    <version>1.46.0</version>
 </dependency>
 ```
 
 ``` gradle
 // Sa-Token 权限认证（ServletAPI 集成包）
-implementation 'cn.dev33:sa-token-servlet:1.45.0'
+implementation 'cn.dev33:sa-token-servlet:1.46.0'
 ```
-
-
 
 如果你的 web 框架不是基于 Servlet 规范开发的，也问题不大，手动实现一下即可，参考一下 Servlet 包是怎么做的：
 [SaRequestForServlet.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-starter/sa-token-servlet/src/main/java/cn/dev33/satoken/servlet/model/SaRequestForServlet.java)、
@@ -14529,8 +14014,6 @@ SaManager.getSaTokenContext().setContext(req, res, stg);
 总结：整体的步骤并不复杂，就是先定义 `SaRequest`、`SaResponse`、`SaStorage` 的包装类，然后在全局过滤器保存在上下文管理器中。
 可以参考具体实现 `sa-token-spring-boot-starter`（SpringBoot2 项目 starter 包）：
 [SaTokenContextFilterForServlet.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-starter/sa-token-spring-boot-starter/src/main/java/cn/dev33/satoken/filter/SaTokenContextFilterForServlet.java)
-
-
 
 ##### 旧版本方案
 在旧版本中（< v1.42.0）我们推荐的方案是自定义整个 `SaTokenCentext` 接口，目前此方案在新版本已不推荐，此处仅做留档备份：[自定义 SaTokenContext 指南](/fun/sa-token-context--backup.md)
@@ -14558,8 +14041,8 @@ StpUtil.setTokenValue(tokenValue, timeout);   // 在当前会话中写入 Token 
 StpUtil.setTokenValue(tokenValue, loginParameter);   // 在当前会话中写入 Token 值，并指定登录参数。
 StpUtil.setTokenValueToStorage(tokenValue);   // 将 Token 写入当前请求的 Storage 存储器。
 StpUtil.getTokenInfo();   // 获取当前 Token 的详细参数。
+StpUtil.createSaLoginParameter();   // 根据当前配置对象创建一个 SaLoginParameter 对象
 ```
-
 
 ##### 2、登录相关  
 ``` java
@@ -14574,7 +14057,6 @@ StpUtil.getOrCreateLoginSession(10001);   // 获取指定账号的登录会话�
 ```
 
 更多 SaLoginParameter 登录参数的用法与示例，请参考 [登录参数示例章节](/up/login-parameter)。
-
 
 ##### 3、注销相关
 ``` java
@@ -14599,7 +14081,6 @@ StpUtil.replaced(10001, logoutParameter);   // 顶人下线，根据账号id 和
 
 更多 SaLogoutParameter 注销参数的用法与示例，请参考 [注销参数示例章节](/up/login-parameter?id=_2、注销参数)。
 
-
 ##### 4、会话查询
 ``` java
 StpUtil.isLogin();   // 当前会话是否已经登录 
@@ -14611,12 +14092,11 @@ StpUtil.getLoginIdDefaultNull();   // 获取当前会话账号id, 如果未登�
 StpUtil.getLoginIdAsString();   // 获取当前会话账号id, 并转换为String类型
 StpUtil.getLoginIdAsInt();   // 获取当前会话账号id, 并转换为int类型
 StpUtil.getLoginIdAsLong();   // 获取当前会话账号id, 并转换为long类型 
-StpUtil.getLoginIdByToken(token);   // 获取指定Token对应的账号id，如果未登录，则返回 null 
+StpUtil.getLoginIdByToken(token);   // 获取指定 Token 对应的账号 id，若 token 无效/被踢/被顶/被冻结则返回 null 
 StpUtil.getLoginIdByTokenNotThinkFreeze(token);   // 获取指定Token对应的账号id（不考虑冻结状态），如果未登录，则返回 null 
 StpUtil.getExtra(key);   // 获取当前 Token 的扩展信息（此函数只在jwt模式下生效）
 StpUtil.getExtra(token, key);   // 获取指定 Token 的扩展信息（此函数只在jwt模式下生效）
 ```
-
 
 ##### 5、Session 相关
 ``` java
@@ -14627,7 +14107,7 @@ StpUtil.getSessionByLoginId(10001);   // 获取指定账号id的Session，如果
 StpUtil.getSessionByLoginId(10001, true);   // 获取指定账号id的Session, 如果Session尚未创建，isCreate=是否新建并返回
 
 // Token-Session 相关 
-StpUtil.getTokenSession();   // 获取当前会话的Session，如果Session尚未创建，则新建并返回 
+StpUtil.getTokenSession();   // 获取当前 Token-Session，如果 Session 尚未创建，则新建并返回 
 StpUtil.getTokenSessionByToken(token);   // 获取指定Token-Session，如果Session尚未创建，则新建并返回
 StpUtil.getAnonTokenSession();   // 获取当前匿名 Token-Session （可在未登录情况下使用的Token-Session）
 
@@ -14635,7 +14115,6 @@ StpUtil.getAnonTokenSession();   // 获取当前匿名 Token-Session （可在�
 StpUtil.getSessionBySessionId("xxxx-xxxx-xxxx");   // 获取指定 sessionId 的 Session，若不存在则返回 null
 StpUtil.isTrustDeviceId(123456, "xxxxxxxxxxxxxxxxxxxxxxxx");   // 判断对于指定 loginId 来讲，指定设备 id 是否为可信任设备
 ```
-
 
 ##### 6、Token有效期相关
 ``` java
@@ -14654,7 +14133,6 @@ StpUtil.renewTimeout(timeout);   // 对当前 Token 的 timeout 值进行续期
 StpUtil.renewTimeout(token, timeout);   // 对指定 Token 的 timeout 值进行续期 
 ```
 
-
 ##### 7、角色认证
 ``` java
 StpUtil.getRoleList();   // 获取：当前账号的角色集合
@@ -14667,7 +14145,6 @@ StpUtil.checkRole(role);   // 校验：当前账号是否含有指定角色标�
 StpUtil.checkRoleAnd(...roleArray);   // 校验：当前账号是否含有指定角色标识 [指定多个，必须全部验证通过] 
 StpUtil.checkRoleOr(...roleArray);   // 校验：当前账号是否含有指定角色标识 [指定多个，只要其一验证通过即可] 
 ```
-
 
 ##### 8、权限认证
 ``` java
@@ -14682,7 +14159,6 @@ StpUtil.checkPermissionAnd(...permissionArray);   // 校验：当前账号是否
 StpUtil.checkPermissionOr(...permissionArray);   // 校验：当前账号是否含有指定权限标识 [指定多个，只要其一验证通过即可] 
 ```
 
-
 ##### 9、id 反查 Token
 ``` java
 StpUtil.getTokenValueByLoginId(10001);   // 获取指定账号id的tokenValue 
@@ -14691,7 +14167,7 @@ StpUtil.getTokenValueListByLoginId(10001);   // 获取指定账号id的tokenValu
 StpUtil.getTokenValueListByLoginId(10001, "APP");   // 获取指定账号id指定设备类型端的tokenValue 集合 
 StpUtil.getTerminalListByLoginId(10001);   // 获取指定账号 id 已登录设备信息集合
 StpUtil.getTerminalListByLoginId(10001, "PC");   // 获取指定账号 id 指定设备类型端的已登录设备信息集合
-StpUtil.forEachTerminalList(10001, (terminal) -> {});   // 遍历指定账号的已登录设备列表
+StpUtil.forEachTerminalList(10001, (session, terminal) -> {});   // 遍历指定账号的已登录设备列表
 StpUtil.getTerminalInfo();   // 获取当前会话的终端信息
 StpUtil.getTerminalInfoByToken(token);   // 获取指定 token 的终端信息
 StpUtil.getLoginDeviceId();   // 返回当前会话的登录设备 id
@@ -14700,7 +14176,6 @@ StpUtil.getLoginDeviceType();   // 返回当前会话的登录设备类型
 StpUtil.getLoginDeviceTypeByToken(token);   // 返回指定 token 的登录设备类型
 ```
 
-
 ##### 10、会话管理
 ``` java
 StpUtil.searchTokenValue(keyword, start, size, sortType);   // 根据条件查询Token
@@ -14708,7 +14183,6 @@ StpUtil.searchSessionId(keyword, start, size, sortType);   // 根据条件查询
 StpUtil.searchTokenSessionId(keyword, start, size, sortType);   // 根据条件查询Token专属Session的Id 
 ```
 详细可参考：[会话治理](/up/search-session)
-
 
 ##### 11、账号封禁
 ``` java
@@ -14719,7 +14193,6 @@ StpUtil.getDisableTime(10001);   // 获取：指定账号剩余封禁时间，�
 StpUtil.untieDisable(loginId);   // 解封：指定账号
 ```
 
-
 ##### 12、分类封禁 (version >= 1.31.0)
 ``` java
 StpUtil.disable(10001, "<业务标识>", 86400);   // 封禁：指定账号的指定服务 指定时间(单位s)
@@ -14728,7 +14201,6 @@ StpUtil.checkDisable(10001, "<业务标识>");   // 校验：指定账号的指�
 StpUtil.getDisableTime(10001, "<业务标识>");   // 获取：指定账号的指定服务 剩余封禁时间，单位：秒（-1=永久封禁，-2=未被封禁）
 StpUtil.untieDisable(loginId, "<业务标识>");   // 解封：指定账号的指定服务（支持传入多个业务标识）
 ```
-
 
 ##### 13、阶梯封禁 (version >= 1.31.0)
 ``` java
@@ -14742,7 +14214,6 @@ StpUtil.checkDisableLevel(10001, "comment", 2);   // 校验：指定账号的指
 StpUtil.checkDisableLevel(10001, 2);   // 校验：指定账号是否被封禁到指定级别（无业务标识）
 ```
 
-
 ##### 14、身份切换
 ``` java
 StpUtil.switchTo(10044);   // 临时切换身份为指定账号id 
@@ -14750,7 +14221,6 @@ StpUtil.endSwitch();   // 结束临时切换身份
 StpUtil.isSwitch();   // 当前是否正处于[身份临时切换]中 
 StpUtil.switchTo(10044, () -> {});   // 在一个代码段里方法内，临时切换身份为指定账号id
 ```
-
 
 ##### 15、二级认证
 ``` java
@@ -14760,7 +14230,6 @@ StpUtil.checkSafe();   // 检查当前会话是否已通过二级认证，如未
 StpUtil.getSafeTime();   // 获取当前会话的二级认证剩余有效时间 (单位: 秒, 返回-2代表尚未通过二级认证)
 StpUtil.closeSafe();   // 在当前会话 结束二级认证 
 ```
-
 
 ##### 16、带有业务标识的二级认证
 ``` java
@@ -14787,15 +14256,21 @@ SaSession.ROLE_LIST = "ROLE_LIST";   // 在 Session 上存储角色时建议使�
 SaSession.PERMISSION_LIST = "PERMISSION_LIST";   // 在 Session 上存储权限时建议使用的key 
 ```
 
-
 ##### 2、构建相关 
 ``` java
 session.getId();   // 获取此 Session 的 id 
 session.setId(id);   // 写入此 Session 的 id
 session.getCreateTime();   // 返回当前会话创建时间（时间戳）
 session.setCreateTime(createTime);   // 写入此 Session 的创建时间（时间戳）
+session.getType();   // 获取此 Session 的类型
+session.setType(type);   // 写入此 Session 的类型
+session.getLoginType();   // 获取此 Session 的账号类型
+session.setLoginType(loginType);   // 写入此 Session 的账号类型
+session.getLoginId();   // 获取此 Session 的账号 id
+session.setLoginId(loginId);   // 写入此 Session 的账号 id
+session.getToken();   // 获取此 Session 的 token 值
+session.setToken(token);   // 写入此 Session 的 token 值
 ```
-
 
 ##### 3、SaTerminalInfo 相关 
 ``` java
@@ -14803,26 +14278,26 @@ session.setTerminalList(terminalList);   // 写入登录终端信息列表
 session.getTerminalList();   // 获取登录终端信息列表
 session.terminalListCopy();   // 获取 登录终端信息列表 (拷贝副本)
 session.getTerminalListByDeviceType(deviceType);   // 获取 登录终端信息列表 (拷贝副本)，根据 deviceType 筛选
+session.getTokenValueListByDeviceType(deviceType);   // 获取指定设备类型的 token 值列表
 session.getTerminal(tokenValue);   // 查找一个终端信息，根据 tokenValue
 session.addTerminal(terminal);   // 添加一个终端信息
 session.removeTerminal(tokenValue);   // 移除一个终端信息
-session.maxTerminalIndex();   // 获取最大的终端索引值，如无返0
+session.forEachTerminalList((session, terminal) -> {});   // 遍历登录终端信息列表
+session.getHistoryTerminalCount();   // 获取历史终端数量
+session.setHistoryTerminalCount(count);   // 设置历史终端数量
 session.isTrustDeviceId("xxxxxxxxxxxxxxxxxxxxxxxx");   // 判断指定设备 id 是否为可信任设备
 ```
-
 
 ##### 4、一些操作
 ``` java
 session.update();   // 更新Session（从持久库更新刷新一下）
 session.logout();   // 注销Session (从持久库删除)
 session.logoutByTerminalCountToZero();   // 当 Session 上的 SaTerminalInfo 数量为零时，注销会话 
-session.getTimeout();   // 获取此Session的剩余存活时间 (单位: 秒)
+session.timeout();   // 获取此Session的剩余存活时间 (单位: 秒)
 session.updateTimeout(timeout);   // 修改此Session的剩余存活时间
 session.updateMinTimeout(minTimeout);   // 修改此Session的最小剩余存活时间 (只有在 Session 的过期时间低于指定的 minTimeout 时才会进行修改)
 session.updateMaxTimeout(maxTimeout);   // 修改此Session的最大剩余存活时间 (只有在 Session 的过期时间高于指定的 maxTimeout 时才会进行修改)
-session.trans(value);   // value为 -1 时返回 Long.MAX_VALUE，否则原样返回 
 ```
-
 
 ##### 5、存取值 
 ``` java
@@ -14843,6 +14318,7 @@ session.delete(key);   // 删值
 session.keys();   // 返回当前Session的所有key 
 session.clear();   // 清空所有值 
 session.getDataMap();   // 获取数据挂载集合（如果更新map里的值，请调用session.update()方法避免产生脏数据 ） 
+session.setDataMap(dataMap);   // 写入数据挂载集合
 session.refreshDataMap(dataMap);   // 写入数据集合 (不改变底层对象，只将此dataMap所有数据进行替换) 
 ```
 
@@ -14860,7 +14336,6 @@ SaTokenDao.NEVER_EXPIRE = -1;   // 常量，表示一个key永不过期 (在一�
 SaTokenDao.NOT_VALUE_EXPIRE = -2;   // 常量，表示系统中不存在这个缓存 (在对不存在的key获取剩余存活时间时返回此值)  
 ```
 
-
 ##### 2、字符串读写 
 ``` java
 dao.get(key);   // 获取Value，如无返空
@@ -14871,10 +14346,10 @@ dao.getTimeout(key);   // 获取Value的剩余存活时间 (单位: 秒)
 dao.updateTimeout(key, timeout);   // 修改Value的剩余存活时间 (单位: 秒) 
 ```
 
-
 ##### 3、对象读写 
 ``` java
 dao.getObject(key);   // 获取Object，如无返空
+dao.getObject(key, classType);   // 获取Object，并指定转换类型
 dao.setObject(key, value, timeout);   // 写入Object，并设定存活时间 (单位: 秒)
 dao.updateObject(key, value);   // 更新Object (过期时间不变)
 dao.deleteObject(key);   // 删除Object
@@ -14882,17 +14357,15 @@ dao.getObjectTimeout(key);   // 获取Object的剩余存活时间 (单位: 秒)
 dao.updateObjectTimeout(key, timeout);   // 修改Object的剩余存活时间 (单位: 秒) 
 ```
 
-
 ##### 4、Session读写 
 ``` java
 dao.getSession(sessionId);   // 获取Session，如无返空
 dao.setSession(session, timeout);   // 写入Session，并设定存活时间 (单位: 秒)
-dao.setSession(session);   // 更新Session (过期时间不变)
+dao.updateSession(session);   // 更新Session (过期时间不变)
 dao.deleteSession(sessionId);   // 删除Session
 dao.getSessionTimeout(sessionId);   // 获取Session的剩余存活时间 (单位: 秒) 
 dao.updateSessionTimeout(sessionId, timeout);   // 修改Session的剩余存活时间 (单位: 秒) 
 ```
-
 
 ##### 5、会话管理
 ``` java
@@ -14984,82 +14457,45 @@ public SaRouteMatchFunction routeMatcher = (pattern, path) -> {
 public SaCorsHandleFunction corsHandle = (req, res, sto) -> {
 
 };
+
+/**
+ * 获取 SaTokenConfig 的策略
+ * <p>  默认 null，表示使用框架内置逻辑（先读 SaManager.config，为空时自动读取 sa-token.properties）  </p>
+ * <p>  赋值后，每次调用 SaManager.getConfig() 时都会执行此策略并直接返回其结果  </p>
+ * <p>  注意：策略内请勿再调用 SaManager.getConfig()，否则会陷入无限递归  </p>
+ */
+public SaGetSaTokenConfigFunction getSaTokenConfig = null;
 ```
 
-
-##### 注解操作相关策略 
+##### 重写策略（set 连缀风格）
 
 ``` java
-/**
- * 对一个 [Method] 对象进行注解校验 （注解鉴权内部实现）
- * <p>  参数：Method句柄  </p>
- * <p>  返回：无  </p>
- */
-public SaCheckMethodAnnotationFunction checkMethodAnnotation = (method) -> {
-	// ... 
-};
-
-/**
- * 对一个 [Element] 对象进行注解校验 （注解鉴权内部实现）
- * <p>  参数：element元素  </p>
- * <p>  返回：无  </p>
- */
-@SuppressWarnings("unchecked")
-public SaCheckElementAnnotationFunction checkElementAnnotation = (element) -> {
-	// ... 
-};
-
-/**
- * 从元素上获取注解
- * <p>  参数：element元素，要获取的注解类型  </p>
- * <p>  返回：注解对象  </p>
- */
-public SaGetAnnotationFunction getAnnotation = (element, annotationClass)->{
-	return element.getAnnotation(annotationClass);
-};
-
-/**
- * 判断一个 Method 或其所属 Class 是否包含指定注解
- * <p>  参数：Method、注解  </p>
- * <p>  返回：是否包含  </p>
- */
-public SaIsAnnotationPresentFunction isAnnotationPresent = (method, annotationClass) -> {
-	// ...
-	return false;
-};
-
-/**
- * SaCheckELRootMap 扩展函数
- * <p>  参数：SaCheckELRootMap 对象 </p>
- */
-public SaCheckELRootMapExtendFunction checkELRootMapExtendFunction = rootMap -> {
-	// 默认不做任何处理
-};
+SaStrategy.instance.setCreateToken(createToken);   // 重写创建 Token 的策略
+SaStrategy.instance.setCreateSession(createSession);   // 重写创建 Session 的策略
+SaStrategy.instance.setHasElement(hasElement);   // 重写集合模糊匹配策略
+SaStrategy.instance.setGenerateUniqueToken(generateUniqueToken);   // 重写生成唯一 token 的策略
+SaStrategy.instance.setCreateStpLogic(createStpLogic);   // 重写创建 StpLogic 的策略
+SaStrategy.instance.setAutoRenew(autoRenew);   // 重写是否自动续期策略
+SaStrategy.instance.setGetSaTokenConfig(getSaTokenConfig);   // 重写获取 SaTokenConfig 的策略
 ```
 
+###### getSaTokenConfig 使用示例
 
-
-##### 防火墙相关策略 
+适用于需要从数据库等外部数据源动态读取配置的场景：
 
 ``` java
-/**
- * 防火墙校验函数
- * <p> 参数：请求对象、响应对象、预留扩展参数 </p>
- */
-public SaFirewallCheckFunction check = (req, res, extArg) -> {
-	// ... 
-};
-
-/**
- * 自定义当请求 path 校验不通过时地处理方案 
- * <p> 参数：防火墙校验异常、请求对象、响应对象、预留扩展参数 </p>
- */
-SaFirewallStrategy.instance.checkFailHandle = (e, req, res, extArg) -> {
-	// 自定义处理逻辑 ...
-};
+SaStrategy.instance.setGetSaTokenConfig(() -> {
+	// 从数据库读取配置，自行做好缓存
+	SaTokenConfig config = new SaTokenConfig();
+	config.setTokenName("satoken");
+	config.setTimeout(30 * 24 * 60 * 60);
+	return config;
+});
 ```
 
-参考：[防火墙](/fun/firewall)
+注意：
+- 策略内**不要**调用 `SaManager.getConfig()`，否则会无限递归。
+- 启用后，每次 `SaManager.getConfig()` 都会走此策略；请做好缓存处理。
 
 ---
 
@@ -15073,13 +14509,7 @@ SaFirewallStrategy.instance.checkFailHandle = (e, req, res, extArg) -> {
 
 ##### Sa-Token 功能结构图：
 
-
-
 ##### Sa-Token 认证流程图：
-
-
-
-
 
 PS：鼠标右键选择 **`[在新窗口打开图片]`** 即可高清模式查看图片。
 
@@ -15093,22 +14523,16 @@ PS：鼠标右键选择 **`[在新窗口打开图片]`** 即可高清模式查�
 
 以下配置可以打开全局日志输出：
 
-
-
-
 ``` yaml
 sa-token: 
 	# 是否输出操作日志 
 	is-log: true
 ```
 
-
 ``` properties
 # 是否输出操作日志 
 sa-token.is-log=true
 ```
-
-
 
 此配置项打开之后，框架将会在账号登录、注销、二级认证 等关键性步骤打印日志，以方便项目开发调试。
 
@@ -15225,7 +14649,6 @@ public SaResult isLogin2() {
 
 更多使用姿势请参考仓库示例：[Async-TestController.java](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-async/src/main/java/com/pj/test/TestController.java)
 
-
 ##### 响应式上下文
 
 在 WebFlux / Spring Cloud 等响应式环境下调用 Sa-Token 的同步 API 也有可能发生上下文异常：
@@ -15287,7 +14710,6 @@ public SaResult isLogin2(ServerWebExchange exchange) {
 本篇介绍如何根据`NotLoginException`异常的场景值，来定制化处理未登录的逻辑 
 应用场景举例：未登录、被顶下线、被踢下线等场景需要不同方式来处理 
 
-
 #### 何为场景值
 在前面的章节中，我们了解到，在会话未登录的情况下尝试获取`loginId`会使框架抛出`NotLoginException`异常，而同为未登录异常却有五种抛出场景的区分 
 
@@ -15301,10 +14723,7 @@ public SaResult isLogin2(ServerWebExchange exchange) {
 | -6      | NotLoginException.TOKEN_FREEZE	| 已读取到 token，但是 token 已被冻结  |
 | -7      | NotLoginException.NO_PREFIX		| 未按照指定前缀提交 token		  |
 
-
-
 那么，如何获取场景值呢？废话少说直接上代码：
-
 
 ``` java
 // 全局异常拦截（拦截项目中的NotLoginException异常）
@@ -15347,7 +14766,6 @@ public SaResult handlerNotLoginException(NotLoginException nle)
 }
 ```
 
-
 注意：以上代码并非处理逻辑的最佳方式，只为以最简单的代码演示出场景值的获取与应用，大家可以根据自己的项目需求来定制化处理
 
 ---
@@ -15355,8 +14773,6 @@ public SaResult handlerNotLoginException(NotLoginException nle)
 ### fun/token-timeout: Token有效期详解
 
 Sa-Token 提供两种 Token 自动过期策略，分别是 `timeout` 与 `active-timeout`，配置方法如下：
-
-
 
 ``` yaml
 sa-token: 
@@ -15372,8 +14788,6 @@ sa-token.timeout=2592000
 # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
 sa-token.active-timeout=-1
 ```
-
-
 
 两者的区别，可以通过下面的例子体现：
 
@@ -15392,19 +14806,16 @@ sa-token.active-timeout=-1
 2. `timeout`~~无法续签，想要继续使用必须重新登录~~。v1.29.0+ 版本新增续期方法：`StpUtil.renewTimeout(100)`。
 3. `timeout`的值配置为-1后，代表永久有效，不会过期。
 
-
 ##### active-timeout
 1. `active-timeout`代表最低活跃频率，单位/秒，例如将其配置为 1800 (30分钟)，代表用户如果30分钟无操作，则此Token会立即过期（被冻结，但不会删除掉）。
 2. 如果在30分钟内用户有操作，则会再次续签30分钟，用户如果一直操作则会一直续签，直到连续30分钟无操作，Token才会过期。
 3. `active-timeout`的值配置为-1后，代表永久有效，不会过期，此时也无需频繁续签。
-
 
 ##### 关于active-timeout的续签
 如果`active-timeout`配置了大于零的值，Sa-Token 会在登录时开始计时，在每次直接或间接调用`getLoginId()`、`getTokenSession()`时进行一次冻结检查与续签操作。
 此时会有两种情况：
 1. 一种是会话无操作时间太长，Token已经被冻结，此时框架会抛出`NotLoginException`异常(场景值=-3)，
 2. 另一种则是会话在`active-timeout`有效期内通过检查，此时Token可以成功续签 
-
 
 ##### 我可以手动续签 active-timeout 吗？
 **可以！**
@@ -15431,11 +14842,9 @@ StpUtil.updateLastActiveToNow();
 StpUtil.stpLogic.updateLastActiveToNow(tokenValue);
 ```
 
-
 ##### timeout 与 active-timeout 可以同时使用吗？
 **可以同时使用！** 
 两者的认证逻辑彼此独立，互不干扰，可以同时使用。
-
 
 ##### StpUtil 类中哪些方法支持自动续签 active-timeout? 
 > 直接或间接调用过 `getLoginId()`、`getTokenSession()` 的方法
@@ -15502,7 +14911,6 @@ StpUtil.stpLogic.updateLastActiveToNow(tokenValue);
 3. 每次一个新的客户端访问服务器时，都会产生一个新的Session对象，即使这个客户端只访问了一次页面 
 4. 在不支持Cookie的客户端下，这种机制会失效 
 
-
 Sa-Token Session可以理解为 HttpSession 的升级版：
 
 1. Sa-Token只在调用`StpUtil.login(id)`登录会话时才会产生Session，不会为每个陌生会话都产生Session，节省性能 
@@ -15522,7 +14930,6 @@ session.set("name", "张三");
 
 使用`Account-Session`在不同端同步数据是非常方便的，因为只要 PC 和 APP 登录的账号id一致，它们对应的都是同一个Session，
 举个应用场景：在PC端点赞的帖子列表，在APP端的点赞记录里也要同步显示出来
-
 
 ##### 2、Token-Session  
 
@@ -15573,7 +14980,6 @@ Custom-Session的会话有效期默认使用`SaManager.getConfig().getTimeout()`
 session.updateTimeout(1000); // 参数说明和全局有效期保持一致
 ```
 
-
 ##### 4、Session模型结构图 
 
 三种Session创建时机：
@@ -15582,10 +14988,7 @@ session.updateTimeout(1000); // 参数说明和全局有效期保持一致
 - `Token-Session`: 指的是框架为每个 token 分配的 Session  
 - `Custom-Session`: 指的是以一个 特定的值 作为SessionId，来分配的 Session 
 
-
 **假设三个客户端登录同一账号，且配置了不共享token，那么此时的Session模型是：**
-
-
 
 简而言之：
 - `Account-Session`  以账号 id 为主，只要 token 指向的账号 id 一致，那么对应的Session对象就一致
@@ -15603,7 +15006,6 @@ Sa-Token 数据存储有三大作用域，分别是：
 - `SaSession` - 会话作用域：存储的数据在一次会话范围内有效。
 - `SaApplication` - 全局作用域：存储的数据在全局范围内有效。
 
-
 ##### SaStorage - 请求作用域
 在 SaStorage 中存储的数据只在一次请求范围内有效，请求结束后数据自动清除。使用 SaStorage 时无需处于登录状态。
 
@@ -15614,7 +15016,6 @@ storage.set("key", "value");   // 写值
 storage.delete("key");   // 删值 
 ```
 
-
 ##### SaSession - 会话作用域
 在 SaSession 存储的数据在一次会话范围内有效，会话结束后数据自动清除。必须登录后才能使用 SaSession 对象。
 
@@ -15624,7 +15025,6 @@ session.get("key");   // 取值
 session.set("key", "value");   // 写值 
 session.delete("key");   // 删值 
 ```
-
 
 ##### SaApplication - 全局作用域
 在 SaApplication 存储的数据在全局范围内有效，应用关闭后数据自动清除（如果集成了 Redis 那则是 Redis 关闭后数据自动清除）。使用 SaApplication 时无需处于登录状态。
@@ -15712,10 +15112,6 @@ public class GlobalExceptionHandler {
 
 SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说，所有异常你都可以通过 `e.getCode()` 的方式获取对应的异常细分状态码。
 
-
-
-
-
 ##### 异常细分状态码-参照表
 
 ###### sa-token-code 核心包
@@ -15771,14 +15167,12 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 12202		| 给定的签名无效						|
 | 12203		| timestamp 超出允许的范围			|
 
-
 ###### sa-token-servlet
 
 | code码值	| 含义												|
 | :--------	| :--------											|
 | 20001		| 转发失败											|
 | 20002		| 重定向失败											|
-
 
 ###### sa-token-spring-boot-starter
 
@@ -15789,7 +15183,6 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 20104		| JSON 字符串转 Map 失败								|
 | 20105		| 默认的 Filter 异常处理函数							|
 
-
 ###### sa-token-reactor-spring-boot-starter
 
 | code码值	| 含义												|
@@ -15798,14 +15191,12 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 20204		| JSON 字符串转 Map 失败								|
 | 20205		| 默认的 Filter 异常处理函数							|
 
-
 ###### sa-token-solon-plugin
 
 | code码值	| 含义												|
 | :--------	| :--------											|
 | 20301		| 默认的拦截器异常处理函数							|
 | 20302		| 默认的 Filter 异常处理函数							|
-
 
 ###### sa-token-sso 单点登录相关：
 
@@ -15820,9 +15211,8 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 30007		| http 请求调用 提供的 `timestamp` 与当前时间的差距超出允许的范围	|
 | 30008		| http 请求调用 提供的 `sign` 无效						|
 | 30009		| 本地系统没有配置 `secretkey` 字段						|
-| 30010		| 本地系统没有配置 http 请求处理器							|
+| 30010		| 本地系统没有配置 http 请求处理器（参考 [HTTP 请求扩展](/plugin/http-extend)）	|
 | 30011		| 该 ticket 不属于当前 client								|
-
 
 ###### sa-token-oauth2 相关：
 | code码值	| 含义									|
@@ -15852,7 +15242,6 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 30151		| 无效的请求 Method						|
 | 30191		| 其它异常								|
 
-
 ###### sa-token-jwt 插件相关：
 
 | code码值	| 含义									|
@@ -15863,7 +15252,7 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 30204		| 此 jwt 已超时							|
 | 30205		| 没有配置jwt秘钥						|
 | 30206		| 登录时提供的账号id为空					|
-
+| 30207		| extraData 包含 jwt 保留字段				|
 
 ###### sa-token-temp-jwt 插件相关：
 | code码值	| 含义									|
@@ -15871,7 +15260,6 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 30301		| jwt 模式没有提供秘钥					|
 | 30302		| jwt 模式不可以删除 Token				|
 | 30303		| Token已超时							|
-
 
 > [!WARNING| label:注意] 
 > 部分插件因异常抛出点较少，暂未做状态码细分处理
@@ -15890,7 +15278,6 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 
 > [!INFO| label:需求场景] 
 > 自定义一个注解 `@CheckAccount`，具有 `name`、`pwd` 两个字段，在标注一个方法上时，要求前端必须提交相应的账号密码参数才能访问方法。
-
 
 ###### 1.1、第一步，创建一个注解
 
@@ -16002,8 +15389,6 @@ public class TestController {
 }
 ```
 
-
-
 ##### 2、使用自定义注解优化多账号鉴权
 
 在之前的 [ 多账号鉴权 ] 章节，我们介绍了利用 “spring 注解处理器” 达到注解合并的目的，从而简化多账号体系下的注解鉴权写法。
@@ -16014,7 +15399,6 @@ public class TestController {
 - 3、扩展性较低，只能略微简化框架内置好的注解写法，无法灵活扩展功能。
 
 此处我们再演示一种方案，使用自定义注解的方式达到相同的目的。
-
 
 ###### 2.1、首先定义注解
 
@@ -16090,7 +15474,6 @@ Sa-Token 内置防火墙组件 `SaFirewallStrategy`，用于拦截一些可能�
 - `SaFirewallCheckHookForHeader`：请求头检测。
 - `SaFirewallCheckHookForParameter`：请求参数检测。
 
-
 ##### 1、默认 hook 配置：
 
 假设我们想要增加请求 path 黑名单，可以使用如下代码：
@@ -16111,9 +15494,7 @@ public class SaTokenConfigure {
 非法请求：/abc
 ```
 
-
 除了 `SaFirewallCheckHookForBlackPath` 以外，其它所有 hook 均可通过此方式重载配置，在此暂不冗余演示。
-
 
 ##### 2、注册新的 hook 规则：
 你可以使用如下代码注册新的 hook 规则：
@@ -16137,7 +15518,6 @@ public void saTokenPostConstruct() {
 SaFirewallStrategy.instance.removeHook(SaFirewallCheckHookForHost.class);
 ```
 
-
 ##### 3、利用自动注入特性注册 hook
 如果你的项目属于 IOC 环境（例如 SpringBoot 项目），还可以这样注册 hook：
 ``` java
@@ -16150,7 +15530,6 @@ public class SaFirewallCheckHookForXxx implements SaFirewallCheckHook {
     }
 }
 ```
-
 
 ##### 4、指定异常处理：
 
@@ -16324,7 +15703,6 @@ public Map<String, String> getAuthRules() {
 }
 ```
 
-
 --- 
 
 错误的写法：
@@ -16369,41 +15747,37 @@ public String test() {
 
 从浏览器访问此接口，我们可以看到：
 
-
-
 此 API 在本地开发时一般可以正常工作，然而如果我们在部署时使用 Nginx 做了一层反向代理后，其最终结果可能会和我们预想的有一点偏差：
 
-
-
 不仅是 Nginx，所有包含路由转发的地方都有可能导致上述丢失 uri 的现象，解决方案也很简单，既然程序无法自动识别，我们改成手动获取即可，Sa-Token 提供两个方案：
-
 
 ##### 方案一：Nginx转发时追加 header 参数
 
 ###### 1、首先在 Nginx 代理转发的地方增加参数
 
-
-
 重点是这一句：`proxy_set_header Public-Network-URL http://$http_host$request_uri;`
 
-###### 2、在程序中新增类 `CustomSaTokenContextForSpring.java`，重写获取uri的逻辑
+###### 2、在程序中重写 SaRequest 创建策略，自定义获取 uri 的逻辑
 
 ``` java
-@Primary
-@Component
-public class CustomSaTokenContextForSpring extends SaTokenContextForSpring {
-	
-	@Override
-	public SaRequest getRequest() {
-		return new SaRequestForServlet(SpringMVCUtil.getRequest()) {
-			@Override
-			public String getUrl() {
-				if(request.getHeader("Public-Network-URL") != null) {
-					return request.getHeader("Public-Network-URL");
+@Configuration
+public class SaTokenConfigure {
+
+	@PostConstruct
+	public void configSaStrategy() {
+		SaStrategy.instance.setCreateSaRequest(source -> {
+			HttpServletRequest request = (HttpServletRequest) source;
+			return new SaRequestForServlet(request) {
+				@Override
+				public String getUrl() {
+					String publicUrl = request.getHeader("Public-Network-URL");
+					if (publicUrl != null) {
+						return publicUrl;
+					}
+					return super.getUrl();
 				}
-				return request.getRequestURL().toString();
-			}
-		};
+			};
+		});
 	}
 
 }
@@ -16414,12 +15788,9 @@ public class CustomSaTokenContextForSpring extends SaTokenContextForSpring {
 > [!ATTENTION| label:风险警告] 
 > 注意：步骤一与步骤二需要同步存在，否则可能有前端假传 header 参数造成安全问题 
 
-
 ##### 方案二：直接在yml中配置当前项目的网络访问地址
 
 在 `application.yml` 中增加配置：
-
-
 
 ``` yaml
 sa-token: 
@@ -16431,7 +15802,6 @@ sa-token:
 # 配置当前项目的网络访问地址
 sa-token.curr-domain=http://local.dev33.cn:8902/api
 ```
-
 
 即可避免路由转发过程中丢失 uri 的问题
 
@@ -16453,7 +15823,6 @@ sa-token.curr-domain=http://local.dev33.cn:8902/api
 
 QQ群里经常有小伙伴提问：项目需要搭建统一认证中心，是用 SSO 方便还是 OAuth2.0 方便呢？针对这个问题，我们列出两者的主要区别以供大家参考：
 
-
 | 功能点				| SSO单点登录			| OAuth2.0											|
 | :--------			| :--------				| :--------											|
 | 统一认证			| 支持度高				| 支持度高											|
@@ -16464,7 +15833,6 @@ QQ群里经常有小伙伴提问：项目需要搭建统一认证中心，是用
 | Client级的权限校验	| 不支持					| 支持度高										|
 | 集成简易度			| 比较简单				| 难度中等									|
 | 适合项目			| 企业内部项目整合		| 企业搭建统一认证授权平台，对外开放服务			|
-
 
 注：以上仅为在 Sa-Token 中两种技术的差异度比较，不同框架的实现可能略有差异，但整体思想是一致的。
 
@@ -16486,9 +15854,6 @@ QQ群里经常有小伙伴提问：项目需要搭建统一认证中心，是用
 
 ---
 
-
-
-
 ``` xml 
 <!-- 引入 spring data mongodb -->
 <dependency>
@@ -16502,14 +15867,9 @@ QQ群里经常有小伙伴提问：项目需要搭建统一认证中心，是用
 implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 ```
 
-
 优点：少量改造即可完成集成 MongodDB
 
-
-
-
 ##### 集成代码：
-
 
 **1. 创建一个类来包装`Sa—Token`的数据**
 ```java
@@ -16814,8 +16174,6 @@ public class SaTokenMongoDao implements SaTokenDao {
 
 在 Spring Boot 下集成 MongoDB：
 
-
-
 ``` xml 
 <!-- 提供MongoDB依赖 -->
 <dependency>
@@ -16828,7 +16186,6 @@ public class SaTokenMongoDao implements SaTokenDao {
 // 提供MongoDB依赖
 implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 ```
-
 
 1. 创建一个 `MySaSession` 并继承 `SaSession`
 ```java
@@ -17063,7 +16420,6 @@ public class SaTokenDaoMongo implements SaTokenDao {
 - Spring Security
 - JWT
 
-
 > [!TIP| label:注意事项] 
 > - 因个人精力&能力有限，本篇只展示部分常见功能的对比，也欢迎大家一起贡献案例，提交pr。
 > - 代码案例仓库：[https://gitee.com/sa-tokens/auth-framework-function-test](https://gitee.com/sa-tokens/auth-framework-function-test)
@@ -17072,21 +16428,16 @@ public class SaTokenDaoMongo implements SaTokenDao {
 
 --- 
 
-
 ##### 依赖引入
 
-
-
-
 ``` xml
-<!-- Sa-Token 权限认证, 在线文档：https://sa-token.cc/ -->
+<!-- Sa-Token 权限认证, 在线文档：https://sa-token.com/ -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot3-starter</artifactId>
 	<version>1.39.0</version>
 </dependency>
 ```
-
 
 ``` xml
 <!-- Shiro 安全控制 -->
@@ -17096,7 +16447,6 @@ public class SaTokenDaoMongo implements SaTokenDao {
 	<version>1.13.0</version>
 </dependency>
 ```
-
 
 ``` xml
 <!-- SpringSecurity -->
@@ -17108,7 +16458,6 @@ public class SaTokenDaoMongo implements SaTokenDao {
 ```
 SpringBoot 项目下一般不用特别指定 SpringSecurity 版本号
 
-
 ``` xml
 <!-- Hutool 工具类框架，其中包含 jwt 实现 -->
 <dependency>
@@ -17118,15 +16467,7 @@ SpringBoot 项目下一般不用特别指定 SpringSecurity 版本号
 </dependency>
 ```
 
-
-
-
-
-
 ##### 会话登录 & 会话状态查询
-
-
-
 
 测试 Controller 
 ``` java 
@@ -17165,7 +16506,6 @@ public class LoginController {
 
 }
 ```
-
 
 自定义 Realm 
 ``` java
@@ -17257,8 +16597,6 @@ public class LoginController {
 
 }
 ```
-
-
 
 定义 SpringSecurity 配置类
 ``` java
@@ -17405,8 +16743,6 @@ public class LoginController {
 
 ```
 
-
-
 测试 Controller 
 ``` java
 @RestController
@@ -17450,15 +16786,7 @@ public class LoginController {
 }
 ```
 
-
-
-
-
-
 ##### 会话注销
-
-
-
 
 ``` java 
 @RequestMapping("logout")
@@ -17468,8 +16796,6 @@ public AjaxJson logout() {
 }
 ```
 
-
-
 ``` java
 @RequestMapping("logout")
 public AjaxJson logout() {
@@ -17477,7 +16803,6 @@ public AjaxJson logout() {
 	return AjaxJson.getSuccess("注销成功");
 }
 ```
-
 
 ``` java
 @Bean
@@ -17501,17 +16826,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
 }
 ```
 
-
 JWT 无法注销已经颁发的 token 。
 
-
-
-
-
 ##### 账号密码登录（MD5 加 salt）
-
-
-
 
 测试 Controller 
 ``` java 
@@ -17532,7 +16849,6 @@ public AjaxJson doLogin(String username, String password) {
 	return AjaxJson.getSuccess("登录成功");
 }
 ```
-
 
 自定义 Realm Bean 设定密码凭证器
 ``` java
@@ -17570,8 +16886,6 @@ protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) 
 
 登录代码照旧 
 
-
-
 CustomUserDetailsManager 的 loadUserByUsername 指定 MD5 算法
 
 ``` java
@@ -17607,8 +16921,6 @@ public AjaxJson doLogin(String username, String password, HttpServletRequest req
 }
 ```
 
-
-
 测试 Controller 
 ``` java 
 @RequestMapping("doLogin")
@@ -17628,12 +16940,7 @@ public AjaxJson doLogin(String username, String password) {
 }
 ```
 
-
-
-
-
 ##### 从上下文获取当前登录 User 信息
-
 
 ``` java
 // 从上下文获取当前登录 User 信息 
@@ -17644,8 +16951,6 @@ public AjaxJson getCurrUser() {
 			.set("user", StpUtil.getSession().get("user"));
 }
 ```
-
-
 
 ``` java
 // 从上下文获取当前登录 User 信息 
@@ -17658,7 +16963,6 @@ public AjaxJson getCurrUser() {
 			.set("user", sysUser);
 }
 ```
-
 
 ``` java
 // 从上下文获取当前登录 User 信息 
@@ -17674,7 +16978,6 @@ public AjaxJson getCurrUser() {
 	return AjaxJson.getError("未登录");
 }
 ```
-
 
 ``` java
 // 从上下文获取当前登录 User 信息 
@@ -17692,12 +16995,7 @@ public AjaxJson getCurrUser(HttpServletRequest request) {
 }
 ```
 
-
-
-
-
 ##### 从会话上下文上存取值
-
 
 ``` java
 // 测试从从会话上下文存取值 
@@ -17712,8 +17010,6 @@ public AjaxJson test() {
 	return AjaxJson.getSuccess();
 }
 ```
-
-
 
 ``` java
 // 测试从从会话上下文存取值
@@ -17730,8 +17026,6 @@ public AjaxJson test() {
 }
 ```
 
-
-
 ``` java
 // 测试从从会话上下文存取值
 @RequestMapping("testSession")
@@ -17745,21 +17039,9 @@ public AjaxJson testSession(HttpServletRequest request) {
 }
 ```
 
-
 无
 
-
-
-
-
-
-
-
-
 ##### 角色认证 & 权限认证
-
-
-
 
 自定义 StpInterface 实现类 
 
@@ -17823,9 +17105,6 @@ public class JurController {
 }
 ```
 
-
-
-
 自定义 Realm 里重写方法 doGetAuthorizationInfo
 
 ``` java
@@ -17883,8 +17162,6 @@ public class JurController {
 }
 ```
 
-
-
 CustomUserDetailsManager 的 loadUserByUsername 里返回用户的 角色 或 权限 信息
 ``` java
 @Override
@@ -17936,18 +17213,9 @@ public class JurController {
 }
 ```
 
-
 无
 
-
-
-
-
-
 ##### 注解鉴权
-
-
-
 
 SaTokenConfigure 配置注解拦截器
 ``` java
@@ -17998,9 +17266,6 @@ public class AtCheckController {
 }
 ```
 
-
-
-
 测试 Controller 
 ``` java
 @RestController
@@ -18030,8 +17295,6 @@ public class AtCheckController {
 
 }
 ```
-
-
 
 `SpringSecurityConfigure` 配置类加上 `@EnableMethodSecurity` 注解
 ``` java
@@ -18072,17 +17335,9 @@ public class AtCheckController {
 }
 ```
 
-
 无
 
-
-
-
-
-
 ##### 路由拦截鉴权
-
-
 
 SaTokenConfigure 配置 
 ``` java
@@ -18097,8 +17352,6 @@ public void addInterceptors(InterceptorRegistry registry) {
 	})).addPathPatterns("/**");
 }
 ```
-
-
 
 过滤器配置 
 ``` java
@@ -18121,7 +17374,6 @@ public ShiroFilterFactoryBean shiroFilterFactoryBean() {
 }
 ```
 
-
 SpringSecurityConfigure 配置 
 
 ``` java
@@ -18141,16 +17393,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
 }
 ```
 
-
 无
 
-
-
-
-
 ##### 鉴权未通过的处理方案
-
-
 
 定义全局异常处理类 
 ``` java
@@ -18174,8 +17419,6 @@ public class GlobalException {
 
 }
 ```
-
-
 
 过滤器配置 
 ``` java
@@ -18211,8 +17454,6 @@ public class ShiroErrorController {
 
 }
 ```
-
-
 
 实现 `AccessDeniedHandler`, `AuthenticationEntryPoint` 接口
 
@@ -18270,7 +17511,6 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
 }
 ```
 
-
 使用 `try-catch` 捕获，或定义全局异常处理
 ``` java
 @RestControllerAdvice
@@ -18289,16 +17529,7 @@ public class GlobalException {
 }
 ```
 
-
-
-
-
-
-
 ##### 和 Thymeleaf 集成
-
-
-
 
 `pom.xml` 依赖 
 ``` xml
@@ -18306,7 +17537,7 @@ public class GlobalException {
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-dialect-thymeleaf</artifactId>
-	<version>${sa-token.version}</version>
+	<version>1.39.0</version>
 </dependency>
 ```
 
@@ -18385,9 +17616,6 @@ public class HomeController {
 </html>
 ```
 
-
-
-
 `pom.xml` 依赖 
 ``` xml
 <!-- Shiro 整合 Thymeleaf 依赖 -->
@@ -18459,8 +17687,6 @@ public class HomeController {
 </html>
 ```
 
-
-
 `pom.xml` 引入依赖 
 ``` xml
 <!-- SpringSecurity 整合 Thymeleaf 依赖 -->
@@ -18526,16 +17752,9 @@ public class HomeController {
 </html>
 ```
 
-
 无
 
-
-
-
-
-
 ##### 前后端分离
-
 
 1、在登录时，将 token 信息返回到前端 
 ``` java
@@ -18549,7 +17768,7 @@ public AjaxJson doLogin(String username, String password) {
 	// 登录
 	StpUtil.login(user.getId());
 	StpUtil.getSession().set("user", user);
-	return AjaxJson.getSuccess("登录成功").set("satoken", StpUtil.getTokenValue());  // 关键代码 
+	return AjaxJson.getSuccess("登录成功").set("satoken", StpUtil.getTokenValue());  // ⚠️ 关键代码 
 }
 ```
 
@@ -18564,9 +17783,6 @@ if(localStorage.satoken) {
 }
 // 后续提交请求...
 ```
-
-
-
 
 1、自定义 SessionManager，从请求 header 里读取前端提交的 token
 ``` java
@@ -18636,8 +17852,8 @@ public AjaxJson doLogin(String username, String password) {
 	Subject subject = SecurityUtils.getSubject();
 	try {
 		subject.login(new UsernamePasswordToken(username, password));
-		String token = subject.getSession().getId().toString();    // 关键代码
-		return AjaxJson.getSuccess("登录成功!").set("token", token);    // 关键代码
+		String token = subject.getSession().getId().toString();    // ⚠️ 关键代码
+		return AjaxJson.getSuccess("登录成功!").set("token", token);    // ⚠️ 关键代码
 	} catch (AuthenticationException e) {
 		e.printStackTrace();
 		return AjaxJson.getError(e.getMessage());
@@ -18657,23 +17873,11 @@ if(localStorage.token) {
 // 后续提交请求...
 ```
 
-
-
 见下方 “集成 Redis” 部分，同时做到：集成 Redis + 前后端分离。
-
-
 
 `JWT` 不依赖 `Cookie` 保存/传输 token，因此无需特殊定制即可原生支持前后端分离模式。
 
-
-
-
-
-
 ##### 集成 Redis
-
-
-
 
 pom.xml 引入依赖
 ``` xml
@@ -18681,7 +17885,7 @@ pom.xml 引入依赖
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-redis-template</artifactId>
-	<version>${sa-token.version}</version>
+	<version>1.39.0</version>
 </dependency>
 
 <!-- 提供Redis连接池 -->
@@ -18721,8 +17925,6 @@ spring:
 
 其它代码照旧
 
-
-
 pom.xml 引入依赖 
 
 ``` xml
@@ -18750,7 +17952,6 @@ spring:
             timeout: 1800
         
 ```
-
 
 ShiroConfigure 注入相关 Bean 
 ``` java
@@ -18846,9 +18047,6 @@ public class SysUser implements Serializable {
 ```
 
 其它代码照旧 
-
-
-
 
 （结合上部分，同时做到集成 Redis + 前后端分离）
 
@@ -18992,8 +18190,6 @@ public class HttpSessionConfigure {
     }
 }
 ```
-
-
 
 无
 

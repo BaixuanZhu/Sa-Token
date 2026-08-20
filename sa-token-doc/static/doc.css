@@ -118,6 +118,7 @@ body{
 
 /* 左边导航 */
 .nav-left{display: inline-block; float: left;}
+.nav-left > a{text-decoration: none; color: inherit;}
 .logo-box {display: inline-block; cursor: pointer; color: #000; padding-left: 24px; height: 60px; line-height: 60px;}
 .logo-box img {width: 50px; height: 50px; vertical-align: middle; position: relative; top: -1px; margin-right: 5px;}
 .logo-box .logo-text {display: inline-block; margin: 0; padding: 0; color: #000; vertical-align: middle; font-size: 26px;font-weight: 500;}
@@ -131,8 +132,21 @@ body{
 .doc-header .nav-right>select:hover{box-shadow: 0 0 10px #aaa;}
 
 .github-corner{z-index: 1001 !important;}
-.doc-header .nav-right .wzi{font-size: 14px; line-height: 61px; transition: color 0.2s; padding-bottom: 4px;}
-.doc-header .nav-right .wzi:hover{border-bottom: 2px var(--a-color) solid;}
+.doc-header .nav-right .wzi{font-size: 14px; line-height: 61px; transition: color 0.2s; position: relative; text-decoration: none;}
+.doc-header .nav-right .wzi::after{
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: calc(50% + 0.8em);
+	height: 2px;
+	background-color: var(--a-color);
+	transform: scaleX(0);
+	transform-origin: center;
+	transition: transform 0.25s ease;
+}
+.doc-header .nav-right .wzi:hover::after,
+.doc-header .nav-right .wzi.nav-active::after{transform: scaleX(1);}
 
 .nav-right a{color: #34495E;}
 
@@ -162,8 +176,52 @@ body{
 .zk-icon{display: inline-block; width: 0px; height: 0px; position: relative;top: 3px; margin-left: 4px;}
 .zk-icon{border-style: solid; border-width: 5px; border-color: #aaa transparent transparent transparent; }
 
-/* 版本选择按钮 */
-.select-version{background-color: transparent !important;}
+/*
+ * 版本 / 语言下拉：同一套样式
+ * 语言框用 #translateSelectLanguage 写死——切换语种时 translate.js 会重绘 select，
+ * 临时 class 会被冲掉，不能指望 JS 事后补 class
+ */
+.select-version,
+#translateSelectLanguage{
+	background-color: transparent !important;
+}
+.nav-left .select-version,
+#translateSelectLanguage{
+	display: inline-block !important;
+	vertical-align: middle;
+	margin-left: 10px !important;
+	border: 1px solid #999 !important;
+	color: #666 !important;
+	outline: 0;
+	cursor: pointer;
+	transition: all 0.2s;
+	background-color: #FFF;
+	font-size: 12px !important;
+	padding: 2px 2px !important;
+	position: relative;
+	top: 2px;
+	appearance: auto;
+	-webkit-appearance: menulist;
+	height: 22px !important;
+	line-height: 16px !important;
+	box-sizing: border-box;
+}
+.nav-left .select-version:hover,
+#translateSelectLanguage:hover{box-shadow: 0 0 10px #aaa;}
+
+/* 语言框单独限宽：长语种名（如 Bahasa Indonesia）别把顶栏撑爆 */
+#translateSelectLanguage{
+	width: 88px !important;
+	max-width: 88px !important;
+}
+
+/*
+ * 语言容器用 contents：不生成盒子，内部 select 跟版本 select 同级排版
+ * 否则多一层 span，高低会对不齐
+ */
+.nav-left .select-language-box{
+	display: contents;
+}
 
 
 /* ------- 调整一下左侧树的字体样式 ------- */
@@ -324,8 +382,38 @@ body {
 #main *:not(h1,h2,h3,h4,h5,h6) a:hover{color: var(--a-hover-color); border-bottom: 1px var(--a-hover-color) solid;}
 
 #main .un-dec-a-pre+p a,
-#main p[align=center] a{border-bottom:0px;}
+#main p[align=center] a,
+#main .doc-inline-ad a,
+#main .doc-inline-ad a:hover{border-bottom: 0; text-decoration: none;}
 
+/* 正文区标题下广告（独立样式，不与右侧栏 top-ad-box 共用） */
+#main .doc-inline-ad{font-size: 12px; margin: 16px 0 20px;}
+#main .doc-inline-ad__card{position: relative; padding: 10px 28px 10px 10px; background-color: #F4F8FA; overflow: hidden;}
+#main .doc-inline-ad__close{
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	z-index: 1;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	font-size: 18px;
+	color: #aaa;
+	cursor: pointer;
+	user-select: none;
+	text-decoration: none;
+}
+#main .doc-inline-ad__close:hover{color: #666; text-decoration: none;}
+#main .doc-inline-ad__body{display: flex; align-items: center; gap: 16px;}
+#main .doc-inline-ad__img{height: 80px; width: auto; flex-shrink: 0; border: 0; border-radius: 0; box-shadow: none;}
+#main .doc-inline-ad__img:hover{box-shadow: none;}
+#main .doc-inline-ad__text{flex: 1; display: flex; flex-direction: column; gap: 6px;}
+#main .doc-inline-ad__text p{margin: 0; color: #999; font-size: 12px; font-weight: 400; line-height: 1.5; word-break: break-all;}
+
+#main footer a.footer-beian,
+#main footer a.footer-beian:hover{font-size: 12px; color: #999; border-bottom: 1px #999 solid;}
+#main footer a.footer-beian:hover{color: #777; border-bottom-color: #777;}
 
 /* toc目录树 */
 .toc-box>li{margin-bottom: 15px;}
@@ -351,20 +439,6 @@ body {
 	background-color: #eaf6eb;
 }
 .show-to-img{cursor: pointer;}
-
-/* 导航栏悬浮时出现下滑条条 */
-/* .doc-header .nav-right .wzi::after {
-    content: '';
-    width: 0%;
-	float: left;
-    display: inline-block;
-	text-align: center;
-	margin-top: -15px;
-    border-bottom: 2px var(--a-color) solid;
-	transition: all 0.2s;
-}
-.doc-header .nav-right .wzi:hover::after {width: 100%;} */
-
 
 /* 保证点开图片时在最上面 */
 .medium-zoom-image.medium-zoom-image--opened{
@@ -463,7 +537,7 @@ body {
 .main-box details p{padding: 0 14px;}
 
 /* 广告盒子 */
-.ad-title{ font-size: 14px; color: #aaa; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px #aaa solid; }
+.ad-title{ font-size: 12px; color: #aaa; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 1px #aaa solid; }
 .ad-tips{margin-bottom: 5px;}
 .ad-close{float: right;}
 .ad-close:hover{cursor: pointer; text-decoration: underline; color: red;}
@@ -484,7 +558,9 @@ body {
 
 
 /* 帮助按钮 */
-.help-btn{transition: all 0.5s; text-align: center; border: 1px #42b983 solid; background-color: rgba(255, 255, 255, 0.5); cursor: pointer; font-size: 13px; color: #42b983; line-height: 40px;}
+.help-btn{transition: all 0.5s; text-align: center; background-color: rgba(255, 255, 255, 0.5); cursor: pointer; font-size: 13px; line-height: 40px;}
+.help-btn{ margin-top: 20px; border: 1px #42b983 solid; color: green;}
+.help-btn a{ text-decoration: none !important; color: inherit; height: 100%; width: 100%; display: inline-block; }
 .help-btn:hover{box-shadow: 0 0 20px #D1EEE1 !important;}
 .xiaozhushou-intro p{line-height: 14px;}
 
@@ -539,3 +615,8 @@ body {
 .main-box .alert.flat.note{background-color: #E8F4FF;}
 .main-box .alert.flat.tip{background-color: #F0F9EB;}
 .main-box .alert.flat.warning{background-color: #FDF6EC;}
+
+/* 公安备案 */
+.foot-beian-gongan{display:inline-flex;align-items:center;gap:4px;vertical-align:middle;}
+.foot-beian-gongan-icon{width:16px;height:16px;flex-shrink:0;}
+#main footer a.footer-beian img{width:14px;height:14px;vertical-align:-2px;margin-right:3px;}

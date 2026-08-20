@@ -3,7 +3,7 @@
 **Reactor** 是一种非阻塞的响应式模型，本篇将以 **WebFlux** 为例，展示 Sa-Token 与 Reactor 响应式模型框架相整合的示例，
 **你可以用同样方式去对接其它 Reactor 模型框架（例如 SpringCloud Gateway）**
 
-整合示例在官方仓库的`/sa-token-demo/sa-token-demo-webflux`文件夹下，如遇到难点可结合源码进行测试学习
+整合示例在官方仓库的`/sa-token-demo/sa-token-demo-webflux`文件夹下，如遇到难点可结合源码进行测试学习。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 
 > [!WARNING| label:小提示 ] 
@@ -22,7 +22,7 @@
 <!---------------------------- tabs:start ------------------------------>
 <!-------- tab:Maven 方式 -------->
 ``` xml 
-<!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-reactor-spring-boot-starter</artifactId>
@@ -34,7 +34,7 @@
 
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:${sa.top.version}'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。
@@ -42,7 +42,7 @@ implementation 'cn.dev33:sa-token-reactor-spring-boot-starter:${sa.top.version}'
 
 <!-------- tab:Gradle (Kotlin) 方式 -------->
 ``` gradle
-// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc
+// Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.com
 implementation("cn.dev33:sa-token-reactor-spring-boot-starter:${sa.top.version}")
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-reactor-spring-boot3-starter`。

@@ -49,6 +49,13 @@ Redis 的集成有多种方式，缓存的方案也不止 Redis 一种，Sa-Toke
 如果你想对缓存方案再进行一下深入探究，那么你可以参考：[缓存层扩展](/plugin/dao-extend) 
 
 
+> [!WARNING| ] 
+> 若往 Session 存自定义实体类后，从 Redis 读回报错 `无法反序列化的类型：xxx，请先将其注册到 JSON 全局类型白名单`，请参考：[JSON 全局类型白名单机制](/plugin/json-extend?id=json-全局类型白名单机制)
+
+> [!WARNING| ] 
+> 自 v1.46.0 起，`sa-token-redis-template` / `sa-token-redisson` 使用了 Redis 6.0+ 的 `SET KEEPTTL` 特性。若 Redis 服务低于 6.0，会报 `ERR syntax error`。解决方案见：[Q：Redis 6.0 以下版本集成报错](/more/common-questions?id=q：redis-60-以下版本集成报错：err-syntax-error)
+
+
 ### 2、自定义序列化方案
 
 如果你按照上述 RedisTemplate 方案进行集成测试，会发现框架在 Redis 中是以 json 格式存储数据的。可以自定义数据序列化格式吗？当然是可以的。
@@ -205,8 +212,164 @@ spring.redis.lettuce.pool.min-idle=0
 Sa-Token-Redis 集成包的版本尽量与 Sa-Token-Starter 集成包的版本一致，否则可能出现兼容性问题。
 
 
+### 4、多个项目共用同一个 Redis，怎么防止冲突？
 
-### 4、扩展：集成 MongoDB 
+如无特殊需求，建议多个项目不要共用同一个 Redis。如果非要共用，可用以下方式隔离数据：
+
+**方式 1：使用不同的 db 索引**
+
+Redis 默认提供 16 个 database，每个项目配置不同的 `spring.redis.database`（SpringBoot3 为 `spring.data.redis.database`）即可。
+
+**方式 2：配置不同的 `sa-token.token-name`**
+
+此配置项默认为 `satoken`，会作为框架在 Redis 中存储数据时的统一前缀，例如：
+
+``` yaml
+sa-token: 
+    token-name: my-app-a
+```
+
+> [!NOTE| label:注意 ]
+> `token-name` 同时也会作为前端提交 Token 时的参数名 / Header 名。若只想隔离 Redis 键、又不想改前端传参方式，请看方式 4。
+
+**方式 3：使用 Alone 独立 Redis / Redisson 插件**
+
+让权限缓存与业务缓存分离，或让不同项目连接不同的 Redis 实例：
+- RedisTemplate：[Alone 独立 Redis 插件](/plugin/alone-redis)
+- Redisson：[Alone 独立 Redisson 插件](/plugin/alone-redisson)
+
+**方式 4：重写 `wrapKey` 自定义键前缀（保底方案）**
+
+`sa-token-redis-template`（及 `sa-token-redis-template-jdk-serializer`）提供了 `wrapKey` 钩子，默认原样返回 key。需要给所有 Redis 键加项目前缀时，可注册自定义 Dao 并重写该方法：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao() {
+		return new SaTokenDaoForRedisTemplate() {
+			@Override
+			public String wrapKey(String key) {
+				return "my-app:" + key;
+			}
+		};
+	}
+}
+```
+
+重写后，框架读写的键会变成类似：`my-app:satoken:login:token:xxxx`。
+
+
+### 5、集成 Redisson
+
+如果你的项目用的是 Redisson，而不是上文的 RedisTemplate，可以改用本节方案。这是与第 1 节 **并列的可选项**，不是必须步骤。已经按 RedisTemplate 集成的，不必再引入 Redisson；也不要两套 Dao 同时引入。
+
+集成 Redisson 有两种方式，**二选一**即可。
+
+#### 5.1、方式一：引入 `sa-token-redisson`
+
+通用插件，Spring Boot、Solon、JFinal 等都可用。需要项目里已有 `RedissonClient`，并自己注册 `SaTokenDao`。
+
+<!---------------------------- tabs:start ------------------------------>
+<!-------- tab:Maven 方式 -------->
+``` xml
+<!-- Sa-Token 整合 Redisson -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-redisson</artifactId>
+	<version>${sa.top.version}</version>
+</dependency>
+```
+<!-------- tab:Gradle 方式 -------->
+``` gradle
+implementation 'cn.dev33:sa-token-redisson:${sa.top.version}'
+```
+<!---------------------------- tabs:end ------------------------------>
+
+然后注册 Dao（`RedissonClient` 由你现有的 Redisson 配置提供）：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	public SaTokenDao saTokenDao(RedissonClient redissonClient) {
+		return new SaTokenDaoForRedisson(redissonClient);
+	}
+}
+```
+
+#### 5.2、方式二：引入 `sa-token-redisson-spring-boot-starter`
+
+Spring Boot 专用自动配置包，内部已包含 `sa-token-redisson` 和官方 `redisson-spring-boot-starter`。引入后会自动注册 `SaTokenDao`，不用手写 Java。
+
+<!---------------------------- tabs:start ------------------------------>
+<!-------- tab:Maven 方式 -------->
+``` xml
+<!-- Sa-Token 整合 Redisson（Spring Boot 自动配置） -->
+<dependency>
+	<groupId>cn.dev33</groupId>
+	<artifactId>sa-token-redisson-spring-boot-starter</artifactId>
+	<version>${sa.top.version}</version>
+</dependency>
+```
+<!-------- tab:Gradle 方式 -------->
+``` gradle
+implementation 'cn.dev33:sa-token-redisson-spring-boot-starter:${sa.top.version}'
+```
+<!---------------------------- tabs:end ------------------------------>
+
+配置 Redis 连接即可（与官方 Redisson starter 相同）。Spring Boot 3.x 请将前缀 `spring.redis` 改为 `spring.data.redis`：
+
+<!---------------------------- tabs:start ------------------------------>
+<!-------- tab:yaml 风格 -------->
+``` yaml
+spring:
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        database: 1
+        # password:
+```
+<!-------- tab:properties 风格 -------->
+``` properties
+spring.redis.host=127.0.0.1
+spring.redis.port=6379
+spring.redis.database=1
+# spring.redis.password=
+```
+<!---------------------------- tabs:end ------------------------------>
+
+示例：[sa-token-demo-springboot-redisson](https://gitee.com/dromara/sa-token/blob/master/sa-token-demo/sa-token-demo-springboot-redisson)
+
+若需要权限缓存与业务缓存分离，请改用 [Alone 独立 Redisson 插件](/plugin/alone-redisson)。
+
+#### 5.3、升级注意
+
+`SaTokenDaoForRedisson` 按 String 读写，默认使用 `StringCodec`，与业务 `RedissonClient` 的全局 codec（未配置时为 `Kryo5Codec`）隔离。
+
+Sa-Token 旧版本下（version<=v1.45.0） `getBucket(key)` 跟随 `RedissonClient` 全局 `codec` （一般默认是 `Kryo5Codec`）。升级 `sa-token-redisson` 或 `sa-token-redisson-spring-boot-starter` 后改为默认为 `StringCodec`，旧缓存将无法反序列化，登录态会失效。处理方式二选一：
+
+1. **清空旧缓存**（推荐）：删除 Redis 中 Sa-Token 相关 key（默认前缀为配置项 `sa-token.token-name`，一般为 `satoken:`），让用户重新登录。
+2. **保持旧 codec**：重写 `SaTokenDao` 的注册方式，在构造时显式传入升级前的 `codec`。未自定义过 Redisson codec 时，传入 `new Kryo5Codec()`。例如：
+
+``` java
+@Configuration
+public class SaTokenDaoConfig {
+	@Bean
+	@Primary
+	public SaTokenDao saTokenDao(RedissonClient redissonClient) {
+		return new SaTokenDaoForRedisson(redissonClient, new Kryo5Codec());
+	}
+}
+```
+
+若你曾在 Redisson 配置里指定过其它 codec（如 `JsonJacksonCodec`），请传入当时使用的那个，而不是 `Kryo5Codec`。
+
+`setAndKeepTTL` 要求 Redis 6.0+。若 Redis 服务低于 6.0，会报 `ERR syntax error`，请参考：[Q：Redis 6.0 以下版本集成报错](/more/common-questions?id=q：redis-60-以下版本集成报错：err-syntax-error)
+
+
+### 6、扩展：集成 MongoDB  
 
 - [集成 MongoDB 参考一](/up/integ-spring-mongod-1)
 - [集成 MongoDB 参考二](/up/integ-spring-mongod-2)

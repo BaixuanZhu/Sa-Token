@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8">
 		<title>Sa-Token</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="description"
 			content="Sa-Token是一个java权限认证框架，功能全面，上手简单，登录认证、权限认证、Session会话、踢人下线、账号封禁、集成Redis、前后端分离、分布式会话、微服务网关鉴权、单点登录、OAuth2.0、临时Token验证、记住我模式、模拟他人账号、临时身份切换、多账号体系、注解式鉴权、路由拦截式鉴权、花式token、自动续签、同端互斥登录、会话治理、密码加密、jwt集成、Spring集成、WebFlux集成...，有了sa-token，你所有的权限认证问题，都不再是问题">
-		<meta name="keywords" content="sa-token,sa-token框架,sa-token文档,java权限认证">
+		<meta name="keywords" content="Sa-Token,Java权限认证,登录认证,权限认证,SSO,单点登录,OAuth2,微服务鉴权,Spring Boot权限框架">
 		<meta name="viewport"
 			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="canonical" href="https://sa-token.com/">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="Sa-Token">
+		<meta property="og:description" content="Sa-Token是一个java权限认证框架，功能全面，上手简单，登录认证、权限认证、Session会话、踢人下线、账号封禁、集成Redis、前后端分离、分布式会话、微服务网关鉴权、单点登录、OAuth2.0、临时Token验证、记住我模式、模拟他人账号、临时身份切换、多账号体系、注解式鉴权、路由拦截式鉴权、花式token、自动续签、同端互斥登录、会话治理、密码加密、jwt集成、Spring集成、WebFlux集成...，有了sa-token，你所有的权限认证问题，都不再是问题">
+		<meta property="og:url" content="https://sa-token.com/">
+		<meta property="og:image" content="https://sa-token.com/logo.png">
+		<meta property="og:site_name" content="Sa-Token">
+		<meta property="og:locale" content="zh_CN">
 		<link rel="shortcut icon" type="image/x-icon" href="logo.png">
 		<link rel="stylesheet" href="static/index.css">
 		<link rel="stylesheet" href="static/swiper/swiper-bundle.min.css">
 		<link rel="stylesheet" href="static/swiper/index-swiper.css">
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Organization",
+					"name": "Sa-Token",
+					"url": "https://sa-token.com/",
+					"logo": "https://sa-token.com/logo.png"
+				},
+				{
+					"@type": "SoftwareApplication",
+					"name": "Sa-Token",
+					"applicationCategory": "DeveloperApplication",
+					"operatingSystem": "Java",
+					"url": "https://sa-token.com/",
+					"image": "https://sa-token.com/logo.png",
+					"description": "轻量级 Java 权限认证框架，支持登录认证、权限认证、SSO 单点登录、OAuth2.0、微服务网关鉴权等。",
+					"offers": {
+						"@type": "Offer",
+						"price": "0",
+						"priceCurrency": "CNY"
+					},
+					"keywords": "Sa-Token,Java权限认证,登录认证,权限认证,SSO,OAuth2,微服务鉴权"
+				}
+			]
+		}
+		</script>
 	</head>
 	<body>
 		<!-- 总盒子 -->
@@ -29,6 +65,8 @@
 							<!-- <sub>vx.x.x</sub> -->
 						</div>
 					</a>
+					<!-- 语言切换：translate.js 会往这个容器里生成 select -->
+					<span id="translate" class="select-language-box ignore"></span>
 				</div>
 				<nav class="nav-right">
 					<!-- <div class="zk-box p-none">
@@ -55,6 +93,7 @@
 					</div> -->
 					<a class="wzi" href="index.html">首页</a>
 					<a class="wzi" href="doc.html">文档</a>
+					<a class="wzi" href="/blog/index.html">博客</a>
 					<div class="zk-box">
 						<a class="wzi" href="javascript:;">
 							<span>视频 </span>
@@ -62,6 +101,8 @@
 						</a>
 						<div class="zk-context">
 							<div>
+								<a href="https://www.bilibili.com/video/BV1LzNu6KEsW" target="_blank">乐之者java（登录认证/权限管理/apiKey等）</a>
+								<a href="https://www.bilibili.com/video/BV1PF9QBXEet/?p=53" target="_blank">抓蛙师（23集）</a>
 								<a href="https://www.bilibili.com/video/BV1fsUVBWEyH/" target="_blank">朱老师的小课堂（7集）</a>
 								<a href="https://www.bilibili.com/video/BV1NF1FBpEe6/" target="_blank">王清江唷 SSO篇（29集）</a>
 								<a href="https://www.bilibili.com/video/BV1uZUpYVEst/" target="_blank">fox说技术（7集）</a>
@@ -71,19 +112,46 @@
 								<a href="https://www.bilibili.com/video/BV11u4y197JL/" target="_blank">达达-Java（26集）</a>
 								<a href="https://space.bilibili.com/473679148/video" target="_blank">晒太阳的盐（22集）</a>
 								<div class="zk-fengexian"></div>
-								<a href="doc.html#/more/content-cooperation">[ + 课程提交 ]</a>
+								<a href="https://wj.qq.com/s2/27539608/zzzd/" target="_blank">[ + 课程提交 ]</a>
 								<!-- <a href="javascript: layer.alert('如您有 Sa-Token 相关课程录制，请联系官网文档右侧 < sa-token 小助手 > 进行提交');">
 									[ + 课程提交 ]
 								</a> -->
 							</div>
 						</div>
 					</div>
-					<a class="p-none wzi" href="doc.html#/more/link">案例</a>
-					<a class="p-none wzi" href="doc.html#/more/join-group">加入讨论群</a>
+					<div class="zk-box">
+						<a class="wzi" href="javascript:;">
+							<span>案例 </span>
+							<span class="zk-icon"></span>
+						</a>
+						<div class="zk-context">
+							<div>
+								<a href="https://gitee.com/sa-tokens/awesome-sa-token" target="_blank">Gitee - Awesome-Sa-Token</a>
+								<a href="https://github.com/sa-tokens/awesome-sa-token" target="_blank">GitHub - Awesome-Sa-Token</a>
+								<a href="https://atomgit.com/sa-tokens/awesome-sa-token" target="_blank">AtomGit - Awesome-Sa-Token</a>
+							</div>
+						</div>
+					</div>
+					<a class="p-none wzi" href="doc.html#/more/join-group">加群</a>
 					<a class="p-none wzi" href="doc.html#/more/demand-commit">需求提交</a>
-					<a class="p-none wzi" href="doc.html#/more/blog">博客</a>
 					<a class="p-none wzi" href="doc.html#/more/sa-token-donate">赞助</a>
-					<a class="p-none wzi" href="doc.html#/pro/st_index_top">🔥 SSO/OAuth2 商业版</a>
+					<a class="p-none wzi" href="https://sa-max.cn?way=st_index_top" target="_blank">🔥 SSO/OAuth2 商业版</a>
+					<div class="zk-box">
+						<a class="wzi" href="javascript:;">
+							<span>安全推荐 </span>
+							<span class="zk-icon"></span>
+						</a>
+						<div class="zk-context">
+							<div>
+								<a href="https://github.com/FallibleInc/security-guide-for-developers/blob/master/security-checklist-zh.md" target="_blank">开发者安全 Checklist</a>
+								<a href="https://github.com/shieldfy/API-Security-Checklist/blob/master/README-zh.md" target="_blank">API 安全 Checklist</a>
+								<a href="https://github.com/Tencent/secguide" target="_blank">腾讯代码安全指南</a>
+								<a href="https://github.com/LyleMi/Learn-Web-Hacking" target="_blank">Web 安全学习笔记</a>
+								<a href="https://github.com/OWASP/CheatSheetSeries" target="_blank">OWASP Cheat Sheet Series</a>
+								<a href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank">PayloadsAllTheThings</a>
+							</div>
+						</div>
+					</div>
 					<div class="zk-box">
 						<a class="wzi" href="javascript:;">
 							<span>相关资源 </span>
@@ -95,7 +163,6 @@
 								<a href="doc.html#/more/update-log">更新日志</a>
 								<a href="doc.html#/more/common-questions">常见报错</a>
 								<a href="doc.html#/more/tj-gzh">推荐公众号</a>
-								<a href="doc.html#/more/blog">相关博客</a>
 								<div class="zk-fengexian"></div>
 								<!-- <a href="http://sa-app.dev33.cn/wall.html?name=sa-token" target="_blank">需求墙</a> -->
 								<a href="doc.html#/fun/sa-token-test">在线考试</a>
@@ -125,7 +192,7 @@
 			<div class="main-box">
 				<div class="content-box">
 					<!-- <div class="fenge"></div> -->
-					<h1>Sa-Token<small>v1.45.0</small></h1>
+					<h1>Sa-Token<small>v1.46.0</small></h1>
 					<div class="sub-title">
 						<span class="sub-title-nr">开源、免费、一站式 java 权限认证框架，让鉴权变得简单、优雅！</span>
 						<div class="gb-cursor">&nbsp;</div>
@@ -134,7 +201,7 @@
 						<!-- <a class="abtn" href="https://gitee.com/dromara/sa-token" target="_blank">Gitee</a>
 						<a class="abtn" href="https://github.com/dromara/sa-token" target="_blank">GitHub</a> -->
 						<a class="abtn" href="doc.html#/more/demand-commit" target="_self">需求提交</a>
-						<a class="abtn" href="https://gitee.com/sa-tokens/awesome-sa-token" target="_blank">开源案例</a>
+						<a class="abtn" href="https://gitee.com/sa-tokens/awesome-sa-token" target="_blank">优秀案例</a>
 						<a class="abtn" href="doc.html#/more/join-group" target="_self">加入讨论群</a>
 						<a class="abtn doc-btn" href="doc.html" target="_self">在线文档 →</a>
 						<!-- <a href="https://gitee.com/dromara/sa-token" target="_blank">集成案例</a> -->
@@ -255,7 +322,7 @@
 					<div style="height: 20px;"></div>
 					<h2 class="s-title s-title-tx">
 						七年磨一剑 🗡️ 
-						<span style="background: linear-gradient(to right, #44f, #bd34fe); background-clip: text; color: transparent;"> 一站式解决方案</span>
+						<span class="s-gradient-text"> 一站式解决方案</span>
 					</h2>
 					<div style="margin-top: -20px; margin-bottom: 40px;">
 						<!-- <img class="sa-token-jss-img" src="/big-file/index/intro/sa-token-jss--tran.png"> -->
@@ -342,7 +409,7 @@
 					<h2 class="s-title">Java 鉴权框架 Stars 对比</h2>
 					<div style="border: 0px #000 solid;">
 						<iframe 
-						  src="./static/page-com/github-stars-vs/github-stars-vs.html" 
+						  src="./a/github-stars-vs/index.html" 
 						  width="1000" 
 						  height="700" 
 						  frameborder="0"
@@ -568,7 +635,7 @@
 						<a href="http://www.sxpartner.com/" target="_blank" title="陕西小伙伴网络科技有限公司">
 							<img class="lazy" data-original="/big-file/index/com/cptc.png">
 						</a>
-						<a href="http://www.hmnst.com/index.html" target="_blank" title="微纳感知（合肥）技术有限公司">
+						<a href="https://www.hmnst.com/" target="_blank" title="微纳感知（合肥）技术有限公司">
 							<img class="lazy" data-original="/big-file/index/com/weinaganzhi.png">
 						</a>
 						<a href="https://mimirii.com/" target="_blank" title="西安米默网络科技有限公司">
@@ -604,9 +671,9 @@
 						<a href="https://yimei.liuxin.online/" target="_blank" title="逸玫工作室">
 							<img class="lazy" data-original="/big-file/index/com/yimei-black.png">
 						</a>
-						<a href="http://www.njhrchina.top/" target="_blank" title="南京桓瑞软件科技有限公司">
+						<!-- <a href="http://www.njhrchina.top/" target="_blank" title="南京桓瑞软件科技有限公司">
 							<img class="lazy" data-original="/big-file/index/com/nanjing-hengrui.png">
-						</a>
+						</a> -->
 						<a href="https://sohelp.net/" target="_blank" title="宁波互邦软件有限公司">
 							<img class="lazy" data-original="/big-file/index/com/ningbohubang.png">
 						</a>
@@ -652,15 +719,27 @@
 						<a href="https://aiflowy.tech" target="_blank" title="AIFlowy - 开源的 AI 智能体开发平台">
 							<img class="lazy" data-original="/big-file/index/com/aiflowy.png">
 						</a>
-						
-						
 						<a href="https://www.klszkj.com" target="_blank" title="昆仑数智科技有限责任公司">
 							<img class="lazy" data-original="/big-file/index/com/kunlunshuzhi.png">
 						</a>
 						<a href="https://www.haozpay.com/" target="_blank" title="皓臻云（重庆）科技有限责任公司">
 							<img class="lazy" data-original="/big-file/index/com/haozpay.png">
 						</a>
-						
+						<a href="https://www.wxmx.com.cn/" target="_blank" title="无锡梦雪网络科技有限公司">
+							<img class="lazy" data-original="/big-file/index/com/mengxue.png">
+						</a>
+						<a href="http://www.yungnet.cn/" target="_blank" title="辽宁天云港云计算有限责任公司">
+							<img class="lazy" data-original="/big-file/index/com/tianyungang.png">
+						</a>
+						<a href="https://xgk.gkzycc.cn/" target="_blank" title="内蒙古志愿查查咨询服务有限公司">
+							<img class="lazy" data-original="/big-file/index/com/zhiyuanzhachazixun.png">
+						</a>
+						<a href="https://www.gsk-china.com/" target="_blank" title="葛兰素史克（中国）投资有限公司">
+							<img class="lazy" data-original="/big-file/index/com/gelansushike.png">
+						</a>
+						<a href="https://www.ixiayi.net/" target="_blank" title="北京侠医软件技术有限公司">
+							<img class="lazy" data-original="/big-file/index/com/beijingxiayiruanjian.png">
+						</a>
 						
 					</div>
 					<div style="height: 10px; clear: both;"></div>
@@ -696,7 +775,7 @@
 							<img class="lazy" data-original="/big-file/index/dromara/hutool.jpg"
 								msg="小而全的Java工具类库，使Java拥有函数式语言般的优雅，让Java语言也可以“甜甜的”。">
 						</a>
-						<a href="https://sa-token.cc/" target="_blank">
+						<a href="https://sa-token.com/" target="_blank">
 							<img class="lazy" data-original="/big-file/index/dromara/sa-token.png"
 								msg="一个轻量级 java 权限认证框架，让你的鉴权变得简单、优雅！">
 						</a>
@@ -817,10 +896,12 @@
 							<img class="lazy" data-original="/big-file/index/dromara/dataCompare.png"
 								msg="数据库比对工具：hive 表数据比对，mysql、Doris 数据比对，实现自动化配置进行数据比对，避免频繁写sql 进行处理，低代码(Low-Code) 平台">
 						</a>
+						<!-- open-giteye-api：Gitee 组织内已移除，2026-8-5 起不再展示
 						<a href="https://gitee.com/dromara/open-giteye-api" target="_blank">
 							<img class="lazy" data-original="/big-file/index/dromara/open-giteye-api.svg"
 								msg="giteye.net 是专为开源作者设计的数据图表服务工具类站点，提供了包括 Star 趋势图、贡献者列表、Gitee指数等数据图表服务。">
 						</a>
+						-->
 						<a href="https://gitee.com/dromara/RuoYi-Vue-Plus" target="_blank">
 							<img class="lazy" data-original="/big-file/index/dromara/RuoYi-Vue-Plus.png"
 								msg="后台管理系统 重写 RuoYi-Vue 所有功能 集成 Sa-Token + Mybatis-Plus + Jackson + Xxl-Job + SpringDoc + Hutool + OSS 定期同步">
@@ -985,9 +1066,9 @@
 							<img class="lazy" data-original="/big-file/index/dromara/surpass.png"
 								msg="Surpass是API开放平台，支持OpenAPI定义，面向REST API资源无状态认证和调用，实现企业统一权限管理">
 						</a>
-						<a href="https://gitee.com/dromara/my-obj" target="_blank">
-							<img class="lazy" data-original="/big-file/index/dromara/my-obj.png"
-								msg="现代化的私有云存储解决方案">
+						<a href="https://myobj.sms4j.com/" target="_blank">
+							<img class="lazy" data-original="/big-file/index/dromara/my-obj.svg"
+								msg="MyObj 是基于 Go 的开源家庭网盘系统，支持大文件上传、断点续传、秒传、文件分享与权限管理，可作为企业级对象存储的轻量化替代方案。">
 						</a>
 						
 						
@@ -1079,6 +1160,9 @@
 								msg="在线记事本 – 免费在线文本编辑器：专为无干扰写作、高效记笔记。完全免费，无需注册，打开即用，支持富文本内容编辑。支持保存、导出，以及分享给其他人。简洁流畅，专注创作。">
 						</a>
 					</div>
+					<div class="you-coop-tip">
+						<a href="doc.html#/more/join-group?id=_6、商务合作" target="_blank">申请友联交换</a>
+					</div>
 					<div style="height: 10px; clear: both;"></div>
 				</div>
 				<div style="height: 60px;"></div>
@@ -1140,8 +1224,8 @@
 				</style>
 				<div class="foot-box" id="foot">
 					<div class="s-width" style="text-align: center;">
-						Copyright ©2025 Sa-Token java 权限认证 | sa-token.cc | <a href="https://beian.miit.gov.cn/"
-							target="_blank">鲁ICP备18046274号-4</a>
+						Copyright ©2026 Sa-Token java 权限认证 | sa-token.com | <a href="https://beian.miit.gov.cn/"
+							target="_blank">鲁ICP备18046274号-5</a> | <a href="https://beian.mps.gov.cn/#/query/webSearch?code=37011202002956" rel="noreferrer" target="_blank" style="display:inline-flex;align-items:center;gap:4px;vertical-align:middle;"><img src="/big-file/index/gonganbeian.png" alt="" style="width:16px;height:16px;flex-shrink:0;">鲁公网安备37011202002956号</a>
 					</div>
 				</div>
 			</div>
@@ -1161,34 +1245,17 @@
 			}, 1);
 		</script>
 
-		<!-- 搜索引擎自动提交 -->
-		<script>
-			(function() {
-				var bp = document.createElement('script');
-				var curProtocol = window.location.protocol.split(':')[0];
-				if (curProtocol === 'https') {
-					bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-				} else {
-					bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-				}
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(bp, s);
-			})();
-		</script>
-		<!-- 百度统计 -->
-		<script>
-			var _hmt = _hmt || [];
-			(function() {
-				var hm = document.createElement("script");
-				hm.src = "https://hm.baidu.com/hm.js?35ad501304eae758ac6139a22a9830f5";
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(hm, s);
-			})();
-		</script>
+
 
 		<!-- 悬浮效果 -->
 		<script src="static/jquery.min.js"></script>
 		<script src="static/layer-v3.1.1/layer.js"></script>
+		<script src="/static/all-version-common.js"></script>
+
+		<!-- 多语言：translate.js + 本地初始化（见 static/sa-translate.js） -->
+		<script src="https://res.zvo.cn/translate/translate.js"></script>
+		<script src="./static/sa-translate.js"></script>
+		<script>initSaTranslate();</script>
 		
 		<!-- 赞助者名单 -->
 		<script src="static/donate/donate-list.js"></script>
@@ -1314,9 +1381,9 @@
 		
 		<!-- 预览版提示 -->
 		<script type="text/javascript">
-			if (location.host === 'rc.sa-token.cc') {
+			if (location.host === 'rc.sa-token.com') {
 				const newTips =
-					'<b>当前文档为RC预览版文档，仅做学习测试使用，正式项目请使用正式版：<a href="https://sa-token.cc/" target="_blank">https://sa-token.cc/</a></b>';
+					'<b>当前文档为RC预览版文档，仅做学习测试使用，正式项目请使用正式版：<a href="https://sa-token.com/" target="_blank">https://sa-token.com/</a></b>';
 				layer.alert(newTips);
 			}
 		</script>
@@ -1347,6 +1414,9 @@
 
 		</script>
 		
+		
+		<script src="./a/star-guide/star-guide.js"></script>
+		
 		<!-- 自定义滚动条颜色 -->
 		<!-- <style>
 		    /* 自定义body滚动条样式 */
@@ -1376,5 +1446,5 @@
 		</script> -->
 		
 		
-	</body>
+</body>
 </html>

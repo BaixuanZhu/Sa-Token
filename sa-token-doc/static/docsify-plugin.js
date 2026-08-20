@@ -1,5 +1,94 @@
 // 声明 docsify 插件
 var myDocsifyPlugin = function(hook, vm) {
+
+	// 文档页顶栏：根据当前路由高亮对应导航项
+	function updateDocNavActive() {
+		var header = document.querySelector('.doc-header .nav-right');
+		if (!header) return;
+
+		var hash = location.hash || '#/';
+		var onDocPage = location.pathname.indexOf('doc.html') !== -1;
+
+		header.querySelectorAll('.wzi').forEach(function(a) {
+			a.classList.remove('nav-active');
+		});
+
+		header.querySelectorAll(':scope > a.wzi').forEach(function(a) {
+			var href = a.getAttribute('href');
+			if (!href || href.indexOf('javascript') === 0 || href.indexOf('http') === 0) return;
+			if (href.indexOf('#/') === 0 && (hash === href || hash.indexOf(href + '/') === 0)) {
+				a.classList.add('nav-active');
+			}
+		});
+
+		header.querySelectorAll(':scope > .zk-box').forEach(function(box) {
+			var trigger = box.querySelector(':scope > .wzi');
+			if (!trigger) return;
+			box.querySelectorAll('.zk-context a[href^="#/"]').forEach(function(link) {
+				var href = link.getAttribute('href');
+				if (hash === href || hash.indexOf(href + '/') === 0) {
+					trigger.classList.add('nav-active');
+				}
+			});
+		});
+
+		var docLink = header.querySelector(':scope > a.wzi[href*="doc.html"]');
+		if (docLink && onDocPage) {
+			var hashNavActive = header.querySelector(':scope > a.wzi.nav-active[href^="#/"]');
+			var zkNavActive = header.querySelector(':scope > .zk-box > .wzi.nav-active');
+			if (!hashNavActive && !zkNavActive) {
+				docLink.classList.add('nav-active');
+			}
+		}
+	}
+
+	// 功能6：标题下面的广告（正文区 doc-inline-ad，仅 SSO / OAuth2 章节）
+	function renderDocInlineAd(routePath) {
+		if (!/^\/(sso|oauth2)\//.test(routePath) || $(window).width() < 800) {
+			return;
+		}
+
+		var ad = `<div class="doc-inline-ad">
+			<div class="doc-inline-ad__card">
+				<span class="doc-inline-ad__close" title="关闭">×</span>
+				<a href="https://sa-max.cn?way=st_md_top" target="_blank">
+					<div class="doc-inline-ad__body">
+						<img class="doc-inline-ad__img" src="/big-file/contact/sa-token-syb-3.png" />
+						<div class="doc-inline-ad__text">
+							<p>一个项目搞定：同域、跨域、共享Redis、跨Redis、前后端一体、前后端分离、纯 js、vue2、vue3、非 Sa-Token 项目、非 java 项目等架构下的 SSO 认证需求。</p>
+							<p>一次购买，永久授权。全源码交付，不含密 Jar。提供售后技术支持。</p>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>`;
+
+		// 如果一周内用户点击过关闭广告，则不再展现
+		var allowJg = 1000 * 60 * 60 * 24 * 7;
+		try {
+			var closeAdTime = localStorage.closeMdTopAdTime;
+			if (closeAdTime) {
+				var closeAdJg = new Date().getTime() - parseInt(closeAdTime);
+				if (closeAdJg < allowJg) {
+					return;
+				}
+			}
+		} catch (e) {
+			console.error(e);
+		}
+
+		$('#main h1').after(ad);
+
+		$('#main .doc-inline-ad .doc-inline-ad__close').click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			layer.confirm('关闭后，一周内不再展现此信息', function() {
+				$('#main .doc-inline-ad').fadeOut(1000);
+				layer.msg('关闭成功');
+				localStorage.closeMdTopAdTime = new Date().getTime();
+			});
+		});
+	}
 	
 	// 钩子函数：解析之前执行
 	hook.beforeEach(function(content) {
@@ -20,18 +109,23 @@ var myDocsifyPlugin = function(hook, vm) {
 	hook.afterEach(function(html) {
 		
 		// 功能 2，文章底部添加仓库地址  
-		var url = 'https://gitee.com/dromara/sa-token/tree/dev/sa-token-doc/' + vm.route.file;
-		var url2 = 'https://github.com/dromara/sa-token/tree/dev/sa-token-doc/' + vm.route.file;
-		var footer = [
-			'<br/><br/><br/><br/><br/><br/><br/><hr/>',
-			'<footer>',
-			'<span>发现错误？ 您可以在 <a href="' + url + '" target="_blank">Gitee</a> 或 <a href="' + url2 +
-			'" target="_blank">GitHub</a> 帮助我们完善此页文档！</span>',
-			'或 <a href="#/more/join-group">加入讨论群</a> 交流反馈。',
-			'<br/><br/>',
-			'<a href="https://beian.miit.gov.cn/" target="_blank" style="color:#aaa; border-color: #aaa;">鲁ICP备18046274号-4</a>',
-			'</footer>'
-		].join('');
+		var giteeUrl = `https://gitee.com/dromara/sa-token/tree/dev/sa-token-doc/${vm.route.file}`;
+		var githubUrl = `https://github.com/dromara/sa-token/tree/dev/sa-token-doc/${vm.route.file}`;
+		var atomgitUrl = `https://atomgit.com/dromara/sa-token/tree/dev/sa-token-doc/${vm.route.file}`;
+		var footer = `
+			<br/><br/><br/><br/><br/><br/><br/><hr/>
+			<footer>
+				<span>发现错误？ 您可以在 <a href="${giteeUrl}" target="_blank">Gitee</a> 或 <a href="${githubUrl}" target="_blank">GitHub</a> 或 <a href="${atomgitUrl}" target="_blank">AtomGit</a> 帮助我们完善此页文档！</span>
+				或 <a href="#/more/join-group" target="_blank">加入讨论群</a> 交流反馈。
+				<br/>
+				<p style="font-size: 12px; color: #999;">我们坚信，即使再复杂的技术，也可以用清晰、干练、易懂的文字描述出它的具体细节，如果你在阅读文档时有难以理解的章节，那一定是我们还没有优化好它，
+					请向我们 <a href="#/more/demand-commit" target="_blank">反馈</a> 你的困惑之处，我们将持续优化文档。</p>
+				<br/>
+				<a href="https://beian.miit.gov.cn/" target="_blank" class="footer-beian">鲁ICP备18046274号-5</a>
+				<span style="color:#999;font-size:12px;margin:0 12px;">|</span>
+				<a href="https://beian.mps.gov.cn/#/query/webSearch?code=37011202002956" rel="noreferrer" target="_blank" class="footer-beian"><img src="/big-file/index/gonganbeian.png" alt="" style="width:14px;height:14px;vertical-align:-2px;margin-right:3px;">鲁公网安备37011202002956号</a>
+			</footer>
+		`;
 		return html + footer;
 	});
 	
@@ -69,62 +163,20 @@ var myDocsifyPlugin = function(hook, vm) {
 			renderDonateTable();
 			onZanzhuSortClick();
 		}
-		
-		// 功能6：标题下面的广告 
-		// if(vm.route.path !== '/' && $(window).width() >= 800) {
-		// 	var ad = `<p class="top-ad-box">
-		// 		<span class="ad-tips">推广信息：</span>
-		// 		<span class="ad-tips ad-close">关闭</span>
-		// 		<a href="http://sa-pro.yun94.cn?from=satop" target="_blank">
-		// 			<img src="https://oss.dev33.cn/sa-token/ad/sa-sso-pro-s3.png" />
-		// 		</a>
-		// 	</p>`;
-				
-		// 	// 没有下划线就先补个下划线
-		// 	// if($('#main h1').next().prop('tagName') !== 'HR') {
-		// 	// 	$('#main h1').after('<hr/>');
-		// 	// }
-			
-		// 	// 如果一周内用户点击过关闭广告，则不再展现
-		// 	let allowJg = 1000 * 60 * 60 * 24 * 7;
-		// 	// allowJg = 1000 * 10;
-		// 	try{
-		// 		const closeAdTime = localStorage.closeAdTime;
-		// 		if(closeAdTime) {
-		// 			// 点击广告关闭的时间，和当前时间的差距
-		// 			const closeAdJg = new Date().getTime() - parseInt(closeAdTime);
-					
-		// 			// 差距小于七天，不再展示 
-		// 			if(closeAdJg < allowJg) {
-		// 				console.log('not show ad ...');
-		// 				return;
-		// 			}
-		// 		}
-		// 	}catch(e){
-		// 		console.error(e);
-		// 	}
-			
-			
-		// 	// 添加广告
-		// 	// $('#main h1').after(ad);
-		// 	$('.ssp-ad-box').append(ad)
-			
-		// 	// 添加关闭事件
-		// 	$('.top-ad-box .ad-close').click(function(){
-		// 		console.log('关闭广告');
-		// 		// $('.top-ad-box').slideUp(); // 折叠收起
-		// 		layer.confirm('关闭后，一周内不再展现此信息', function(){
-		// 			$(".top-ad-box").fadeOut(1000); // 淡出效果
-		// 			layer.msg('关闭成功');
-		// 			localStorage.closeAdTime = new Date().getTime();
-		// 		})
-		// 	})
-		// }
+
+		// 功能7，更新文档导航高亮
+		updateDocNavActive();
+
+		// 功能6，标题下面的广告
+		renderDocInlineAd(vm.route.path);
 		
 	});
 	
 	// 钩子函数：初始化并第一次加载完成数据后调用，没有参数。
 	hook.ready(function() {
+		updateDocNavActive();
+		window.addEventListener('hashchange', updateDocNavActive);
+
 		// 将搜索框转移到右上角 
 		document.querySelector(".sear-box").innerHTML = '';
 		document.querySelector(".sear-box").append(document.querySelector(".search"));

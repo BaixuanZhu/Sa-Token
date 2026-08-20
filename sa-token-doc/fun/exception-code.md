@@ -155,7 +155,7 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 30007		| http 请求调用 提供的 `timestamp` 与当前时间的差距超出允许的范围	|
 | 30008		| http 请求调用 提供的 `sign` 无效						|
 | 30009		| 本地系统没有配置 `secretkey` 字段						|
-| 30010		| 本地系统没有配置 http 请求处理器							|
+| 30010		| 本地系统没有配置 http 请求处理器（参考 [HTTP 请求扩展](/plugin/http-extend)）	|
 | 30011		| 该 ticket 不属于当前 client								|
 
 
@@ -198,6 +198,7 @@ SaToken 中的所有异常都是继承于 `SaTokenException` 的，也就是说�
 | 30204		| 此 jwt 已超时							|
 | 30205		| 没有配置jwt秘钥						|
 | 30206		| 登录时提供的账号id为空					|
+| 30207		| extraData 包含 jwt 保留字段				|
 
 
 #### sa-token-temp-jwt 插件相关：

@@ -12,7 +12,7 @@
 
 <!------------- tab:yaml 风格  ------------->
 ``` yaml
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 sa-token: 
 	# token 名称（同时也是 cookie 名称）
 	token-name: satoken
@@ -32,7 +32,7 @@ sa-token:
 
 <!------------- tab:properties 风格  ------------->
 ``` properties
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 
 # token 名称（同时也是 cookie 名称）
 sa-token.token-name=satoken
@@ -64,7 +64,7 @@ sa-token.is-log=true
  */
 @Configuration
 public class SaTokenConfigure {
-	// Sa-Token 参数配置，参考文档：https://sa-token.cc
+	// Sa-Token 参数配置，参考文档：https://sa-token.com
 	// 此配置会覆盖 application.yml 中的配置
     @Bean
     @Primary
@@ -88,7 +88,7 @@ public class SaTokenConfigure {
  */
 @Configuration
 public class SaTokenConfigure {
-	// Sa-Token 参数配置，参考文档：https://sa-token.cc
+	// Sa-Token 参数配置，参考文档：https://sa-token.com
 	// 此配置会与 application.yml 中的配置合并 （代码配置优先）
 	@Autowired
 	public void configSaToken(SaTokenConfig config) {
@@ -138,6 +138,7 @@ public class SaTokenConfigure {
 | isLogoutKeepFreezeOps		| Boolean	| false	| 如果 token 已被冻结，是否保留其操作权 (是否允许此 token 调用注销API)	(此参数只在调用 StpUtil.[logout/kickout/replaced]ByTokenValue("token") 时有效)			|
 | isLogoutKeepTokenSession	| Boolean	| false	| 在注销 token 后，是否保留其对应的 Token-Session					|
 | rightNowCreateTokenSession| Boolean	| false	| 在登录时，是否立即创建对应的 Token-Session （true=在登录时立即创建，false=在第一次调用 getTokenSession() 时创建）	|
+| allowLoginIdColon		| Boolean	| false	| 是否允许 loginId 包含冒号（`:`）。默认为 false，因 Sa-Token 持久化 key 使用冒号分段，loginId 含冒号会导致 key 难以解析；存量项目如需使用可设为 true	|
 | tokenStyle			| String	| uuid		| token风格， [参考：自定义Token风格](/up/token-style)										|
 | dataRefreshPeriod		| int		| 30		| 默认数据持久组件实现类中，每次清理过期数据间隔的时间 （单位: 秒） ，默认值30秒，设置为-1代表不启动定时清理 		|
 | tokenSessionCheckLogin	| Boolean	| true	| 获取 `Token-Session` 时是否必须登录 （如果配置为true，会在每次获取 `Token-Session` 时校验是否登录），[详解](/use/config?id=配置项详解：tokenSessionCheckLogin)		|
@@ -332,7 +333,7 @@ sa-token.sso-server.home-route=/home
 | :--------			| :--------	| :--------	| :--------										|
 | mode				| String	| 					| 指定当前系统集成 SSO 时使用的模式（约定型配置项，不对代码逻辑产生任何影响）			|
 | client			| String	| ""				| 当前 Client 名称标识，用于和 ticket 码的互相锁定			|
-| serverUrl			| String	| null				| 配置 Server 端主机总地址，拼接在 `authUrl`、`checkTicketUrl`、`userinfoUrl`、`sloUrl` 属性前面，用以简化各种 url 配置，参考：[详解](/sso/sso-questions?id=问：模式三配置一堆-xxx-url-，有办法简化一下吗？)	|
+| serverUrl			| String	| null				| 配置 Server 端主机总地址，拼接在 `authUrl`、`signoutUrl`、`pushUrl` 属性前面，用以简化各种 url 配置，参考：[详解](/sso/sso-questions?id=问：模式三配置一堆-xxx-url-，有办法简化一下吗？)	|
 | authUrl			| String	| /sso/auth			| 配置 Server 端单点登录授权地址					|
 | signoutUrl		| String	| /sso/signout		| 配置 Server 端单点注销地址										|
 | pushUrl			| String	| /sso/pushS		| 配置 Server 端的推送消息地址						|
@@ -379,7 +380,7 @@ sa-token.sso-client.is-slo=true
 | isPush			| Boolean	| false				| 是否接收推送消息			|
 | isSlo				| Boolean	| true				| 是否打开单点注销功能							|
 | secretKey			| String	| ""				| API 调用签名秘钥					|
-| serverUrl			| String	| null				| 配置 Server 端主机总地址，拼接在 `authUrl`、`checkTicketUrl`、`userinfoUrl`、`sloUrl` 属性前面，用以简化各种 url 配置，参考：[详解](/sso/sso-questions?id=问：模式三配置一堆-xxx-url-，有办法简化一下吗？)	|
+| serverUrl			| String	| null				| 配置此 Client 端主机总地址，拼接在 `pushUrl` 属性前面（默认 `/sso/pushC`），用以简化推送地址配置	|
 | pushUrl			| String	| /sso/pushC		| 配置此 Client 端的推送消息地址						|
 
 配置示例：

@@ -11,6 +11,7 @@
 - [在 SpringBoot 环境集成](docs/start/example.md)
 - [在 WebFlux 环境集成](docs/start/webflux-example.md)
 - [在 Solon 环境集成](docs/start/solon-example.md)
+- [源码运行指南](docs/start/run-source-code.md)
 
 ## 基础
 
@@ -61,7 +62,6 @@
 - [NoSdk、ReSdk 模式与非 java 项目](docs/sso/sso-nosdk.md)
 - [SSO 代码 API 参考](docs/sso/sso-dev.md)
 - [常见问题总结](docs/sso/sso-questions.md)
-- [Sa-Pro：单点登录商业版](docs/pro/st_sso.md)
 
 ## OAuth2.0
 
@@ -82,7 +82,6 @@
 - [OAuth2-与登录会话实现数据互通](docs/oauth2/oauth2-interworking.md)
 - [OAuth2 代码 API 参考](docs/oauth2/oauth2-dev.md)
 - [常见问题总结](docs/oauth2/oauth2-questions.md)
-- [Sa-Max：统一认证商业版](docs/pro/st_oauth2.md)
 
 ## 微服务
 
@@ -97,9 +96,11 @@
 - [临时 Token 认证](docs/plugin/temp-token.md)
 - [Quick-Login快速登录插件](docs/plugin/quick-login.md)
 - [Alone独立Redis插件](docs/plugin/alone-redis.md)
+- [Alone独立Redisson插件](docs/plugin/alone-redisson.md)
 - [缓存层扩展](docs/plugin/dao-extend.md)
 - [JSON 序列化扩展](docs/plugin/json-extend.md)
 - [序列化插件扩展包](docs/plugin/custom-serializer.md)
+- [HTTP 请求扩展](docs/plugin/http-extend.md)
 - [和 Thymeleaf 集成](docs/plugin/thymeleaf-extend.md)
 - [和 Freemarker 集成](docs/plugin/freemarker-extend.md)
 - [注解鉴权 SpEL 表达式](docs/plugin/spel-at.md)

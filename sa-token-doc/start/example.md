@@ -1,8 +1,9 @@
 # SpringBoot 集成 Sa-Token 示例
 
-本篇带你从零开始集成 Sa-Token，从而快速熟悉框架的使用姿势。
 
-整合示例在官方仓库的`/sa-token-demo/sa-token-demo-springboot`文件夹下，如遇到难点可结合源码进行学习测试。
+本篇带你从零开始集成 Sa-Token，只需简单 5 步，你就可以快速熟悉框架的使用姿势。
+
+整合示例在官方仓库的`/sa-token-demo/sa-token-demo-springboot`文件夹下，如遇到难点可结合源码进行学习测试。[Sa-Token 集成示例大全下载](/more/download-demos) 。
 
 ---
 
@@ -16,7 +17,7 @@
 <!---------------------------- tabs:start ---------------------------->
 <!-------- tab:Maven 方式 -------->
 ``` xml 
-<!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+<!-- Sa-Token 权限认证，在线文档：https://sa-token.com -->
 <dependency>
 	<groupId>cn.dev33</groupId>
 	<artifactId>sa-token-spring-boot-starter</artifactId>
@@ -28,7 +29,7 @@
 
 <!-------- tab:Gradle 方式 -------->
 ``` gradle
-// Sa-Token 权限认证，在线文档：https://sa-token.cc
+// Sa-Token 权限认证，在线文档：https://sa-token.com
 implementation 'cn.dev33:sa-token-spring-boot-starter:${sa.top.version}'
 ```
 - 如果你使用的 `SpringBoot 3.x`，请引入 `sa-token-spring-boot3-starter`。
@@ -36,7 +37,7 @@ implementation 'cn.dev33:sa-token-spring-boot-starter:${sa.top.version}'
 <!---------------------------- tabs:end ---------------------------->
 
 
-Maven依赖一直无法加载成功？[参考解决方案](https://sa-token.cc/doc.html#/start/maven-pull)
+Maven依赖一直无法加载成功？[参考解决方案](https://sa-token.com/doc.html#/start/maven-pull)
 
 更多内测版本了解：[Sa-Token最新版本](https://gitee.com/dromara/sa-token/blob/dev/sa-token-doc/start/new-version.md)
 
@@ -51,7 +52,7 @@ server:
 	# 端口
     port: 8081
 	
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 sa-token: 
 	# token 名称（同时也是 cookie 名称）
 	token-name: satoken
@@ -74,7 +75,7 @@ sa-token:
 # 端口
 server.port=8081
 	
-############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+############## Sa-Token 配置 (文档: https://sa-token.com) ##############
 
 # token 名称（同时也是 cookie 名称）
 sa-token.token-name=satoken

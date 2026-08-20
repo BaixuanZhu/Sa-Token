@@ -37,7 +37,7 @@
 		├── sa-token-servlet                      // [整合] Sa-Token 整合 Servlet 容器实现类包
 		├── sa-token-jakarta-servlet              // [整合] Sa-Token 整合 Jakarta-Servlet 容器实现类包
 		├── sa-token-spring-boot-webmvc-reactor-v2v3v4-common  // [整合] Sa-Token SpringBoot WebMvc+Reactor 公共包 (2/3/4)
-		├── sa-token-spring-boot-reactor-v2v3v4-common         // [整合] Sa-Token SpringBoot Reactor 公共包 (2/3/4)
+		├── sa-token-spring-boot-reactor-v3v4-common          // [整合] Sa-Token SpringBoot Reactor 公共包 (3/4)
 		├── sa-token-spring-boot-starter                       // [整合] Sa-Token 整合 SpringBoot2 快速集成 
 		├── sa-token-spring-boot-webmvc-v3v4-common            // [整合] Sa-Token SpringBoot WebMvc 公共包 (3/4)
 		├── sa-token-spring-boot3-starter         // [整合] Sa-Token 整合 SpringBoot3 快速集成 
@@ -54,6 +54,7 @@
 		├── sa-token-jackson3                     // [插件] Sa-Token 整合 Jackson3 (json序列化插件) 
 		├── sa-token-fastjson                     // [插件] Sa-Token 整合 Fastjson (json序列化插件) 
 		├── sa-token-fastjson2                    // [插件] Sa-Token 整合 Fastjson2 (json序列化插件) 
+		├── sa-token-fory-json                    // [插件] Sa-Token 整合 Apache Fory JSON (json序列化插件) 
 		├── sa-token-snack3                       // [插件] Sa-Token 整合 Snack3 (json序列化插件) 
 		├── sa-token-snack4                       // [插件] Sa-Token 整合 Snack4 (json序列化插件) 
 		├── sa-token-hutool-timed-cache           // [插件] Sa-Token 整合 Hutool 缓存组件 Timed-Cache（基于内存） (数据缓存插件) 
@@ -75,6 +76,7 @@
 		├── sa-token-redis-template-jdk-serializer // [插件] Sa-Token 整合 RedisTemplate - 使用 jdk 序列化算法 (数据缓存插件) 
 		├── sa-token-redis-jackson                // [插件] Sa-Token 整合 RedisTemplate - 使用 Jackson 序列化算法 (数据缓存插件) 
 		├── sa-token-alone-redis                  // [插件] Sa-Token 独立 Redis 插件，实现 [ 权限缓存与业务缓存分离 ]
+		├── sa-token-alone-redisson               // [插件] Sa-Token 独立 Redisson 插件，实现 [ 权限缓存与业务缓存分离 ]
 		├── sa-token-spring-aop                   // [插件] Sa-Token 整合 SpringAOP 注解鉴权
 		├── sa-token-spring-el                    // [插件] Sa-Token 实现 SpringEL 表达式注解鉴权
 		├── sa-token-grpc                         // [插件] Sa-Token 整合 gRPC (RPC 调用鉴权、状态传递) 
@@ -82,9 +84,15 @@
 		├── sa-token-redisson-spring-boot-starter // [插件] Sa-Token 整合 Redisson - SpringBoot 自动配置包 (数据缓存插件) 
 		├── sa-token-forest                       // [插件] Sa-Token 整合 Forest，http 请求处理器 
 		├── sa-token-okhttps                      // [插件] Sa-Token 整合 OkHttps，http 请求处理器 
+		├── sa-token-rest-template                // [插件] Sa-Token 整合 RestTemplate，http 请求处理器 
+		├── sa-token-rest-client                  // [插件] Sa-Token 整合 RestClient，http 请求处理器 
 	├── sa-token-demo                         // [示例] Sa-Token 示例合集
 		├── sa-token-demo-alone-redis             // [示例] Sa-Token 集成 alone-redis 模块
 		├── sa-token-demo-alone-redis-cluster     // [示例] Sa-Token 集成 alone-redis 模块、集群模式
+		├── sa-token-demo-alone-redisson          // [示例] Sa-Token 集成 alone-redisson 模块
+		├── sa-token-demo-alone-redisson-cluster  // [示例] Sa-Token 集成 alone-redisson 模块、集群模式
+		├── sa-token-demo-alone-redisson-sb3      // [示例] Sa-Token 集成 alone-redisson 模块（Spring Boot 3）
+		├── sa-token-demo-alone-redisson-sb4      // [示例] Sa-Token 集成 alone-redisson 模块（Spring Boot 4）
 		├── sa-token-demo-apikey                  // [示例] Sa-Token API Key 模块示例
 		├── sa-token-demo-async                   // [示例] Sa-Token 异步场景示例
 		├── sa-token-demo-beetl                   // [示例] Sa-Token 集成 beetl 示例
@@ -98,6 +106,10 @@
 			├── sa-token-demo-dubbo3-consumer         // [示例] Sa-Token 集成 dubbo3 鉴权，消费端（调用端）
 			├── sa-token-demo-dubbo3-provider         // [示例] Sa-Token 集成 dubbo3 鉴权，生产端（被调用端）
 		├── sa-token-demo-freemarker              // [示例] Sa-Token 集成 Freemarker 标签方言
+		├── sa-token-demo-first-run               // [示例] 源码首次运行引导，强制引入 apikey、sso、oauth2、sign、jwt 等可选模块
+		├── sa-token-demo-bug-reproduce           // [示例] Issue/Bug 复现沙盒（按需改代码验证）
+		├── sa-token-demo-json-typing-security    // [示例] JSON 多态反序列化白名单回归（Spring Boot + Jackson）
+		├── sa-token-demo-json-typing-security-for-solon // [示例] JSON 多态反序列化白名单回归（Solon + Snack4）
 		├── sa-token-demo-grpc                    // [示例] Sa-Token 集成 grpc 鉴权
 			├── client                                // [示例] Sa-Token 集成 grpc 鉴权，client 端
 			├── server                                // [示例] Sa-Token 集成 grpc 鉴权，server 端
@@ -129,6 +141,7 @@
 			├── sa-token-demo-sso1-client             // [示例] Sa-Token 集成 SSO单点登录-模式一 应用端 (同域、同Redis)
 			├── sa-token-demo-sso2-client             // [示例] Sa-Token 集成 SSO单点登录-模式二 应用端 (跨域、同Redis)
 			├── sa-token-demo-sso3-client             // [示例] Sa-Token 集成 SSO单点登录-模式三 应用端 (跨域、跨Redis)
+			├── sa-token-demo-sso3-client--sb4        // [示例] SSO 模式三 应用端 (Spring Boot 4 + RestClient)
 			├── sa-token-demo-sso3-client-nosdk       // [示例] Sa-Token 集成 SSO单点登录-模式三 应用端 (不使用sdk，纯手动对接)
 			├── sa-token-demo-sso3-client-resdk       // [示例] Sa-Token 集成 SSO单点登录-模式三 应用端 (ReSdk 模式，重写部分方法对接任意技术栈)
 			├── sa-token-demo-sso3-client-anon        // [示例] Sa-Token 集成 SSO单点登录-模式三 应用端 (匿名应用接入示例)
@@ -155,8 +168,8 @@
 		├── sa-token-springboot-test            // [测试] Sa-Token SpringBoot 整合测试
 		├── sa-token-jwt-test                   // [测试] Sa-Token jwt 整合测试
 		├── sa-token-temp-jwt-test              // [测试] Sa-Token temp-jwt 整合测试
-		├── sa-token-json-test                  // [测试] Sa-Token json 序列化测试
-		├── sa-token-jackson3-test              // [测试] Sa-Token Jackson3 整合测试
+		├── sa-token-json-test                  // [测试] Sa-Token json 序列化测试（Jackson / Snack4 白名单等）
+		├── sa-token-jackson3-test              // [测试] Sa-Token Jackson3 整合测试（含 DefaultTyping 白名单）
 		├── sa-token-serializer-test            // [测试] Sa-Token 序列化测试
 	├── sa-token-doc                          // [文档] Sa-Token 开发文档 
 	├── MEMO                                  // [备忘] 内部备忘录、开发记录
