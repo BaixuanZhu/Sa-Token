@@ -66,6 +66,11 @@ jobs:
             echo "$BODY"
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
+          {
+            echo "body<<CHANGELOG_EOF"
+            echo "$BODY"
+            echo "CHANGELOG_EOF"
+          } >> "$GITHUB_OUTPUT"
 
       # ── 2. 同步文档：从发版对应的 tag 拉取 sa-token-doc/ ──
       - name: Sync docs from release tag
@@ -80,6 +85,29 @@ jobs:
         if: steps.detect.outputs.notify == 'true'
         run: node llm-wiki/scripts/generate-llms.js
 
+      # ── 3.5 渲染发版说明为 HTML 并注入 skills.html 更新日志区块 ──
+      - name: Render changelog and inject
+        if: steps.detect.outputs.notify == 'true'
+        env:
+          BODY: ${{ steps.detect.outputs.body }}
+          VERSION: ${{ steps.detect.outputs.version }}
+        run: |
+          printf '%s' "$BODY" > /tmp/changelog.md
+          npx -y marked -i /tmp/changelog.md -o /tmp/changelog.html
+          python3 - <<'PY'
+          import os, pathlib, re
+          version = os.environ['VERSION']
+          html = pathlib.Path('/tmp/changelog.html').read_text(encoding='utf-8')
+          fragment = '<div class="changelog-body">\n<h3>Sa-Token ' + version + ' 更新日志</h3>\n' + html + '\n</div>'
+          p = pathlib.Path('llm-wiki/skills.html')
+          s = p.read_text(encoding='utf-8')
+          new_s, n = re.subn(r'<!-- CHANGELOG_START -->.*?<!-- CHANGELOG_END -->',
+                             '<!-- CHANGELOG_START -->\n' + fragment + '\n      <!-- CHANGELOG_END -->', s, flags=re.S)
+          assert n == 1, f"changelog placeholder not found exactly once: {n}"
+          p.write_text(new_s, encoding='utf-8')
+          print("changelog injected, replaced", n)
+          PY
+
       # ── 4. 入库（push 到 dev 触发 deploy-pages.yml 部署）并更新 marker ──
       - name: Commit & Push
         if: steps.detect.outputs.notify == 'true'
@@ -88,7 +116,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           echo "$TAG" > .github/last_synced_release
-          git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt .github/last_synced_release
+          git add sa-token-doc/ llm-wiki/llms.txt llm-wiki/llms-full.txt llm-wiki/skills.html .github/last_synced_release
           git commit -m "auto: sync Sa-Token $TAG docs & regenerate llms.txt" || echo "nothing to commit"
           git push
 
