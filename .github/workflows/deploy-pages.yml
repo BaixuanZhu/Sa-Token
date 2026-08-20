@@ -47,9 +47,6 @@ jobs:
           cp -r llm-wiki/. _site/
           cp -r docs _site/docs
           cp -r skills _site/skills
-          cd _site/skills
-          command -v zip >/dev/null 2>&1 || (apt-get update -y && apt-get install -y zip)
-          zip -rq sa-token-dev.zip sa-token-dev
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
