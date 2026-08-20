@@ -72,8 +72,8 @@ jobs:
         if: steps.detect.outputs.notify == 'true'
         run: |
           TAG="${{ steps.detect.outputs.version }}"
-          git fetch upstream --tags
-          git checkout "upstream/$TAG" -- sa-token-doc/
+          git fetch upstream "refs/tags/$TAG:refs/tags/$TAG"
+          git checkout "$TAG" -- sa-token-doc/
 
       # ── 3. 重新生成 llms.txt / llms-full.txt ──
       - name: Generate llms.txt and clean docs
